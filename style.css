@@ -1,23 +1,38 @@
-/* 기본 스타일 초기화 및 폰트 설정 */
+/* ---
+   Revised CSS for Dabin Kim's Portfolio
+   Inspired by the minimalist and technical aesthetic of jinandpark.com
+   --- */
+
+/* 0. Font Import: Import Inter for body text and Lora for stylistic headings */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lora:ital,wght@1,400&display=swap');
+
+/* 1. Global Styles: Pure black/white contrast, sharp edges, and technical typography. */
 body {
-    font-family: 'Noto Sans KR', 'Roboto', sans-serif;
-    background-color: #f8f9fa;
-    color: #343a40;
+    /* Set the primary font to Inter for its clean, technical feel */
+    font-family: 'Inter', sans-serif; 
+    /* Use a pure white background for maximum contrast */
+    background-color: #ffffff; 
+    /* Set the primary text color to pure black */
+    color: #000000; 
     line-height: 1.6;
     margin: 0;
-    padding: 20px;
+    /* Remove body padding; spacing will be handled by the .container */
+    padding: 0; 
 }
 
 .container {
     max-width: 960px;
     margin: 0 auto;
+    /* Apply consistent padding to the main content container */
+    padding: 20px;
 }
 
-/* 프로필 (헤더) 스타일 */
+/* 2. Profile (Header) Styles: Minimalist and text-focused. */
 .profile {
     text-align: center;
     padding: 40px 0;
-    border-bottom: 1px solid #dee2e6;
+    /* Use a very light, thin border for subtle separation */
+    border-bottom: 1px solid #eeeeee; 
     margin-bottom: 40px;
 }
 
@@ -25,11 +40,14 @@ body {
     font-size: 2.5rem;
     font-weight: 700;
     margin: 0 0 10px 0;
+    /* Add subtle letter-spacing for a more refined title appearance */
+    letter-spacing: 0.03em; 
 }
 
 .profile .subtitle {
     font-size: 1.2rem;
-    color: #6c757d;
+    /* Use transparent black for secondary text to maintain the monochromatic scheme */
+    color: rgba(0, 0, 0, 0.5); 
     margin: 0;
 }
 
@@ -38,25 +56,34 @@ body {
 }
 
 .social-links a {
-    color: #007bff;
+    /* Make links black by default to avoid introducing color */
+    color: #000000; 
     text-decoration: none;
     margin: 0 10px;
     font-weight: 500;
+    transition: opacity 0.2s ease; /* Add a subtle transition for the hover effect */
 }
 
 .social-links a:hover {
-    text-decoration: underline;
+    /* Use opacity for a minimal, clean hover effect instead of an underline */
+    text-decoration: none; 
+    opacity: 0.6; 
 }
 
-/* 메인 콘텐츠 스타일 */
+/* 3. Main Content Styles: Use of a secondary, stylistic font for headings. */
 main h2 {
     text-align: center;
     font-size: 2rem;
-    font-weight: 700;
     margin-bottom: 40px;
+    /* Use the imported 'Lora' font for a stylistic, italic serif heading */
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-weight: 400; /* Lora's regular weight */
+    /* Introduce a strong, unexpected color for a single point of visual interest */
+    color: rgb(10, 0, 255); 
 }
 
-/* 프로젝트 그리드 스타일 */
+/* 4. Project Grid & Cards: Flat, sharp, and structured layout. */
 .project-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -64,17 +91,23 @@ main h2 {
 }
 
 .project-card {
-    background-color: #ffffff;
-    border: 1px solid #dee2e6;
-    border-radius: 8px;
+    /* Remove background color, borders, and shadows for a completely flat look */
+    background-color: transparent; 
+    border: none; 
+    border-radius: 0; /* Sharp corners */
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: none; 
+    /* Remove all hover transitions */
+    transition: none; 
+    /* Use a bottom border on the card itself to separate items in the grid */
+    border-bottom: 1px solid #eeeeee;
+    padding-bottom: 20px;
 }
 
 .project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+    /* Disable all hover effects on the card container */
+    transform: none; 
+    box-shadow: none; 
 }
 
 .project-card img {
@@ -85,35 +118,37 @@ main h2 {
 
 .project-card h3 {
     font-size: 1.25rem;
-    margin: 15px 20px 10px 20px;
+    margin: 15px 0 10px 0; /* Adjust horizontal margin to 0 for a cleaner look */
 }
 
 .project-card h3 a {
-    color: #343a40;
+    color: #000000;
     text-decoration: none;
+    transition: opacity 0.2s ease;
 }
 
 .project-card h3 a:hover {
-    color: #007bff;
+    color: #000000;
+    opacity: 0.6; 
 }
 
 .project-card .authors {
     font-size: 0.9rem;
-    color: #6c757d;
-    margin: 0 20px 10px 20px;
+    color: rgba(0, 0, 0, 0.5);
+    margin: 0 0 10px 0; /* Adjust horizontal margin to 0 */
 }
 
 .project-card .summary {
     font-size: 1rem;
-    margin: 0 20px 20px 20px;
+    margin: 0;
 }
 
-/* 푸터 스타일 */
+/* 5. Footer Styles: Clean and consistent. */
 footer {
     text-align: center;
     padding: 30px 0;
     margin-top: 40px;
-    color: #6c757d;
+    color: rgba(0, 0, 0, 0.5);
     font-size: 0.9rem;
-    border-top: 1px solid #dee2e6;
+    border-top: 1px solid #eeeeee;
 }
