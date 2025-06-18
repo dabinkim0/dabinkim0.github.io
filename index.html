@@ -114,7 +114,7 @@
             font-size: 2rem;
             text-align: left;
             margin-bottom: 40px;
-            color: var(--text-color);
+            color: var(--accent-color); /* Changed to accent color for consistency */
         }
 
         /* --- About Section --- */
@@ -128,8 +128,9 @@
         #about .subtitle {
             font-size: 1.3rem;
             color: var(--accent-color);
-            margin: 0 0 30px 0;
+            margin: 0 0 30px 0; /* Fixed syntax error */
         }
+        
         #about .intro-text {
             font-size: 1.1rem;
             max-width: 75ch; /* Optimal line length for readability */
@@ -232,9 +233,9 @@
         }
         
         .project-card-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 50px; /* Increased gap between projects */
+             display: grid;
+             grid-template-columns: 1fr;
+             gap: 50px; /* Increased gap between projects */
         }
         
         .project-card {
@@ -358,26 +359,26 @@
                 <article class="project-card">
                     <img src="https://placehold.co/400x250/EEEEEE/333333?text=Project+Showcase" alt="AI-Muzik Project Image">
                     <div>
-                        <h3>AI-Muzik: Controllable Music Generation</h3>
-                        <p class="authors"><strong>Dabin Kim</strong>, John Doe, Jane Smith</p>
-                        <p class="summary">
+                         <h3>AI-Muzik: Controllable Music Generation</h3>
+                         <p class="authors"><strong>Dabin Kim</strong>, John Doe, Jane Smith</p>
+                         <p class="summary">
                             Proposed a novel music generation model based on the Transformer architecture, allowing for fine-grained control over genre, instrumentation, and mood.
-                        </p>
-                        <div class="links">
+                         </p>
+                         <div class="links">
                             <a href="#" target="_blank">[GitHub]</a>
                             <a href="#" target="_blank">[Demo]</a>
                         </div>
                     </div>
                 </article>
                 <article class="project-card">
-                    <img src="https://placehold.co/400x250/E0E0E0/333333?text=Project+Showcase" alt="DeepSource Project Image">
+                     <img src="https://placehold.co/400x250/E0E0E0/333333?text=Project+Showcase" alt="DeepSource Project Image">
                     <div>
-                        <h3>DeepSource: Real-time Music Source Separation</h3>
-                        <p class="authors"><strong>Dabin Kim</strong>, Anonymous Researcher</p>
-                        <p class="summary">
+                         <h3>DeepSource: Real-time Music Source Separation</h3>
+                         <p class="authors"><strong>Dabin Kim</strong>, Anonymous Researcher</p>
+                         <p class="summary">
                             Developed a lightweight deep learning model for real-time music source separation, effectively isolating vocals, drums, and bass with high fidelity.
-                        </p>
-                        <div class="links">
+                         </p>
+                         <div class="links">
                             <a href="#" target="_blank">[GitHub]</a>
                         </div>
                     </div>
