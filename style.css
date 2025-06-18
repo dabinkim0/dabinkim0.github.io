@@ -1,0 +1,119 @@
+/* 기본 스타일 초기화 및 폰트 설정 */
+body {
+    font-family: 'Noto Sans KR', 'Roboto', sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+/* 프로필 (헤더) 스타일 */
+.profile {
+    text-align: center;
+    padding: 40px 0;
+    border-bottom: 1px solid #dee2e6;
+    margin-bottom: 40px;
+}
+
+.profile h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+}
+
+.profile .subtitle {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin: 0;
+}
+
+.social-links {
+    margin-top: 20px;
+}
+
+.social-links a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-weight: 500;
+}
+
+.social-links a:hover {
+    text-decoration: underline;
+}
+
+/* 메인 콘텐츠 스타일 */
+main h2 {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+/* 프로젝트 그리드 스타일 */
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+}
+
+.project-card {
+    background-color: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+}
+
+.project-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.project-card h3 {
+    font-size: 1.25rem;
+    margin: 15px 20px 10px 20px;
+}
+
+.project-card h3 a {
+    color: #343a40;
+    text-decoration: none;
+}
+
+.project-card h3 a:hover {
+    color: #007bff;
+}
+
+.project-card .authors {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin: 0 20px 10px 20px;
+}
+
+.project-card .summary {
+    font-size: 1rem;
+    margin: 0 20px 20px 20px;
+}
+
+/* 푸터 스타일 */
+footer {
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 40px;
+    color: #6c757d;
+    font-size: 0.9rem;
+    border-top: 1px solid #dee2e6;
+}
