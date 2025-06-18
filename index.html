@@ -1,67 +1,400 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dab-in Kim | Music & Audio AI Researcher</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Dabin Kim | Music & Audio AI Researcher</title>
+    
+    <!-- Google Fonts: Inter for body, Lora for italic accents -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Lora:ital,wght@1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        /*
+         * --- Global Styles ---
+         * Inspired by a minimalist, technical, and academic aesthetic.
+         * Uses a strict black/white palette with a single color accent.
+         */
+        :root {
+            --text-color: #111111;
+            --background-color: #ffffff;
+            --secondary-text-color: rgba(0, 0, 0, 0.6);
+            --border-color: #eeeeee;
+            --accent-color: rgb(10, 0, 255);
+        }
+
+        /* Basic Reset & Font Settings */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6; /* Reduced line height */
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* --- Layout & Container --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        main {
+            padding-top: 80px; /* Space for fixed header */
+        }
+
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        /* --- Header & Navigation --- */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+
+        .logo {
+            font-weight: 400; /* Removed bold from logo */
+            font-size: 1.1rem;
+            text-decoration: none;
+            color: var(--text-color);
+            letter-spacing: 0.05em; /* Added letter-spacing for style */
+        }
+
+        .main-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 25px;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--secondary-text-color);
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--text-color);
+        }
+        
+        /* --- Section Headings --- */
+        h2.section-title {
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 2rem;
+            text-align: left;
+            margin-bottom: 40px;
+            color: var(--text-color);
+        }
+
+        /* --- About Section --- */
+        #about h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+        
+        #about .subtitle {
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            margin: 0 0 30px 0;
+        }
+        #about .intro-text {
+            font-size: 1.1rem;
+            max-width: 75ch; /* Optimal line length for readability */
+        }
+
+        .education-list {
+            margin-top: 40px;
+        }
+
+        .education-list h3 {
+            font-weight: 400; /* Removed bold */
+            font-size: 1.1rem; /* Adjusted size */
+            margin-bottom: 20px;
+            color: var(--secondary-text-color);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .education-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-left: 2px solid var(--border-color);
+        }
+
+        .education-list li {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        .education-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .education-list p {
+            margin: 0 0 5px 0;
+            font-size: 1.05rem;
+        }
+
+        .education-list .period, .education-list .details {
+            font-size: 0.95rem;
+            color: var(--secondary-text-color);
+        }
+
+        /* --- Publications & Projects Lists --- */
+        .item-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .item-list li {
+            padding-bottom: 25px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .item-list li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .item-list h3 {
+            font-size: 1.25rem;
+            font-weight: 400; /* Reduced heading weight */
+            margin: 0 0 5px 0;
+        }
+        
+        .item-list h3 a {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .item-list h3 a:hover {
+            text-decoration: underline;
+        }
+
+        .item-list .authors {
+            font-size: 1rem;
+            color: var(--secondary-text-color);
+            margin-bottom: 10px;
+        }
+
+        .item-list .venue, .item-list .summary {
+            font-size: 1rem;
+            margin-bottom: 10px;
+        }
+        
+        .item-list .links a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            margin-right: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .item-list .links a:hover {
+            text-decoration: underline;
+        }
+        
+        .project-card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 50px; /* Increased gap between projects */
+        }
+        
+        .project-card {
+            /* Changed to a horizontal grid layout */
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 25px; /* Gap between image and text */
+            align-items: start;
+        }
+        
+        .project-card img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            display: block;
+            background-color: #f0f0f0; /* Placeholder background */
+        }
+        
+        /* --- Footer (Contact Section) --- */
+        .main-footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #fafafa;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .main-footer .contact-info {
+            margin-bottom: 20px;
+        }
+        
+        .main-footer .contact-info a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1rem;
+        }
+
+        .main-footer .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        .main-footer .copyright {
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+        }
+
+    </style>
 </head>
 <body>
-    <div class="container">
-        <header class="profile">
-            <h1>김다빈 (Dab-in Kim)</h1>
-            <p class="subtitle">Music / Audio ML & DL Researcher</p>
-            <div class="social-links">
-                <a href="mailto:your.email@example.com">Email</a>
-                <a href="https://github.com/dabinkim" target="_blank">GitHub</a>
-                <a href="https://scholar.google.com/" target="_blank">Google Scholar</a>
-                <a href="https://linkedin.com/" target="_blank">LinkedIn</a>
+    <header class="main-header">
+        <div class="container">
+            <a href="#about" class="logo">DABIN KIM</a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#about">Home</a></li>
+                    <li><a href="#publications">Publications</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- "Home" Section -->
+        <section id="about">
+            <h1>Dabin Kim (김다빈)</h1>
+            <p class="subtitle">Music & Audio Machine Learning Researcher</p>
+            <p class="intro-text">
+                I am a machine learning researcher specializing in music and audio. My work focuses on controllable music generation and deep learning-based audio analysis, driven by an interdisciplinary background in Art & Technology and Big Data Science.
+            </p>
+            <div class="education-list">
+                <h3>Education</h3>
+                <ul>
+                    <li>
+                        <p>M.S. in Music and Audio Computing (MAC) Lab</p>
+                        <p class="period">Aug 2023 - Expected Aug 2025</p>
+                    </li>
+                    <li>
+                        <p>B.S. in Art & Technology, Sogang University</p>
+                        <p class="period">Feb 2017 - Feb 2023</p>
+                        <p class="details">&mdash; Double Major in Big Data Science</p>
+                    </li>
+                </ul>
             </div>
-        </header>
+        </section>
 
-        <main>
-            <h2>Projects</h2>
-            <section class="project-grid">
-                
+        <!-- Publications Section -->
+        <section id="publications">
+            <h2 class="section-title">Publications</h2>
+            <ul class="item-list">
+                <li>
+                    <h3><a href="#">A Transformer-based Approach for Controllable Music Generation</a></h3>
+                    <p class="authors"><strong>Dabin Kim</strong>, John Doe, Jane Smith</p>
+                    <p class="venue"><em>To be presented at the IEEE International Conference on Acoustics, Speech, and Signal Processing (ICASSP)</em>, 2025.</p>
+                    <div class="links">
+                        <a href="#" target="_blank">[PDF]</a>
+                        <a href="#" target="_blank">[Code]</a>
+                        <a href="#" target="_blank">[BibTeX]</a>
+                    </div>
+                </li>
+                <li>
+                    <h3><a href="#">Self-supervised Learning for Universal Audio Representations</a></h3>
+                    <p class="authors">John Doe, <strong>Dabin Kim</strong></p>
+                    <p class="venue"><em>Proceedings of the 25th International Society for Music Information Retrieval Conference (ISMIR)</em>, 2024.</p>
+                     <div class="links">
+                        <a href="#" target="_blank">[PDF]</a>
+                        <a href="#" target="_blank">[Code]</a>
+                        <a href="#" target="_blank">[BibTeX]</a>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        
+        <!-- Projects Section -->
+        <section id="projects">
+            <h2 class="section-title">Projects</h2>
+            <div class="project-card-grid">
                 <article class="project-card">
-                    <a href="#" target="_blank">
-                        <img src="https://via.placeholder.com/400x250/EEEEEE/333333?text=Project+Image" alt="프로젝트 1 대표 이미지">
-                    </a>
-                    <h3><a href="#" target="_blank">AI-Muzik: Controllable Music Generation with Transformers</a></h3>
-                    <p class="authors"><strong>Dab-in Kim</strong>, John Doe, Jane Smith</p>
-                    <p class="summary">
-                        트랜스포머 아키텍처를 기반으로 하여 장르, 악기, 분위기 등 다양한 요소를 제어할 수 있는 새로운 음악 생성 모델을 제안합니다.
-                    </p>
+                    <img src="https://placehold.co/400x250/EEEEEE/333333?text=Project+Showcase" alt="AI-Muzik Project Image">
+                    <div>
+                        <h3>AI-Muzik: Controllable Music Generation</h3>
+                        <p class="authors"><strong>Dabin Kim</strong>, John Doe, Jane Smith</p>
+                        <p class="summary">
+                            Proposed a novel music generation model based on the Transformer architecture, allowing for fine-grained control over genre, instrumentation, and mood.
+                        </p>
+                        <div class="links">
+                            <a href="#" target="_blank">[GitHub]</a>
+                            <a href="#" target="_blank">[Demo]</a>
+                        </div>
+                    </div>
                 </article>
                 <article class="project-card">
-                    <a href="#" target="_blank">
-                        <img src="https://via.placeholder.com/400x250/BDBDBD/333333?text=Project+Image" alt="프로젝트 2 대표 이미지">
-                    </a>
-                    <h3><a href="#" target="_blank">DeepSource: Real-time Music Source Separation</a></h3>
-                    <p class="authors"><strong>Dab-in Kim</strong>, Anonymous Researcher</p>
-                    <p class="summary">
-                        실시간 음원 분리를 위한 경량 딥러닝 모델입니다. 보컬, 드럼, 베이스 등 각 음원을 높은 품질로 분리해냅니다.
-                    </p>
+                    <img src="https://placehold.co/400x250/E0E0E0/333333?text=Project+Showcase" alt="DeepSource Project Image">
+                    <div>
+                        <h3>DeepSource: Real-time Music Source Separation</h3>
+                        <p class="authors"><strong>Dabin Kim</strong>, Anonymous Researcher</p>
+                        <p class="summary">
+                            Developed a lightweight deep learning model for real-time music source separation, effectively isolating vocals, drums, and bass with high fidelity.
+                        </p>
+                        <div class="links">
+                            <a href="#" target="_blank">[GitHub]</a>
+                        </div>
+                    </div>
                 </article>
-                <article class="project-card">
-                    <a href="#" target="_blank">
-                        <img src="https://via.placeholder.com/400x250/8D8D8D/FFFFFF?text=Project+Image" alt="프로젝트 3 대표 이미지">
-                    </a>
-                    <h3><a href="#" target="_blank">SoundVEC: Self-supervised Learning for Universal Audio Representations</a></h3>
-                    <p class="authors">John Doe, <strong>Dab-in Kim</strong></p>
-                    <p class="summary">
-                        레이블이 없는 대규모 오디오 데이터로부터 범용적인 오디오 특징을 학습하는 자기지도학습 방법론을 연구합니다.
-                    </p>
-                </article>
-                </section>
-        </main>
+            </div>
+        </section>
+    </main>
 
-        <footer>
-            <p>&copy; 2025 Dab-in Kim. All rights reserved.</p>
-        </footer>
-    </div>
+    <footer id="contact" class="main-footer">
+        <div class="contact-info">
+            <a href="mailto:dabinchi98@kaist.ac.kr">Email</a>
+            <a href="https://github.com/dabinkim" target="_blank">GitHub</a>
+            <a href="#" target="_blank">Google Scholar</a>
+            <a href="#" target="_blank">LinkedIn</a>
+            <a href="#">[Download CV]</a>
+        </div>
+        <p class="copyright">&copy; 2025 Dabin Kim. All rights reserved.</p>
+    </footer>
 </body>
 </html>
