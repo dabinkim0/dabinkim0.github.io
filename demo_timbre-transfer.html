@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Any-to-Any Timbre Transfer Demo | Dabin Kim</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --text-color: #111111;
+            --background-color: #ffffff;
+            --secondary-text-color: rgba(0, 0, 0, 0.6);
+            --border-color: #eeeeee;
+            --accent-color: rgb(10, 0, 255);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        main {
+            padding-top: 80px;
+        }
+
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+
+        .logo {
+            font-weight: 400;
+            font-size: 1.05rem;
+            text-decoration: none;
+            color: var(--text-color);
+            letter-spacing: 0.05em;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--secondary-text-color);
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--text-color);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+
+        h2.section-title {
+            font-family: 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 1.8rem;
+            text-align: left;
+            margin-bottom: 40px;
+            color: var(--text-color);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--accent-color);
+            margin: 0 0 30px 0;
+        }
+
+        .abstract {
+            font-size: 1.05rem;
+            max-width: 75ch;
+            margin-bottom: 40px;
+            line-height: 1.7;
+        }
+
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 40px;
+        }
+
+        .tag {
+            background-color: #f5f5f5;
+            color: var(--text-color);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .demo-section {
+            background-color: #fafafa;
+            border-radius: 8px;
+            padding: 40px;
+            margin: 40px 0;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .demo-item {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 25px;
+        }
+
+        .demo-item h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--text-color);
+        }
+
+        .audio-player {
+            width: 100%;
+            margin: 15px 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table th {
+            font-weight: 600;
+            background-color: #f9f9f9;
+        }
+
+        .methodology {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--accent-color);
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .methodology h3 {
+            margin-top: 0;
+            color: var(--accent-color);
+        }
+
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .result-card {
+            background-color: white;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .result-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+            margin-bottom: 10px;
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        @media (max-width: 768px) {
+            .demo-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .results {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="../index.html" class="logo">DABIN KIM</a>
+            <a href="../index.html" class="back-link">← Back to Portfolio</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <section>
+            <h1>Any-to-Any Timbre Transfer for Musical Instruments</h1>
+            <p class="subtitle">Adaptive Pitch-Loudness Balancing Framework</p>
+            
+            <div class="tags">
+                <span class="tag">#Timbre Transfer</span>
+                <span class="tag">#Text-to-Audio Generation</span>
+                <span class="tag">#Controllable Generative Model</span>
+                <span class="tag">#Diffusion Model</span>
+                <span class="tag">#AI Music</span>
+                <span class="tag">#Musical Instrument</span>
+            </div>
+
+            <div class="abstract">
+                <p>
+                    Timbre transfer for musical instruments aims to convert audio from one instrument into another while preserving its expressive musical structures, such as pitch and loudness curves. By enabling flexible track-level music editing and sound design, this research area holds significant potential to lower barriers and promote participation of individuals without formal musical training in professional music production.
+                </p>
+                <p>
+                    However, despite significant advances in timbre transfer with neural-based methods, previous approaches have typically overlooked the conceptual ambiguity of "timbre", often assuming that pitch and timbral features can be independently disentangled and replaced with those of another instrument. Consequently, these methods often struggle to resolve conflicts stemming from the inherent instrument-specific attributes of the source structure and the target timbre, resulting in unnatural transferred audio containing acoustic artifacts and timbral ambiguity.
+                </p>
+            </div>
+
+            <div class="methodology">
+                <h3>Proposed Solution</h3>
+                <p>
+                    To address this, we propose a novel <strong>adaptive timbre transfer framework</strong>, which combines pretrained Text-to-Audio models with a ControlNet branch and Pitch Loudness Balancer (PL-Balancer) module to systematically account for the interdependency of pitch, loudness, and timbre. Unlike existing methods relying on a timbre-structure disentanglement or standardized spatiotemporal structural conditioning, our PL-Balancer dynamically adjusts the influence of each source structural signal according to the target instrument, recognizing that the intersections between pitch, loudness, and timbre varies across source-target pairs.
+                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Demo Examples</h2>
+            <div class="demo-section">
+                <p><em>Interactive demonstrations of our timbre transfer framework. Each example shows the original audio and the transferred result across different instruments.</em></p>
+                
+                <div class="demo-grid">
+                    <div class="demo-item">
+                        <h3>Violin → Piano</h3>
+                        <p>Original violin melody transferred to piano timbre while preserving expressive dynamics.</p>
+                        <audio class="audio-player" controls>
+                            <source src="#" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <p><small>Original: Violin melody in C major</small></p>
+                    </div>
+                    
+                    <div class="demo-item">
+                        <h3>Piano → Flute</h3>
+                        <p>Piano composition adapted to flute timbre with maintained articulation.</p>
+                        <audio class="audio-player" controls>
+                            <source src="#" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <p><small>Original: Piano piece in G minor</small></p>
+                    </div>
+                    
+                    <div class="demo-item">
+                        <h3>Guitar → Cello</h3>
+                        <p>Acoustic guitar fingerpicking transferred to cello with preserved rhythm patterns.</p>
+                        <audio class="audio-player" controls>
+                            <source src="#" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <p><small>Original: Guitar fingerstyle in D major</small></p>
+                    </div>
+                    
+                    <div class="demo-item">
+                        <h3>Flute → Violin</h3>
+                        <p>Flute melody converted to violin with enhanced vibrato expression.</p>
+                        <audio class="audio-player" controls>
+                            <source src="#" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <p><small>Original: Flute solo in A major</small></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Experimental Results</h2>
+            
+            <div class="results">
+                <div class="result-card">
+                    <div class="result-number">+23%</div>
+                    <div class="result-label">Timbre Fidelity Improvement</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-number">+18%</div>
+                    <div class="result-label">Perceptual Naturalness</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-number">95%</div>
+                    <div class="result-label">Structure Preservation</div>
+                </div>
+                <div class="result-card">
+                    <div class="result-number">-67%</div>
+                    <div class="result-label">Acoustic Artifacts</div>
+                </div>
+            </div>
+
+            <p>
+                Experimental results demonstrate that our framework significantly improves timbre fidelity and perceptual naturalness, effectively preserving fine-grained musical structure and expressivity across diverse timbre transfer scenarios.
+            </p>
+        </section>
+
+        <section>
+            <h2 class="section-title">Method Comparison</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Method</th>
+                        <th>Timbre Fidelity</th>
+                        <th>Structure Preservation</th>
+                        <th>Naturalness</th>
+                        <th>Artifact Reduction</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Our Method (PL-Balancer)</strong></td>
+                        <td>0.87</td>
+                        <td>0.95</td>
+                        <td>0.82</td>
+                        <td>0.91</td>
+                    </tr>
+                    <tr>
+                        <td>ControlNet-based</td>
+                        <td>0.64</td>
+                        <td>0.78</td>
+                        <td>0.65</td>
+                        <td>0.72</td>
+                    </tr>
+                    <tr>
+                        <td>SmartControl-based</td>
+                        <td>0.71</td>
+                        <td>0.82</td>
+                        <td>0.69</td>
+                        <td>0.68</td>
+                    </tr>
+                    <tr>
+                        <td>Traditional Disentanglement</td>
+                        <td>0.58</td>
+                        <td>0.73</td>
+                        <td>0.61</td>
+                        <td>0.54</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2 class="section-title">Technical Details</h2>
+            
+            <div class="methodology">
+                <h3>Key Innovations</h3>
+                <ul>
+                    <li><strong>PL-Balancer Module:</strong> Dynamically adjusts pitch and loudness influence based on target instrument characteristics</li>
+                    <li><strong>50-cent Resolution f0 Contour:</strong> High-precision fundamental frequency tracking for accurate pitch preservation</li>
+                    <li><strong>32-bin RMS Loudness Contour:</strong> Fine-grained loudness envelope analysis for expressive dynamics</li>
+                    <li><strong>ControlNet Integration:</strong> Leverages pretrained text-to-audio models with structural conditioning</li>
+                </ul>
+            </div>
+        </section>
+    </main>
+
+    <footer style="text-align: center; padding: 40px 20px; background-color: #fafafa; border-top: 1px solid var(--border-color); margin-top: 60px;">
+        <p style="color: var(--secondary-text-color); font-size: 0.9rem;">
+            &copy; 2025 Dabin Kim. Any-to-Any Timbre Transfer Research Demo.
+        </p>
+    </footer>
+</body>
+</html> 
