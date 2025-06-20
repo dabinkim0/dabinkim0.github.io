@@ -228,8 +228,18 @@
             font-size: 0.9rem;
         }
         
+        .item-list .links a[href="#"] {
+            color: var(--secondary-text-color);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
         .item-list .links a:hover {
             text-decoration: underline;
+        }
+        
+        .item-list .links a[href="#"]:hover {
+            text-decoration: none;
         }
         
         .project-card-grid {
@@ -336,7 +346,7 @@
                     </p>
                     <div class="links">
                         <a href="#" target="_blank">[Paper]</a>
-                        <a href="#" target="_blank">[Demo]</a>
+                        <a href="https://dabinkim.github.io/any-to-any-timbre-transfer" target="_blank">[Demo]</a>
                         <a href="#" target="_blank">[Code]</a>
                     </div>
                 </li>
