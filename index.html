@@ -126,23 +126,25 @@
         }
         
         #about .subtitle {
-            font-size: 1.2rem; /* Adjusted size */
+            font-size: 1rem; /* Reduced from 1.2rem */
             color: var(--accent-color);
             margin: 0 0 30px 0; /* Fixed syntax error */
         }
         
+        /*
         #about .intro-text {
-            font-size: 1.05rem; /* Adjusted size */
-            max-width: 75ch; /* Optimal line length for readability */
+            font-size: 1.05rem;
+            width: 100%;
         }
+        */
 
         .education-list {
-            margin-top: 40px;
+            margin-top: 0;
         }
 
         .education-list h3 {
             font-weight: 400; /* Removed bold */
-            font-size: 1rem; /* Adjusted size */
+            font-size: 0.9rem; /* Reduced from 1rem */
             margin-bottom: 20px;
             color: var(--secondary-text-color);
             text-transform: uppercase;
@@ -167,11 +169,11 @@
 
         .education-list p {
             margin: 0 0 5px 0;
-            font-size: 1rem; /* Adjusted size */
+            font-size: 0.9rem; /* Reduced from 1rem */
         }
 
         .education-list .period, .education-list .details {
-            font-size: 0.95rem;
+            font-size: 0.85rem; /* Reduced from 0.95rem */
             color: var(--secondary-text-color);
         }
 
@@ -195,7 +197,7 @@
         }
         
         .item-list h3 {
-            font-size: 1.15rem; /* Adjusted size */
+            font-size: 1rem; /* Reduced from 1.15rem */
             font-weight: 400; /* Reduced heading weight */
             margin: 0 0 3px 0; /* Reduced from 5px to 3px */
         }
@@ -210,13 +212,13 @@
         }
 
         .item-list .authors {
-            font-size: 1rem;
+            font-size: 0.9rem; /* Reduced from 1rem */
             color: var(--secondary-text-color);
             margin-bottom: 10px;
         }
 
         .item-list .venue, .item-list .summary {
-            font-size: 1rem;
+            font-size: 0.9rem; /* Reduced from 1rem */
             margin-bottom: 10px;
         }
         
@@ -303,7 +305,7 @@
                 <ul>
                     <li><a href="#about">Home</a></li>
                     <li><a href="#publications">Publications</a></li>
-                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="projects/index.html">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
@@ -315,22 +317,26 @@
         <section id="about">
             <h1>Dabin Kim 김다빈</h1>
             <p class="subtitle">Music & Audio AI Researcher</p>
-            <p class="intro-text">
-                I am an AI researcher specializing in music and audio domain. My work focuses on controllable music generation and deep learning-based audio analysis, driven by an interdisciplinary background in Art & Technology and Big Data Science.
+            <p style="margin: 0; font-size: 1rem;">
+                I am an AI researcher exploring new ways to understand and create music and sound. I am passionate about building intelligent systems that can comprehend and control the nuanced and expressive qualities of audio using deep learning and generative models. 
+                <br><br>
+                dabinchi98@kaist.ac.kr
             </p>
-            <div class="education-list">
-                <h3>Education</h3>
-                <ul>
-                    <li>
-                        <p>M.S. in Music and Audio Computing (MAC) Lab</p>
-                        <p class="period">Aug 2023 - Expected Aug 2025</p>
-                    </li>
-                    <li>
-                        <p>B.S. in Art & Technology, Sogang University</p>
-                        <p class="period">Feb 2017 - Feb 2023</p>
-                        <p class="details">&mdash; Double Major in Big Data Science</p>
-                    </li>
-                </ul>
+            <div style="background-color: #f8f9fa; padding: 20px 25px; border-radius: 8px; margin-top: 30px;">
+                <div class="education-list">
+                    <h3>News</h3>
+                    <ul>
+                        <li>
+                            <p>M.S. in Music and Audio Computing (MAC) Lab</p>
+                            <p class="period">Aug 2023 - Expected Aug 2025</p>
+                        </li>
+                        <li>
+                            <p>B.S. in Art & Technology, Sogang University</p>
+                            <p class="period">Feb 2017 - Feb 2023</p>
+                            <p class="details">&mdash; Double Major in Big Data Science</p>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </section>
 
@@ -341,9 +347,11 @@
                     <h3><a href="#">Any-to-Any Timbre Transfer for Musical Instruments with Adaptive Pitch-Loudness Balancing</a></h3>
                     <p class="authors"><strong>Dabin Kim</strong>, Juhan Nam</p>
                     <p class="venue"><em>Master's Thesis, planned for ICASSP 2026 Submission</em></p>
+                    <!--
                     <p class="summary">
                         As the first author, this work addresses a key limitation in timbre transfer where instrument-specific expressive features (e.g., vibrato, loudness shimmer) embedded in fine-grained pitch and loudness signals hinder accurate timbre reproduction. My proposed method improves this by adaptively adjusting the influence of source-target aware pitch and loudness information. In comparison with ControlNet and SmartControl-based methods, my model achieves the highest target timbre fidelity (measured by CLAP-MS, CLAP-LAION) when conditioned simultaneously on a 50-cent resolution fundamental frequency (f0) contour and a 32-bin RMS loudness contour.
                     </p>
+                    -->
                     <div class="links">
                         <a href="#" target="_blank">[Paper]</a>
                         <a href="https://dabinkim.github.io/any-to-any-timbre-transfer" target="_blank">[Demo]</a>
@@ -354,9 +362,11 @@
                     <h3><a href="https://arxiv.org/abs/2408.11915" target="_blank">Video-Foley: Two-Stage Video-To-Sound Generation via Temporal Event Condition For Foley Sound</a></h3>
                     <p class="authors">Junwon Lee, Jaekwon Im, <strong>Dabin Kim</strong>, Juhan Nam</p>
                     <p class="venue"><em>arXiv preprint</em>, 2024.</p>
+                    <!--
                     <p class="summary">
                         In this project, my contributions included working with Optical Flow for video-to-audio tasks. I was also responsible for designing and participating in the qualitative evaluation of the generated sounds.
                     </p>
+                    -->
                     <div class="links">
                         <a href="https://arxiv.org/abs/2408.11915" target="_blank">[Paper]</a>
                         <a href="https://jnwnlee.github.io/video-foley-demo/" target="_blank">[Demo]</a>
@@ -367,9 +377,11 @@
                     <h3><a href="https://ismir2024program.ismir.net/lbd_480.html" target="_blank">Pitch-ControlNet: Continuous Pitch Control for Monophonic Instrument Sound Generation</a></h3>
                     <p class="authors"><strong>Dabin Kim</strong>*, Junwon Lee*, Minseo Kim*, Juhan Nam</p>
                     <p class="venue"><em>Late Breaking Demo, ISMIR 2024</em></p>
+                    <!--
                     <p class="summary">
                         As a co-author, I contributed to the development of this model, focusing on MIDI-level structural control. My specific role involved designing the module that processes MIDI pitch contours to guide the Text-to-Audio diffusion model with ControlNet architecture.
                     </p>
+                    -->
                     <div class="links">
                         <a href="https://ismir2024program.ismir.net/lbd_480.html" target="_blank">[Paper]</a>
                         <a href="#" target="_blank">[Demo]</a>
@@ -379,38 +391,7 @@
             </ul>
         </section>
         
-        <section id="projects">
-            <h2 class="section-title">Projects</h2>
-            <div class="project-card-grid">
-                <article class="project-card">
-                    <img src="https://placehold.co/400x250/EEEEEE/333333?text=Project+Showcase" alt="AI-Muzik Project Image">
-                    <div>
-                        <h3>AI-Muzik: Controllable Music Generation</h3>
-                        <p class="authors"><strong>Dabin Kim</strong>, John Doe, Jane Smith</p>
-                        <p class="summary">
-                            Proposed a novel music generation model based on the Transformer architecture, allowing for fine-grained control over genre, instrumentation, and mood.
-                        </p>
-                        <div class="links">
-                            <a href="#" target="_blank">[GitHub]</a>
-                            <a href="#" target="_blank">[Demo]</a>
-                        </div>
-                    </div>
-                </article>
-                <article class="project-card">
-                    <img src="https://placehold.co/400x250/E0E0E0/333333?text=Project+Showcase" alt="DeepSource Project Image">
-                    <div>
-                        <h3>DeepSource: Real-time Music Source Separation</h3>
-                        <p class="authors"><strong>Dabin Kim</strong>, Anonymous Researcher</p>
-                        <p class="summary">
-                            Developed a lightweight deep learning model for real-time music source separation, effectively isolating vocals, drums, and bass with high fidelity.
-                        </p>
-                        <div class="links">
-                            <a href="#" target="_blank">[GitHub]</a>
-                        </div>
-                    </div>
-                </article>
-            </div>
-        </section>
+        <!-- Projects section removed - accessible via navigation only -->
     </main>
 
     <footer id="contact" class="main-footer">

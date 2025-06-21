@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Dabin Kim</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --text-color: #111111;
+            --background-color: #ffffff;
+            --secondary-text-color: rgba(0, 0, 0, 0.6);
+            --border-color: #eeeeee;
+            --accent-color: rgb(10, 0, 255);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-size: 16px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        main {
+            padding-top: 80px;
+        }
+
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+
+        .logo {
+            font-weight: 400;
+            font-size: 1.05rem;
+            text-decoration: none;
+            color: var(--text-color);
+            letter-spacing: 0.05em;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: var(--secondary-text-color);
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: var(--text-color);
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+
+        h2.section-title {
+            font-family: 'Inter', sans-serif;
+            font-style: italic;
+            font-weight: 400;
+            font-size: 1.8rem;
+            text-align: left;
+            margin-bottom: 40px;
+            color: var(--text-color);
+        }
+
+        .project-card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 50px;
+        }
+        
+        .project-card {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 25px;
+            align-items: start;
+        }
+        
+        .project-card img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            display: block;
+            background-color: #f0f0f0;
+        }
+        
+        .project-card h3 {
+            font-size: 1rem;
+            font-weight: 400;
+            margin: 0 0 3px 0;
+        }
+        
+        .project-card .authors {
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+            margin-bottom: 10px;
+        }
+
+        .project-card .summary {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        
+        .project-card .tech-stack {
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+        }
+
+        .main-footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #fafafa;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .main-footer .copyright {
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+        }
+
+        @media (max-width: 768px) {
+            .project-card {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="container">
+            <a href="../index.html" class="logo">DABIN KIM</a>
+            <a href="../index.html" class="back-link">← Back to Portfolio</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <section>
+            <h1>Projects</h1>
+            <p style="color: var(--secondary-text-color); font-size: 1rem; margin-bottom: 40px;">
+                A collection of my technical projects in interactive music and audio systems.
+            </p>
+            
+            <div class="project-card-grid">
+                <article class="project-card">
+                    <img src="https://placehold.co/400x250/EEEEEE/333333?text=Data+Music+Performance" alt="Data Music Performance">
+                    <div>
+                        <h3>Data Music Performance: "Manmulgwanggaek, Ritual Cheongol"</h3>
+                        <p class="authors"><strong>Dabin Kim</strong> (Developer)</p>
+                        <p class="summary">
+                            Designed a data sonification algorithm in Max/MSP that transforms the respiratory resonance frequency data of four dancers into sound in real-time. By utilizing I Ching trigrams to generate harmony and rhythm, the system musically expresses the dancers' physical states, creating clear, high-pitched sounds for high-resonance states and complex, low-pitched sounds for low-resonance states via an FM synthesizer.
+                        </p>
+                        <p class="tech-stack"><strong>Tools:</strong> Max/MSP</p>
+                    </div>
+                </article>
+                
+                <article class="project-card">
+                    <img src="https://placehold.co/400x250/E0E0E0/333333?text=SuperCollider+Music" alt="SuperCollider Music Generation">
+                    <div>
+                        <h3>SuperCollider Programming Music Generation</h3>
+                        <p class="authors"><strong>Dabin Kim</strong> (Developer)</p>
+                        <p class="summary">
+                            A personal project focused on creating music using the SuperCollider programming language. I implemented a Granular Synthesis system from code to generate diverse sound textures—such as drum rolls, string legatos, and pad sounds—using only two short audio samples ('Bass Drum' and 'Strings Staccato'). The piece was completed by applying custom delay and reverb effects.
+                        </p>
+                        <p class="tech-stack"><strong>Tools:</strong> SuperCollider</p>
+                    </div>
+                </article>
+                
+                <article class="project-card">
+                    <img src="https://placehold.co/400x250/EEEEEE/333333?text=MIDI+Controller" alt="MIDI Controller">
+                    <div>
+                        <h3>MIDI Controller: "Ssangbitnari"</h3>
+                        <p class="authors"><strong>Dabin Kim</strong> (Developer)</p>
+                        <p class="summary">
+                            A team project to create a performance-oriented MIDI controller designed for intuitive use by non-musicians. Using an Arduino and a gyro/accelerometer sensor, the controller detects orientation and rotation, sending this data to PureData to manipulate sound effects. Users can flip the controller to change MIDI channels and rotate it to adjust parameters, with real-time feedback provided by the changing brightness of an LED.
+                        </p>
+                        <p class="tech-stack"><strong>Tools:</strong> Arduino, PureData</p>
+                    </div>
+                </article>
+                
+                <article class="project-card">
+                    <img src="https://placehold.co/400x250/E0E0E0/333333?text=Virtual+Space+Music" alt="Virtual Space Music">
+                    <div>
+                        <h3>Virtual Space Aleatoric Music: "Gravity Resonance"</h3>
+                        <p class="authors"><strong>Dabin Kim</strong> (Planner, Developer)</p>
+                        <p class="summary">
+                            An interactive aleatoric music experience in a virtual space, inspired by John Cage's Silence. I developed the environment in Unity and implemented spatial audio using the Google Resonance Audio package. Participants navigate the space, triggering everyday sounds through random collisions with objects, which combine with the continuously changing spatial reverb to generate a unique ambient music piece.
+                        </p>
+                        <p class="tech-stack"><strong>Tools:</strong> Unity, Google Resonance Audio</p>
+                    </div>
+                </article>
+                
+                <article class="project-card">
+                    <img src="https://placehold.co/400x250/EEEEEE/333333?text=Interactive+Music+Performance" alt="Interactive Music Performance">
+                    <div>
+                        <h3>Interactive Music Performance System: "Future Mouth"</h3>
+                        <p class="authors"><strong>Dabin Kim</strong> (Planner, Developer)</p>
+                        <p class="summary">
+                            A live performance tool developed with P5.js that allows users to control a synthesizer with their mouth movements via a webcam. This interactive system tracks the user's mouth size to modulate a Low Pass Filter and uses the mouse position to control panning and volume. The experience is enhanced by an on-screen virtual character that mimics the user's mouth movements in real-time.
+                        </p>
+                        <p class="tech-stack"><strong>Tools:</strong> Javascript (P5.js)</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <p class="copyright">&copy; 2025 Dabin Kim. All rights reserved.</p>
+    </footer>
+</body>
+</html> 

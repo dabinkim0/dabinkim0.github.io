@@ -45,7 +45,7 @@
         }
 
         section {
-            padding: 60px 0;
+            padding: 40px 0;
             border-bottom: 1px solid var(--border-color);
         }
         
@@ -111,13 +111,6 @@
             font-size: 1.2rem;
             color: var(--accent-color);
             margin: 0 0 30px 0;
-        }
-
-        .abstract {
-            font-size: 1.05rem;
-            max-width: 75ch;
-            margin-bottom: 40px;
-            line-height: 1.7;
         }
 
         .tags {
@@ -262,10 +255,7 @@
             <div class="methodology">
                 <h3>Abstract</h3>
                 <p>
-                    <strong>Timbre transfer for musical instruments</strong> aims to convert audio from one instrument into another while preserving its expressive musical structures, such as pitch and loudness curves. By enabling flexible track-level music editing and sound design, this research area holds significant potential to lower barriers and promote participation of individuals without formal musical training in professional music production.
-                </p>
-                <p>
-                    However, despite significant advances in timbre transfer with neural-based methods, previous approaches have typically overlooked the conceptual ambiguity of "timbre", often assuming that pitch and timbral features can be independently disentangled and replaced with those of another instrument. Consequently, these methods often struggle to resolve conflicts stemming from the inherent instrument-specific attributes of the source structure and the target timbre, resulting in unnatural transferred audio containing acoustic artifacts and timbral ambiguity.
+                    Timbre transfer aims to transform the timbral characteristics of a source audio while preserving its structural content. Recent advances in neural-based timbre transfer have demonstrated remarkable capabilities in generating high-quality audio with target timbres. However, despite significant advances in timbre transfer with neural-based methods, previous approaches have typically overlooked the conceptual ambiguity of "timbre", often assuming that pitch and timbral features can be independently disentangled and replaced with those of another instrument. Consequently, these methods often struggle to resolve conflicts stemming from the inherent instrument-specific attributes of the source structure and the target timbre, resulting in unnatural transferred audio containing acoustic artifacts and timbral ambiguity.
                 </p>
                 <p>
                     To address this, we propose a novel <strong>adaptive timbre transfer framework</strong>, which combines pretrained Text-to-Audio models with a ControlNet branch and <strong>Pitch Loudness Balancer (PL-Balancer)</strong> module to systematically account for the interdependency of pitch, loudness, and timbre. Unlike existing methods relying on a timbre-structure disentanglement or standardized spatiotemporal structural conditioning, our PL-Balancer dynamically adjusts the influence of each source structural signal according to the target instrument, recognizing that the intersections between pitch, loudness, and timbre varies across source-target pairs.
@@ -275,6 +265,12 @@
 
         <section>
             <h2 class="section-title">Proposed Architecture</h2>
+            
+            <div style="text-align: center; margin: 40px 0;">
+                <img src="figs/final-architecture.png" alt="Final Architecture Diagram" style="max-width: 100%; height: auto; border-radius: 8px;">
+                <p style="margin-top: 15px; color: var(--secondary-text-color); font-size: 0.9rem;"><em>Overall architecture of our proposed PL-Balancer framework</em></p>
+            </div>
+            
             <!--
             <h3>PL-Balancer Framework</h3>
             <p>
@@ -292,26 +288,33 @@
             </div>
             -->
             <p style="color: #dc2626; font-size: 1rem; font-weight: 500; text-align: center; padding: 40px 20px; background-color: #fef2f2; border-radius: 8px; border: 1px solid #fecaca;">
-                Detailed content will be updated with the arXiv paper by early July 2025.
+                Detailed content will be updated soon with the arXiv paper.
             </p>
         </section>
 
-        <section>
+        <!-- <section>
             <h2 class="section-title">Trade-off between Target Timbre Fidelity and Source Structure Preservation</h2>
+            
             <h3>Challenge Analysis</h3>
             <p>
-                One of the fundamental challenges in timbre transfer lies in the inherent trade-off between achieving high target timbre fidelity and preserving the original source structure. Previous approaches often struggle with this balance, leading to either:
+                A fundamental challenge in timbre transfer lies in the inherent trade-off between target timbre fidelity and source structure preservation. This issue is more pronounced with fine-grained source structures than with coarse-grained ones.
             </p>
 
             <p>
-                Our PL-Balancer module addresses this challenge by dynamically adjusting the influence of pitch and loudness signals with awareness of the specific source-target instrument pair.
+                We first implemented <strong>Stable Audio ControlNet (SA-ControlNet)</strong> to find a configuration that generalizes across various instrument groups, based on discrete bins for pitch and loudness curves. This configuration then served as a new baseline against which we compared the performance of our proposed PL-Balancer.
             </p>
-        </section>
+            
+            <div style="text-align: center; margin: 40px 0;">
+                <img src="figs/eval_discrete-bins.png" alt="Evaluation of Discrete Bins" style="max-width: 100%; height: auto; border-radius: 8px;">
+                <p style="margin-top: 15px; color: var(--secondary-text-color); font-size: 0.9rem;"><em>Evaluation of discrete bins for pitch and loudness curves in SA-ControlNet</em></p>
+            </div>
+            
+        </section> -->
 
         <section>
             <h2 class="section-title">Instrument-mismatched Dataset Construction</h2>
             <p style="color: #dc2626; font-size: 1rem; font-weight: 500; text-align: center; padding: 40px 20px; background-color: #fef2f2; border-radius: 8px; border: 1px solid #fecaca;">
-                Detailed content will be updated with the arXiv paper by early July 2025.
+                Detailed content will be updated soon with the arXiv paper.
             </p>
         </section>
 
@@ -320,19 +323,19 @@
             
             <div class="results">
                 <div class="result-card">
-                    <div class="result-number" style="color: #22c55e; font-size: 2.5rem;">↑</div>
+                    <div class="result-number" style="color: #22c55e; font-size: 2rem;">↑</div>
                     <div class="result-label">Timbre Fidelity</div>
                 </div>
                 <div class="result-card">
-                    <div class="result-number" style="color: #16a34a; font-size: 2.5rem;">↑</div>
+                    <div class="result-number" style="color: #16a34a; font-size: 2rem;">↑</div>
                     <div class="result-label">Expressive Realism</div>
                 </div>
                 <div class="result-card">
-                    <div class="result-number" style="color: #059669; font-size: 2.5rem;">-</div>
+                    <div class="result-number" style="color: #059669; font-size: 2rem;">-</div>
                     <div class="result-label">Structure Preservation</div>
                 </div>
                 <div class="result-card">
-                    <div class="result-number" style="color: #dc2626; font-size: 2.5rem;">↓</div>
+                    <div class="result-number" style="color: #dc2626; font-size: 2rem;">↓</div>
                     <div class="result-label">Audio Quality</div>
                 </div>
             </div>
@@ -391,11 +394,11 @@
                         </tr>
                         <tr style="border-bottom: 1px solid #f0f0f0;">
                             <td style="padding: 10px 20px; color: var(--text-color);">SA-ControlNet</td>
-                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">Baseline method for source structure preservation.</td>
+                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">Implemented with Stable Audio Open and Diffusion Transformer (DiT)-based ControlNet for source structure preservation.</td>
                         </tr>
                         <tr style="border-bottom: 1px solid #f0f0f0;">
                             <td style="padding: 10px 20px; color: var(--text-color);">w/ CSPs</td>
-                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">An approach using Control Scale Predictors (CSPs), which adjusts the intermediate feature maps from the pretrained ControlNet.</td>
+                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">An approach using Control Scale Predictors (CSPs), which adjusts the intermediate feature maps from the pretrained SA-ControlNet.</td>
                         </tr>
                         <tr>
                             <td style="padding: 10px 20px; color: var(--text-color);">w/ PL-Balancer (Ours)</td>
@@ -788,7 +791,7 @@
             </ul>
             -->
             <p style="color: #dc2626; font-size: 1rem; font-weight: 500; text-align: center; padding: 40px 20px; background-color: #fef2f2; border-radius: 8px; border: 1px solid #fecaca;">
-                Detailed content will be updated with the arXiv paper by early July 2025.
+                Detailed content will be updated soon with the arXiv paper.
             </p>
         </section>
     </main>
