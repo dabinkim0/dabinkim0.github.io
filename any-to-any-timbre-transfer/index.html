@@ -253,12 +253,10 @@
             <!-- <p class="subtitle">Pitch-Loudness Balancer (PL-Balancer) for Source-Target Context-Aware Timbre Transfer</p> -->
             
             <div class="tags">
-                <span class="tag">#Timbre Transfer</span>
-                <span class="tag">#Text-to-Audio Generation</span>
-                <span class="tag">#Controllable Generative Model</span>
-                <span class="tag">#Diffusion Model</span>
-                <span class="tag">#AI Music</span>
-                <span class="tag">#Musical Instrument</span>
+                <span class="tag"># Musical Timbre Transfer</span>
+                <span class="tag"># Text-to-Audio Generation</span>
+                <span class="tag"># Controllable Generative Model</span>
+                <span class="tag"># Diffusion Model</span>
             </div>
 
             <div class="methodology">
@@ -277,6 +275,7 @@
 
         <section>
             <h2 class="section-title">Proposed Architecture</h2>
+            <!--
             <h3>PL-Balancer Framework</h3>
             <p>
                 Our proposed framework consists of three main components: (1) a pretrained Text-to-Audio model, (2) a ControlNet branch for structural conditioning, and (3) a novel Pitch Loudness Balancer (PL-Balancer) module that dynamically adjusts the influence of source structural signals based on target instrument characteristics.
@@ -291,6 +290,10 @@
                 <img src="figs/final architecture.png" alt="Final Architecture Diagram" style="max-width: 100%; height: auto; border-radius: 8px;">
                 <p style="margin-top: 15px; color: var(--secondary-text-color); font-size: 0.9rem;"><em>Figure 1: Overall architecture of our proposed PL-Balancer framework</em></p>
             </div>
+            -->
+            <p style="color: #dc2626; font-size: 1rem; font-weight: 500; text-align: center; padding: 40px 20px; background-color: #fef2f2; border-radius: 8px; border: 1px solid #fecaca;">
+                Detailed content will be updated with the arXiv paper by early July 2025.
+            </p>
         </section>
 
         <section>
@@ -299,28 +302,17 @@
             <p>
                 One of the fundamental challenges in timbre transfer lies in the inherent trade-off between achieving high target timbre fidelity and preserving the original source structure. Previous approaches often struggle with this balance, leading to either:
             </p>
-            <ul>
-                <li><strong>Over-preservation:</strong> Maintaining source structure at the cost of poor target timbre reproduction</li>
-                <li><strong>Over-transfer:</strong> Achieving target timbre while losing essential musical expressivity</li>
-                <li><strong>Artifact generation:</strong> Introducing unwanted acoustic artifacts due to conflicting signals</li>
-            </ul>
+
             <p>
-                Our PL-Balancer module addresses this challenge by dynamically adjusting the influence of pitch and loudness signals based on the specific source-target instrument pair, recognizing that different instruments have varying degrees of interdependence between their structural and timbral characteristics.
+                Our PL-Balancer module addresses this challenge by dynamically adjusting the influence of pitch and loudness signals with awareness of the specific source-target instrument pair.
             </p>
         </section>
 
         <section>
             <h2 class="section-title">Instrument-mismatched Dataset Construction</h2>
-            <h3>Dataset Design</h3>
-            <p>
-                We constructed a comprehensive dataset of instrument-mismatched audio pairs to evaluate our framework's performance across diverse timbre transfer scenarios. The dataset includes:
+            <p style="color: #dc2626; font-size: 1rem; font-weight: 500; text-align: center; padding: 40px 20px; background-color: #fef2f2; border-radius: 8px; border: 1px solid #fecaca;">
+                Detailed content will be updated with the arXiv paper by early July 2025.
             </p>
-            <ul>
-                <li><strong>Source Instruments:</strong> Violin, Piano, Guitar, Flute, Cello, Trumpet</li>
-                <li><strong>Target Instruments:</strong> All source instruments for any-to-any transfer</li>
-                <li><strong>Musical Styles:</strong> Classical, Jazz, Folk, Contemporary</li>
-                <li><strong>Recording Conditions:</strong> Studio-quality recordings with consistent acoustic environments</li>
-            </ul>
         </section>
 
         <section>
@@ -376,7 +368,7 @@
             </div>
 
             <p>
-                Experimental results demonstrate that our framework significantly improves timbre fidelity and perceptual naturalness, effectively preserving fine-grained musical structure and expressivity across diverse timbre transfer scenarios.
+                Experimental results demonstrate that our PL-Balancer framework significantly improves <strong>timbre fidelity</strong> and <strong>perceptual naturalness</strong>, effectively preserving fine-grained musical structure and expressivity across diverse timbre transfer scenarios.
             </p>
         </section>
 
@@ -384,25 +376,34 @@
             <h2 class="section-title">Demo Examples</h2>
             <div class="demo-section">
                 <p><em>Audio demonstrations of our timbre transfer framework. Each example compares the source audio with results from various methods:</em></p>
-                <table style="width: 100%; margin: 15px 0; border-collapse: collapse;">
-                    <tr>
-                        <td style="padding: 5px 15px 5px 0; vertical-align: top; font-weight: bold; color: var(--text-color);">Stable Audio Open</td>
-                        <td style="padding: 5px 0; vertical-align: top; color: var(--secondary-text-color);">Baseline method for target timbre synthesis.</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 5px 15px 5px 0; vertical-align: top; font-weight: bold; color: var(--text-color);">SA-ControlNet</td>
-                        <td style="padding: 5px 0; vertical-align: top; color: var(--secondary-text-color);">Baseline method for source structure preservation.</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 5px 15px 5px 0; vertical-align: top; font-weight: bold; color: var(--text-color);">w/ CSPs</td>
-                        <td style="padding: 5px 0; vertical-align: top; color: var(--secondary-text-color);">An approach using Control Scale Predictors (CSPs) to enhance structural conditioning.</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 5px 15px 5px 0; vertical-align: top; font-weight: bold; color: var(--text-color);">w/ PL-Balancer (Ours)</td>
-                        <td style="padding: 5px 0; vertical-align: top; color: var(--secondary-text-color);">Our proposed method using a Pitch-Loudness Balancer for timbre transfer.</td>
-                    </tr>
-                </table>
                 
+                <table style="width: 100%; margin: 30px 0; border-collapse: collapse; background-color: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); font-size: 0.95rem;">
+                    <thead>
+                        <tr style="background-color: #f8f9fa;">
+                            <th style="padding: 10px 20px; text-align: left; border-bottom: 2px solid #e9ecef; font-weight: 600; color: var(--text-color); width: 25%;">Method</th>
+                            <th style="padding: 10px 20px; text-align: left; border-bottom: 2px solid #e9ecef; font-weight: 600; color: var(--text-color);">Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 1px solid #f0f0f0;">
+                            <td style="padding: 10px 20px; color: var(--text-color);">Stable Audio Open</td>
+                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">Baseline method for target timbre fidelity.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #f0f0f0;">
+                            <td style="padding: 10px 20px; color: var(--text-color);">SA-ControlNet</td>
+                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">Baseline method for source structure preservation.</td>
+                        </tr>
+                        <tr style="border-bottom: 1px solid #f0f0f0;">
+                            <td style="padding: 10px 20px; color: var(--text-color);">w/ CSPs</td>
+                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">An approach using Control Scale Predictors (CSPs), which adjusts the intermediate feature maps from the pretrained ControlNet.</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 10px 20px; color: var(--text-color);">w/ PL-Balancer (Ours)</td>
+                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">Our proposed method using a Pitch-Loudness Balancer for source-target context-aware timbre transfer.</td>
+                        </tr>
+                    </tbody>
+                </table>
+
                 <!-- Violin → Clarinet -->
                 <div style="margin: 40px 0;">
                     <h3 style="margin-bottom: 20px; color: var(--text-color);">Violin → Clarinet</h3>
@@ -777,7 +778,7 @@
 
         <section>
             <h2 class="section-title">Technical Details</h2>
-            
+            <!--
             <h3>Key Innovations</h3>
             <ul>
                 <li><strong>PL-Balancer Module:</strong> Dynamically adjusts pitch and loudness influence based on target instrument characteristics</li>
@@ -785,6 +786,10 @@
                 <li><strong>32-bin RMS Loudness Contour:</strong> Fine-grained loudness envelope analysis for expressive dynamics</li>
                 <li><strong>ControlNet Integration:</strong> Leverages pretrained text-to-audio models with structural conditioning</li>
             </ul>
+            -->
+            <p style="color: #dc2626; font-size: 1rem; font-weight: 500; text-align: center; padding: 40px 20px; background-color: #fef2f2; border-radius: 8px; border: 1px solid #fecaca;">
+                Detailed content will be updated with the arXiv paper by early July 2025.
+            </p>
         </section>
     </main>
 
