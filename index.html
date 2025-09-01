@@ -138,7 +138,7 @@
         /* Hero row grouping for image + text */
         .hero {
             display: flex;
-            align-items: center;
+            align-items: stretch; /* Match image height to text block */
             justify-content: space-between;
             gap: 20px;
             width: 100%;
@@ -146,9 +146,14 @@
         }
         .hero-text {
             text-align: left;
+            flex: 1; /* Let text occupy remaining space */
         }
         .hero .profile-image {
             margin: 0;
+            height: 100%;
+            width: auto;
+            border-radius: 0; /* No circular mask */
+            object-fit: cover;
         }
         
         #about .subtitle {
@@ -346,13 +351,13 @@
                 <div class="hero-text">
                     <h1>Dabin Kim 김다빈</h1>
                     <p class="subtitle">Music & Audio AI Researcher</p>
+                    <p style="margin: 0; font-size: 1rem;">
+                        I am an AI researcher exploring new ways to understand and create music and sound. I am passionate about building intelligent systems that can comprehend and control the nuanced and expressive qualities of audio using deep learning and generative models. 
+                        <br><br>
+                        dabinchi98@kaist.ac.kr
+                    </p>
                 </div>
             </div>
-            <p style="margin: 0; font-size: 1rem;">
-                I am an AI researcher exploring new ways to understand and create music and sound. I am passionate about building intelligent systems that can comprehend and control the nuanced and expressive qualities of audio using deep learning and generative models. 
-                <br><br>
-                dabinchi98@kaist.ac.kr
-            </p>
             <div style="background-color: #f8f9fa; padding: 20px 25px; border-radius: 8px; margin-top: 30px;">
                 <div class="education-list">
                     <h3>News</h3>
