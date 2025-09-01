@@ -139,11 +139,13 @@
         .hero {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             gap: 20px;
+            width: 100%;
+            flex-direction: row-reverse; /* Image on the right, text on the left */
         }
         .hero-text {
-            text-align: right;
+            text-align: left;
         }
         .hero .profile-image {
             margin: 0;
