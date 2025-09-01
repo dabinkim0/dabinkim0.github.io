@@ -135,6 +135,20 @@
             margin: 0 0 15px 0;
         }
         
+        /* Hero row grouping for image + text */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+        }
+        .hero-text {
+            text-align: right;
+        }
+        .hero .profile-image {
+            margin: 0;
+        }
+        
         #about .subtitle {
             font-size: 1rem; /* Reduced from 1.2rem */
             color: var(--accent-color);
@@ -325,9 +339,13 @@
     <main class="container">
 
         <section id="about">
-            <img src="any-to-any-timbre-transfer/figs/profile_rec.jpeg" alt="Profile photo of Dabin Kim" class="profile-image">
-            <h1>Dabin Kim 김다빈</h1>
-            <p class="subtitle">Music & Audio AI Researcher</p>
+            <div class="hero">
+                <img src="any-to-any-timbre-transfer/figs/profile_rec.jpeg" alt="Profile photo of Dabin Kim" class="profile-image">
+                <div class="hero-text">
+                    <h1>Dabin Kim 김다빈</h1>
+                    <p class="subtitle">Music & Audio AI Researcher</p>
+                </div>
+            </div>
             <p style="margin: 0; font-size: 1rem;">
                 I am an AI researcher exploring new ways to understand and create music and sound. I am passionate about building intelligent systems that can comprehend and control the nuanced and expressive qualities of audio using deep learning and generative models. 
                 <br><br>
@@ -372,7 +390,7 @@
                 <li>
                     <h3><a href="https://arxiv.org/abs/2408.11915" target="_blank">Video-Foley: Two-Stage Video-To-Sound Generation via Temporal Event Condition For Foley Sound</a></h3>
                     <p class="authors">Junwon Lee, Jaekwon Im, <strong>Dabin Kim</strong>, Juhan Nam</p>
-                    <p class="venue"><em>arXiv preprint</em>, 2024.</p>
+                    <p class="venue"><em>TASLP</em>, 2024.</p>
                     <!--
                     <p class="summary">
                         In this project, my contributions included working with Optical Flow for video-to-audio tasks. I was also responsible for designing and participating in the qualitative evaluation of the generated sounds.
