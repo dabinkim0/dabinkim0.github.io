@@ -119,10 +119,20 @@
 
         /* --- About Section --- */
         #about h1 {
-            font-size: 2.2rem; /* Adjusted size */
-            font-weight: 700;
+            font-size: 1.8rem; /* Match section-title size */
+            font-weight: 400; /* Remove bold */
             margin-bottom: 10px;
             letter-spacing: -0.02em;
+        }
+        
+        /* Profile image styling */
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 0 0 15px 0;
         }
         
         #about .subtitle {
@@ -300,7 +310,7 @@
 <body>
     <header class="main-header">
         <div class="container">
-            <a href="#about" class="logo">DABIN KIM</a>
+            <a href="#about" class="logo">Dabin Kim</a>
             <nav class="main-nav">
                 <ul>
                     <li><a href="#about">Home</a></li>
@@ -315,6 +325,7 @@
     <main class="container">
 
         <section id="about">
+            <img src="any-to-any-timbre-transfer/figs/profile_rec.jpeg" alt="Profile photo of Dabin Kim" class="profile-image">
             <h1>Dabin Kim 김다빈</h1>
             <p class="subtitle">Music & Audio AI Researcher</p>
             <p style="margin: 0; font-size: 1rem;">
@@ -354,7 +365,7 @@
                     -->
                     <div class="links">
                         <a href="#" target="_blank">[Paper]</a>
-rk                        <a href="any-to-any-timbre-transfer/" target="_blank">[Demo]</a>
+                        <a href="any-to-any-timbre-transfer/" target="_blank">[Demo]</a>
                         <a href="#" target="_blank">[Code]</a>
                     </div>
                 </li>
