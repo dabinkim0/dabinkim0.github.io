@@ -157,6 +157,12 @@
             object-fit: cover;
         }
         
+        /* Cap max height so the photo doesn’t get overly large */
+        @media (min-width: 769px) {
+            .hero { min-height: 180px; }
+            .hero .profile-image { max-height: 220px; }
+        }
+        
         #about .subtitle {
             font-size: 1rem; /* Reduced from 1.2rem */
             color: var(--accent-color);
