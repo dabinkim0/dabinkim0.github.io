@@ -190,6 +190,7 @@
         .methodology h3 {
             margin-top: 0;
             color: var(--accent-color);
+            font-weight: 400; /* Match main site's non-bold headings */
         }
 
         .results {
@@ -258,7 +259,7 @@
                     Timbre transfer aims to transform the timbral characteristics of a source audio while preserving its structural content. Recent advances in neural-based timbre transfer have demonstrated remarkable capabilities in generating high-quality audio with target timbres. However, despite significant advances in timbre transfer with neural-based methods, previous approaches have typically overlooked the conceptual ambiguity of "timbre", often assuming that pitch and timbral features can be independently disentangled and replaced with those of another instrument. Consequently, these methods often struggle to resolve conflicts stemming from the inherent instrument-specific attributes of the source structure and the target timbre, resulting in unnatural transferred audio containing acoustic artifacts and timbral ambiguity.
                 </p>
                 <p>
-                    To address this, we propose a novel <strong>adaptive timbre transfer framework</strong>, which combines pretrained Text-to-Audio models with a ControlNet branch and <strong>Pitch Loudness Balancer (PL-Balancer)</strong> module to systematically account for the interdependency of pitch, loudness, and timbre. Unlike existing methods relying on a timbre-structure disentanglement or standardized spatiotemporal structural conditioning, our PL-Balancer dynamically adjusts the influence of each source structural signal according to the target instrument, recognizing that the intersections between pitch, loudness, and timbre varies across source-target pairs.
+                    To address this, we propose a novel adaptive timbre transfer framework, which combines pretrained Text-to-Audio models with a ControlNet branch and Pitch Loudness Balancer (PL-Balancer) module to systematically account for the interdependency of pitch, loudness, and timbre. Unlike existing methods relying on a timbre-structure disentanglement or standardized spatiotemporal structural conditioning, our PL-Balancer dynamically adjusts the influence of each source structural signal according to the target instrument, recognizing that the intersections between pitch, loudness, and timbre varies across source-target pairs.
                 </p>
             </div>
         </section>
