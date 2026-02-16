@@ -312,12 +312,12 @@
             </p>
 
             <p>
-                We first implemented <strong>Stable Audio ControlNet (SA-ControlNet)</strong> to find a configuration that generalizes across various instrument groups, based on discrete bins for pitch and loudness curves. This configuration then served as a new baseline against which we compared the performance of our proposed PL-Balancer.
+                We first implemented <strong>Stable Audio ControlNet (SAO-ControlNet)</strong> to find a configuration that generalizes across various instrument groups, based on discrete bins for pitch and loudness curves. This configuration then served as a new baseline against which we compared the performance of our proposed PL-Balancer.
             </p>
             
             <div style="text-align: center; margin: 40px 0;">
                 <img src="figs/eval_discrete-bins.png" alt="Evaluation of Discrete Bins" style="max-width: 100%; height: auto; border-radius: 8px;">
-                <p style="margin-top: 15px; color: var(--secondary-text-color); font-size: 0.9rem;"><em>Evaluation of discrete bins for pitch and loudness curves in SA-ControlNet</em></p>
+                <p style="margin-top: 15px; color: var(--secondary-text-color); font-size: 0.9rem;"><em>Evaluation of discrete bins for pitch and loudness curves in SAO-ControlNet</em></p>
             </div>
             
         </section> -->
@@ -331,40 +331,6 @@
 
         <section>
             <h2 class="section-title">Experimental Results</h2>
-            
-            <div class="results">
-                <div class="result-card">
-                    <div class="result-number" style="color: #22c55e; font-size: 2rem;">↑</div>
-                    <div class="result-label">Timbre Fidelity</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-number" style="color: #16a34a; font-size: 2rem;">↑</div>
-                    <div class="result-label">Expressive Realism</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-number" style="color: #059669; font-size: 2rem;">-</div>
-                    <div class="result-label">Structure Preservation</div>
-                </div>
-                <div class="result-card">
-                    <div class="result-number" style="color: #dc2626; font-size: 2rem;">↓</div>
-                    <div class="result-label">Audio Quality</div>
-                </div>
-            </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; margin: 40px 0;">
-                <div style="text-align: center;">
-                    <img src="figs/sa-controlnet.png" alt="SA-ControlNet" style="max-width: 100%; height: auto; border-radius: 6px;">
-                    <p style="margin-top: 10px; color: var(--secondary-text-color); font-size: 0.85rem;"><em>SA-ControlNet</em></p>
-                </div>
-                <div style="text-align: center;">
-                    <img src="figs/csps.png" alt="Control Scale Predictors (CSPs)" style="max-width: 100%; height: auto; border-radius: 6px;">
-                    <p style="margin-top: 10px; color: var(--secondary-text-color); font-size: 0.85rem;"><em>Control Scale Predictors (CSPs)</em></p>
-                </div>
-                <div style="text-align: center;">
-                    <img src="figs/pl-balancer.png" alt="Pitch-Loudness Balancer (PL-Balancer)" style="max-width: 100%; height: auto; border-radius: 6px;">
-                    <p style="margin-top: 10px; color: var(--secondary-text-color); font-size: 0.85rem;"><em>Pitch-Loudness Balancer (PL-Balancer)</em></p>
-                </div>
-            </div>
 
             <div style="text-align: center; margin: 40px 0;">
                 <img src="figs/table_timbre-transfer.png" alt="Timbre Transfer Evaluation Table" style="max-width: 100%; height: auto; border-radius: 6px;">
@@ -404,15 +370,15 @@
                             <td style="padding: 10px 20px; color: var(--secondary-text-color);">Baseline method for target timbre fidelity.</td>
                         </tr>
                         <tr style="border-bottom: 1px solid #f0f0f0;">
-                            <td style="padding: 10px 20px; color: var(--text-color);">SA-ControlNet</td>
+                            <td style="padding: 10px 20px; color: var(--text-color);">SAO-ControlNet</td>
                             <td style="padding: 10px 20px; color: var(--secondary-text-color);">Implemented with Stable Audio Open and Diffusion Transformer (DiT)-based ControlNet for source structure preservation.</td>
                         </tr>
                         <tr style="border-bottom: 1px solid #f0f0f0;">
-                            <td style="padding: 10px 20px; color: var(--text-color);">w/ CSPs</td>
-                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">An approach using Control Scale Predictors (CSPs), which adjusts the intermediate feature maps from the pretrained SA-ControlNet.</td>
+                            <td style="padding: 10px 20px; color: var(--text-color);">SmartControl</td>
+                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">An approach using Control Scale Predictors (CSPs), which adjusts the intermediate feature maps from the pretrained SAO-ControlNet.</td>
                         </tr>
                         <tr>
-                            <td style="padding: 10px 20px; color: var(--text-color);">w/ PL-Balancer (Ours)</td>
+                            <td style="padding: 10px 20px; color: var(--text-color);">AdaTransfer (Ours)</td>
                             <td style="padding: 10px 20px; color: var(--secondary-text-color);">Our proposed method using a Pitch-Loudness Balancer for source-target context-aware timbre transfer.</td>
                         </tr>
                     </tbody>
@@ -438,19 +404,19 @@
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_violin_to_clarinet_sample_29_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SA-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_violin_to_clarinet_sample_29_csps.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">w/ CSPs</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SmartControl</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_violin_to_clarinet_sample_29_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>w/ PL-Balancer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
                         </div>
                     </div>
                 </div>
@@ -475,19 +441,19 @@
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_violin_to_flute_sample_39_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SA-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_violin_to_flute_sample_39_csps.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">w/ CSPs</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SmartControl</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_violin_to_flute_sample_39_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>w/ PL-Balancer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
                         </div>
                     </div>
                 </div>
@@ -512,19 +478,19 @@
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_trumpet_to_flute_sample_26_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SA-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_trumpet_to_flute_sample_26_csps.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">w/ CSPs</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SmartControl</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_trumpet_to_flute_sample_26_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>w/ PL-Balancer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
                         </div>
                     </div>
                 </div>
@@ -549,19 +515,19 @@
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_oboe_to_trumpet_sample_01_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SA-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_oboe_to_trumpet_sample_01_csps.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">w/ CSPs</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SmartControl</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_oboe_to_trumpet_sample_01_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>w/ PL-Balancer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
                         </div>
                     </div>
                 </div>
@@ -586,19 +552,19 @@
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_clarinet_to_violin_sample_03_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SA-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_clarinet_to_violin_sample_03_csps.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">w/ CSPs</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SmartControl</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_clarinet_to_violin_sample_03_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>w/ PL-Balancer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
                         </div>
                     </div>
                 </div>
@@ -623,19 +589,19 @@
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_double_bass_to_trombone_sample_04_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SA-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_double_bass_to_trombone_sample_04_csps.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">w/ CSPs</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SmartControl</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_double_bass_to_trombone_sample_04_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>w/ PL-Balancer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
                         </div>
                     </div>
                 </div>
@@ -660,19 +626,19 @@
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_saxophone_to_viola_sample_01_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SA-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_saxophone_to_viola_sample_01_csps.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">w/ CSPs</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SmartControl</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_saxophone_to_viola_sample_01_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>w/ PL-Balancer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
                         </div>
                     </div>
                 </div>
@@ -697,19 +663,19 @@
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_tuba_to_double_bass_sample_02_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SA-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_tuba_to_double_bass_sample_02_csps.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">w/ CSPs</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SmartControl</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_tuba_to_double_bass_sample_02_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>w/ PL-Balancer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
                         </div>
                     </div>
                 </div> -->
@@ -734,19 +700,19 @@
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_viola_to_horn_sample_02_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SA-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_viola_to_horn_sample_02_csps.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">w/ CSPs</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SmartControl</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_viola_to_horn_sample_02_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>w/ PL-Balancer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
                         </div>
                     </div>
                 </div> -->
@@ -771,19 +737,19 @@
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_viola_to_saxophone_sample_05_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SA-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_viola_to_saxophone_sample_05_csps.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">w/ CSPs</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SmartControl</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 10px;">
                                 <source src="audio/generated_viola_to_saxophone_sample_05_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>w/ PL-Balancer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
                         </div>
                     </div>
                 </div> -->
