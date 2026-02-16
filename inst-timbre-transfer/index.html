@@ -310,12 +310,12 @@
             </p>
 
             <p>
-                We first implemented <strong>Stable Audio ControlNet (SAO-ControlNet)</strong> to find a configuration that generalizes across various instrument groups, based on discrete bins for pitch and loudness curves. This configuration then served as a new baseline against which we compared the performance of our proposed PL-Balancer.
+                We first implemented <strong>Stable Audio ControlNet (ControlNet)</strong> to find a configuration that generalizes across various instrument groups, based on discrete bins for pitch and loudness curves. This configuration then served as a new baseline against which we compared the performance of our proposed PL-Balancer.
             </p>
             
             <div style="text-align: center; margin: 40px 0 20px 0;">
                 <img src="figs/eval_discrete-bins.png" alt="Evaluation of Discrete Bins" style="max-width: 100%; height: auto; border-radius: 8px;">
-                <p style="margin-top: 20px; color: var(--secondary-text-color); font-size: 0.9rem;"><em>Evaluation of discrete bins for pitch and loudness curves in SAO-ControlNet</em></p>
+                <p style="margin-top: 20px; color: var(--secondary-text-color); font-size: 0.9rem;"><em>Evaluation of discrete bins for pitch and loudness curves in ControlNet</em></p>
             </div>
             
         </section> -->
@@ -346,8 +346,6 @@
         <section>
             <h2 class="section-title">Demo Examples</h2>
             <div class="demo-section">
-                <p><em>Audio demonstrations of our timbre transfer framework. Each example compares the source audio with results from various methods:</em></p>
-                
                 <table style="width: 100%; margin: 30px 0 20px 0; border-collapse: collapse; background-color: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); font-size: 0.95rem;">
                     <thead>
                         <tr style="background-color: #f8f9fa;">
@@ -358,19 +356,19 @@
                     <tbody>
                         <tr style="border-bottom: 1px solid #f0f0f0;">
                             <td style="padding: 10px 20px; color: var(--text-color);">Stable Audio Open</td>
-                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">Baseline method for target timbre fidelity.</td>
+                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">A Text-to-Music latent diffusion model that synthesizes audio based on text prompts.</td>
                         </tr>
                         <tr style="border-bottom: 1px solid #f0f0f0;">
-                            <td style="padding: 10px 20px; color: var(--text-color);">SAO-ControlNet</td>
-                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">Implemented with Stable Audio Open and Diffusion Transformer (DiT)-based ControlNet for source structure preservation.</td>
+                            <td style="padding: 10px 20px; color: var(--text-color);">ControlNet</td>
+                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">A DiT-based ControlNet trained with a frozen Stable Audio Open backbone. It is conditioned on two heterogeneous structural features ($f_0$ and RMS contours).</td>
                         </tr>
                         <tr style="border-bottom: 1px solid #f0f0f0;">
                             <td style="padding: 10px 20px; color: var(--text-color);">SmartControl</td>
-                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">An approach using Control Scale Predictors (CSPs), which adjusts the intermediate feature maps from the pretrained SAO-ControlNet.</td>
+                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">Incorporates Control Scale Predictors (CSPs) with the frozen ControlNet to adaptively adjust intermediate control features.</td>
                         </tr>
                         <tr>
                             <td style="padding: 10px 20px; color: var(--text-color);">AdaTransfer (Ours)</td>
-                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">Our proposed method using a Pitch-Loudness Balancer for source-target context-aware timbre transfer.</td>
+                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">Jointly trains CSPs and Text-Guided CSPs (TG-CSPs). TG-CSPs modulate control scales to balance the contributions of each structural condition.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -395,7 +393,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_violin_to_clarinet_sample_29_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 20px;">
@@ -432,7 +430,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_violin_to_flute_sample_39_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 20px;">
@@ -469,7 +467,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_trumpet_to_flute_sample_26_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 20px;">
@@ -506,7 +504,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_oboe_to_trumpet_sample_01_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 20px;">
@@ -543,7 +541,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_clarinet_to_violin_sample_03_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 20px;">
@@ -580,7 +578,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_double_bass_to_trombone_sample_04_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 20px;">
@@ -617,7 +615,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_saxophone_to_viola_sample_01_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 20px;">
@@ -654,7 +652,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_tuba_to_double_bass_sample_02_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 20px;">
@@ -691,7 +689,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_viola_to_horn_sample_02_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 20px;">
@@ -728,7 +726,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_viola_to_saxophone_sample_05_sa-controlnet.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">SAO-ControlNet</p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);">ControlNet</p>
                         </div>
                         <div style="text-align: center;">
                             <audio controls style="width: 100%; margin-bottom: 20px;">
