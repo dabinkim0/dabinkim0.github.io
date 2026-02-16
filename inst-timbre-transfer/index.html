@@ -267,6 +267,14 @@
             }
         }
     </style>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']]
+            }
+        };
+    </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
     <header class="main-header">
@@ -360,7 +368,7 @@
                         </tr>
                         <tr style="border-bottom: 1px solid #f0f0f0;">
                             <td style="padding: 10px 20px; color: var(--text-color);">ControlNet</td>
-                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">A DiT-based ControlNet trained with a frozen Stable Audio Open backbone. It is conditioned on two heterogeneous structural features: $f_0$ and RMS contours.</td>
+                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">A DiT-based ControlNet trained with a frozen Stable Audio Open backbone. It is conditioned on two heterogeneous structural features: \(f_0\) and RMS contours.</td>
                         </tr>
                         <tr style="border-bottom: 1px solid #f0f0f0;">
                             <td style="padding: 10px 20px; color: var(--text-color);">SmartControl</td>
