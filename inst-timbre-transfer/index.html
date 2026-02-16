@@ -102,7 +102,7 @@
             font-style: italic;
             font-weight: 400;
             font-size: 1.8rem;
-            text-align: left;
+            text-align: center;
             margin-bottom: 40px;
             color: var(--text-color);
         }
@@ -270,13 +270,11 @@
 
         <section>
             <h2 class="section-title">Proposed Architecture</h2>
-            <div style="display: flex; gap: 20px; align-items: flex-start; justify-content: center; flex-wrap: wrap; margin: 40px 0;">
-                <div style="flex: 1 1 380px; max-width: 560px; text-align: center;">
-                    <img src="figs/final-architecture_high-level.png" alt="Final Architecture Diagram" style="max-width: 100%; height: auto; border-radius: 8px;">
-                </div>
-                <div style="flex: 1 1 380px; max-width: 560px; text-align: center;">
-                    <img src="figs/fig_scale-predictor-freezed.png" alt="Scale Predictor Freezed Diagram" style="max-width: 100%; height: auto; border-radius: 8px;">
-                </div>
+            <div style="text-align: center; margin: 40px 0 20px 0;">
+                <img src="figs/final-architecture_high-level.png" alt="Final Architecture Diagram" style="max-width: 100%; height: auto; border-radius: 8px;">
+            </div>
+            <div style="text-align: center; margin: 20px 0 0 0;">
+                <img src="figs/fig_scale-predictor-freezed.png" alt="Scale Predictor Freezed Diagram" style="max-width: 100%; height: auto; border-radius: 8px;">
             </div>
             <div style="text-align: center; margin-top: -10px; margin-bottom: 40px;">
                 <p style="margin-top: 15px; color: var(--secondary-text-color); font-size: 0.9rem;"><em>Overall architecture of AdaTransfer, integrating two sets of lightweight modules into frozen SAO-ControlNet.</em></p>
