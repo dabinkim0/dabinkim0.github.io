@@ -107,14 +107,9 @@
             text-align: center;
             margin-bottom: 20px;
             margin-top: 0;
-            padding-top: 24px;
+            padding-top: 16px;
             border-top: 1px solid var(--border-color);
             color: var(--text-color);
-        }
-
-        h2.section-title.no-divider {
-            padding-top: 0;
-            border-top: none;
         }
 
         .subtitle {
@@ -276,39 +271,16 @@
                 <span class="tag"># diffusion model</span>
             </div>
 
+            <div style="text-align: center; margin: 40px 0 20px 0;">
+                <img src="figs/fig_architecture_demo.png" alt="Proposed Architecture Demo" style="max-width: 90%; height: auto; border-radius: 8px;">
+            </div>
+
             <div class="methodology">
                 <h3>Abstract</h3>
                 <p>
                     ...
                 </p>
             </div>
-        </section>
-
-        <section>
-            <h2 class="section-title no-divider">Proposed Architecture</h2>
-            <div style="text-align: center; margin: 40px 0 0 0;">
-                <img src="figs/fig_architecture_demo.png" alt="Proposed Architecture Demo" style="max-width: 90%; height: auto; border-radius: 8px;">
-            </div>
-            <div style="text-align: center; margin-top: -10px; margin-bottom: 20px;">
-                <p style="margin-top: 20px; color: var(--secondary-text-color); font-size: 0.9rem;"><em>Overall architecture of AdaTransfer, integrating two sets of lightweight modules into frozen SAO-ControlNet.</em></p>
-            </div>
-            
-            <!--
-            <h3>PL-Balancer Framework</h3>
-            <p>
-                Our proposed framework consists of three main components: (1) a pretrained Text-to-Audio model, (2) a ControlNet branch for structural conditioning, and (3) a novel Pitch Loudness Balancer (PL-Balancer) module that dynamically adjusts the influence of source structural signals based on target instrument characteristics.
-            </p>
-            <ul>
-                <li><strong>Text-to-Audio Model:</strong> Leverages state-of-the-art diffusion models for high-quality audio generation</li>
-                <li><strong>ControlNet Branch:</strong> Provides fine-grained control over structural features</li>
-                <li><strong>PL-Balancer Module:</strong> Adaptively balances pitch and loudness influence for optimal timbre transfer</li>
-            </ul>
-            
-            <div style="text-align: center; margin: 40px 0 20px 0;">
-                <img src="figs/final architecture.png" alt="Final Architecture Diagram" style="max-width: 100%; height: auto; border-radius: 8px;">
-                <p style="margin-top: 20px; color: var(--secondary-text-color); font-size: 0.9rem;"><em>Figure 1: Overall architecture of our proposed PL-Balancer framework</em></p>
-            </div>
-            -->
         </section>
 
         <!-- <section>
