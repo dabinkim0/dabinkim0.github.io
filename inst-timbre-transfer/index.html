@@ -243,7 +243,7 @@
 
     <main class="container">
         <section>
-            <h1>Any-to-Any Timbre Transfer for Musical Instruments with Adaptive Pitch-Loudness Balancing</h1>
+            <h1>Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control</h1>
             <!-- <p class="subtitle">Pitch-Loudness Balancer (PL-Balancer) for Source-Target Context-Aware Timbre Transfer</p> -->
             
             <div class="tags">
@@ -256,11 +256,15 @@
             <div class="methodology">
                 <h3>Abstract</h3>
                 <p>
-                    Timbre transfer aims to transform the timbral characteristics of a source audio while preserving its structural content. Recent advances in neural-based timbre transfer have demonstrated remarkable capabilities in generating high-quality audio with target timbres. However, despite significant advances in timbre transfer with neural-based methods, previous approaches have typically overlooked the conceptual ambiguity of "timbre", often assuming that pitch and timbral features can be independently disentangled and replaced with those of another instrument. Consequently, these methods often struggle to resolve conflicts stemming from the inherent instrument-specific attributes of the source structure and the target timbre, resulting in unnatural transferred audio containing acoustic artifacts and timbral ambiguity.
+                    ...
                 </p>
-                <p>
-                    To address this, we propose a novel adaptive timbre transfer framework, which combines pretrained Text-to-Audio models with a ControlNet branch and Pitch Loudness Balancer (PL-Balancer) module to systematically account for the interdependency of pitch, loudness, and timbre. Unlike existing methods relying on a timbre-structure disentanglement or standardized spatiotemporal structural conditioning, our PL-Balancer dynamically adjusts the influence of each source structural signal according to the target instrument, recognizing that the intersections between pitch, loudness, and timbre varies across source-target pairs.
-                </p>
+            </div>
+        </section>
+
+        <section>
+            <h2 class="section-title">Core Concept of AdaTransfer</h2>
+            <div style="text-align: center; margin: 40px 0;">
+                <img src="figs/fig_core-concept.png" alt="Core Concept of AdaTransfer" style="max-width: 100%; height: auto; border-radius: 8px;">
             </div>
         </section>
 
@@ -269,7 +273,11 @@
             
             <div style="text-align: center; margin: 40px 0;">
                 <img src="figs/final-architecture_high-level.png" alt="Final Architecture Diagram" style="max-width: 100%; height: auto; border-radius: 8px;">
-                <p style="margin-top: 15px; color: var(--secondary-text-color); font-size: 0.9rem;"><em>Overall architecture of our proposed PL-Balancer framework</em></p>
+            </div>
+
+            <div style="text-align: center; margin: 40px 0;">
+                <img src="figs/fig_scale-predictor-freezed.png" alt="Scale Predictor Freezed Diagram" style="max-width: 100%; height: auto; border-radius: 8px;">
+                <p style="margin-top: 15px; color: var(--secondary-text-color); font-size: 0.9rem;"><em>Overall architecture of AdaTransfer, integrating two sets of lightweight modules into frozen SAO-ControlNet.</em></p>
             </div>
             
             <!--
