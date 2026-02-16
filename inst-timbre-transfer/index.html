@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Any-to-Any Timbre Transfer Demo | Dabin Kim</title>
+    <title>Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control | Dabin Kim</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -103,7 +103,7 @@
             font-family: 'Inter', sans-serif;
             font-style: normal;
             font-weight: 400;
-            font-size: 1.8rem;
+            font-size: 1.65rem;
             text-align: center;
             margin-bottom: 40px;
             color: var(--text-color);
@@ -173,7 +173,8 @@
             margin: 0 0 10px 0;
             border-radius: 4px;
             border: 1px solid var(--border-color);
-            background: #0b1220;
+            object-fit: cover;
+            background: #111;
         }
 
         .comparison-table {
@@ -284,11 +285,8 @@
 
         <section>
             <h2 class="section-title">Proposed Architecture</h2>
-            <div style="text-align: center; margin: 40px 0 20px 0;">
-                <img src="figs/final-architecture_high-level.png" alt="Final Architecture Diagram" style="max-width: 50%; height: auto; border-radius: 8px;">
-            </div>
-            <div style="text-align: center; margin: 20px 0 0 0;">
-                <img src="figs/fig_scale-predictor-freezed.png" alt="Scale Predictor Freezed Diagram" style="max-width: 50%; height: auto; border-radius: 8px;">
+            <div style="text-align: center; margin: 40px 0 0 0;">
+                <img src="figs/fig_architecture_demo.png" alt="Proposed Architecture Demo" style="max-width: 100%; height: auto; border-radius: 8px;">
             </div>
             <div style="text-align: center; margin-top: -10px; margin-bottom: 40px;">
                 <p style="margin-top: 15px; color: var(--secondary-text-color); font-size: 0.9rem;"><em>Overall architecture of AdaTransfer, integrating two sets of lightweight modules into frozen SAO-ControlNet.</em></p>
@@ -791,66 +789,26 @@
         </p>
     </footer>
     <script>
-        function hashString(input) {
-            let hash = 0;
-            for (let i = 0; i < input.length; i += 1) {
-                hash = ((hash << 5) - hash) + input.charCodeAt(i);
-                hash |= 0;
-            }
-            return Math.abs(hash);
-        }
-
-        function drawSpectrogramExample(canvas, key) {
-            const ctx = canvas.getContext('2d');
-            const dpr = window.devicePixelRatio || 1;
-            const width = Math.max(120, Math.floor(canvas.clientWidth || 220));
-            const height = 64;
-            canvas.width = Math.floor(width * dpr);
-            canvas.height = Math.floor(height * dpr);
-            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-            const seed = hashString(key);
-            const hue = seed % 360;
-            const bg = ctx.createLinearGradient(0, 0, width, height);
-            bg.addColorStop(0, `hsl(${hue}, 45%, 10%)`);
-            bg.addColorStop(1, `hsl(${(hue + 60) % 360}, 50%, 14%)`);
-            ctx.fillStyle = bg;
-            ctx.fillRect(0, 0, width, height);
-
-            const bars = 72;
-            const barW = width / bars;
-            for (let i = 0; i < bars; i += 1) {
-                const n = Math.sin((i + 1) * 0.21 + seed * 0.0017) * 0.5 + 0.5;
-                const m = Math.cos((i + 1) * 0.11 + seed * 0.0031) * 0.5 + 0.5;
-                const energy = Math.min(1, (n * 0.65) + (m * 0.55));
-                const barH = 6 + (energy * (height - 10));
-                const y = height - barH;
-                const lightness = 40 + Math.round(energy * 35);
-                ctx.fillStyle = `hsl(${(hue + (i % 24) * 2) % 360}, 90%, ${lightness}%)`;
-                ctx.fillRect(i * barW, y, Math.max(1, barW - 1), barH);
-            }
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
             const audioNodes = Array.from(document.querySelectorAll('.demo-section audio'));
-            const previewPairs = [];
 
             audioNodes.forEach((audio, index) => {
-                const canvas = document.createElement('canvas');
-                canvas.className = 'spectrogram-preview';
-                canvas.setAttribute('aria-label', 'Spectrogram visualization example');
-                audio.insertAdjacentElement('afterend', canvas);
-
                 const sourceNode = audio.querySelector('source');
-                const key = sourceNode ? sourceNode.getAttribute('src') : `audio-${index}`;
-                previewPairs.push({ canvas, key: key || `audio-${index}` });
-                drawSpectrogramExample(canvas, key || `audio-${index}`);
-            });
+                const audioPath = sourceNode ? sourceNode.getAttribute('src') : null;
+                if (!audioPath || !audioPath.endsWith('.wav')) {
+                    return;
+                }
 
-            window.addEventListener('resize', () => {
-                previewPairs.forEach((pair) => {
-                    drawSpectrogramExample(pair.canvas, pair.key);
-                });
+                const imagePath = audioPath
+                    .replace(/^audio\//, 'spectrograms/')
+                    .replace(/\.wav$/i, '.png');
+
+                const img = document.createElement('img');
+                img.className = 'spectrogram-preview';
+                img.src = imagePath;
+                img.alt = `Spectrogram preview ${index + 1}`;
+                img.loading = 'lazy';
+                audio.insertAdjacentElement('afterend', img);
             });
         });
     </script>
