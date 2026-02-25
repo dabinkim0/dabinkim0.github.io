@@ -122,8 +122,8 @@
         
         /* Profile image styling */
         .profile-image {
-            width: 120px;
-            height: 120px;
+            width: 100px;
+            height: 100px;
             border-radius: 50%;
             object-fit: cover;
             display: block;
@@ -155,8 +155,8 @@
         
         /* Cap max height so the photo doesn’t get overly large */
         @media (min-width: 769px) {
-            .hero { min-height: 180px; }
-            .hero .profile-image { max-height: 220px; }
+            .hero { min-height: 160px; }
+            .hero .profile-image { max-height: 190px; }
         }
         
         #about .subtitle {
@@ -328,4 +328,3 @@
             font-size: 0.9rem;
             color: var(--secondary-text-color);
         }
-
