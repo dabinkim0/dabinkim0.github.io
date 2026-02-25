@@ -113,9 +113,9 @@
 
         /* --- About Section --- */
         #about h1 {
-            font-size: 1.8rem; /* Match section-title size */
+            font-size: 1.7rem; /* Slightly reduced */
             font-weight: 400; /* Remove bold */
-            margin-bottom: 10px;
+            margin-bottom: 0;
             margin-top: 0; /* Align top edge with photo */
             letter-spacing: -0.02em;
         }
