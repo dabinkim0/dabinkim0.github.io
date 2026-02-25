@@ -105,6 +105,12 @@
         .main-nav a:hover {
             color: var(--text-color);
         }
+
+        .main-nav a.nav-disabled {
+            color: rgba(0, 0, 0, 0.35);
+            pointer-events: none;
+            cursor: default;
+        }
         
         /* --- Section Headings --- */
         h2.section-title {
@@ -345,7 +351,7 @@
                 <ul>
                     <li><a href="#about">Home</a></li>
                     <li><a href="#publications">Publications</a></li>
-                    <li><a href="projects/index.html">Projects</a></li>
+                    <li><a href="projects/index.html" class="nav-disabled" aria-disabled="true">Projects</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </nav>
