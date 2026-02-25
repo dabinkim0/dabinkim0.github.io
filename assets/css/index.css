@@ -1,0 +1,331 @@
+        /*
+         * --- Global Styles ---
+         * Inspired by a minimalist, technical, and academic aesthetic.
+         * Uses a strict black/white palette with a single color accent.
+         */
+        :root {
+            --text-color: #111111;
+            --background-color: #ffffff;
+            --secondary-text-color: rgba(0, 0, 0, 0.6);
+            --border-color: #eeeeee;
+            --accent-color: rgb(10, 0, 255);
+        }
+
+        /* Basic Reset & Font Settings */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6; /* Reduced line height */
+            margin: 0;
+            padding: 0;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            font-size: 16px; /* Set a base font size */
+        }
+
+        /* --- Layout & Container --- */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        main {
+            padding-top: 80px; /* Space for fixed header */
+        }
+
+        section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        /* --- Header & Navigation --- */
+        .main-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+
+        .logo {
+            font-weight: 400; /* Removed bold from logo */
+            font-size: 1.05rem; /* Adjusted size */
+            text-decoration: none;
+            color: var(--text-color);
+            letter-spacing: 0.05em; /* Added letter-spacing for style */
+        }
+
+        .main-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 25px;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: var(--secondary-text-color);
+            font-size: 0.95rem;
+            transition: color 0.2s ease;
+        }
+
+        .main-nav a:hover {
+            color: var(--text-color);
+        }
+
+        .main-nav a.nav-disabled {
+            color: rgba(0, 0, 0, 0.35);
+            pointer-events: none;
+            cursor: default;
+        }
+        
+        /* --- Section Headings --- */
+        h2.section-title {
+            font-family: 'Inter', sans-serif; /* Main font is used */
+            font-style: italic; /* Italic style applied */
+            font-weight: 400; /* Regular weight for a softer italic look */
+            font-size: 1.8rem; /* Adjusted size */
+            text-align: left;
+            margin-bottom: 40px;
+            color: var(--text-color); /* Changed back to black */
+        }
+
+        /* --- About Section --- */
+        #about h1 {
+            font-size: 1.8rem; /* Match section-title size */
+            font-weight: 400; /* Remove bold */
+            margin-bottom: 10px;
+            margin-top: 0; /* Align top edge with photo */
+            letter-spacing: -0.02em;
+        }
+        
+        /* Profile image styling */
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 0 0 15px 0;
+        }
+        
+        /* Hero row grouping for image + text */
+        .hero {
+            display: flex;
+            align-items: stretch; /* Match image height to text block */
+            justify-content: space-between;
+            gap: 20px;
+            width: 100%;
+            flex-direction: row-reverse; /* Image on the right, text on the left */
+            margin-top: 10px; /* Add slight space above name and photo */
+        }
+        .hero-text {
+            text-align: left;
+            flex: 1; /* Let text occupy remaining space */
+        }
+        .hero .profile-image {
+            margin: 0;
+            height: 100%;
+            width: auto;
+            border-radius: 50%;
+            aspect-ratio: 1 / 1; /* Ensure perfect circle */
+            object-fit: cover;
+        }
+        
+        /* Cap max height so the photo doesn’t get overly large */
+        @media (min-width: 769px) {
+            .hero { min-height: 180px; }
+            .hero .profile-image { max-height: 220px; }
+        }
+        
+        #about .subtitle {
+            font-size: 1rem; /* Reduced from 1.2rem */
+            color: var(--accent-color);
+            margin: 0 0 30px 0; /* Fixed syntax error */
+        }
+        
+        /*
+        #about .intro-text {
+            font-size: 1.05rem;
+            width: 100%;
+        }
+        */
+
+        .education-list {
+            margin-top: 0;
+        }
+
+        .education-list h3 {
+            font-weight: 400; /* Removed bold */
+            font-size: 0.9rem; /* Reduced from 1rem */
+            margin-bottom: 20px;
+            color: var(--secondary-text-color);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .education-list ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            border-left: 2px solid var(--border-color);
+        }
+
+        .education-list li {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        .education-list li:last-child {
+            margin-bottom: 0;
+        }
+
+        .education-list p {
+            margin: 0 0 5px 0;
+            font-size: 0.9rem; /* Reduced from 1rem */
+        }
+
+        .education-list .period, .education-list .details {
+            font-size: 0.85rem; /* Reduced from 0.95rem */
+            color: var(--secondary-text-color);
+        }
+
+        /* --- Publications & Projects Lists --- */
+        .item-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .item-list li {
+            padding-bottom: 25px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .item-list li:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .item-list h3 {
+            font-size: 1rem; /* Reduced from 1.15rem */
+            font-weight: 400; /* Reduced heading weight */
+            margin: 0 0 3px 0; /* Reduced from 5px to 3px */
+        }
+        
+        .item-list h3 a {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .item-list h3 a:hover {
+            text-decoration: underline;
+        }
+
+        .item-list .authors {
+            font-size: 0.9rem; /* Reduced from 1rem */
+            color: var(--secondary-text-color);
+            margin-bottom: 10px;
+        }
+
+        .item-list .venue, .item-list .summary {
+            font-size: 0.9rem; /* Reduced from 1rem */
+            margin-bottom: 10px;
+        }
+        
+        .item-list .links a {
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+            margin-right: 15px;
+            font-size: 0.9rem;
+        }
+        
+        .item-list .links a[href="#"] {
+            color: var(--secondary-text-color);
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .item-list .links a:hover {
+            text-decoration: underline;
+        }
+        
+        .item-list .links a[href="#"]:hover {
+            text-decoration: none;
+        }
+        
+        .project-card-grid {
+             display: grid;
+             grid-template-columns: 1fr;
+             gap: 50px; /* Increased gap between projects */
+        }
+        
+        .project-card {
+            /* Changed to a horizontal grid layout */
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 25px; /* Gap between image and text */
+            align-items: start;
+        }
+        
+        .project-card img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            display: block;
+            background-color: #f0f0f0; /* Placeholder background */
+        }
+        
+        /* --- Footer (Contact Section) --- */
+        .main-footer {
+            text-align: center;
+            padding: 40px 20px;
+            background-color: #fafafa;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .main-footer .contact-info {
+            margin-bottom: 20px;
+        }
+        
+        .main-footer .contact-info a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1rem;
+        }
+
+        .main-footer .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        .main-footer .copyright {
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+        }
+
