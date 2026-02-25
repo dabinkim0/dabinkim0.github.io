@@ -313,12 +313,23 @@
             opacity: 0.6;
             cursor: not-allowed;
         }
+
+        .item-list .links a.disabled-link {
+            color: var(--secondary-text-color);
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
         
         .item-list .links a:hover {
             text-decoration: underline;
         }
         
         .item-list .links a[href="#"]:hover {
+            text-decoration: none;
+        }
+
+        .item-list .links a.disabled-link:hover {
             text-decoration: none;
         }
         
