@@ -39,8 +39,11 @@
             </div>
             <div style="background-color: #f8f9fa; padding: 20px 25px; border-radius: 8px; margin-top: 30px;">
                 <div class="education-list">
-                    <h3>News</h3>
-                    <ul>
+                    <button class="news-toggle" type="button" aria-expanded="true" aria-controls="news-list">
+                        <span class="news-toggle-icon" aria-hidden="true">&gt;</span>
+                        <span>News</span>
+                    </button>
+                    <ul id="news-list">
                         <li>
                             <p>Ph.D. in Music and Audio Computing (MAC) Lab, KAIST</p>
                             <p class="period">Mar 2026 - Present</p>
@@ -127,5 +130,6 @@
         </div>
         <p class="copyright">&copy; 2025 Dabin Kim. All rights reserved.</p>
     </footer>
+    <script src="assets/js/index.js"></script>
 </body>
 </html>

@@ -108,7 +108,7 @@
         /* --- Section Headings --- */
         h2.section-title {
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            font-style: italic; /* Italic style applied */
+            font-style: normal;
             font-weight: 400; /* Regular weight for a softer italic look */
             font-size: 1.8rem; /* Adjusted size */
             text-align: left;
@@ -138,7 +138,7 @@
         /* Hero row grouping for image + text */
         .hero {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-between;
             gap: 20px;
             width: 100%;
@@ -150,15 +150,15 @@
             flex: 1; /* Let text occupy remaining space */
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: flex-start;
             gap: 10px;
         }
         .hero .profile-image {
             margin: 0;
             width: 190px;
             height: 190px;
-            border-radius: 50%;
-            aspect-ratio: 1 / 1; /* Ensure perfect circle */
+            border-radius: 0;
+            aspect-ratio: 1 / 1; /* Keep a strict square */
             object-fit: cover;
             flex-shrink: 0;
         }
@@ -192,13 +192,41 @@
             margin-top: 0;
         }
 
-        .education-list h3 {
+        .news-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: none;
+            border: none;
+            padding: 0;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             font-weight: 400; /* Removed bold */
             font-size: 0.9rem; /* Reduced from 1rem */
             margin-bottom: 20px;
             color: var(--secondary-text-color);
             text-transform: uppercase;
             letter-spacing: 0.05em;
+            cursor: pointer;
+        }
+
+        .news-toggle:focus-visible {
+            outline: 1px solid var(--secondary-text-color);
+            outline-offset: 2px;
+        }
+
+        .news-toggle-icon {
+            display: inline-block;
+            transform: rotate(90deg);
+            transform-origin: center;
+            transition: transform 0.2s ease;
+        }
+
+        .education-list.is-collapsed .news-toggle-icon {
+            transform: rotate(0deg);
+        }
+
+        .education-list.is-collapsed ul {
+            display: none;
         }
 
         .education-list ul {
@@ -333,7 +361,7 @@
             color: var(--text-color);
             text-decoration: none;
             margin: 0 15px;
-            font-size: 1.1rem;
+            font-size: 0.95rem;
         }
 
         .main-footer .contact-info a:hover {
