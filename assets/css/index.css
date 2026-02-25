@@ -133,7 +133,7 @@
         /* Hero row grouping for image + text */
         .hero {
             display: flex;
-            align-items: stretch; /* Match image height to text block */
+            align-items: center;
             justify-content: space-between;
             gap: 20px;
             width: 100%;
@@ -143,20 +143,31 @@
         .hero-text {
             text-align: left;
             flex: 1; /* Let text occupy remaining space */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 10px;
         }
         .hero .profile-image {
             margin: 0;
-            height: 100%;
-            width: auto;
+            width: 190px;
+            height: 190px;
             border-radius: 50%;
             aspect-ratio: 1 / 1; /* Ensure perfect circle */
             object-fit: cover;
+            flex-shrink: 0;
         }
         
         /* Cap max height so the photo doesn’t get overly large */
         @media (min-width: 769px) {
-            .hero { min-height: 160px; }
+            .hero { min-height: 190px; }
             .hero .profile-image { max-height: 190px; }
+        }
+
+        .hero-email,
+        .hero-bio {
+            margin: 0;
+            font-size: 1rem;
         }
         
         #about .subtitle {
