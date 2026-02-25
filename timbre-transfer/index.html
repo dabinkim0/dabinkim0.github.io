@@ -257,13 +257,74 @@
             letter-spacing: 0.05em;
         }
 
+        .demo-section > table {
+            display: block;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 16px;
+            }
+
+            .demo-section {
+                padding: 28px 20px;
+            }
+
+            .demo-section div[style*="grid-template-columns: repeat(5, 1fr)"] {
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                gap: 14px !important;
+            }
+
+            .spectrogram-preview:hover {
+                transform: scale(1.25);
+            }
+        }
+
         @media (max-width: 768px) {
             .demo-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .results {
                 grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.55rem;
+            }
+
+            h2.section-title {
+                font-size: 1.35rem;
+                padding-top: 12px;
+            }
+
+            .demo-section {
+                padding: 22px 14px;
+            }
+
+            .demo-section > table {
+                font-size: 0.88rem;
+            }
+
+            .demo-section > table th,
+            .demo-section > table td {
+                padding: 8px 12px !important;
+            }
+
+            .demo-section div[style*="grid-template-columns: repeat(5, 1fr)"] {
+                grid-template-columns: 1fr !important;
+                gap: 12px !important;
+            }
+
+            .spectrogram-preview {
+                height: 56px;
+            }
+
+            .spectrogram-preview:hover {
+                transform: none;
+                box-shadow: none;
             }
         }
     </style>
@@ -279,7 +340,7 @@
 <body>
     <header class="main-header">
         <div class="container">
-            <a href="../index.html" class="logo">Dabin Kim</a>
+            <a href="../index.html" class="logo"><strong>Dabin Kim</strong></a>
             <a href="../index.html" class="back-link">← Home</a>
         </div>
     </header>
