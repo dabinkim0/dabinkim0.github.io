@@ -295,6 +295,10 @@
             margin-bottom: 10px;
         }
 
+        .item-list .authors .author-self {
+            text-decoration: underline;
+        }
+
         .item-list .venue, .item-list .summary {
             font-size: 0.9rem; /* Reduced from 1rem */
             margin-bottom: 10px;

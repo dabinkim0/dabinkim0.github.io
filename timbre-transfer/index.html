@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control | Dabin Kim</title>
+    <title>AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control | Dabin Kim</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,10 +22,8 @@
 
     <main class="container">
         <section>
-            <h1>Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control</h1>
+            <h1>AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control</h1>
             <p style="text-align: center; font-size: 0.95rem; color: var(--secondary-text-color); margin: 0 0 20px 0;">Dabin Kim, Junwon Lee, Juhan Nam</p>
-            <!-- <p class="subtitle">Pitch-Loudness Balancer (PL-Balancer) for Source-Target Context-Aware Timbre Transfer</p> -->
-            
             <div class="tags">
                 <span class="tag"># timbre transfer</span>
                 <span class="tag"># music editing</span>
@@ -39,54 +37,11 @@
 
             <div class="methodology">
                 <h3>Abstract</h3>
-                <p>
-                    ...
+                <p style="text-align: justify; text-align-last: left;">
+                    This paper addresses the issue of timbral ambiguity in instrument timbre transfer under fine-grained structural conditions. We argue that this ambiguity arises from instrument-specific expressive details in these conditions, which conflict with the target timbral properties. For example, imposing a violin's pitch-dominant vibrato contours onto a flute, which naturally exhibits loudness-dominant vibrato, compromises timbral fidelity. We propose <span style="font-weight: 700;">AdaTT</span>, a target-adaptive system that ensures high timbral fidelity across diverse timbre transfer cases within the pretrained ControlNet scheme. It selectively scales the frame-wise influence of pitch and loudness controls via text prompts to match the target instrument. We also present an annotation-free data construction pipeline to identify which expressive details to transform or preserve. Results show AdaTT achieves superior timbral fidelity and naturalness, preserving score-level content on par with the ControlNet baseline.
                 </p>
             </div>
         </section>
-
-        <!-- <section>
-            <h2 class="section-title">Trade-off between Target Timbre Fidelity and Source Structure Preservation</h2>
-            
-            <h3>Challenge Analysis</h3>
-            <p>
-                A fundamental challenge in timbre transfer lies in the inherent trade-off between target timbre fidelity and source structure preservation. This issue is more pronounced with fine-grained source structures than with coarse-grained ones.
-            </p>
-
-            <p>
-                We first implemented <strong>Stable Audio ControlNet (ControlNet)</strong> to find a configuration that generalizes across various instrument groups, based on discrete bins for pitch and loudness curves. This configuration then served as a new baseline against which we compared the performance of our proposed PL-Balancer.
-            </p>
-            
-            <div style="text-align: center; margin: 40px 0 20px 0;">
-                <img src="figs/eval_discrete-bins.png" alt="Evaluation of Discrete Bins" style="max-width: 100%; height: auto; border-radius: 8px;">
-                <p style="margin-top: 20px; color: var(--secondary-text-color); font-size: 0.9rem;"><em>Evaluation of discrete bins for pitch and loudness curves in ControlNet</em></p>
-            </div>
-            
-        </section> -->
-
-        <section>
-            <h2 class="section-title no-divider">Experimental Results</h2>
-
-            <div style="text-align: center; margin: 40px 0 20px 0;">
-                <img src="figs/table_timbre-transfer.png" alt="Timbre Transfer Evaluation Table" style="max-width: 100%; height: auto; border-radius: 6px;">
-                <p style="margin-top: 20px; color: var(--secondary-text-color); font-size: 0.9rem;"><em>Quantitative Evaluation for <strong>Timbre Transfer</strong> within Each Instrument Cluster</em></p>
-            </div>
-
-            <div style="text-align: center; margin: 40px 0 20px 0;">
-                <img src="figs/table_self-recon.png" alt="Self-Reconstruction Evaluation Table" style="max-width: 100%; height: auto; border-radius: 6px;">
-                <p style="margin-top: 20px; color: var(--secondary-text-color); font-size: 0.9rem;"><em>Quantitative Evaluation for <strong>Self-Reconstruction</strong> within Each Instrument Cluster</em></p>
-            </div>
-
-            <div style="text-align: center; margin: 40px 0 20px 0;">
-                <img src="figs/table_mos.png" alt="MOS Evaluation Table" style="max-width: 100%; height: auto; border-radius: 6px;">
-                <p style="margin-top: 20px; color: var(--secondary-text-color); font-size: 0.9rem;"><em>Qualitative Evaluation (MOS) Results for <strong>Timbre Transfer</strong></em></p>
-            </div>
-
-            <p>
-                Experimental results demonstrate that our PL-Balancer framework significantly improves <strong>timbre fidelity</strong> and <strong>perceptual naturalness</strong>, effectively preserving fine-grained musical structure and expressivity across diverse timbre transfer scenarios.
-            </p>
-        </section>
-
         <section>
             <h2 class="section-title">Demo Examples</h2>
             <div class="demo-section">
@@ -100,7 +55,7 @@
                     <tbody>
                         <tr style="border-bottom: 1px solid #f0f0f0;">
                             <td style="padding: 10px 20px; color: var(--text-color);">Stable Audio Open</td>
-                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">A Text-to-Music latent diffusion model that synthesizes audio based on text prompts.</td>
+                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">A text-to-music latent diffusion model that synthesizes audio based on text prompts.</td>
                         </tr>
                         <tr style="border-bottom: 1px solid #f0f0f0;">
                             <td style="padding: 10px 20px; color: var(--text-color);">ControlNet</td>
@@ -111,7 +66,7 @@
                             <td style="padding: 10px 20px; color: var(--secondary-text-color);">Incorporates Control Scale Predictors (CSPs) with the frozen ControlNet to adaptively adjust intermediate control features.</td>
                         </tr>
                         <tr>
-                            <td style="padding: 10px 20px; color: var(--text-color);">AdaTransfer (Ours)</td>
+                            <td style="padding: 10px 20px; color: var(--text-color);">AdaTT (Ours)</td>
                             <td style="padding: 10px 20px; color: var(--secondary-text-color);">Jointly trains CSPs and Text-Guided CSPs (TG-CSPs). TG-CSPs modulate control scales to balance the contributions of each structural condition.</td>
                         </tr>
                     </tbody>
@@ -149,7 +104,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_violin_to_clarinet_sample_29_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTT (Ours)</strong></p>
                         </div>
                     </div>
                 </div>
@@ -186,7 +141,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_violin_to_flute_sample_39_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTT (Ours)</strong></p>
                         </div>
                     </div>
                 </div>
@@ -223,7 +178,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_trumpet_to_flute_sample_26_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTT (Ours)</strong></p>
                         </div>
                     </div>
                 </div>
@@ -260,7 +215,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_oboe_to_trumpet_sample_01_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTT (Ours)</strong></p>
                         </div>
                     </div>
                 </div>
@@ -297,7 +252,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_clarinet_to_violin_sample_03_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTT (Ours)</strong></p>
                         </div>
                     </div>
                 </div>
@@ -334,7 +289,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_double_bass_to_trombone_sample_04_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTT (Ours)</strong></p>
                         </div>
                     </div>
                 </div>
@@ -371,7 +326,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_saxophone_to_viola_sample_01_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTT (Ours)</strong></p>
                         </div>
                     </div>
                 </div>
@@ -408,7 +363,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_tuba_to_double_bass_sample_02_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTT (Ours)</strong></p>
                         </div>
                     </div>
                 </div> -->
@@ -445,7 +400,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_viola_to_horn_sample_02_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTT (Ours)</strong></p>
                         </div>
                     </div>
                 </div> -->
@@ -482,7 +437,7 @@
                             <audio controls style="width: 100%; margin-bottom: 20px;">
                                 <source src="audio/generated_viola_to_saxophone_sample_05_pl-balancer.wav" type="audio/wav">
                             </audio>
-                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTransfer (Ours)</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--secondary-text-color);"><strong>AdaTT (Ours)</strong></p>
                         </div>
                     </div>
                 </div> -->
@@ -493,7 +448,7 @@
 
     <footer style="text-align: center; padding: 40px 20px; background-color: #fafafa; border-top: 1px solid var(--border-color); margin-top: 60px;">
         <p style="color: var(--secondary-text-color); font-size: 0.9rem;">
-            &copy; 2026 Dabin Kim. Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control.
+            &copy; 2026 Dabin Kim. AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control.
         </p>
     </footer>
     <script defer src="../assets/js/timbre-transfer.js"></script>
