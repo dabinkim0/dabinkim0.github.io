@@ -134,7 +134,7 @@ a {
     border: 1px solid var(--rule);
     border-radius: 50%;
     box-shadow: 0 22px 40px var(--shadow);
-    margin: 34px auto 50px;
+    margin: 28px auto 50px;
 }
 
 .identity-kicker {
