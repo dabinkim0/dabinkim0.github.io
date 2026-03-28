@@ -11,7 +11,7 @@ import numpy as np
 from scipy import signal
 from scipy.io import wavfile
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[3]
 os.environ.setdefault("MPLCONFIGDIR", str(ROOT / ".mplconfig"))
 
 import matplotlib
@@ -19,7 +19,7 @@ import matplotlib
 matplotlib.use("Agg")
 from matplotlib import pyplot as plt
 
-PAGE_DIR = ROOT / "ddsp-carsound"
+PAGE_DIR = ROOT / "publications" / "ddsp-carsound"
 AUDIO_DIR = PAGE_DIR / "audio"
 SPEC_DIR = PAGE_DIR / "spectrograms"
 SOURCE_BASE = Path("/Users/dabinkim/Desktop/anonymous_ddsp_carsound_demo/data/AES_ListeningTestset_v2")
@@ -442,7 +442,7 @@ def build_html() -> str:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{html.escape(PROJECT_TITLE)}</title>
-    <link rel="stylesheet" href="../assets/css/ddsp-carsound.css">
+    <link rel="stylesheet" href="../../assets/css/ddsp-carsound.css">
 </head>
 <body>
     <header class="main-header">
