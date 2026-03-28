@@ -4,93 +4,151 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Projects | Dabin Kim</title>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/projects.css">
 </head>
 <body>
     <header class="main-header">
-        <div class="container">
+        <div class="shell header-shell">
             <a href="../index.html" class="logo">Dabin Kim</a>
-            <a href="../index.html" class="back-link">← Home</a>
+            <nav class="main-nav" aria-label="Primary">
+                <ul>
+                    <li><a href="../publications/index.html">Publications</a></li>
+                    <li><a href="index.html" class="is-active nav-current">Projects</a></li>
+                    <li><a href="#" class="nav-disabled" aria-disabled="true" tabindex="-1">Blog</a></li>
+                    <li><a href="../index.html">About</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <main class="container">
-        <section>
+    <main id="top" class="shell page-shell">
+        <section class="page-intro">
             <h1>Projects</h1>
-            <p style="color: var(--secondary-text-color); font-size: 1rem; margin-bottom: 40px;">
-                A collection of my technical projects in interactive music and audio systems.
+            <p class="page-summary">
+                A selected archive of projects spanning live performance, interactive sound, and spatial audio.
             </p>
-            
-            <div class="project-card-grid">
-                <article class="project-card">
-                    <img src="https://placehold.co/400x250/EEEEEE/333333?text=Data+Music+Performance" alt="Data Music Performance">
-                    <div>
-                        <h3>Data Music Performance: "Manmulgwanggaek, Ritual Cheongol (만물관객, 리추얼 천골)"</h3>
-                        <p class="authors"><strong>Dabin Kim</strong> (Developer)</p>
-                        <p class="summary">
-                            Designed a data sonification algorithm in Max/MSP that transforms the respiratory resonance frequency data of four dancers into sound in real-time. By utilizing I Ching trigrams to generate harmony and rhythm, the system musically expresses the dancers' physical states, creating clear, high-pitched sounds for high-resonance states and complex, low-pitched sounds for low-resonance states via an FM synthesizer.
+        </section>
+
+        <section class="archive-section">
+            <p class="section-label">Selected Work</p>
+
+            <div class="project-list">
+                <article class="project-entry">
+                    <div class="project-meta">
+                        <p class="format-tag">Performance System</p>
+                        <p class="meta-label">Role</p>
+                        <p class="meta-value">Developer</p>
+                        <p class="meta-label">Tools</p>
+                        <p class="meta-value">Max/MSP</p>
+                    </div>
+                    <div class="project-content">
+                        <h2>Data Music Performance: Manmulgwanggaek, Ritual Cheongol (만물관객, 리추얼 천골)</h2>
+                        <p class="project-summary">
+                            Designed a real-time bio-signal data sonification in Max/MSP that transforms the respiratory resonance frequency data of four dancers into sound.
                         </p>
-                        <p class="tech-stack"><strong>Tools:</strong> Max/MSP</p>
+                        <p class="project-description">
+                            Employing I Ching trigrams as a structural framework for harmony and rhythm, the system mapped performers' bodily states to musical behavior, generating clear, high-register tones for high-resonance states and denser, lower-register textures for low-resonance states through FM synthesis.
+                        </p>
                     </div>
                 </article>
-                
-                <article class="project-card">
-                    <img src="https://placehold.co/400x250/E0E0E0/333333?text=SuperCollider+Music" alt="SuperCollider Music Generation">
-                    <div>
-                        <h3>Orchestral Sound Generation with Granular Synthesis</h3>
-                        <p class="authors"><strong>Dabin Kim</strong> (Developer)</p>
-                        <p class="summary">
-                            A personal project focused on creating orchestral music using SuperCollider. I implemented a Granular Synthesis system from code to generate diverse sound textures—such as drum rolls, string legatos, and pad sounds—using only two short audio samples ('Bass Drum' and 'Strings Staccato'). The piece was completed by applying custom delay and reverb effects.
+
+                <article class="project-entry">
+                    <div class="project-meta">
+                        <p class="format-tag">Sound Synthesis Study</p>
+                        <p class="meta-label">Role</p>
+                        <p class="meta-value">Developer</p>
+                        <p class="meta-label">Tools</p>
+                        <p class="meta-value">SuperCollider</p>
+                    </div>
+                    <div class="project-content">
+                        <h2>Orchestral Sound Generation with Granular Synthesis</h2>
+                        <p class="project-summary">
+                            A personal project exploring how orchestral textures can be produced from a minimal sample set using granular synthesis.
                         </p>
-                        <p class="tech-stack"><strong>Tools:</strong> SuperCollider</p>
+                        <p class="project-description">
+                            The system was implemented end-to-end in code and used to generate a range of orchestral textures, including drum rolls, string legatos, and pad-like timbres, from only two short source samples, with custom delay and reverb processing applied in the final composition.
+                        </p>
                     </div>
                 </article>
-                
-                <article class="project-card">
-                    <img src="https://placehold.co/400x250/EEEEEE/333333?text=MIDI+Controller" alt="MIDI Controller">
-                    <div>
-                        <h3>MIDI Controller: "Ssangbitnari (쌍빛나리)"</h3>
-                        <p class="authors"><strong>Dabin Kim</strong> (Developer)</p>
-                        <p class="summary">
-                            A team project to create a performance-oriented MIDI controller designed for intuitive use by non-musicians. Using an Arduino and a gyro/accelerometer sensor, the controller detects orientation and rotation, sending this data to PureData to manipulate sound effects. Users can flip the controller to change MIDI channels and rotate it to adjust parameters, with real-time feedback provided by the changing brightness of an LED.
+
+                <article class="project-entry">
+                    <div class="project-meta">
+                        <p class="format-tag">Hardware Interface</p>
+                        <p class="meta-label">Role</p>
+                        <p class="meta-value">Developer</p>
+                        <p class="meta-label">Tools</p>
+                        <p class="meta-value">Arduino, PureData</p>
+                    </div>
+                    <div class="project-content">
+                        <h2>MIDI Controller: Ssangbitnari (쌍빛나리)</h2>
+                        <p class="project-summary">
+                            A performance-oriented MIDI controller that non-musicians could use intuitively in live interaction.
                         </p>
-                        <p class="tech-stack"><strong>Tools:</strong> Arduino, PureData</p>
+                        <p class="project-description">
+                            Using an Arduino equipped with gyroscope and accelerometer sensors, the controller estimates orientation and rotational motion, transmits the resulting data to PureData, and maps these measurements to sound parameters. Flipping the device switches MIDI channels, while LED brightness provides immediate performance feedback.
+                        </p>
                     </div>
                 </article>
-                
-                <article class="project-card">
-                    <img src="https://placehold.co/400x250/E0E0E0/333333?text=Virtual+Space+Music" alt="Virtual Space Music">
-                    <div>
-                        <h3>Virtual Space Aleatoric Music: "Gravity Resonance"</h3>
-                        <p class="authors"><strong>Dabin Kim</strong> (Planner, Developer)</p>
-                        <p class="summary">
-                            An interactive aleatoric music experience in a virtual space, inspired by John Cage's Silence. I developed the environment in Unity and implemented spatial audio using the Google Resonance Audio package. Participants navigate the space, triggering everyday sounds through random collisions with objects, which combine with the continuously changing spatial reverb to generate a unique ambient music piece.
+
+                <article class="project-entry">
+                    <div class="project-meta">
+                        <p class="format-tag">Spatial Audio Work</p>
+                        <p class="meta-label">Role</p>
+                        <p class="meta-value">Planner, developer</p>
+                        <p class="meta-label">Tools</p>
+                        <p class="meta-value">Unity, Resonance Audio</p>
+                    </div>
+                    <div class="project-content">
+                        <h2>Virtual Space Aleatoric Music: Gravity Resonance</h2>
+                        <p class="project-summary">
+                            An interactive aleatoric music experience in virtual space.
                         </p>
-                        <p class="tech-stack"><strong>Tools:</strong> Unity, Google Resonance Audio</p>
+                        <p class="project-description">
+                            I designed the environment in Unity and implemented spatial audio with the Google Resonance Audio package. Participants navigate the space and trigger everyday sounds through unpredictable collisions, which combine with evolving reverb behavior to produce a continuously changing ambient composition.
+                        </p>
                     </div>
                 </article>
-                
-                <article class="project-card">
-                    <img src="https://placehold.co/400x250/EEEEEE/333333?text=Interactive+Music+Performance" alt="Interactive Music Performance">
-                    <div>
-                        <h3>Interactive Music Performance System: "Future Mouth"</h3>
-                        <p class="authors"><strong>Dabin Kim</strong> (Planner, Developer)</p>
-                        <p class="summary">
-                            A live performance tool developed with P5.js that allows users to control a synthesizer with their mouth movements via a webcam. This interactive system tracks the user's mouth size to modulate a Low Pass Filter and uses the mouse position to control panning and volume. The experience is enhanced by an on-screen virtual character that mimics the user's mouth movements in real-time.
+
+                <article class="project-entry">
+                    <div class="project-meta">
+                        <p class="format-tag">Creative Coding Tool</p>
+                        <p class="meta-label">Role</p>
+                        <p class="meta-value">Planner, developer</p>
+                        <p class="meta-label">Tools</p>
+                        <p class="meta-value">JavaScript, P5.js</p>
+                    </div>
+                    <div class="project-content">
+                        <h2>Interactive Music Performance System: Future Mouth</h2>
+                        <p class="project-summary">
+                            A live performance tool that lets users control a synthesizer with mouth movement captured through a webcam.
                         </p>
-                        <p class="tech-stack"><strong>Tools:</strong> Javascript (P5.js)</p>
+                        <p class="project-description">
+                            The system tracks mouth size to modulate a low-pass filter and uses mouse position to shape panning and volume, while an on-screen virtual character mirrors the performer's mouth gestures in real time to make the interaction legible as both instrument and performance.
+                        </p>
                     </div>
                 </article>
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <p class="section-label">Contact</p>
+            <div class="contact-links">
+                <a href="mailto:dabinchi9598@kaist.ac.kr">Email</a>
+                <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">Google Scholar</a>
+                <a href="https://github.com/dabinkim0" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://www.linkedin.com/in/dabin-kim-4a792a345/" target="_blank" rel="noreferrer">LinkedIn</a>
+                <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">Download CV</a>
             </div>
         </section>
     </main>
 
     <footer class="main-footer">
-        <p class="copyright">&copy; 2025 Dabin Kim. All rights reserved.</p>
+        <div class="shell footer-shell">
+            <p class="copyright">&copy; 2025 Dabin Kim. All rights reserved.</p>
+        </div>
     </footer>
 </body>
-</html> 
+</html>
