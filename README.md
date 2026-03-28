@@ -8,7 +8,8 @@ Personal website hosted with GitHub Pages.
 .
 ├── index.html
 ├── projects/
-│   └── index.html
+│   ├── index.html
+│   └── posters/
 ├── publications/
 │   ├── index.html
 │   ├── ddsp-carsound/
@@ -47,6 +48,7 @@ Personal website hosted with GitHub Pages.
 - Page-specific styles are stored in `assets/css/*.css` and linked from each HTML page.
 - Page-specific scripts are stored in `assets/js/*.js`.
 - Shared site-wide images such as profile photos are stored in `assets/images/`.
+- Project-page poster assets live under `projects/posters/`.
 - Publication demo pages live under `publications/` and keep their own media next to the page, for example `publications/timbre-transfer/figs` and `publications/ddsp-carsound/figs`.
 - Publication entries without standalone pages store representative figures in `publications/figs/<slug>/`.
 
