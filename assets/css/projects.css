@@ -21,6 +21,9 @@ html {
 
 body {
     margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
     background: #fff;
     color: var(--text);
@@ -105,6 +108,9 @@ a {
 }
 
 .page-shell {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
     padding: 36px 0 72px;
 }
 
@@ -120,6 +126,10 @@ a {
     padding-top: 0;
     margin-bottom: 22px;
     max-width: 880px;
+}
+
+.archive-section {
+    flex: 1;
 }
 
 .page-kicker,
@@ -159,6 +169,35 @@ a {
     display: grid;
 }
 
+.project-filter-panel {
+    display: grid;
+    gap: 10px;
+    margin: 0 0 18px;
+}
+
+.project-filter-label,
+.project-filter-status {
+    margin: 0;
+}
+
+.project-filter-label {
+    font-size: 0.92rem;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+}
+
+.project-filter-status {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+.project-filter-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 10px;
+}
+
 .project-entry {
     display: grid;
     grid-template-columns: minmax(132px, 160px) minmax(0, 1fr);
@@ -185,7 +224,8 @@ a {
     align-content: start;
 }
 
-.format-tag {
+.format-tag,
+.project-filter-chip {
     grid-column: 1 / -1;
     width: max-content;
     margin: 0 0 8px;
@@ -193,11 +233,42 @@ a {
     border: 1px solid var(--rule);
     border-radius: 999px;
     background: rgba(255, 255, 255, 0.72);
+    font-family: inherit;
+    appearance: none;
+    cursor: pointer;
     font-size: 0.92rem;
     font-weight: 500;
     line-height: 1.35;
     letter-spacing: 0.01em;
     color: var(--text);
+    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.project-filter-chip {
+    grid-column: auto;
+    margin: 0;
+}
+
+.format-tag:hover,
+.project-filter-chip:hover {
+    border-color: var(--text);
+}
+
+.format-tag.is-active,
+.project-filter-chip.is-active {
+    background: var(--text);
+    border-color: var(--text);
+    color: #fff;
+}
+
+.format-tag:focus-visible,
+.project-filter-chip:focus-visible {
+    outline: 1px solid var(--muted);
+    outline-offset: 3px;
+}
+
+.project-entry[hidden] {
+    display: none;
 }
 
 .meta-label,
@@ -243,7 +314,7 @@ a {
 }
 
 .contact-section {
-    margin-top: 18px;
+    margin-top: auto;
     text-align: center;
 }
 
