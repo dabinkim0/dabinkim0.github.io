@@ -257,7 +257,7 @@ a {
 .statement-text {
     margin: 0;
     max-width: 42ch;
-    font-size: 1.58rem;
+    font-size: 1.5rem;
     line-height: 1.7;
     letter-spacing: -0.02em;
 }
@@ -309,17 +309,30 @@ a {
 }
 
 .education-list.is-collapsed .news-scroll-area {
-    display: none;
+    max-height: 0;
+    opacity: 0;
+    margin-top: -4px;
+    padding-right: 0;
+    overflow: hidden;
+    pointer-events: none;
 }
 
 .news-scroll-area {
     max-height: 22rem;
+    opacity: 1;
+    margin-top: 0;
     overflow-y: auto;
     overscroll-behavior: contain;
     padding-right: 10px;
     touch-action: pan-y;
     scrollbar-width: thin;
     scrollbar-color: var(--rule) transparent;
+    transition:
+        max-height 0.28s ease,
+        opacity 0.22s ease,
+        margin-top 0.28s ease,
+        padding-right 0.28s ease;
+    will-change: max-height, opacity;
 }
 
 .news-scroll-area.is-draggable {
@@ -329,6 +342,13 @@ a {
 .news-scroll-area.is-dragging {
     cursor: grabbing;
     user-select: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .news-toggle-icon,
+    .news-scroll-area {
+        transition: none;
+    }
 }
 
 .entry-list,
@@ -577,7 +597,7 @@ a {
     }
 
     .statement-text {
-        font-size: 1.42rem;
+        font-size: 1.36rem;
     }
 
     .entry-head {

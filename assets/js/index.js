@@ -3,13 +3,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
     collapsibleSections.forEach((section) => {
         const toggleButton = section.querySelector(".news-toggle");
+        const scrollArea = section.querySelector(".news-scroll-area");
         if (!toggleButton) {
             return;
+        }
+
+        if (scrollArea) {
+            scrollArea.setAttribute("aria-hidden", String(section.classList.contains("is-collapsed")));
         }
 
         toggleButton.addEventListener("click", () => {
             const isCollapsed = section.classList.toggle("is-collapsed");
             toggleButton.setAttribute("aria-expanded", String(!isCollapsed));
+            if (scrollArea) {
+                scrollArea.setAttribute("aria-hidden", String(isCollapsed));
+            }
         });
     });
 
