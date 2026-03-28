@@ -83,13 +83,25 @@ a {
 
 .main-nav a {
     display: inline-block;
+    position: relative;
     text-decoration: none;
     color: var(--muted);
     font-size: 1.05rem;
     letter-spacing: 0.04em;
     padding-bottom: 2px;
-    border-bottom: 1px solid transparent;
     transition: color 0.2s ease;
+}
+
+.main-nav a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: currentColor;
+    opacity: 0;
+    transition: opacity 0.2s ease;
 }
 
 .main-nav a.nav-disabled {
@@ -98,13 +110,23 @@ a {
     pointer-events: none;
 }
 
+.main-nav a.nav-disabled::after {
+    opacity: 0;
+}
+
 .main-nav a.is-active,
 .main-nav a:hover {
     color: var(--text);
 }
 
 .main-nav a.nav-current {
-    border-bottom-color: currentColor;
+    color: var(--text);
+}
+
+.main-nav a.is-active::after,
+.main-nav a:hover::after,
+.main-nav a.nav-current::after {
+    opacity: 1;
 }
 
 .page-shell {
