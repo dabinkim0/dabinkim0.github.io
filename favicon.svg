@@ -1,3 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <circle cx="32" cy="32" r="24" fill="#9EA38F"/>
+  <circle cx="32" cy="32" r="29" fill="#9EA38F"/>
+  <text
+    x="32"
+    y="34.5"
+    text-anchor="middle"
+    font-family="Inter, Helvetica Neue, Helvetica, Arial, sans-serif"
+    font-size="26"
+    font-weight="600"
+    fill="#ffffff"
+  >D</text>
 </svg>
