@@ -471,13 +471,12 @@ body.has-image-overlay {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 32px;
-    height: 32px;
+    width: auto;
+    height: auto;
     margin: 0;
     padding: 0;
-    border: 1px solid rgba(36, 37, 33, 0.08);
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.92);
+    border: 0;
+    background: transparent;
     color: var(--muted);
     font: inherit;
     line-height: 1;
