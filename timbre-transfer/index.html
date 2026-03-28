@@ -7,23 +7,31 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/timbre-transfer.css">
     <script src="../assets/js/mathjax-config.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
     <header class="main-header">
-        <div class="container">
+        <div class="shell header-shell">
             <a href="../index.html" class="logo">Dabin Kim</a>
-            <a href="../index.html" class="back-link">← Home</a>
+            <nav class="main-nav" aria-label="Primary">
+                <ul>
+                    <li><a href="../publications/index.html" class="is-active nav-current">Publications</a></li>
+                    <li><a href="../projects/index.html">Projects</a></li>
+                    <li><a href="#" class="nav-disabled" aria-disabled="true" tabindex="-1">Blog</a></li>
+                    <li><a href="../index.html">About</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <main class="container">
-        <section>
+    <div class="shell post-layout">
+        <main class="post-page">
+        <section id="overview" class="post-section">
             <h1>AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control</h1>
-            <p style="text-align: center; font-size: 0.95rem; color: var(--secondary-text-color); margin: 0 0 20px 0;">Dabin Kim, Junwon Lee, Juhan Nam</p>
+            <p class="article-authors">Dabin Kim, Junwon Lee, Juhan Nam</p>
             <div class="tags">
                 <span class="tag"># timbre transfer</span>
                 <span class="tag"># music editing</span>
@@ -31,43 +39,43 @@
                 <span class="tag"># diffusion model</span>
             </div>
 
-            <div style="text-align: center; margin: 40px 0 20px 0;">
-                <img src="figs/fig_architecture_demo.png" alt="Proposed Architecture Demo" style="max-width: 100%; height: auto; border-radius: 8px;">
+            <div class="hero-figure">
+                <img src="figs/fig_architecture_demo.png" alt="Proposed Architecture Demo" class="hero-image">
             </div>
 
-            <div class="methodology">
+            <div id="abstract" class="methodology">
                 <h3>Abstract</h3>
                 <p style="text-align: justify; text-align-last: left;">
                     This paper addresses the issue of timbral ambiguity in instrument timbre transfer under fine-grained structural conditions. We argue that this ambiguity arises from instrument-specific expressive details in these conditions, which conflict with the target timbral properties. For example, imposing a violin's pitch-dominant vibrato contours onto a flute, which naturally exhibits loudness-dominant vibrato, compromises timbral fidelity. We propose <span style="font-weight: 700;">AdaTT</span>, a target-adaptive system that ensures high timbral fidelity across diverse timbre transfer cases within the pretrained ControlNet scheme. It selectively scales the frame-wise influence of pitch and loudness controls via text prompts to match the target instrument. We also present an annotation-free data construction pipeline to identify which expressive details to transform or preserve. Results show AdaTT achieves superior timbral fidelity and naturalness, preserving score-level content on par with the ControlNet baseline.
                 </p>
             </div>
         </section>
-        <section>
-            <h2 class="section-title">Demo Examples</h2>
+        <section id="demo-examples" class="post-section">
+            <h2 class="section-title centered-title">Demo Examples</h2>
             <div class="demo-section">
-                <table style="width: 100%; margin: 30px 0 20px 0; border-collapse: collapse; background-color: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); font-size: 0.95rem;">
+                <table class="method-table" style="width: 100%; margin: 30px 0 20px 0; border-collapse: collapse; background-color: white; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
                     <thead>
                         <tr style="background-color: #f8f9fa;">
-                            <th style="padding: 10px 20px; text-align: left; border-bottom: 2px solid #e9ecef; font-weight: 600; color: var(--text-color); width: 25%;">Method</th>
-                            <th style="padding: 10px 20px; text-align: left; border-bottom: 2px solid #e9ecef; font-weight: 600; color: var(--text-color);">Description</th>
+                            <th style="padding: 12px 20px; text-align: left; border-bottom: 2px solid #e9ecef; font-weight: 600; color: var(--text-color); width: 25%;">Method</th>
+                            <th style="padding: 12px 20px; text-align: left; border-bottom: 2px solid #e9ecef; font-weight: 600; color: var(--text-color);">Description</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr style="border-bottom: 1px solid #f0f0f0;">
-                            <td style="padding: 10px 20px; color: var(--text-color);">Stable Audio Open</td>
-                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">A text-to-music latent diffusion model that synthesizes audio based on text prompts.</td>
+                            <td style="padding: 12px 20px; color: var(--text-color);">Stable Audio Open</td>
+                            <td style="padding: 12px 20px; color: var(--secondary-text-color);">A text-to-music latent diffusion model that synthesizes audio based on text prompts.</td>
                         </tr>
                         <tr style="border-bottom: 1px solid #f0f0f0;">
-                            <td style="padding: 10px 20px; color: var(--text-color);">ControlNet</td>
-                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">A DiT-based ControlNet trained with a frozen Stable Audio Open backbone. It is conditioned on two heterogeneous structural features: \(f_0\) and RMS contours.</td>
+                            <td style="padding: 12px 20px; color: var(--text-color);">ControlNet</td>
+                            <td style="padding: 12px 20px; color: var(--secondary-text-color);">A DiT-based ControlNet trained with a frozen Stable Audio Open backbone. It is conditioned on two heterogeneous structural features: \(f_0\) and RMS contours.</td>
                         </tr>
                         <tr style="border-bottom: 1px solid #f0f0f0;">
-                            <td style="padding: 10px 20px; color: var(--text-color);">SmartControl</td>
-                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">Incorporates Control Scale Predictors (CSPs) with the frozen ControlNet to adaptively adjust intermediate control features.</td>
+                            <td style="padding: 12px 20px; color: var(--text-color);">SmartControl</td>
+                            <td style="padding: 12px 20px; color: var(--secondary-text-color);">Incorporates Control Scale Predictors (CSPs) with the frozen ControlNet to adaptively adjust intermediate control features.</td>
                         </tr>
                         <tr>
-                            <td style="padding: 10px 20px; color: var(--text-color);">AdaTT (Ours)</td>
-                            <td style="padding: 10px 20px; color: var(--secondary-text-color);">Jointly trains CSPs and Text-Guided CSPs (TG-CSPs). TG-CSPs modulate control scales to balance the contributions of each structural condition.</td>
+                            <td style="padding: 12px 20px; color: var(--text-color);">AdaTT (Ours)</td>
+                            <td style="padding: 12px 20px; color: var(--secondary-text-color);">Jointly trains CSPs and Text-Guided CSPs (TG-CSPs). TG-CSPs modulate control scales to balance the contributions of each structural condition.</td>
                         </tr>
                     </tbody>
                 </table>
@@ -444,12 +452,15 @@
             </div>
         </section>
 
-    </main>
+        </main>
+    </div>
 
-    <footer style="text-align: center; padding: 40px 20px; background-color: #fafafa; border-top: 1px solid var(--border-color); margin-top: 60px;">
-        <p style="color: var(--secondary-text-color); font-size: 0.9rem;">
-            &copy; 2026 Dabin Kim. AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control.
-        </p>
+    <footer class="main-footer">
+        <div class="shell footer-shell">
+            <p class="copyright">
+                &copy; 2026 Dabin Kim. AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control.
+            </p>
+        </div>
     </footer>
     <script defer src="../assets/js/timbre-transfer.js"></script>
 </body>

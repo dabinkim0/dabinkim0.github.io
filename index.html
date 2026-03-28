@@ -3,133 +3,163 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dabin Kim | Music & Audio AI Researcher</title>
-    
+    <title>Dabin Kim | MD / DL Researcher</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/index.css">
 </head>
 <body>
     <header class="main-header">
-        <div class="container">
-            <a href="#about" class="logo">Dabin Kim</a>
-            <nav class="main-nav">
+        <div class="shell header-shell">
+            <a href="index.html" class="logo">Dabin Kim</a>
+            <nav class="main-nav" aria-label="Primary">
                 <ul>
-                    <li><a href="#about">Home</a></li>
-                    <li><a href="#publications">Publications</a></li>
-                    <li><a href="projects/index.html" class="nav-disabled" aria-disabled="true">Projects</a></li>
-                    <li><a href="#" class="nav-disabled" aria-disabled="true">Blog</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="publications/index.html">Publications</a></li>
+                    <li><a href="projects/index.html">Projects</a></li>
+                    <li><a href="#" class="nav-disabled" aria-disabled="true" tabindex="-1">Blog</a></li>
+                    <li><a href="index.html" class="is-active">About</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main class="container">
+    <main id="top" class="shell page-shell">
+        <div class="home-layout">
+            <aside id="about" class="identity-rail">
+                <div class="identity-sticky">
+                    <img src="assets/images/profile/profile_02.png" alt="Profile photo of Dabin Kim" class="profile-image">
+                    <h1>Dabin Kim</h1>
+                    <p class="identity-kicker">MD / DL Researcher</p>
+                    <dl class="identity-meta">
+                        <div>
+                            <dt>Affiliation</dt>
+                            <dd>Music and Audio Computing (MAC) Lab, KAIST</dd>
+                        </div>
+                        <div>
+                            <dt>Email</dt>
+                            <dd><a href="mailto:dabinchi9598@kaist.ac.kr">dabinchi9598@kaist.ac.kr</a></dd>
+                        </div>
+                        <div>
+                            <dt>Research Interest</dt>
+                            <dd>Music Geneneration and Editing, Music Understanding</dd>
+                        </div>
+                    </dl>
 
-        <section id="about">
-            <div class="hero">
-                <img src="timbre-transfer/figs/profile_rect.jpeg" alt="Profile photo of Dabin Kim" class="profile-image">
-                <div class="hero-text">
-                    <h1>Dabin Kim 김다빈</h1>
-                    <p class="hero-bio">AI researcher exploring the frontiers of music understanding and generation.</p>
-                    <p class="hero-email"><a href="mailto:dabinchi9598@kaist.ac.kr">dabinchi9598@kaist.ac.kr</a></p>
+                    <div class="identity-links">
+                        <a href="mailto:dabinchi9598@kaist.ac.kr">Email</a>
+                        <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">Google Scholar</a>
+                        <a href="https://github.com/dabinkim0" target="_blank" rel="noreferrer">GitHub</a>
+                        <a href="https://www.linkedin.com/in/dabin-kim-4a792a345/" target="_blank" rel="noreferrer">LinkedIn</a>
+                        <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">Download CV</a>
+                    </div>
                 </div>
-            </div>
-            <div style="background-color: #f8f9fa; padding: 20px 25px; border-radius: 8px; margin-top: 30px;">
-                <div class="education-list">
-                    <button class="news-toggle" type="button" aria-expanded="true" aria-controls="news-list">
-                        <span class="news-toggle-icon" aria-hidden="true">&gt;</span>
-                        <span>News</span>
-                    </button>
-                    <ul id="news-list">
+            </aside>
+
+            <div class="document-column">
+                <section id="statement" class="section-block statement-block">
+                    <p class="section-label">Statement</p>
+                    <div class="section-body">
+                        <p class="statement-text">
+                            My recent work focuses on music generation and editing based on a high-level understanding of musical context.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="news" class="section-block">
+                    <div class="education-list" data-collapsible="news">
+                        <button class="news-toggle" type="button" aria-expanded="true" aria-controls="news-list">
+                            <span class="news-toggle-icon" aria-hidden="true">&gt;</span>
+                            <span>Recent News</span>
+                        </button>
+                        <div class="news-scroll-area" data-draggable-scroll>
+                            <ul id="news-list" class="entry-list">
+                                <li class="entry-item">
+                                    <div class="entry-head">
+                                        <p class="entry-title">Ph.D. in Music and Audio Computing (MAC) Lab, KAIST</p>
+                                        <p class="entry-meta">Mar 2026 - Present</p>
+                                    </div>
+                                </li>
+                                <li class="entry-item">
+                                    <div class="entry-head">
+                                        <p class="entry-title">Sony CSL Assistant Researcher</p>
+                                        <p class="entry-meta">Jul 2025 - Oct 2025</p>
+                                    </div>
+                                </li>
+                                <li class="entry-item">
+                                    <div class="entry-head">
+                                        <p class="entry-title">M.S. in Music and Audio Computing (MAC) Lab, KAIST</p>
+                                        <p class="entry-meta">Aug 2023 - Aug 2025</p>
+                                    </div>
+                                </li>
+                                <li class="entry-item">
+                                    <div class="entry-head">
+                                        <p class="entry-title">B.S. in Art &amp; Technology, Sogang University</p>
+                                        <p class="entry-meta">Feb 2017 - Feb 2023</p>
+                                    </div>
+                                    <p class="entry-detail">Double major in Big Data Science</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="publications" class="section-block">
+                    <p class="section-label">Recent Publications</p>
+                    <ul class="item-list">
                         <li>
-                            <p>Ph.D. in Music and Audio Computing (MAC) Lab, KAIST</p>
-                            <p class="period">Mar 2026 - Present</p>
+                            <h3><a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">DDSP-Based Neural Vehicle Sound Synthesis from Driving Signals</a></h3>
+                            <p class="authors">Minsuk Choi, <span class="author-self">Dabin Kim</span>, Daehun Song, Juhan Nam</p>
+                            <p class="venue"><em>-</em></p>
+                            <div class="links">
+                                <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">Paper</a>
+                                <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">Demo</a>
+                                <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">Code</a>
+                            </div>
                         </li>
                         <li>
-                            <p>Sony CSL Assistant Researcher</p>
-                            <p class="period">Jul 2025 - Oct 2025</p>
+                            <h3><a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control</a></h3>
+                            <p class="authors"><span class="author-self">Dabin Kim</span>, Junwon Lee, Juhan Nam</p>
+                            <p class="venue"><em>-</em></p>
+                            <div class="links">
+                                <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">Paper</a>
+                                <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">Demo</a>
+                                <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">Code</a>
+                            </div>
                         </li>
                         <li>
-                            <p>M.S. in Music and Audio Computing (MAC) Lab, KAIST</p>
-                            <p class="period">Aug 2023 - Expected Aug 2025</p>
+                            <h3><a href="https://arxiv.org/abs/2408.11915" target="_blank" rel="noreferrer">Video-Foley: Two-Stage Video-To-Sound Generation via Temporal Event Condition For Foley Sound</a></h3>
+                            <p class="authors">Junwon Lee, Jaekwon Im, <span class="author-self">Dabin Kim</span>, Juhan Nam</p>
+                            <p class="venue"><em>TASLP</em>, 2025.</p>
+                            <div class="links">
+                                <a href="https://arxiv.org/abs/2408.11915" target="_blank" rel="noreferrer">Paper</a>
+                                <a href="https://jnwnlee.github.io/video-foley-demo/" target="_blank" rel="noreferrer">Demo</a>
+                                <a href="https://github.com/jnwnlee/video-foley" target="_blank" rel="noreferrer">Code</a>
+                            </div>
                         </li>
                         <li>
-                            <p>B.S. in Art & Technology, Sogang University</p>
-                            <p class="period">Feb 2017 - Feb 2023</p>
-                            <p class="details">&mdash; Double Major in Big Data Science</p>
+                            <h3><a href="https://ismir2024program.ismir.net/lbd_480.html" target="_blank" rel="noreferrer">Pitch-ControlNet: Continuous Pitch Control for Monophonic Instrument Sound Generation</a></h3>
+                            <p class="authors"><span class="author-self">Dabin Kim</span>*, Junwon Lee*, Minseo Kim*, Juhan Nam</p>
+                            <p class="venue"><em>Late Breaking Demo, ISMIR 2024</em></p>
+                            <div class="links">
+                                <a href="https://ismir2024program.ismir.net/lbd_480.html" target="_blank" rel="noreferrer">Paper</a>
+                                <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">Demo</a>
+                                <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">Code</a>
+                            </div>
                         </li>
                     </ul>
-                </div>
-            </div>
-        </section>
+                </section>
 
-        <section id="publications">
-            <h2 class="section-title">Publications</h2>
-            <ul class="item-list">
-                <li>
-                    <h3><a href="#">AdaTT: Text-Guided Instrument T imbre Transfer with Target-Adaptive Structural Control</a></h3>
-                    <p class="authors"><span class="author-self">Dabin Kim</span>, Junwon Lee, Juhan Nam</p>
-                    <p class="venue"><em>-</em></p>
-                    <!--
-                    <p class="summary">
-                        As the first author, this work addresses a key limitation in timbre transfer where instrument-specific expressive features (e.g., vibrato, loudness shimmer) embedded in fine-grained pitch and loudness signals hinder accurate timbre reproduction. My proposed method improves this by adaptively adjusting the influence of source-target aware pitch and loudness information. In comparison with ControlNet and SmartControl-based methods, my model achieves the highest target timbre fidelity (measured by CLAP-MS, CLAP-LAION) when conditioned simultaneously on a 50-cent resolution fundamental frequency (f0) contour and a 32-bin RMS loudness contour.
-                    </p>
-                    -->
-                    <div class="links">
-                        <a href="#" target="_blank">[Paper]</a>
-                        <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">[Demo]</a>
-                        <a href="#" target="_blank">[Code]</a>
-                    </div>
-                </li>
-                <li>
-                    <h3><a href="https://arxiv.org/abs/2408.11915" target="_blank">Video-Foley: Two-Stage Video-To-Sound Generation via Temporal Event Condition For Foley Sound</a></h3>
-                    <p class="authors">Junwon Lee, Jaekwon Im, <span class="author-self">Dabin Kim</span>, Juhan Nam</p>
-                    <p class="venue"><em>TASLP</em>, 2025.</p>
-                    <!--
-                    <p class="summary">
-                        In this project, my contributions included working with Optical Flow for video-to-audio tasks. I was also responsible for designing and participating in the qualitative evaluation of the generated sounds.
-                    </p>
-                    -->
-                    <div class="links">
-                        <a href="https://arxiv.org/abs/2408.11915" target="_blank">[Paper]</a>
-                        <a href="https://jnwnlee.github.io/video-foley-demo/" target="_blank">[Demo]</a>
-                        <a href="https://github.com/jnwnlee/video-foley" target="_blank">[Code]</a>
-                    </div>
-                </li>
-                <li>
-                    <h3><a href="https://ismir2024program.ismir.net/lbd_480.html" target="_blank">Pitch-ControlNet: Continuous Pitch Control for Monophonic Instrument Sound Generation</a></h3>
-                    <p class="authors"><span class="author-self">Dabin Kim</span>*, Junwon Lee*, Minseo Kim*, Juhan Nam</p>
-                    <p class="venue"><em>Late Breaking Demo, ISMIR 2024</em></p>
-                    <!--
-                    <p class="summary">
-                        As a co-author, I contributed to the development of this model, focusing on MIDI-level structural control. My specific role involved designing the module that processes MIDI pitch contours to guide the Text-to-Audio diffusion model with ControlNet architecture.
-                    </p>
-                    -->
-                    <div class="links">
-                        <a href="https://ismir2024program.ismir.net/lbd_480.html" target="_blank">[Paper]</a>
-                        <a href="#" target="_blank">[Demo]</a>
-                        <a href="#" target="_blank">[Code]</a>
-                    </div>
-                </li>
-            </ul>
-        </section>
-        
-        <!-- Projects section removed - accessible via navigation only -->
+            </div>
+        </div>
     </main>
 
-    <footer id="contact" class="main-footer">
-        <div class="contact-info">
-            <a href="mailto:dabinchi98@kaist.ac.kr">Email</a>
-            <a href="https://github.com/dabinkim" target="_blank">GitHub</a>
-            <a href="#" target="_blank">Google Scholar</a>
-            <a href="#" target="_blank">LinkedIn</a>
-            <a href="#">[Download CV]</a>
+    <footer class="main-footer">
+        <div class="shell footer-shell">
+            <p class="copyright">&copy; 2025 Dabin Kim. All rights reserved.</p>
         </div>
-        <p class="copyright">&copy; 2025 Dabin Kim. All rights reserved.</p>
     </footer>
+
     <script src="assets/js/index.js"></script>
 </body>
 </html>

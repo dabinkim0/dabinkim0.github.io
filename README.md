@@ -9,6 +9,17 @@ Personal website hosted with GitHub Pages.
 ├── index.html
 ├── projects/
 │   └── index.html
+├── publications/
+│   ├── index.html
+│   └── figs/
+│       ├── pitch-controlnet/
+│       └── video-foley/
+├── ddsp-carsound/
+│   ├── index.html
+│   ├── audio/
+│   ├── figs/
+│   ├── spectrograms/
+│   └── scripts/
 ├── timbre-transfer/
 │   ├── index.html
 │   ├── audio/
@@ -17,10 +28,15 @@ Personal website hosted with GitHub Pages.
 │   └── scripts/
 ├── assets/
 │   ├── css/
+│   │   ├── ddsp-carsound.css
 │   │   ├── index.css
 │   │   ├── projects.css
+│   │   ├── publications.css
 │   │   └── timbre-transfer.css
+│   ├── images/
+│   │   └── profile/
 │   └── js/
+│       ├── index.js
 │       ├── mathjax-config.js
 │       └── timbre-transfer.js
 └── _legacy/
@@ -30,12 +46,15 @@ Personal website hosted with GitHub Pages.
 
 - Page-specific styles are stored in `assets/css/*.css` and linked from each HTML page.
 - Page-specific scripts are stored in `assets/js/*.js`.
-- `timbre-transfer/` keeps project assets (audio/images/spectrograms) and generation scripts.
+- Shared site-wide images such as profile photos are stored in `assets/images/`.
+- Standalone project/demo pages keep their own media next to the page, for example `timbre-transfer/figs` and `ddsp-carsound/figs`.
+- Publication entries without standalone pages store representative figures in `publications/figs/<slug>/`.
 
 ## Editing Rules
 
 - Prefer editing CSS/JS files in `assets/` instead of adding new large inline `<style>` or `<script>` blocks.
-- Keep static resources for each page near that page (`timbre-transfer/audio`, `timbre-transfer/figs`, etc.).
+- Keep static resources near the page that owns them (`timbre-transfer/audio`, `ddsp-carsound/figs`, etc.).
+- Avoid creating root-level folders that mix shared assets with page-specific media.
 - When adding demo audio in `timbre-transfer/audio`, generate matching spectrograms in `timbre-transfer/spectrograms`.
 
 ## Spectrogram Generation
