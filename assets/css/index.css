@@ -296,6 +296,11 @@ a {
     border: 1px solid var(--rule-soft);
     border-radius: 10px;
     background: #fdfcfb;
+    transition: gap 0.28s ease;
+}
+
+.education-list.is-collapsed {
+    gap: 0;
 }
 
 .news-toggle {
@@ -338,7 +343,7 @@ a {
 .education-list.is-collapsed .news-scroll-area {
     max-height: 0;
     opacity: 0;
-    margin-top: -4px;
+    margin-top: 0;
     padding-right: 0;
     overflow: hidden;
     pointer-events: none;
