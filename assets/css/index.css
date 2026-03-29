@@ -282,7 +282,9 @@ a {
 .statement-text {
     margin: 0;
     max-width: none;
-    font-size: 1.14rem;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--text);
     line-height: 1.7;
     letter-spacing: -0.02em;
 }
@@ -622,7 +624,7 @@ a {
     }
 
     .statement-text {
-        font-size: 1.14rem;
+        font-size: 1.36rem;
     }
 
     .entry-head {
