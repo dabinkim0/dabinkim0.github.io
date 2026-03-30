@@ -678,7 +678,8 @@ a {
 
     .identity-meta dd {
         min-width: 0;
-        white-space: nowrap;
+        white-space: normal;
+        overflow-wrap: anywhere;
     }
 
     .identity-meta .meta-block-stacked {
