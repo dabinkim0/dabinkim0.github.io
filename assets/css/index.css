@@ -210,6 +210,17 @@ a {
     line-height: 1.7;
 }
 
+.identity-bullets {
+    margin: 0;
+    padding-left: 1.2em;
+    display: grid;
+    gap: 2px;
+}
+
+.identity-bullets li {
+    margin: 0;
+}
+
 .identity-meta a,
 .identity-links a,
 .contact-item {
@@ -608,6 +619,49 @@ a {
 
     .identity-rail h1 {
         font-size: 3.5rem;
+    }
+
+    .identity-meta {
+        gap: 12px;
+    }
+
+    .identity-meta div {
+        grid-template-columns: minmax(104px, auto) minmax(0, 1fr);
+        gap: 0 14px;
+        align-items: start;
+    }
+
+    .identity-meta .meta-block-stacked {
+        grid-template-columns: 1fr;
+        gap: 4px;
+    }
+
+    .identity-meta dt,
+    .identity-meta dd {
+        font-size: 1.08rem;
+        line-height: 1.5;
+    }
+
+    .identity-meta dt {
+        white-space: nowrap;
+    }
+
+    .identity-meta dd {
+        min-width: 0;
+        white-space: nowrap;
+    }
+
+    .identity-meta .meta-block-stacked .identity-bullets {
+        padding-left: 1.1em;
+        gap: 0;
+    }
+
+    .identity-meta .meta-block-stacked dd {
+        white-space: normal;
+    }
+
+    .identity-meta .meta-block-stacked {
+        display: none;
     }
 
     .identity-links {
