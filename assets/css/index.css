@@ -598,7 +598,7 @@ a {
 @media (max-width: 960px) {
     .home-layout {
         grid-template-columns: 1fr;
-        gap: 36px;
+        gap: 0;
     }
 
     .identity-sticky {
@@ -607,6 +607,14 @@ a {
 
     .profile-image {
         display: none;
+    }
+
+    .identity-rail {
+        margin-bottom: 0;
+    }
+
+    .identity-meta {
+        margin-bottom: 12px;
     }
 
     .document-column {
@@ -683,6 +691,29 @@ a {
 
     .statement-text {
         font-size: 1.14rem;
+    }
+
+    .statement-block {
+        display: grid;
+        grid-template-columns: minmax(104px, auto) minmax(0, 1fr);
+        gap: 0 14px;
+        align-items: start;
+        padding-top: 0;
+    }
+
+    .statement-block .section-label {
+        margin: 0;
+        white-space: nowrap;
+        font-size: 1.08rem;
+        line-height: 1.5;
+    }
+
+    .statement-block .section-body {
+        gap: 0;
+    }
+
+    .statement-block .statement-text {
+        line-height: 1.5;
     }
 
     .entry-head {
