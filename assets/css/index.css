@@ -678,19 +678,7 @@ a {
     }
 
     .identity-links {
-        display: flex;
-        flex-wrap: nowrap;
-        align-items: center;
-        justify-content: center;
-        gap: clamp(10px, 1.6vw, 20px);
-        min-width: 0;
-    }
-
-    .identity-links a {
-        flex: 0 1 auto;
-        font-size: clamp(0.95rem, 1.08vw, 1.14rem);
-        line-height: 1.35;
-        white-space: nowrap;
+        display: none;
     }
 
     .statement-text {
@@ -715,17 +703,13 @@ a {
         flex-direction: column;
         align-items: flex-start;
     }
-}
-
-@media (max-width: 720px) {
-    .identity-links {
-        display: none;
-    }
 
     .home-contact {
         display: block;
     }
+}
 
+@media (max-width: 720px) {
     .contact-links {
         justify-content: center;
     }
