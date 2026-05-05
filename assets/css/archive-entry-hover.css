@@ -1,0 +1,114 @@
+:root {
+    --archive-hover-duration: 180ms;
+    --archive-hover-ease: cubic-bezier(0.2, 0, 0.16, 1);
+    --archive-hover-inset-x: clamp(10px, 1.4vw, 14px);
+    --archive-hover-inset-y: 10px;
+    --archive-hover-bg: linear-gradient(135deg, rgba(248, 244, 236, 0.82), rgba(255, 255, 255, 0.96));
+    --archive-hover-border: rgba(23, 23, 23, 0.08);
+    --archive-hover-shadow: 0 18px 34px rgba(23, 23, 23, 0.05);
+}
+
+.archive-entry {
+    position: relative;
+    isolation: isolate;
+}
+
+.archive-entry::before,
+.archive-entry::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+    opacity: 0;
+    transition:
+        opacity var(--archive-hover-duration) var(--archive-hover-ease),
+        transform var(--archive-hover-duration) var(--archive-hover-ease),
+        border-color var(--archive-hover-duration) var(--archive-hover-ease),
+        box-shadow var(--archive-hover-duration) var(--archive-hover-ease);
+}
+
+.archive-entry::before {
+    inset: calc(var(--archive-hover-inset-y) * -1) calc(var(--archive-hover-inset-x) * -1);
+    z-index: 0;
+    border: 1px solid transparent;
+    border-radius: 18px;
+    background: var(--archive-hover-bg);
+    box-shadow: 0 10px 18px rgba(23, 23, 23, 0);
+    transform: translateY(4px) scale(0.99);
+}
+
+.archive-entry::after {
+    left: calc(var(--archive-hover-inset-x) * -1);
+    top: 14px;
+    bottom: 14px;
+    width: 2px;
+    z-index: 0;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(23, 23, 23, 0.22), rgba(23, 23, 23, 0.02));
+    transform: scaleY(0.55);
+    transform-origin: center;
+}
+
+.archive-entry > * {
+    position: relative;
+    z-index: 1;
+    transition: transform var(--archive-hover-duration) var(--archive-hover-ease);
+}
+
+.archive-entry .publication-figure,
+.archive-entry .publication-figure img,
+.archive-entry .format-tag {
+    transition:
+        transform var(--archive-hover-duration) var(--archive-hover-ease),
+        border-color var(--archive-hover-duration) var(--archive-hover-ease),
+        background-color var(--archive-hover-duration) var(--archive-hover-ease),
+        box-shadow var(--archive-hover-duration) var(--archive-hover-ease),
+        filter var(--archive-hover-duration) var(--archive-hover-ease);
+}
+
+.archive-entry:is(:hover, :focus-within)::before {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    border-color: var(--archive-hover-border);
+    box-shadow: var(--archive-hover-shadow);
+}
+
+.archive-entry:is(:hover, :focus-within)::after {
+    opacity: 1;
+    transform: scaleY(1);
+}
+
+.archive-entry:is(:hover, :focus-within) > * {
+    transform: translateY(-2px);
+}
+
+.archive-entry:is(:hover, :focus-within) .publication-figure:not(.disabled-link) {
+    border-color: var(--rule);
+    box-shadow: 0 14px 24px rgba(23, 23, 23, 0.07);
+}
+
+.archive-entry:is(:hover, :focus-within) .publication-figure:not(.disabled-link) img {
+    transform: scale(1.018);
+}
+
+.archive-entry:is(:hover, :focus-within) .format-tag:not(.is-active) {
+    border-color: var(--text);
+    background: rgba(255, 255, 255, 0.9);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .archive-entry::before,
+    .archive-entry::after,
+    .archive-entry > *,
+    .archive-entry .publication-figure,
+    .archive-entry .publication-figure img,
+    .archive-entry .format-tag {
+        transition: none;
+    }
+
+    .archive-entry:is(:hover, :focus-within)::before,
+    .archive-entry:is(:hover, :focus-within)::after,
+    .archive-entry:is(:hover, :focus-within) > *,
+    .archive-entry:is(:hover, :focus-within) .publication-figure:not(.disabled-link) img {
+        transform: none;
+    }
+}
