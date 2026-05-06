@@ -3,7 +3,7 @@
 @font-face {
 font-family: 'IconFont'; /* Assign 'IconFont' name to the font */
 src: url('fonts/IconFont-Regular-0.9.3.woff2') format('woff2');
-font-weight: normal;
+font-weight: 500;
 font-style: normal;
 }
 
@@ -11,6 +11,7 @@ font-style: normal;
 body {
     /* Change default font to 'IconFont' */
     font-family: 'IconFont', sans-serif; /* Add fallback font (sans-serif) in case of loading failure */
+    font-weight: 500;
     background-color: #ffffff; /* Pure white background */
     color: #000000; /* Pure black text */
     line-height: 1.6;

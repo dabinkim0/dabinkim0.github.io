@@ -1,4 +1,18 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const preventImageSaveGesture = (event) => {
+        event.preventDefault();
+    };
+    const protectedProjectImages = document.querySelectorAll(".project-list .project-figure, .project-list .project-figure img");
+
+    protectedProjectImages.forEach((element) => {
+        element.addEventListener("contextmenu", preventImageSaveGesture);
+        element.addEventListener("dragstart", preventImageSaveGesture);
+    });
+
+    document.querySelectorAll(".project-list .project-figure img").forEach((image) => {
+        image.setAttribute("draggable", "false");
+    });
+
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const overlayDuration = prefersReducedMotion ? 0 : 220;
     const imageOverlay = document.createElement("div");
@@ -66,6 +80,36 @@ document.addEventListener("DOMContentLoaded", () => {
             );
         });
     });
+
+    const projectList = document.querySelector("[data-project-list]");
+    const viewButtons = Array.from(document.querySelectorAll("[data-project-view]"));
+
+    if (projectList && viewButtons.length > 0) {
+        const defaultProjectView = "grid-compact";
+        const setProjectView = (view) => {
+            const viewClasses = ["is-list", "is-grid", "is-grid-compact"];
+
+            viewClasses.forEach((className) => {
+                projectList.classList.remove(className);
+            });
+
+            projectList.classList.add(`is-${view}`);
+
+            viewButtons.forEach((button) => {
+                const isActive = button.dataset.projectView === view;
+                button.classList.toggle("is-active", isActive);
+                button.setAttribute("aria-pressed", String(isActive));
+            });
+        };
+
+        viewButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                setProjectView(button.dataset.projectView);
+            });
+        });
+
+        setProjectView(defaultProjectView);
+    }
 
     const filterPanel = document.querySelector("[data-project-filter-panel]");
     const filterList = document.querySelector("[data-project-filter-list]");

@@ -7,9 +7,8 @@
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/publications.css">
-    <link rel="stylesheet" href="../assets/css/archive-entry-hover.css">
 </head>
 <body>
     <header class="main-header">
@@ -29,15 +28,32 @@
     <main id="top" class="shell page-shell">
         <section class="page-intro">
             <h1>Publications</h1>
-            <p class="page-summary">
-                A selected archive of research papers and technical reports from my ongoing research.
-            </p>
+            <div class="page-summary-row">
+                <p class="page-summary">
+                    A selected archive of research papers and technical reports from my ongoing research.
+                </p>
+                <div class="publication-view-toggle" role="group" aria-label="Publication layout">
+                    <button class="view-toggle-button" type="button" data-publication-view="list" aria-label="List view" aria-pressed="false">
+                        <span class="view-toggle-icon view-toggle-icon--list" aria-hidden="true"></span>
+                    </button>
+                    <button class="view-toggle-button" type="button" data-publication-view="grid" aria-label="Grid view" aria-pressed="false">
+                        <span class="view-toggle-icon view-toggle-icon--grid" aria-hidden="true"></span>
+                    </button>
+                    <button class="view-toggle-button is-active" type="button" data-publication-view="grid-compact" aria-label="Compact grid view" aria-pressed="true">
+                        <span class="view-toggle-icon view-toggle-icon--grid-compact" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
         </section>
 
         <section class="archive-section">
-            <p class="section-label">Publications</p>
-            <ul class="item-list">
-                <li class="publication-item archive-entry">
+            <div class="publication-filter-panel" data-publication-filter-panel>
+                <div class="publication-filter-list" data-publication-filter-list></div>
+                <p class="publication-filter-status" data-publication-filter-status>Showing all publications.</p>
+            </div>
+
+            <ul class="item-list is-grid-compact" data-publication-list>
+                <li class="publication-item" data-publication-category="Generative Models">
                     <div class="publication-copy">
                         <h3><a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control</a></h3>
                         <p class="authors"><span class="author-self">Dabin Kim</span>, Junwon Lee, Juhan Nam</p>
@@ -52,7 +68,7 @@
                         <img src="timbre-transfer/figs/fig_architecture_demo.png" alt="AdaTT main architecture figure">
                     </a>
                 </li>
-                <li class="publication-item archive-entry">
+                <li class="publication-item" data-publication-category="Generative Models">
                     <div class="publication-copy">
                         <h3><a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">DDSP-Based Neural Vehicle Sound Synthesis from Driving Signals</a></h3>
                         <p class="authors">Minsuk Choi, <span class="author-self">Dabin Kim</span>, Daehun Song, Juhan Nam</p>
@@ -67,11 +83,11 @@
                         <img src="ddsp-carsound/figs/fig_framework_overview.png" alt="DDSP framework overview figure">
                     </a>
                 </li>
-                <li class="publication-item archive-entry">
+                <li class="publication-item" data-publication-category="Generative Models">
                     <div class="publication-copy">
                         <h3><a href="https://jnwnlee.github.io/video-foley-demo/" target="_blank" rel="noreferrer">Video-Foley: Two-Stage Video-To-Sound Generation via Temporal Event Condition for Foley Sound</a></h3>
                         <p class="authors">Junwon Lee, Jaekwon Im, <span class="author-self">Dabin Kim</span>, Juhan Nam</p>
-                        <p class="venue"><em>TASLP</em>, 2025.</p>
+                        <p class="venue"><em>IEEE/ACM Transactions on Audio, Speech, and Language Processing (TASLP)</em>, 2025.</p>
                         <div class="links">
                             <a href="https://arxiv.org/abs/2408.11915" target="_blank" rel="noreferrer">Paper</a>
                             <a href="https://jnwnlee.github.io/video-foley-demo/" target="_blank" rel="noreferrer">Demo</a>
@@ -82,11 +98,11 @@
                         <img src="figs/video-foley/model_vts.png" alt="Video-Foley main figure">
                     </a>
                 </li>
-                <li class="publication-item archive-entry">
+                <li class="publication-item" data-publication-category="Generative Models">
                     <div class="publication-copy">
                         <h3><a href="https://ismir2024program.ismir.net/lbd_480.html" target="_blank" rel="noreferrer">Pitch-ControlNet: Continuous Pitch Control for Monophonic Instrument Sound Generation</a></h3>
                         <p class="authors"><span class="author-self">Dabin Kim</span>*, Junwon Lee*, Minseo Kim*, Juhan Nam</p>
-                        <p class="venue"><em>Late Breaking Demo, ISMIR 2024.</em></p>
+                        <p class="venue"><em>Late-Breaking/Demo (LBD), International Society for Music Information Retrieval Conference (ISMIR)</em>, 2024.</p>
                         <div class="links">
                             <a href="https://ismir2024program.ismir.net/lbd_480.html" target="_blank" rel="noreferrer">Paper</a>
                             <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">Demo</a>
@@ -117,5 +133,6 @@
             <p class="copyright">&copy; 2025 Dabin Kim. All rights reserved.</p>
         </div>
     </footer>
+    <script src="../assets/js/publications.js"></script>
 </body>
 </html>
