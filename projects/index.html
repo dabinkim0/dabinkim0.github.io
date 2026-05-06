@@ -7,9 +7,8 @@
     <link rel="icon" type="image/svg+xml" href="../favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/projects.css">
-    <link rel="stylesheet" href="../assets/css/archive-entry-hover.css">
 </head>
 <body>
     <header class="main-header">
@@ -29,20 +28,32 @@
     <main id="top" class="shell page-shell">
         <section class="page-intro">
             <h1>Projects</h1>
-            <p class="page-summary">
-                A selected archive of projects spanning music composition and interactive sound design, primarily completed before 2024.
-            </p>
+            <div class="page-summary-row">
+                <p class="page-summary">
+                    A selected archive of projects spanning music composition and interactive sound design, primarily completed before 2024.
+                </p>
+                <div class="project-view-toggle" role="group" aria-label="Project layout">
+                    <button class="view-toggle-button" type="button" data-project-view="list" aria-label="List view" aria-pressed="false">
+                        <span class="view-toggle-icon view-toggle-icon--list" aria-hidden="true"></span>
+                    </button>
+                    <button class="view-toggle-button" type="button" data-project-view="grid" aria-label="Grid view" aria-pressed="false">
+                        <span class="view-toggle-icon view-toggle-icon--grid" aria-hidden="true"></span>
+                    </button>
+                    <button class="view-toggle-button is-active" type="button" data-project-view="grid-compact" aria-label="Compact grid view" aria-pressed="true">
+                        <span class="view-toggle-icon view-toggle-icon--grid-compact" aria-hidden="true"></span>
+                    </button>
+                </div>
+            </div>
         </section>
 
         <section class="archive-section">
-            <p class="section-label">Selected Works</p>
             <div class="project-filter-panel" data-project-filter-panel>
                 <div class="project-filter-list" data-project-filter-list></div>
                 <p class="project-filter-status" data-project-filter-status>Showing all projects.</p>
             </div>
 
-            <div class="project-list">
-                <article class="project-entry archive-entry">
+            <div class="project-list is-grid-compact" data-project-list>
+                <article class="project-entry">
                     <div class="project-meta">
                         <button class="format-tag" type="button" data-filter-tag="Interactive Sound Design">Interactive Sound Design</button>
                         <p class="meta-label">Role</p>
@@ -56,7 +67,10 @@
                             <a class="meta-link" href="https://d11gqctr4esips.cloudfront.net/" target="_blank" rel="noreferrer" aria-label="Open project page for Media Art: 초평오행도 (Chopyeong Magic Island, 草坪五行島)">Project Page ↗</a>
                         </p>
                     </div>
-                    <div class="project-content">
+                    <div class="project-content project-content--has-figure">
+                        <figure class="project-figure">
+                            <img src="figs/dorothymyoon_cho.jpg" alt="Media Art: Chopyeong Magic Island">
+                        </figure>
                         <h2>Media Art: 초평오행도 (Chopyeong Magic Island, 草坪五行島)</h2>
                         <p class="project-summary">
                             Artist: Dorothy M. Yoon.
@@ -67,7 +81,7 @@
                     </div>
                 </article>
 
-                <article class="project-entry archive-entry">
+                <article class="project-entry">
                     <div class="project-meta">
                         <button class="format-tag" type="button" data-filter-tag="Interactive Sound Design">Interactive Sound Design</button>
                         <p class="meta-label">Role</p>
@@ -81,7 +95,10 @@
                             <a class="meta-link" href="../projects/posters/poster_all_about_error.png" data-popup-image="poster" aria-label="Open poster image for Live Performance: All About Error">Poster</a>
                         </p>
                     </div>
-                    <div class="project-content">
+                    <div class="project-content project-content--has-figure">
+                        <figure class="project-figure">
+                            <img src="figs/allabouterror.jpeg" alt="Live Performance: All About Error">
+                        </figure>
                         <h2>Live Performance: All About Error</h2>
                         <p class="project-summary">
                             Artist: Neo Harmonics (이태헌, 권태균, 최재란, 강요섭, 김준형).
@@ -89,7 +106,7 @@
                     </div>
                 </article>
 
-                <article class="project-entry archive-entry">
+                <article class="project-entry">
                     <div class="project-meta">
                         <button class="format-tag" type="button" data-filter-tag="Interactive Sound Design">Interactive Sound Design</button>
                         <p class="meta-label">Role</p>
@@ -102,8 +119,15 @@
                         <p class="meta-value">
                             <a class="meta-link" href="https://www.youtube.com/watch?v=FIVNbJLM0hs&list=PLyyTK5ekx9MDIWEGIQZ9QVDoj68z6gZrv" target="_blank" rel="noreferrer" aria-label="Open audio clip for Live Performance: 만물관객, 리추얼 천골 (Manmulgwanggaek, Ritual Cheongol)">Audio Clip ↗</a>
                         </p>
+                        <p class="meta-label">Website</p>
+                        <p class="meta-value">
+                            <a class="meta-link" href="https://kooooong.notion.site/a93cdf98cf3a44d18539f17a607887a2" target="_blank" rel="noreferrer" aria-label="Open project page for Live Performance: 만물관객, 리추얼 천골 (Manmulgwanggaek, Ritual Cheongol)">Project Page ↗</a>
+                        </p>
                     </div>
-                    <div class="project-content">
+                    <div class="project-content project-content--has-figure">
+                        <figure class="project-figure">
+                            <img src="figs/rittual.png" alt="Live Performance: 만물관객, 리추얼 천골">
+                        </figure>
                         <h2>Live Performance: 만물관객, 리추얼 천골 (Manmulgwanggaek, Ritual Cheongol)</h2>
                         <p class="project-summary">
                             Artists: 고헌, 권세현, 성은지, 성창현, 임금님.
@@ -114,7 +138,7 @@
                     </div>
                 </article>
 
-                <article class="project-entry archive-entry">
+                <article class="project-entry">
                     <div class="project-meta">
                         <button class="format-tag" type="button" data-filter-tag="Interactive Sound Design">Interactive Sound Design</button>
                         <p class="meta-label">Role</p>
@@ -128,7 +152,10 @@
                             <a class="meta-link" href="http://dorothymyoon.com/portfolio/44-magic-sticks-and-saekdong-aura/" target="_blank" rel="noreferrer" aria-label="Open project page for Paradise Art Lab Festival VR Media Art: 44개 색동 요술봉과 색동 아우라 (44 Magic Sticks and Saekdong Aura)">Project Page ↗</a>
                         </p>
                     </div>
-                    <div class="project-content">
+                    <div class="project-content project-content--has-figure">
+                        <figure class="project-figure">
+                            <img src="figs/dorothymyoon_44magicsticks.jpg" alt="Paradise Art Lab Festival VR Media Art: 44 Magic Sticks and Saekdong Aura">
+                        </figure>
                         <h2>Paradise Art Lab Festival VR Media Art: 44개 색동 요술봉과 색동 아우라 (44 Magic Sticks and Saekdong Aura)</h2>
                         <p class="project-summary">
                             Artist: Dorothy M. Yoon.
@@ -139,7 +166,7 @@
                     </div>
                 </article>
 
-                <article class="project-entry archive-entry">
+                <article class="project-entry">
                     <div class="project-meta">
                         <button class="format-tag" type="button" data-filter-tag="Music">Music</button>
                         <p class="meta-label">Role</p>
@@ -153,7 +180,10 @@
                             <a class="meta-link" href="https://www.youtube.com/playlist?list=PLyyTK5ekx9MDHOUCpi8zvVD7-H41a9All" target="_blank" rel="noreferrer" aria-label="Open audio clip for Live Performance: 경기도 어린이박물관 어린이 예술제4 퍼포먼스: POP! POP! 도도랜드">Audio Clip ↗</a>
                         </p>
                     </div>
-                    <div class="project-content">
+                    <div class="project-content project-content--has-figure">
+                        <figure class="project-figure project-figure--poppop">
+                            <img src="figs/dorothymyoon_poppop.jpg" alt="Live Performance: POP! POP! Dodoland">
+                        </figure>
                         <h2>Live Performance: 경기도 어린이박물관 어린이 예술제4 퍼포먼스: POP! POP! 도도랜드</h2>
                         <p class="project-summary">
                             Artist: Dorothy M. Yoon.
@@ -161,7 +191,7 @@
                     </div>
                 </article>
 
-                <article class="project-entry archive-entry">
+                <article class="project-entry">
                     <div class="project-meta">
                         <button class="format-tag" type="button" data-filter-tag="Interactive Sound Design">Interactive Sound Design</button>
                         <p class="meta-label">Developer</p>
@@ -175,7 +205,10 @@
                             <a class="meta-link" href="https://www.youtube.com/watch?v=FicBVExcqVo" target="_blank" rel="noreferrer" aria-label="Open demo for Granular Synthesis-based Orchestral Sound Generator">Demo ↗</a>
                         </p>
                     </div>
-                    <div class="project-content">
+                    <div class="project-content project-content--has-figure">
+                        <figure class="project-figure">
+                            <img src="figs/supercollider_logo.png" alt="Granular Synthesis-based Orchestral Sound Generator">
+                        </figure>
                         <h2>Granular Synthesis-based Orchestral Sound Generator</h2>
                         <p class="project-summary">
                             Personal Project
@@ -186,7 +219,7 @@
                     </div>
                 </article>
 
-                <article class="project-entry archive-entry">
+                <article class="project-entry">
                     <div class="project-meta">
                         <button class="format-tag" type="button" data-filter-tag="Interactive Sound Design">Interactive Sound Design</button>
                         <p class="meta-label">Role</p>
@@ -200,7 +233,10 @@
                             <a class="meta-link" href="../projects/posters/poster_dna_sonification.jpg" data-popup-image="poster" aria-label="Open poster image for Exhibition: 식물의 소리 (DMZ 자생식물 DNA Sonification 음감회, 서울숲)">Poster</a>
                         </p>
                     </div>
-                    <div class="project-content">
+                    <div class="project-content project-content--has-figure">
+                        <figure class="project-figure">
+                            <img src="figs/dmz_dna_sonification.jpg" alt="Exhibition: DMZ native plant DNA sonification">
+                        </figure>
                         <h2>Exhibition: 식물의 소리 (DMZ 자생식물 DNA Sonification 음감회, 서울숲)</h2>
                         <p class="project-summary">
                             Artists: 권병준, 이다영.
@@ -211,7 +247,7 @@
                     </div>
                 </article>
 
-                <article class="project-entry archive-entry">
+                <article class="project-entry">
                     <div class="project-meta">
                         <button class="format-tag" type="button" data-filter-tag="Music">Music</button>
                         <p class="meta-label">Role</p>
@@ -225,7 +261,10 @@
                             <a class="meta-link" href="https://www.youtube.com/watch?v=QQPLZ69rmTA&list=PLyyTK5ekx9MDM-N5Yu0HykOpCTlsUwpKH" target="_blank" rel="noreferrer" aria-label="Open audio clip for Original Soundtrack: 합격을 기원합니다">Audio Clip ↗</a>
                         </p>
                     </div>
-                    <div class="project-content">
+                    <div class="project-content project-content--has-figure">
+                        <figure class="project-figure">
+                            <img src="figs/goodluck.png" alt="Original Soundtrack: 합격을 기원합니다">
+                        </figure>
                         <h2>Original Soundtrack: 합격을 기원합니다</h2>
                         <p class="project-summary">
                             Directors: 박세원, 민지산.
@@ -236,7 +275,7 @@
                     </div>
                 </article>
 
-                <article class="project-entry archive-entry">
+                <article class="project-entry">
                     <div class="project-meta">
                         <button class="format-tag" type="button" data-filter-tag="Hardware Interface">Hardware Interface</button>
                         <p class="meta-label">Role</p>
@@ -250,7 +289,10 @@
                             <a class="meta-link" href="https://www.youtube.com/watch?v=Jc-FzXt6E1Y" target="_blank" rel="noreferrer" aria-label="Open demo for MIDI Controller: 쌍빛나리 (Ssangbitnari)">Demo ↗</a>
                         </p>
                     </div>
-                    <div class="project-content">
+                    <div class="project-content project-content--has-figure">
+                        <figure class="project-figure">
+                            <img src="figs/ssangbitnari.png" alt="MIDI Controller: Ssangbitnari">
+                        </figure>
                         <h2>MIDI Controller: 쌍빛나리 (Ssangbitnari)</h2>
                         <p class="project-summary">
                             Developers: 김건호, 김다빈, 양승현.
@@ -261,7 +303,7 @@
                     </div>
                 </article>
 
-                <article class="project-entry archive-entry">
+                <article class="project-entry">
                     <div class="project-meta">
                         <button class="format-tag" type="button" data-filter-tag="Music">Music</button>
                         <p class="meta-label">Role</p>
@@ -279,7 +321,10 @@
                             <a class="meta-link" href="https://www.youtube.com/watch?v=MOen8vCmTvQ" target="_blank" rel="noreferrer" aria-label="Open archive video for Original Soundtrack: 변신 (Die Verwandlung)">Archive ↗</a>
                         </p>
                     </div>
-                    <div class="project-content">
+                    <div class="project-content project-content--has-figure">
+                        <figure class="project-figure">
+                            <img src="figs/die_verwandlung.jpg" alt="Original Soundtrack: Die Verwandlung">
+                        </figure>
                         <h2>Original Soundtrack: 변신 (Die Verwandlung)</h2>
                         <p class="project-summary">
                             Director: 기성림.
@@ -290,7 +335,7 @@
                     </div>
                 </article>
 
-                <article class="project-entry archive-entry">
+                <article class="project-entry">
                     <div class="project-meta">
                         <button class="format-tag" type="button" data-filter-tag="Music">Music</button>
                         <p class="meta-label">Role</p>
@@ -304,7 +349,10 @@
                             <a class="meta-link" href="https://www.youtube.com/watch?v=IGH19Vskk8M" target="_blank" rel="noreferrer" aria-label="Open audio clip for Original Soundtrack: 경기도박물관 경기천년특별전 영상 오! 경기의 천년여행">Audio Clip ↗</a>
                         </p>
                     </div>
-                    <div class="project-content">
+                    <div class="project-content project-content--has-figure">
+                        <figure class="project-figure">
+                            <img src="figs/gyeonggi1000.jpg" alt="Original Soundtrack: 오! 경기의 천년여행">
+                        </figure>
                         <h2>Original Soundtrack: 경기도박물관 경기천년특별전 영상 &lt;오! 경기의 천년여행&gt;</h2>
                         <p class="project-summary">
                             Creators: 이보아, 김도유, 박주혁, 최희현, 이윤경, 양기태, 박찬우, 김진수, 우주언, 김다빈.
@@ -312,7 +360,7 @@
                     </div>
                 </article>
 
-                <article class="project-entry archive-entry">
+                <article class="project-entry">
                     <div class="project-meta">
                         <button class="format-tag" type="button" data-filter-tag="Music">Music</button>
                         <p class="meta-label">Role</p>
@@ -326,7 +374,10 @@
                             <a class="meta-link" href="https://creative.sogang.ac.kr/%EC%95%84%ED%85%8D-%EC%9D%B4%EB%B3%B4%EC%95%84%EA%B5%90%EC%88%98%EC%99%80-%EC%97%B0%EA%B5%AC%ED%8C%80-%EA%B2%BD%EA%B8%B0%EB%8F%84%EB%B0%95%EB%AC%BC%EA%B4%80-%ED%8A%B9%EB%B3%84%EC%A0%84-%EC%A0%84/" target="_blank" rel="noreferrer" aria-label="Open related page for VR Media Art: 경기도박물관 천년경기와 미디어의 만남 in 봄 VR Media Art: Retrospect and Prospect, 책가도">Related Page ↗</a>
                         </p>
                     </div>
-                    <div class="project-content">
+                    <div class="project-content project-content--has-figure">
+                        <figure class="project-figure">
+                            <img src="figs/gyeonggi.png" alt="VR Media Art: 천년경기와 미디어의 만남 in 봄">
+                        </figure>
                         <h2>VR Media Art: 경기도박물관 '천년경기와 미디어의 만남 in 봄' VR Media Art: Retrospect &amp; Prospect, 책가도</h2>
                         <p class="project-summary">
                             Creators: Prof. Boa Lee and the Research Team (Art &amp; Technology, Sogang University).
@@ -337,32 +388,7 @@
                     </div>
                 </article>
 
-                <article class="project-entry archive-entry">
-                    <div class="project-meta">
-                        <button class="format-tag" type="button" data-filter-tag="Interactive Sound Design">Interactive Sound Design</button>
-                        <p class="meta-label">Role</p>
-                        <p class="meta-value">Planner, Developer</p>
-                        <p class="meta-label">Tools</p>
-                        <p class="meta-value">JavaScript, P5.js</p>
-                        <p class="meta-label">Year</p>
-                        <p class="meta-value">2017</p>
-                        <p class="meta-label">Video</p>
-                        <p class="meta-value">
-                            <a class="meta-link" href="https://www.youtube.com/watch?v=pU9TzO9C79I&list=PLyyTK5ekx9MDRyGONaQ_fGtqttOpBkeuz&index=2" target="_blank" rel="noreferrer" aria-label="Open demo for Interactive Music Performance System: Future Mouth">Demo ↗</a>
-                        </p>
-                    </div>
-                    <div class="project-content">
-                        <h2>Interactive Music Performance System: Future Mouth</h2>
-                        <p class="project-summary">
-                            Personal Project
-                        </p>
-                        <p class="project-description">
-                            A live performance tool that lets users control a synthesizer with mouth movement captured through a webcam. The system tracks mouth size to modulate a low-pass filter (LPF) and uses mouse position to shape panning and volume, while an on-screen virtual character mirrors the performer's mouth gestures in real time to make the interaction legible.
-                        </p>
-                    </div>
-                </article>
-
-                <article class="project-entry archive-entry">
+                <article class="project-entry">
                     <div class="project-meta">
                         <button class="format-tag" type="button" data-filter-tag="Music">Music</button>
                         <p class="meta-label">Role</p>
@@ -380,7 +406,10 @@
                             <a class="meta-link" href="../projects/posters/poster_night_portrait.jpg" data-popup-image="poster" aria-label="Open poster image for Original Soundtrack: 밤의 초상 (Night Portrait)">Poster</a>
                         </p>
                     </div>
-                    <div class="project-content">
+                    <div class="project-content project-content--has-figure">
+                        <figure class="project-figure">
+                            <img src="figs/night_portrait.jpg" alt="Original Soundtrack: Night Portrait">
+                        </figure>
                         <h2>Original Soundtrack: 밤의 초상 (Night Portrait)</h2>
                         <p class="project-summary">
                             Director: 우주언.
@@ -391,7 +420,7 @@
                     </div>
                 </article>
 
-                <article class="project-entry archive-entry">
+                <article class="project-entry">
                     <div class="project-meta">
                         <button class="format-tag" type="button" data-filter-tag="Music">Music</button>
                         <p class="meta-label">Role</p>
@@ -405,7 +434,10 @@
                             <a class="meta-link" href="https://www.youtube.com/watch?v=KkIvBRWGqxo&list=PLyyTK5ekx9MBVkMO8BQ8XXYYmrj7a6krL" target="_blank" rel="noreferrer" aria-label="Open audio clip for Original Soundtrack: 과학탐구보고서">Audio Clip ↗</a>
                         </p>
                     </div>
-                    <div class="project-content">
+                    <div class="project-content project-content--has-figure">
+                        <figure class="project-figure">
+                            <img src="figs/science_investigation_report.jpg" alt="Original Soundtrack: Science Investigation Report">
+                        </figure>
                         <h2>Original Soundtrack: 과학탐구보고서</h2>
                         <p class="project-summary">
                             Director: 박주혁.
@@ -416,7 +448,7 @@
                     </div>
                 </article>
 
-                <article class="project-entry archive-entry">
+                <article class="project-entry">
                     <div class="project-meta">
                         <button class="format-tag" type="button" data-filter-tag="Music">Music</button>
                         <p class="meta-label">Role</p>
@@ -430,7 +462,10 @@
                             <a class="meta-link" href="https://www.youtube.com/watch?v=jaflf8Pseo0&list=PLyyTK5ekx9MDRyGONaQ_fGtqttOpBkeuz" target="_blank" rel="noreferrer" aria-label="Open archive video for Live Performance: SPOILER The Spoils">Archive ↗</a>
                         </p>
                     </div>
-                    <div class="project-content">
+                    <div class="project-content project-content--has-figure">
+                        <figure class="project-figure">
+                            <img src="figs/spoiler.png" alt="Live Performance: SPOILER The Spoils">
+                        </figure>
                         <h2>Live Performance: SPOILER 'The Spoils'</h2>
                         <p class="project-summary">
                             Directors: 기성림, 이예본, 김다빈.

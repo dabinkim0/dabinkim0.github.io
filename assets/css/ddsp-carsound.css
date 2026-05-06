@@ -24,6 +24,7 @@ html {
 body {
     margin: 0;
     font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 500;
     background: #fff;
     color: var(--text-color);
     line-height: 1.6;
@@ -34,7 +35,7 @@ body {
 strong,
 b,
 th {
-    font-weight: 400 !important;
+    font-weight: 500 !important;
 }
 
 a {
@@ -250,7 +251,7 @@ h2.section-title {
     background-color: transparent;
     color: var(--secondary-text-color);
     font-size: 1rem;
-    font-weight: 400;
+    font-weight: 500;
 }
 
 .hero-figure {
