@@ -7,7 +7,7 @@
     <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&family=Noto+Serif+KR:wght@400;500&family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/ddsp-carsound.css">
     <link rel="stylesheet" href="../../assets/css/typography.css">
 </head>
@@ -31,11 +31,6 @@
         <section id="overview" class="post-section">
             <h1>DDSP-Based Neural Vehicle Sound Synthesis from Driving Signals</h1>
             <p class="article-authors">Minsuk Choi, Dabin Kim, Daehun Song, Juhan Nam</p>
-            <div class="tags">
-                <span class="tag"># differentiable digital signal processing (ddsp)</span>
-                <span class="tag"># real-time audio synthesis</span>
-                <span class="tag"># controllable generative model</span>
-            </div>
 
             <div class="hero-figure">
                 <img src="figs/fig_framework_overview.png" alt="Framework overview">
@@ -49,19 +44,23 @@
             </div>
 
             <div class="case-overview">
-                <div class="case-card">
-                    <h3>Demo A: F<sub>0</sub> Definition</h3>
-                    <p>This demo compares synthesized vehicle sounds using firing-based and crank-based F<sub>0</sub> definitions. Listen to how the crank-based reference preserves richer harmonic structures and improves overall timbral fidelity.</p>
-                </div>
-                <div class="case-card">
-                    <h3>Demo B: Driving Signal Configuration</h3>
-                    <p>This demo illustrates the impact of varying driving signal inputs, ranging from minimal (RPM-only) to full (RPM, Pedal Position, Gear Level, Speed, Acceleration) configurations. Notice the robustness of encoded conditioning with limited inputs, and the precise transient alignment of direct conditioning with full inputs.</p>
-                </div>
+                <a href="#f0-definition-section" class="case-card-link">
+                    <div class="case-card">
+                        <h3>Demo A: F<sub>0</sub> Definition</h3>
+                        <p>Compares synthesized vehicle sounds using crank-based and firing-based F<sub>0</sub> definitions under direct and encoded conditioning.</p>
+                    </div>
+                </a>
+                <a href="#driving-signal-configuration-section" class="case-card-link">
+                    <div class="case-card">
+                        <h3>Demo B: Driving Signal Configuration</h3>
+                        <p>Compares synthesized vehicle sounds across driving signal configurations: (RPM), (RPM, Gear Level, Pedal Position) and (RPM, Gear Level, Pedal Position, Speed, Acceleration), under direct and encoded conditioning.</p>
+                    </div>
+                </a>
             </div>
         </section>
-        <section id="demo-a" class="post-section">
+        <section id="f0-definition-section" class="post-section">
             <h2 class="section-title centered-title">Demo A: F<sub>0</sub> Definition</h2>
-            <p class="section-intro">This demo compares synthesized vehicle sounds using firing-based and crank-based F<sub>0</sub> definitions. Listen to how the crank-based reference preserves richer harmonic structures and improves overall timbral fidelity.</p>
+            <p class="section-intro">Compares synthesized vehicle sounds using crank-based and firing-based F<sub>0</sub> definitions under direct and encoded conditioning.</p>
             <div class="legend-table-wrap">
                 <table class="legend-table">
                     <thead>
@@ -73,22 +72,22 @@
                     <tbody>
                         <tr>
                             <td>Ground Truth</td>
-                            <td>The original recorded reference clip used for comparison.</td>
+                            <td>The reference audio.</td>
                         </tr>
                         <tr>
-                            <td>Direct<br>Firing-based F<sub>0</sub></td>
+                            <td>Direct<br>Firing-based</td>
                             <td>Synthesized audio using direct conditioning with the firing-based F<sub>0</sub> definition.</td>
                         </tr>
                         <tr>
-                            <td>Direct<br>Crank-based F<sub>0</sub></td>
+                            <td>Direct<br>Crank-based</td>
                             <td>Synthesized audio using direct conditioning with the crank-based F<sub>0</sub> definition.</td>
                         </tr>
                         <tr>
-                            <td>Encoded<br>Firing-based F<sub>0</sub></td>
+                            <td>Encoded<br>Firing-based</td>
                             <td>Synthesized audio using encoded conditioning with the firing-based F<sub>0</sub> definition.</td>
                         </tr>
                         <tr>
-                            <td>Encoded<br>Crank-based F<sub>0</sub></td>
+                            <td>Encoded<br>Crank-based</td>
                             <td>Synthesized audio using encoded conditioning with the crank-based F<sub>0</sub> definition.</td>
                         </tr>
                     </tbody>
@@ -108,7 +107,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_024_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_GroundTruth.png" alt="Spectrogram for F0 Definition sample 024 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_GroundTruth.png" alt="Spectrogram for F0 Definition sample 024 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -118,17 +117,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_024_TestA_02_C1_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_024_TestA_01_C2_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 024 - Direct Firing-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 024 - Direct Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_024_TestA_01_C2_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_024_TestA_02_C1_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 024 - Direct Crank-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 024 - Direct Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -137,17 +136,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_024_TestA_04_C1_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_024_TestA_03_C2_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 024 - Encoded Firing-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 024 - Encoded Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_024_TestA_03_C2_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_024_TestA_04_C1_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 024 - Encoded Crank-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 024 - Encoded Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -167,7 +166,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_031_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_GroundTruth.png" alt="Spectrogram for F0 Definition sample 031 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_GroundTruth.png" alt="Spectrogram for F0 Definition sample 031 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -177,17 +176,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_031_TestA_02_C1_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_031_TestA_01_C2_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 031 - Direct Firing-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 031 - Direct Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_031_TestA_01_C2_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_031_TestA_02_C1_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 031 - Direct Crank-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 031 - Direct Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -196,17 +195,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_031_TestA_04_C1_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_031_TestA_03_C2_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 031 - Encoded Firing-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 031 - Encoded Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_031_TestA_03_C2_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_031_TestA_04_C1_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 031 - Encoded Crank-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 031 - Encoded Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -226,7 +225,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_052_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_GroundTruth.png" alt="Spectrogram for F0 Definition sample 052 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_GroundTruth.png" alt="Spectrogram for F0 Definition sample 052 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -236,17 +235,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_052_TestA_02_C1_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_052_TestA_01_C2_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 052 - Direct Firing-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 052 - Direct Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_052_TestA_01_C2_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_052_TestA_02_C1_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 052 - Direct Crank-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 052 - Direct Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -255,17 +254,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_052_TestA_04_C1_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_052_TestA_03_C2_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 052 - Encoded Firing-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 052 - Encoded Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_052_TestA_03_C2_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_052_TestA_04_C1_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 052 - Encoded Crank-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 052 - Encoded Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -285,7 +284,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_080_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_GroundTruth.png" alt="Spectrogram for F0 Definition sample 080 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_GroundTruth.png" alt="Spectrogram for F0 Definition sample 080 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -295,17 +294,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_080_TestA_02_C1_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_080_TestA_01_C2_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 080 - Direct Firing-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 080 - Direct Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_080_TestA_01_C2_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_080_TestA_02_C1_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 080 - Direct Crank-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 080 - Direct Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -314,17 +313,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_080_TestA_04_C1_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_080_TestA_03_C2_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 080 - Encoded Firing-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 080 - Encoded Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_080_TestA_03_C2_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_080_TestA_04_C1_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 080 - Encoded Crank-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 080 - Encoded Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -344,7 +343,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_095_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_GroundTruth.png" alt="Spectrogram for F0 Definition sample 095 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_GroundTruth.png" alt="Spectrogram for F0 Definition sample 095 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -354,17 +353,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_095_TestA_02_C1_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_095_TestA_01_C2_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 095 - Direct Firing-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 095 - Direct Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_095_TestA_01_C2_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_095_TestA_02_C1_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 095 - Direct Crank-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 095 - Direct Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -373,17 +372,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_095_TestA_04_C1_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_095_TestA_03_C2_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 095 - Encoded Firing-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 095 - Encoded Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_095_TestA_03_C2_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_095_TestA_04_C1_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 095 - Encoded Crank-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 095 - Encoded Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -403,7 +402,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_099_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_GroundTruth.png" alt="Spectrogram for F0 Definition sample 099 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_GroundTruth.png" alt="Spectrogram for F0 Definition sample 099 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -413,17 +412,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_099_TestA_02_C1_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_099_TestA_01_C2_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 099 - Direct Firing-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 099 - Direct Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_099_TestA_01_C2_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_099_TestA_02_C1_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 099 - Direct Crank-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 099 - Direct Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -432,17 +431,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_099_TestA_04_C1_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_099_TestA_03_C2_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 099 - Encoded Firing-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 099 - Encoded Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_099_TestA_03_C2_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_099_TestA_04_C1_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 099 - Encoded Crank-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 099 - Encoded Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -462,7 +461,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_104_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_GroundTruth.png" alt="Spectrogram for F0 Definition sample 104 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_GroundTruth.png" alt="Spectrogram for F0 Definition sample 104 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -472,17 +471,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_104_TestA_02_C1_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_104_TestA_01_C2_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 104 - Direct Firing-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 104 - Direct Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_104_TestA_01_C2_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_104_TestA_02_C1_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 104 - Direct Crank-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 104 - Direct Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -491,17 +490,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_104_TestA_04_C1_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_104_TestA_03_C2_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 104 - Encoded Firing-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 104 - Encoded Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_104_TestA_03_C2_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_104_TestA_04_C1_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 104 - Encoded Crank-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 104 - Encoded Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -521,7 +520,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_112_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_GroundTruth.png" alt="Spectrogram for F0 Definition sample 112 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_GroundTruth.png" alt="Spectrogram for F0 Definition sample 112 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -531,17 +530,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_112_TestA_02_C1_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_112_TestA_01_C2_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 112 - Direct Firing-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 112 - Direct Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_112_TestA_01_C2_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_112_TestA_02_C1_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 112 - Direct Crank-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 112 - Direct Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -550,17 +549,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_112_TestA_04_C1_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_112_TestA_03_C2_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 112 - Encoded Firing-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 112 - Encoded Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_112_TestA_03_C2_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_112_TestA_04_C1_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 112 - Encoded Crank-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 112 - Encoded Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -580,7 +579,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_172_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_GroundTruth.png" alt="Spectrogram for F0 Definition sample 172 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_GroundTruth.png" alt="Spectrogram for F0 Definition sample 172 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -590,17 +589,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_172_TestA_02_C1_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_172_TestA_01_C2_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 172 - Direct Firing-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 172 - Direct Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_172_TestA_01_C2_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_172_TestA_02_C1_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 172 - Direct Crank-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 172 - Direct Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -609,17 +608,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_172_TestA_04_C1_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_172_TestA_03_C2_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 172 - Encoded Firing-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 172 - Encoded Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_172_TestA_03_C2_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_172_TestA_04_C1_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 172 - Encoded Crank-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 172 - Encoded Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -639,7 +638,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_179_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_GroundTruth.png" alt="Spectrogram for F0 Definition sample 179 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_GroundTruth.png" alt="Spectrogram for F0 Definition sample 179 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -649,17 +648,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_179_TestA_02_C1_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_179_TestA_01_C2_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 179 - Direct Firing-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 179 - Direct Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_179_TestA_01_C2_Direct.wav" type="audio/wav">
+                                <source src="audio/2kHz_179_TestA_02_C1_Direct.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestA_01_C2_Direct.png" alt="Spectrogram for F0 Definition sample 179 - Direct Crank-based F0" loading="lazy">
-                            <p class="sample-label">Direct<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestA_02_C1_Direct.png" alt="Spectrogram for F0 Definition sample 179 - Direct Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -668,17 +667,17 @@
                             <div class="sample-method-group-grid cols-2">
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_179_TestA_04_C1_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_179_TestA_03_C2_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 179 - Encoded Firing-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Firing-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 179 - Encoded Firing-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Firing-based</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
-                                <source src="audio/2kHz_179_TestA_03_C2_Encoder.wav" type="audio/wav">
+                                <source src="audio/2kHz_179_TestA_04_C1_Encoder.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestA_03_C2_Encoder.png" alt="Spectrogram for F0 Definition sample 179 - Encoded Crank-based F0" loading="lazy">
-                            <p class="sample-label">Encoded<br>Crank-based F<sub>0</sub></p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestA_04_C1_Encoder.png" alt="Spectrogram for F0 Definition sample 179 - Encoded Crank-based" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>Crank-based</p>
                         </div>
                             </div>
                         </div>
@@ -687,9 +686,9 @@
                 </article>
             </div>
         </section>
-        <section id="demo-b" class="post-section">
+        <section id="driving-signal-configuration-section" class="post-section">
             <h2 class="section-title centered-title">Demo B: Driving Signal Configuration</h2>
-            <p class="section-intro">This demo illustrates the impact of varying driving signal inputs, ranging from minimal (RPM-only) to full (RPM, Pedal Position, Gear Level, Speed, Acceleration) configurations. Notice the robustness of encoded conditioning with limited inputs, and the precise transient alignment of direct conditioning with full inputs.</p>
+            <p class="section-intro">Compares synthesized vehicle sounds across driving signal configurations: (RPM), (RPM, Gear Level, Pedal Position) and (RPM, Gear Level, Pedal Position, Speed, Acceleration), under direct and encoded conditioning.</p>
             <div class="legend-table-wrap">
                 <table class="legend-table">
                     <thead>
@@ -701,31 +700,31 @@
                     <tbody>
                         <tr>
                             <td>Ground Truth</td>
-                            <td>The original recorded reference clip used for comparison.</td>
+                            <td>The reference audio.</td>
                         </tr>
                         <tr>
-                            <td>Direct<br>RPM</td>
-                            <td>Synthesized audio using direct conditioning with RPM-only.</td>
+                            <td>Direct<br>(RPM)</td>
+                            <td>Synthesized audio using direct conditioning with (RPM).</td>
                         </tr>
                         <tr>
-                            <td>Direct<br>RPM + 2 Signals</td>
-                            <td>Synthesized audio using direct conditioning with (RPM, Pedal Position, Gear Level).</td>
+                            <td>Direct<br>(RPM, Gear Level, Pedal Position)</td>
+                            <td>Synthesized audio using direct conditioning with (RPM, Gear Level, Pedal Position).</td>
                         </tr>
                         <tr>
-                            <td>Direct<br>RPM + 4 Signals</td>
-                            <td>Synthesized audio using direct conditioning with (RPM, Pedal Position, Gear Level, Speed, Acceleration).</td>
+                            <td>Direct<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</td>
+                            <td>Synthesized audio using direct conditioning with (RPM, Gear Level, Pedal Position, Speed, Acceleration).</td>
                         </tr>
                         <tr>
-                            <td>Encoded<br>RPM</td>
-                            <td>Synthesized audio using encoded conditioning with RPM-only.</td>
+                            <td>Encoded<br>(RPM)</td>
+                            <td>Synthesized audio using encoded conditioning with (RPM).</td>
                         </tr>
                         <tr>
-                            <td>Encoded<br>RPM + 2 Signals</td>
-                            <td>Synthesized audio using encoded conditioning with (RPM, Pedal Position, Gear Level).</td>
+                            <td>Encoded<br>(RPM, Gear Level, Pedal Position)</td>
+                            <td>Synthesized audio using encoded conditioning with (RPM, Gear Level, Pedal Position).</td>
                         </tr>
                         <tr>
-                            <td>Encoded<br>RPM + 4 Signals</td>
-                            <td>Synthesized audio using encoded conditioning with (RPM, Pedal Position, Gear Level, Speed, Acceleration).</td>
+                            <td>Encoded<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</td>
+                            <td>Synthesized audio using encoded conditioning with (RPM, Gear Level, Pedal Position, Speed, Acceleration).</td>
                         </tr>
                     </tbody>
                 </table>
@@ -744,7 +743,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_024_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 024 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 024 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -756,22 +755,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_024_TestB_01_C1_Direct_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 024 - Direct RPM" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 024 - Direct (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_024_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 024 - Direct RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 024 - Direct (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_024_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 024 - Direct RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 024 - Direct (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
@@ -782,22 +781,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_024_TestB_02_C1_Encoder_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 024 - Encoded RPM" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 024 - Encoded (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_024_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 024 - Encoded RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 024 - Encoded (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_024_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 024 - Encoded RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_024_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 024 - Encoded (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
@@ -817,7 +816,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_031_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 031 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 031 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -829,22 +828,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_031_TestB_01_C1_Direct_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 031 - Direct RPM" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 031 - Direct (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_031_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 031 - Direct RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 031 - Direct (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_031_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 031 - Direct RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 031 - Direct (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
@@ -855,22 +854,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_031_TestB_02_C1_Encoder_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 031 - Encoded RPM" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 031 - Encoded (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_031_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 031 - Encoded RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 031 - Encoded (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_031_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 031 - Encoded RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_031_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 031 - Encoded (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
@@ -890,7 +889,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_052_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 052 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 052 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -902,22 +901,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_052_TestB_01_C1_Direct_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 052 - Direct RPM" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 052 - Direct (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_052_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 052 - Direct RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 052 - Direct (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_052_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 052 - Direct RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 052 - Direct (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
@@ -928,22 +927,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_052_TestB_02_C1_Encoder_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 052 - Encoded RPM" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 052 - Encoded (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_052_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 052 - Encoded RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 052 - Encoded (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_052_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 052 - Encoded RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_052_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 052 - Encoded (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
@@ -963,7 +962,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_080_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 080 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 080 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -975,22 +974,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_080_TestB_01_C1_Direct_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 080 - Direct RPM" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 080 - Direct (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_080_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 080 - Direct RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 080 - Direct (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_080_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 080 - Direct RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 080 - Direct (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
@@ -1001,22 +1000,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_080_TestB_02_C1_Encoder_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 080 - Encoded RPM" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 080 - Encoded (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_080_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 080 - Encoded RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 080 - Encoded (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_080_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 080 - Encoded RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_080_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 080 - Encoded (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
@@ -1036,7 +1035,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_095_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 095 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 095 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -1048,22 +1047,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_095_TestB_01_C1_Direct_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 095 - Direct RPM" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 095 - Direct (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_095_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 095 - Direct RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 095 - Direct (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_095_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 095 - Direct RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 095 - Direct (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
@@ -1074,22 +1073,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_095_TestB_02_C1_Encoder_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 095 - Encoded RPM" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 095 - Encoded (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_095_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 095 - Encoded RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 095 - Encoded (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_095_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 095 - Encoded RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_095_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 095 - Encoded (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
@@ -1109,7 +1108,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_099_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 099 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 099 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -1121,22 +1120,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_099_TestB_01_C1_Direct_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 099 - Direct RPM" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 099 - Direct (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_099_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 099 - Direct RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 099 - Direct (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_099_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 099 - Direct RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 099 - Direct (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
@@ -1147,22 +1146,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_099_TestB_02_C1_Encoder_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 099 - Encoded RPM" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 099 - Encoded (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_099_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 099 - Encoded RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 099 - Encoded (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_099_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 099 - Encoded RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_099_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 099 - Encoded (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
@@ -1182,7 +1181,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_104_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 104 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 104 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -1194,22 +1193,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_104_TestB_01_C1_Direct_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 104 - Direct RPM" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 104 - Direct (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_104_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 104 - Direct RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 104 - Direct (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_104_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 104 - Direct RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 104 - Direct (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
@@ -1220,22 +1219,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_104_TestB_02_C1_Encoder_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 104 - Encoded RPM" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 104 - Encoded (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_104_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 104 - Encoded RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 104 - Encoded (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_104_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 104 - Encoded RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_104_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 104 - Encoded (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
@@ -1255,7 +1254,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_112_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 112 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 112 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -1267,22 +1266,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_112_TestB_01_C1_Direct_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 112 - Direct RPM" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 112 - Direct (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_112_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 112 - Direct RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 112 - Direct (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_112_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 112 - Direct RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 112 - Direct (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
@@ -1293,22 +1292,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_112_TestB_02_C1_Encoder_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 112 - Encoded RPM" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 112 - Encoded (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_112_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 112 - Encoded RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 112 - Encoded (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_112_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 112 - Encoded RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_112_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 112 - Encoded (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
@@ -1328,7 +1327,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_172_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 172 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 172 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -1340,22 +1339,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_172_TestB_01_C1_Direct_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 172 - Direct RPM" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 172 - Direct (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_172_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 172 - Direct RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 172 - Direct (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_172_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 172 - Direct RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 172 - Direct (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
@@ -1366,22 +1365,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_172_TestB_02_C1_Encoder_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 172 - Encoded RPM" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 172 - Encoded (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_172_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 172 - Encoded RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 172 - Encoded (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_172_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 172 - Encoded RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_172_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 172 - Encoded (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
@@ -1401,7 +1400,7 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_179_GroundTruth.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 179 - Ground Truth" loading="lazy">
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_GroundTruth.png" alt="Spectrogram for Driving Signal Configuration sample 179 - Ground Truth" loading="lazy" width="243" height="129">
                             <p class="sample-label"><strong>Ground Truth<br></strong></p>
                         </div>
                             </div>
@@ -1413,22 +1412,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_179_TestB_01_C1_Direct_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 179 - Direct RPM" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestB_01_C1_Direct_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 179 - Direct (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_179_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 179 - Direct RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestB_03_C1_Direct_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 179 - Direct (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_179_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 179 - Direct RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Direct<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 179 - Direct (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Direct<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
@@ -1439,22 +1438,22 @@
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_179_TestB_02_C1_Encoder_RPM.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 179 - Encoded RPM" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestB_02_C1_Encoder_RPM.png" alt="Spectrogram for Driving Signal Configuration sample 179 - Encoded (RPM)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_179_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 179 - Encoded RPM + 2 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 2 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel.png" alt="Spectrogram for Driving Signal Configuration sample 179 - Encoded (RPM, Gear Level, Pedal Position)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position)</p>
                         </div>
                         <div class="sample-item">
                             <audio controls preload="none" class="audio-player">
                                 <source src="audio/2kHz_179_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.wav" type="audio/wav">
                             </audio>
-                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 179 - Encoded RPM + 4 Signals" loading="lazy">
-                            <p class="sample-label">Encoded<br>RPM + 4 Signals</p>
+                            <img class="spectrogram-preview" src="spectrograms/2kHz_179_TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration.png" alt="Spectrogram for Driving Signal Configuration sample 179 - Encoded (RPM, Gear Level, Pedal Position, Speed, Acceleration)" loading="lazy" width="243" height="129">
+                            <p class="sample-label">Encoded<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)</p>
                         </div>
                             </div>
                         </div>
