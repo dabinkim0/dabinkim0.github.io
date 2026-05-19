@@ -1,0 +1,138 @@
+:root {
+    --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+    --font-sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-brand: "Chakra Petch", var(--font-sans);
+    --font-mono: "Latin Modern Mono", "SFMono-Regular", SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+}
+
+body {
+    font-family: var(--font-serif);
+    font-weight: 400;
+}
+
+h1,
+.identity-rail h1,
+.page-intro h1 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+}
+
+h2,
+h2.section-title,
+.tinker-like-heading {
+    font-family: var(--font-serif);
+    font-weight: 500;
+}
+
+h3,
+button,
+input,
+label,
+textarea,
+select,
+.article-authors,
+.case-card h3,
+.entry-title,
+.format-tag,
+.identity-kicker,
+.identity-meta,
+.identity-links,
+.item-list,
+.legend-table,
+.main-nav a,
+.meta-label,
+.meta-value,
+.methodology h3,
+.page-kicker,
+.project-filter-chip,
+.project-filter-status,
+.project-meta,
+.project-summary,
+.project-description,
+.publication-filter-chip,
+.publication-filter-status,
+.sample-card-header h3,
+.sample-label,
+.sample-method-group-title,
+.section-intro,
+.section-label,
+.news-toggle,
+.tag,
+.toc-item a,
+.view-toggle-button {
+    font-family: var(--font-sans);
+}
+
+.news-toggle {
+    line-height: 1.6;
+}
+
+h3,
+.case-card h3,
+.entry-title,
+.methodology h3,
+.project-title,
+.sample-card-header h3,
+.sample-method-group-title {
+    font-family: var(--font-sans);
+    font-weight: 400;
+}
+
+.item-list h3,
+.project-content h2 {
+    font-family: var(--font-serif);
+    font-weight: 500;
+}
+
+h4,
+.poster-title {
+    font-family: var(--font-serif);
+    font-weight: 500;
+}
+
+p,
+li,
+dt,
+dd,
+table,
+figcaption,
+.copyright,
+.contact-item,
+.contact-links a,
+.entry-detail,
+.entry-meta,
+.item-list .authors,
+.item-list .venue,
+.links a,
+.poster-kicker,
+.poster-subtitle {
+    font-family: var(--font-sans);
+    font-weight: 400;
+}
+
+.logo {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+}
+
+.page-summary {
+    font-family: var(--font-serif);
+    font-weight: 400;
+}
+
+strong,
+b,
+th,
+.author-self,
+.item-list .authors .author-self,
+.sample-label strong {
+    font-weight: 500 !important;
+}
+
+code,
+pre,
+kbd,
+samp {
+    font-family: var(--font-mono);
+}
