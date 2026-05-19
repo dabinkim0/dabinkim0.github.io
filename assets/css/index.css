@@ -315,6 +315,8 @@ a {
 }
 
 .news-panel-grid {
+    --news-scroll-height: 22rem;
+
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 18px;
@@ -383,12 +385,14 @@ a {
 }
 
 .news-scroll-area {
-    max-height: 22rem;
+    height: var(--news-scroll-height);
+    max-height: var(--news-scroll-height);
     opacity: 1;
     margin-top: 0;
     overflow-y: auto;
     overscroll-behavior: contain;
     padding-right: 10px;
+    scrollbar-gutter: stable;
     touch-action: pan-y;
     scrollbar-width: thin;
     scrollbar-color: var(--rule) transparent;
@@ -814,6 +818,8 @@ a {
 
 @media (max-width: 720px) {
     .news-panel-grid {
+        --news-scroll-height: 18rem;
+
         grid-template-columns: 1fr;
     }
 
