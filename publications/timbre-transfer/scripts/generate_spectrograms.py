@@ -2,13 +2,16 @@ from pathlib import Path
 import numpy as np
 from scipy.io import wavfile
 from scipy import signal
-from matplotlib import cm
-from matplotlib import image as mpimg
+from matplotlib.figure import Figure
 
 ROOT = Path(__file__).resolve().parents[1]
 AUDIO_DIR = ROOT / "audio"
 OUT_DIR = ROOT / "spectrograms"
 OUT_DIR.mkdir(parents=True, exist_ok=True)
+
+EXPORT_WIDTH = 960
+EXPORT_HEIGHT = 360
+EXPORT_DPI = 160
 
 
 def to_mono(data: np.ndarray) -> np.ndarray:
@@ -46,11 +49,16 @@ def generate_one(wav_path: Path) -> Path:
         hi = lo + 1.0
     norm = np.clip((mag_db - lo) / (hi - lo), 0.0, 1.0)
 
-    rgba = cm.magma(norm)
-    rgb = (rgba[..., :3] * 255).astype(np.uint8)
-
     out_path = OUT_DIR / f"{wav_path.stem}.png"
-    mpimg.imsave(out_path, rgb, origin="lower")
+    fig = Figure(
+        figsize=(EXPORT_WIDTH / EXPORT_DPI, EXPORT_HEIGHT / EXPORT_DPI),
+        dpi=EXPORT_DPI,
+        frameon=False,
+    )
+    ax = fig.add_axes([0, 0, 1, 1])
+    ax.imshow(norm, origin="lower", aspect="auto", cmap="magma", interpolation="bilinear")
+    ax.set_axis_off()
+    fig.savefig(out_path, dpi=EXPORT_DPI, bbox_inches=None, pad_inches=0)
     return out_path
 
 

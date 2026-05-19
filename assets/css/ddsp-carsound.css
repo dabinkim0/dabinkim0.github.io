@@ -302,6 +302,7 @@ h2.section-title {
 }
 
 .abstract-card p {
+    font-family: var(--font-serif);
     text-align: justify;
     text-align-last: left;
 }
