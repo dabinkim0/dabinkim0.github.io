@@ -1,5 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
     const collapsibleSections = document.querySelectorAll("[data-collapsible]");
+    const getClosestElement = (target, selector) => {
+        const element = target instanceof Element ? target : target?.parentElement;
+        return element?.closest(selector) || null;
+    };
 
     collapsibleSections.forEach((section) => {
         const toggleButton = section.querySelector(".news-toggle");
@@ -25,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         section.addEventListener("click", (event) => {
-            const interactiveTarget = event.target.closest("a, button, audio, input, select, textarea, [data-draggable-scroll]");
+            const interactiveTarget = getClosestElement(event.target, "a, button, audio, input, select, textarea, [data-draggable-scroll]");
             if (interactiveTarget) {
                 return;
             }
@@ -48,6 +52,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         area.addEventListener("pointerdown", (event) => {
             if (event.pointerType !== "mouse" || event.button !== 0) {
+                return;
+            }
+
+            const interactiveTarget = getClosestElement(event.target, "a, button, audio, input, select, textarea");
+            if (interactiveTarget) {
                 return;
             }
 
