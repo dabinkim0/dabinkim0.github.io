@@ -281,19 +281,50 @@ a {
     gap: 16px;
 }
 
+.statement-block .section-body {
+    min-width: 0;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0%, #000 10%, #000 90%, transparent 100%);
+}
+
 .statement-text {
+    display: inline-block;
     margin: 0;
     max-width: none;
+    padding-left: 100%;
+    width: max-content;
     font-size: 1.14rem;
     font-weight: 500;
+    font-family: var(--font-serif);
     color: var(--text);
     line-height: 1.7;
     letter-spacing: -0.02em;
+    white-space: nowrap;
+    animation: statement-marquee 34s linear infinite;
+}
+
+@keyframes statement-marquee {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
+}
+
+.news-panel-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
 }
 
 .education-list {
     display: grid;
+    align-content: start;
     gap: 18px;
+    min-width: 0;
     padding: 18px;
     border: 1px solid var(--rule-soft);
     border-radius: 10px;
@@ -379,9 +410,22 @@ a {
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .statement-text,
     .news-toggle-icon,
     .news-scroll-area {
         transition: none;
+    }
+
+    .statement-block .section-body {
+        -webkit-mask-image: none;
+        mask-image: none;
+    }
+
+    .statement-text {
+        width: auto;
+        padding-left: 0;
+        white-space: normal;
+        animation: none;
     }
 }
 
@@ -731,6 +775,29 @@ a {
         white-space: normal;
     }
 
+    .entry-item--news-event {
+        display: grid;
+        gap: 2px;
+    }
+
+    .entry-item--news-event .entry-head {
+        display: contents;
+    }
+
+    .entry-item--news-event .entry-title {
+        order: 1;
+    }
+
+    .entry-item--news-event .entry-detail {
+        order: 2;
+        margin-top: 0;
+    }
+
+    .entry-item--news-event .entry-meta {
+        order: 3;
+        margin-top: 0;
+    }
+
     .contact-grid {
         grid-template-columns: 1fr;
     }
@@ -746,6 +813,10 @@ a {
 }
 
 @media (max-width: 720px) {
+    .news-panel-grid {
+        grid-template-columns: 1fr;
+    }
+
     .contact-links {
         justify-content: center;
     }
