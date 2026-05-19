@@ -22,7 +22,7 @@ from matplotlib import pyplot as plt
 PAGE_DIR = ROOT / "publications" / "ddsp-carsound"
 AUDIO_DIR = PAGE_DIR / "audio"
 SPEC_DIR = PAGE_DIR / "spectrograms"
-SOURCE_BASE = Path("/Users/dabinkim/Desktop/anonymous_ddsp_carsound_demo/data/AES_ListeningTestset_v2")
+SOURCE_BASE = Path("/Users/dabinkim/Desktop/30_research/2026_ddsp_carsound/AES_ListeningTestset_v2")
 
 N_FFT = 256
 HOP_LENGTH = 32
@@ -30,14 +30,12 @@ SEC_START = 0.0
 SEC_END = 4.0
 SOURCE_SAMPLE_RATE = 2000
 PLAYBACK_SAMPLE_RATE = 16000
+SPEC_IMAGE_WIDTH = int((int(round((SEC_END - SEC_START) * SOURCE_SAMPLE_RATE)) - N_FFT) / HOP_LENGTH + 1)
+SPEC_IMAGE_HEIGHT = N_FFT // 2 + 1
 DISPLAY_SAMPLE_IDS = ["024", "031", "052", "080", "095", "099", "104", "112", "172", "179"]
 DISPLAY_SAMPLE_LABELS = {sample_id: f"{index:02d}" for index, sample_id in enumerate(DISPLAY_SAMPLE_IDS, start=1)}
 PROJECT_TITLE = "DDSP-Based Neural Vehicle Sound Synthesis from Driving Signals"
-PROJECT_TAGS = [
-    "# differentiable digital signal processing (ddsp)",
-    "# real-time audio synthesis",
-    "# controllable generative model",
-]
+PROJECT_AUTHORS = "Minsuk Choi, Dabin Kim, Daehun Song, Juhan Nam"
 MAIN_FIGURE_SRC = "figs/fig_framework_overview.png"
 MAIN_FIGURE_ALT = "Framework overview"
 ABSTRACT = (
@@ -66,7 +64,7 @@ ABSTRACT = (
 )
 REFERENCE_TEXT = (
     "<em>DDSP-Based Neural Vehicle Sound Synthesis from Driving Signals</em>.<br>"
-    "Anonymous submission. Full bibliographic details will be updated after review."
+    "Proceedings of the 6th AES International Conference on Automotive Audio, 2026."
 )
 
 CASES = [
@@ -77,15 +75,12 @@ CASES = [
         "card_title_html": "Demo A: F<sub>0</sub> Definition",
         "heading_html": "Demo A: F<sub>0</sub> Definition",
         "description": (
-            "This demo compares synthesized vehicle sounds using firing-based and "
-            "crank-based F0 definitions. Listen to how the crank-based reference "
-            "preserves richer harmonic structures and improves overall timbral fidelity."
+            "Compares synthesized vehicle sounds using crank-based and firing-based "
+            "F0 definitions under direct and encoded conditioning."
         ),
         "description_html": (
-            "This demo compares synthesized vehicle sounds using firing-based and "
-            "crank-based F<sub>0</sub> definitions. Listen to how the crank-based "
-            "reference preserves richer harmonic structures and improves overall "
-            "timbral fidelity."
+            "Compares synthesized vehicle sounds using crank-based and firing-based "
+            "F<sub>0</sub> definitions under direct and encoded conditioning."
         ),
         "source_dir": SOURCE_BASE / "TestA_F0" / "mainset" / "processed" / "selected" / "2kHz",
         "methods": [
@@ -93,14 +88,14 @@ CASES = [
                 "label": "Ground Truth",
                 "display_html": "Ground Truth<br>",
                 "pattern": "GroundTruth",
-                "description": "The original recorded reference clip used for comparison.",
+                "description": "The reference audio.",
                 "emphasize": True,
             },
             {
                 "label": "Direct Firing-based",
                 "legend_html": "Direct<br>Firing-based",
                 "display_html": "Direct<br>Firing-based",
-                "pattern": "TestA_02_C1_Direct",
+                "pattern": "TestA_01_C2_Direct",
                 "description": "Synthesized audio using direct conditioning with the firing-based F0 definition.",
                 "description_html": "Synthesized audio using direct conditioning with the firing-based F<sub>0</sub> definition.",
             },
@@ -108,7 +103,7 @@ CASES = [
                 "label": "Direct Crank-based",
                 "legend_html": "Direct<br>Crank-based",
                 "display_html": "Direct<br>Crank-based",
-                "pattern": "TestA_01_C2_Direct",
+                "pattern": "TestA_02_C1_Direct",
                 "description": "Synthesized audio using direct conditioning with the crank-based F0 definition.",
                 "description_html": "Synthesized audio using direct conditioning with the crank-based F<sub>0</sub> definition.",
             },
@@ -116,7 +111,7 @@ CASES = [
                 "label": "Encoded Firing-based",
                 "legend_html": "Encoded<br>Firing-based",
                 "display_html": "Encoded<br>Firing-based",
-                "pattern": "TestA_04_C1_Encoder",
+                "pattern": "TestA_03_C2_Encoder",
                 "description": "Synthesized audio using encoded conditioning with the firing-based F0 definition.",
                 "description_html": "Synthesized audio using encoded conditioning with the firing-based F<sub>0</sub> definition.",
             },
@@ -124,7 +119,7 @@ CASES = [
                 "label": "Encoded Crank-based",
                 "legend_html": "Encoded<br>Crank-based",
                 "display_html": "Encoded<br>Crank-based",
-                "pattern": "TestA_03_C2_Encoder",
+                "pattern": "TestA_04_C1_Encoder",
                 "description": "Synthesized audio using encoded conditioning with the crank-based F0 definition.",
                 "description_html": "Synthesized audio using encoded conditioning with the crank-based F<sub>0</sub> definition.",
             },
@@ -136,16 +131,14 @@ CASES = [
         "card_title": "Demo B: Driving Signal Configuration",
         "heading_html": "Demo B: Driving Signal Configuration",
         "description": (
-            "This demo illustrates the impact of varying driving signal inputs, ranging "
-            "from minimal (RPM-only) to full configurations. Notice the robustness of "
-            "encoded conditioning with limited inputs, and the precise transient "
-            "alignment of direct conditioning with full inputs."
+            "Compares synthesized vehicle sounds across driving signal configurations: "
+            "(RPM), (RPM, Gear Level, Pedal Position) and (RPM, Gear Level, Pedal "
+            "Position, Speed, Acceleration), under direct and encoded conditioning."
         ),
         "description_html": (
-            "This demo illustrates the impact of varying driving signal inputs, ranging "
-            "from minimal (RPM-only) to full configurations. Notice the robustness of "
-            "encoded conditioning with limited inputs, and the precise transient "
-            "alignment of direct conditioning with full inputs."
+            "Compares synthesized vehicle sounds across driving signal configurations: "
+            "(RPM), (RPM, Gear Level, Pedal Position) and (RPM, Gear Level, Pedal "
+            "Position, Speed, Acceleration), under direct and encoded conditioning."
         ),
         "source_dir": SOURCE_BASE / "TestB_CAN" / "mainset" / "processed" / "selected" / "2kHz",
         "methods": [
@@ -153,50 +146,50 @@ CASES = [
                 "label": "Ground Truth",
                 "display_html": "Ground Truth<br>",
                 "pattern": "GroundTruth",
-                "description": "The original recorded reference clip used for comparison.",
+                "description": "The reference audio.",
                 "emphasize": True,
             },
             {
                 "label": "Direct RPM",
-                "legend_html": "Direct<br>RPM",
-                "display_html": "Direct<br>RPM",
+                "legend_html": "Direct<br>(RPM)",
+                "display_html": "Direct<br>(RPM)",
                 "pattern": "TestB_01_C1_Direct_RPM",
-                "description": "Synthesized audio using direct conditioning with RPM-only.",
+                "description": "Synthesized audio using direct conditioning with (RPM).",
             },
             {
                 "label": "Direct RPM + 2 Signals",
-                "legend_html": "Direct<br>RPM + 2 Signals",
-                "display_html": "Direct<br>RPM + 2 Signals",
+                "legend_html": "Direct<br>(RPM, Gear Level, Pedal Position)",
+                "display_html": "Direct<br>(RPM, Gear Level, Pedal Position)",
                 "pattern": "TestB_03_C1_Direct_RPM,PedalPosition,GearLevel",
-                "description": "Synthesized audio using direct conditioning with (RPM, Pedal Position, Gear Level).",
+                "description": "Synthesized audio using direct conditioning with (RPM, Gear Level, Pedal Position).",
             },
             {
                 "label": "Direct RPM + 4 Signals",
-                "legend_html": "Direct<br>RPM + 4 Signals",
-                "display_html": "Direct<br>RPM + 4 Signals",
+                "legend_html": "Direct<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)",
+                "display_html": "Direct<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)",
                 "pattern": "TestB_05_C1_Direct_RPM,PedalPosition,GearLevel,Velocity,Acceleration",
-                "description": "Synthesized audio using direct conditioning with (RPM, Pedal Position, Gear Level, Speed, Acceleration).",
+                "description": "Synthesized audio using direct conditioning with (RPM, Gear Level, Pedal Position, Speed, Acceleration).",
             },
             {
                 "label": "Encoded RPM",
-                "legend_html": "Encoded<br>RPM",
-                "display_html": "Encoded<br>RPM",
+                "legend_html": "Encoded<br>(RPM)",
+                "display_html": "Encoded<br>(RPM)",
                 "pattern": "TestB_02_C1_Encoder_RPM",
-                "description": "Synthesized audio using encoded conditioning with RPM-only.",
+                "description": "Synthesized audio using encoded conditioning with (RPM).",
             },
             {
                 "label": "Encoded RPM + 2 Signals",
-                "legend_html": "Encoded<br>RPM + 2 Signals",
-                "display_html": "Encoded<br>RPM + 2 Signals",
+                "legend_html": "Encoded<br>(RPM, Gear Level, Pedal Position)",
+                "display_html": "Encoded<br>(RPM, Gear Level, Pedal Position)",
                 "pattern": "TestB_04_C1_Encoder_RPM,PedalPosition,GearLevel",
-                "description": "Synthesized audio using encoded conditioning with (RPM, Pedal Position, Gear Level).",
+                "description": "Synthesized audio using encoded conditioning with (RPM, Gear Level, Pedal Position).",
             },
             {
                 "label": "Encoded RPM + 4 Signals",
-                "legend_html": "Encoded<br>RPM + 4 Signals",
-                "display_html": "Encoded<br>RPM + 4 Signals",
+                "legend_html": "Encoded<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)",
+                "display_html": "Encoded<br>(RPM, Gear Level, Pedal Position, Speed, Acceleration)",
                 "pattern": "TestB_06_C1_Encoder_RPM,PedalPosition,GearLevel,Velocity,Acceleration",
-                "description": "Synthesized audio using encoded conditioning with (RPM, Pedal Position, Gear Level, Speed, Acceleration).",
+                "description": "Synthesized audio using encoded conditioning with (RPM, Gear Level, Pedal Position, Speed, Acceleration).",
             },
         ],
     },
@@ -352,7 +345,7 @@ def render_sample_item(case: dict[str, object], sample_id: str, method: dict[str
         "                            <audio controls preload=\"none\" class=\"audio-player\">\n"
         f"                                <source src=\"audio/{html.escape(audio_file.name)}\" type=\"audio/wav\">\n"
         "                            </audio>\n"
-        f"                            <img class=\"spectrogram-preview\" src=\"spectrograms/{html.escape(audio_file.stem)}.png\" alt=\"{alt_text}\" loading=\"lazy\">\n"
+        f"                            <img class=\"spectrogram-preview\" src=\"spectrograms/{html.escape(audio_file.stem)}.png\" alt=\"{alt_text}\" loading=\"lazy\" width=\"{SPEC_IMAGE_WIDTH}\" height=\"{SPEC_IMAGE_HEIGHT}\">\n"
         f"                            <p class=\"sample-label\">{label_html}</p>\n"
         "                        </div>"
     )
@@ -401,9 +394,10 @@ def build_sample_card(case: dict[str, object], sample_id: str) -> str:
 def build_case_section(case: dict[str, object]) -> str:
     sample_ids = list_sample_ids(case["source_dir"])
     sample_cards = "\n".join(build_sample_card(case, sample_id) for sample_id in sample_ids)
+    slug = case["slug"]
     return (
-        "        <section>\n"
-        f"            <h2 class=\"section-title\">{case.get('heading_html', html.escape(case['title']))}</h2>\n"
+        f"        <section id=\"{slug}-section\" class=\"post-section\">\n"
+        f"            <h2 class=\"section-title centered-title\">{case.get('heading_html', html.escape(case['title']))}</h2>\n"
         f"            <p class=\"section-intro\">{case.get('description_html', html.escape(case['description']))}</p>\n"
         "            <div class=\"legend-table-wrap\">\n"
         "                <table class=\"legend-table\">\n"
@@ -427,14 +421,15 @@ def build_case_section(case: dict[str, object]) -> str:
 
 def build_html() -> str:
     overview_cards = "\n".join(
-        "                <div class=\"case-card\">\n"
-        f"                    <h3>{case.get('card_title_html', html.escape(case.get('card_title', case['title'])))}</h3>\n"
-        f"                    <p>{case.get('description_html', html.escape(case['description']))}</p>\n"
-        "                </div>"
+        f"                <a href=\"#{case['slug']}-section\" class=\"case-card-link\">\n"
+        "                    <div class=\"case-card\">\n"
+        f"                        <h3>{case.get('card_title_html', html.escape(case.get('card_title', case['title'])))}</h3>\n"
+        f"                        <p>{case.get('description_html', html.escape(case['description']))}</p>\n"
+        "                    </div>\n"
+        "                </a>"
         for case in CASES
     )
     case_sections = "\n".join(build_case_section(case) for case in CASES)
-    tags_html = "\n".join(f"                <span class=\"tag\">{html.escape(tag)}</span>" for tag in PROJECT_TAGS)
 
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -445,30 +440,36 @@ def build_html() -> str:
     <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&family=Noto+Serif+KR:wght@400;500&family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../assets/css/ddsp-carsound.css">
     <link rel="stylesheet" href="../../assets/css/typography.css">
 </head>
 <body>
     <header class="main-header">
-        <div class="container">
-            <span class="logo">Anonymous Submission</span>
+        <div class="shell header-shell">
+            <a href="../../index.html" class="logo">Dabin Kim</a>
+            <nav class="main-nav" aria-label="Primary">
+                <ul>
+                    <li><a href="../index.html" class="is-active nav-current">Publications</a></li>
+                    <li><a href="../../projects/index.html">Projects</a></li>
+                    <li><a href="#" class="nav-disabled" aria-disabled="true" tabindex="-1">Blog</a></li>
+                    <li><a href="../../index.html">About</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
-    <main class="container">
-        <section>
+    <div class="shell post-layout">
+        <main class="post-page">
+        <section id="overview" class="post-section">
             <h1>{html.escape(PROJECT_TITLE)}</h1>
-            <div class="tags">
-{tags_html}
-            </div>
+            <p class="article-authors">{html.escape(PROJECT_AUTHORS)}</p>
 
             <div class="hero-figure">
                 <img src="{html.escape(MAIN_FIGURE_SRC)}" alt="{html.escape(MAIN_FIGURE_ALT)}">
-                <p class="figure-caption">Framework overview</p>
             </div>
 
-            <div class="methodology abstract-card">
+            <div id="abstract" class="methodology abstract-card">
                 <h3>Abstract</h3>
                 <p>
                     {html.escape(ABSTRACT)}
@@ -480,12 +481,14 @@ def build_html() -> str:
             </div>
         </section>
 {case_sections}
-        <section>
-            <div class="reference-card">
-                <p>{REFERENCE_TEXT}</p>
-            </div>
-        </section>
-    </main>
+        </main>
+    </div>
+
+    <footer class="main-footer">
+        <div class="shell footer-shell">
+            <p class="copyright">&copy; 2026 Dabin Kim. {html.escape(PROJECT_TITLE)}.</p>
+        </div>
+    </footer>
 </body>
 </html>
 """
