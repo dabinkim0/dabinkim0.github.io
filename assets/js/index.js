@@ -12,12 +12,25 @@ document.addEventListener("DOMContentLoaded", () => {
             scrollArea.setAttribute("aria-hidden", String(section.classList.contains("is-collapsed")));
         }
 
-        toggleButton.addEventListener("click", () => {
+        const toggleSection = () => {
             const isCollapsed = section.classList.toggle("is-collapsed");
             toggleButton.setAttribute("aria-expanded", String(!isCollapsed));
             if (scrollArea) {
                 scrollArea.setAttribute("aria-hidden", String(isCollapsed));
             }
+        };
+
+        toggleButton.addEventListener("click", () => {
+            toggleSection();
+        });
+
+        section.addEventListener("click", (event) => {
+            const interactiveTarget = event.target.closest("a, button, audio, input, select, textarea, [data-draggable-scroll]");
+            if (interactiveTarget) {
+                return;
+            }
+
+            toggleSection();
         });
     });
 

@@ -333,6 +333,7 @@ a {
     border: 1px solid var(--rule-soft);
     border-radius: 10px;
     background-color: var(--news-panel-bg);
+    cursor: pointer;
     transition:
         gap 0.28s ease,
         background-color 0.28s ease;
@@ -394,6 +395,7 @@ a {
     max-height: var(--news-scroll-height);
     opacity: 1;
     margin-top: 0;
+    cursor: auto;
     overflow-y: auto;
     overscroll-behavior: contain;
     padding-right: 10px;
