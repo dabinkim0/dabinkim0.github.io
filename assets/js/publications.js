@@ -51,11 +51,32 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
     }
 
-    const filterTags = ["Generative Models", "Representation Learning"];
+    const configuredFilterTags = ["Generative Models", "Representation Learning"];
     const itemData = publicationItems.map((item) => ({
         item,
         category: item.dataset.publicationCategory?.trim() || ""
     }));
+    const categoryCounts = new Map();
+
+    itemData.forEach(({ category }) => {
+        if (!category) {
+            return;
+        }
+
+        categoryCounts.set(category, (categoryCounts.get(category) || 0) + 1);
+    });
+
+    const candidateFilterTags = [
+        ...new Set([
+            ...configuredFilterTags,
+            ...itemData.map(({ category }) => category).filter(Boolean)
+        ])
+    ];
+    const filterTagOrder = new Map(candidateFilterTags.map((tag, index) => [tag, index]));
+    const filterTags = candidateFilterTags.sort((tagA, tagB) => {
+        const countDiff = (categoryCounts.get(tagB) || 0) - (categoryCounts.get(tagA) || 0);
+        return countDiff || filterTagOrder.get(tagA) - filterTagOrder.get(tagB);
+    });
     const filterButtons = new Map();
     let activeFilter = null;
 

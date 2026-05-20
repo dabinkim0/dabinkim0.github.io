@@ -128,7 +128,23 @@ document.addEventListener("DOMContentLoaded", () => {
         return { entry, tags };
     });
 
-    const tags = [...new Set(entryData.flatMap(({ tags: entryTags }) => entryTags))];
+    const tagCounts = new Map();
+    const tagOrder = new Map();
+
+    entryData.forEach(({ tags: entryTags }) => {
+        [...new Set(entryTags)].forEach((tag) => {
+            if (!tagOrder.has(tag)) {
+                tagOrder.set(tag, tagOrder.size);
+            }
+
+            tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+        });
+    });
+
+    const tags = [...tagCounts.keys()].sort((tagA, tagB) => {
+        const countDiff = (tagCounts.get(tagB) || 0) - (tagCounts.get(tagA) || 0);
+        return countDiff || tagOrder.get(tagA) - tagOrder.get(tagB);
+    });
     let activeTag = null;
     const topLevelButtons = new Map();
 
