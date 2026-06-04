@@ -1,4 +1,42 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const syncPublicationTitleDemoLinks = () => {
+        document.querySelectorAll("#publications .item-list li").forEach((item) => {
+            const titleLink = item.querySelector("h3 a");
+            const demoLink = Array.from(item.querySelectorAll(".links a")).find((link) => {
+                const href = link.getAttribute("href")?.trim();
+                const isDemoLink = link.textContent.trim().toLowerCase() === "demo";
+                const isDisabled = link.classList.contains("disabled-link") || link.getAttribute("aria-disabled") === "true";
+                return isDemoLink && href && href !== "#" && !isDisabled;
+            });
+
+            if (!titleLink || !demoLink) {
+                return;
+            }
+
+            const titleHref = titleLink.getAttribute("href")?.trim();
+            const isPlaceholderTitle = !titleHref || titleHref === "#" || titleLink.classList.contains("disabled-link") || titleLink.getAttribute("aria-disabled") === "true";
+
+            if (!isPlaceholderTitle) {
+                return;
+            }
+
+            titleLink.setAttribute("href", demoLink.getAttribute("href"));
+            titleLink.classList.remove("disabled-link");
+            titleLink.removeAttribute("aria-disabled");
+            titleLink.removeAttribute("tabindex");
+
+            if (demoLink.hasAttribute("target")) {
+                titleLink.setAttribute("target", demoLink.getAttribute("target"));
+            }
+
+            if (demoLink.hasAttribute("rel")) {
+                titleLink.setAttribute("rel", demoLink.getAttribute("rel"));
+            }
+        });
+    };
+
+    syncPublicationTitleDemoLinks();
+
     const collapsibleSections = document.querySelectorAll("[data-collapsible]");
     const getClosestElement = (target, selector) => {
         const element = target instanceof Element ? target : target?.parentElement;
