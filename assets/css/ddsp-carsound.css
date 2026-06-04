@@ -213,11 +213,26 @@ h1 {
     text-align: center;
 }
 
-.article-authors {
+.article-meta {
     margin: 0 auto 20px;
     color: var(--secondary-text-color);
-    font-size: 1.2rem;
     text-align: center;
+}
+
+.article-authors {
+    margin: 0 0 8px;
+    font-size: 1.2rem;
+}
+
+.article-affiliations,
+.article-supporting {
+    margin: 0;
+    font-size: 1.08rem;
+    line-height: 1.55;
+}
+
+.article-supporting {
+    margin-top: 8px;
 }
 
 h2.section-title {
