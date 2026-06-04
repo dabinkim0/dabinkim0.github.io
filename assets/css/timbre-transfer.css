@@ -345,6 +345,7 @@ h2.section-title.no-divider {
     background-color: white;
     font-size: 1.04rem;
     line-height: 1.72;
+    table-layout: fixed;
 }
 
 .method-table th,
@@ -355,10 +356,19 @@ h2.section-title.no-divider {
 }
 
 .method-table th {
-    width: 30%;
     background-color: rgba(245, 241, 234, 0.42);
     color: var(--text-color);
     font-weight: 500;
+}
+
+.method-table th:first-child,
+.method-table td:first-child {
+    width: 24%;
+}
+
+.method-table th:nth-child(2),
+.method-table td:nth-child(2) {
+    width: 76%;
 }
 
 .method-table td {
