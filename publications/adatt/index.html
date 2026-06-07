@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control | Dabin Kim</title>
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/timbre-transfer.css">
+    <link rel="stylesheet" href="../../assets/css/typography.css">
+    <script src="../../assets/js/mathjax-config.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="shell header-shell">
+            <a href="../../index.html" class="logo">Dabin Kim</a>
+            <nav class="main-nav" aria-label="Primary">
+                <ul>
+                    <li><a href="../index.html" class="is-active nav-current">Publications</a></li>
+                    <li><a href="../../projects/index.html">Projects</a></li>
+                    <li><a href="#" class="nav-disabled" aria-disabled="true" tabindex="-1">Blog</a></li>
+                    <li><a href="../../index.html">About</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="shell post-layout">
+        <main class="post-page">
+            <section id="overview" class="post-section">
+                <h1>AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control</h1>
+                <div class="article-meta">
+                    <p class="article-authors">Dabin Kim<sup>1</sup>, Junwon Lee<sup>2</sup>, Juhan Nam<sup>1,2</sup></p>
+                    <p class="article-affiliations"><sup>1</sup> Graduate School of Cultural Technology, KAIST, South Korea</p>
+                    <p class="article-affiliations"><sup>2</sup> Graduate School of AI, KAIST, South Korea</p>
+                    <p class="article-supporting">Supporting Webpage for INTERSPEECH 2026.</p>
+                </div>
+                <div class="hero-figure">
+                    <img src="figs/fig_architecture.png" alt="Proposed Architecture Demo" class="hero-image">
+                </div>
+
+                <div id="abstract" class="methodology">
+                    <h3>Abstract</h3>
+                    <p class="abstract-copy">
+                        This paper addresses the issue of timbral ambiguity in instrument timbre transfer under fine-grained structural conditions. We argue that this ambiguity arises from instrument-specific expressive details in these conditions, which conflict with the target timbral properties. For example, imposing a violin's pitch-dominant vibrato contours onto a flute, which naturally exhibits loudness-dominant vibrato, compromises timbral fidelity. We propose <strong>AdaTT</strong>, a target-adaptive system that ensures high timbral fidelity across diverse timbre transfer cases within the pretrained ControlNet scheme. It selectively scales the frame-wise influence of pitch and loudness controls via text prompts to match the target instrument. We also present an annotation-free data construction pipeline to identify which expressive details to transform or preserve. Results show AdaTT achieves superior timbral fidelity and naturalness, preserving score-level content on par with the ControlNet baseline.
+                    </p>
+                </div>
+            </section>
+
+            <section id="demo-examples" class="post-section">
+                <h2 class="section-title centered-title">Demo Examples</h2>
+                <div class="demo-section">
+                    <table class="method-table">
+                        <thead>
+                            <tr>
+                                <th>Method</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Stable Audio Open</td>
+                                <td>A text-to-music latent diffusion model that synthesizes audio based on text prompts.</td>
+                            </tr>
+                            <tr>
+                                <td>ControlNet</td>
+                                <td>A DiT-based ControlNet trained with a frozen Stable Audio Open backbone. It is conditioned on two heterogeneous structural features: \(f_0\) and RMS contours.</td>
+                            </tr>
+                            <tr>
+                                <td>SmartControl</td>
+                                <td>Incorporates Control Scale Predictors (CSPs) with the frozen ControlNet to adaptively adjust intermediate control features.</td>
+                            </tr>
+                            <tr>
+                                <td>AdaTT (Ours)</td>
+                                <td>Jointly trains CSPs and Text-Guided CSPs (TG-CSPs). TG-CSPs modulate control scales to balance the contributions of each structural condition.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="sample-card-list">
+                        <article class="sample-card" id="sample-violin-to-clarinet">
+                            <div class="sample-card-header">
+                                <h3>Violin → Clarinet</h3>
+                            </div>
+                            <div class="sample-row-scroll">
+                                <div class="sample-row cols-5">
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_violin_to_clarinet_sample_29_source.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_violin_to_clarinet_sample_29_source.png" alt="Spectrogram for Violin to Clarinet - Source" loading="lazy" width="960" height="360">
+                                        <p class="sample-label"><strong>Source</strong></p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_violin_to_clarinet_sample_29_baseline.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_violin_to_clarinet_sample_29_baseline.png" alt="Spectrogram for Violin to Clarinet - Stable Audio Open" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">Stable Audio Open</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_violin_to_clarinet_sample_29_sa-controlnet.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_violin_to_clarinet_sample_29_sa-controlnet.png" alt="Spectrogram for Violin to Clarinet - ControlNet" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">ControlNet</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_violin_to_clarinet_sample_29_csps.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_violin_to_clarinet_sample_29_csps.png" alt="Spectrogram for Violin to Clarinet - SmartControl" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">SmartControl</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_violin_to_clarinet_sample_29_pl-balancer.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_violin_to_clarinet_sample_29_pl-balancer.png" alt="Spectrogram for Violin to Clarinet - AdaTT (Ours)" loading="lazy" width="960" height="360">
+                                        <p class="sample-label"><strong>AdaTT (Ours)</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="sample-card" id="sample-violin-to-flute">
+                            <div class="sample-card-header">
+                                <h3>Violin → Flute</h3>
+                            </div>
+                            <div class="sample-row-scroll">
+                                <div class="sample-row cols-5">
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_violin_to_flute_sample_39_source.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_violin_to_flute_sample_39_source.png" alt="Spectrogram for Violin to Flute - Source" loading="lazy" width="960" height="360">
+                                        <p class="sample-label"><strong>Source</strong></p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_violin_to_flute_sample_39_baseline.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_violin_to_flute_sample_39_baseline.png" alt="Spectrogram for Violin to Flute - Stable Audio Open" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">Stable Audio Open</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_violin_to_flute_sample_39_sa-controlnet.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_violin_to_flute_sample_39_sa-controlnet.png" alt="Spectrogram for Violin to Flute - ControlNet" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">ControlNet</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_violin_to_flute_sample_39_csps.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_violin_to_flute_sample_39_csps.png" alt="Spectrogram for Violin to Flute - SmartControl" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">SmartControl</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_violin_to_flute_sample_39_pl-balancer.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_violin_to_flute_sample_39_pl-balancer.png" alt="Spectrogram for Violin to Flute - AdaTT (Ours)" loading="lazy" width="960" height="360">
+                                        <p class="sample-label"><strong>AdaTT (Ours)</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="sample-card" id="sample-trumpet-to-flute">
+                            <div class="sample-card-header">
+                                <h3>Trumpet → Flute</h3>
+                            </div>
+                            <div class="sample-row-scroll">
+                                <div class="sample-row cols-5">
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_trumpet_to_flute_sample_26_source.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_trumpet_to_flute_sample_26_source.png" alt="Spectrogram for Trumpet to Flute - Source" loading="lazy" width="960" height="360">
+                                        <p class="sample-label"><strong>Source</strong></p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_trumpet_to_flute_sample_26_baseline.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_trumpet_to_flute_sample_26_baseline.png" alt="Spectrogram for Trumpet to Flute - Stable Audio Open" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">Stable Audio Open</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_trumpet_to_flute_sample_26_sa-controlnet.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_trumpet_to_flute_sample_26_sa-controlnet.png" alt="Spectrogram for Trumpet to Flute - ControlNet" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">ControlNet</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_trumpet_to_flute_sample_26_csps.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_trumpet_to_flute_sample_26_csps.png" alt="Spectrogram for Trumpet to Flute - SmartControl" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">SmartControl</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_trumpet_to_flute_sample_26_pl-balancer.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_trumpet_to_flute_sample_26_pl-balancer.png" alt="Spectrogram for Trumpet to Flute - AdaTT (Ours)" loading="lazy" width="960" height="360">
+                                        <p class="sample-label"><strong>AdaTT (Ours)</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="sample-card" id="sample-oboe-to-trumpet">
+                            <div class="sample-card-header">
+                                <h3>Oboe → Trumpet</h3>
+                            </div>
+                            <div class="sample-row-scroll">
+                                <div class="sample-row cols-5">
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_oboe_to_trumpet_sample_01_source.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_oboe_to_trumpet_sample_01_source.png" alt="Spectrogram for Oboe to Trumpet - Source" loading="lazy" width="960" height="360">
+                                        <p class="sample-label"><strong>Source</strong></p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_oboe_to_trumpet_sample_01_baseline.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_oboe_to_trumpet_sample_01_baseline.png" alt="Spectrogram for Oboe to Trumpet - Stable Audio Open" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">Stable Audio Open</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_oboe_to_trumpet_sample_01_sa-controlnet.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_oboe_to_trumpet_sample_01_sa-controlnet.png" alt="Spectrogram for Oboe to Trumpet - ControlNet" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">ControlNet</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_oboe_to_trumpet_sample_01_csps.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_oboe_to_trumpet_sample_01_csps.png" alt="Spectrogram for Oboe to Trumpet - SmartControl" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">SmartControl</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_oboe_to_trumpet_sample_01_pl-balancer.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_oboe_to_trumpet_sample_01_pl-balancer.png" alt="Spectrogram for Oboe to Trumpet - AdaTT (Ours)" loading="lazy" width="960" height="360">
+                                        <p class="sample-label"><strong>AdaTT (Ours)</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="sample-card" id="sample-clarinet-to-violin">
+                            <div class="sample-card-header">
+                                <h3>Clarinet → Violin</h3>
+                            </div>
+                            <div class="sample-row-scroll">
+                                <div class="sample-row cols-5">
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_clarinet_to_violin_sample_03_source.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_clarinet_to_violin_sample_03_source.png" alt="Spectrogram for Clarinet to Violin - Source" loading="lazy" width="960" height="360">
+                                        <p class="sample-label"><strong>Source</strong></p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_clarinet_to_violin_sample_03_baseline.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_clarinet_to_violin_sample_03_baseline.png" alt="Spectrogram for Clarinet to Violin - Stable Audio Open" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">Stable Audio Open</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_clarinet_to_violin_sample_03_sa-controlnet.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_clarinet_to_violin_sample_03_sa-controlnet.png" alt="Spectrogram for Clarinet to Violin - ControlNet" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">ControlNet</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_clarinet_to_violin_sample_03_csps.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_clarinet_to_violin_sample_03_csps.png" alt="Spectrogram for Clarinet to Violin - SmartControl" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">SmartControl</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_clarinet_to_violin_sample_03_pl-balancer.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_clarinet_to_violin_sample_03_pl-balancer.png" alt="Spectrogram for Clarinet to Violin - AdaTT (Ours)" loading="lazy" width="960" height="360">
+                                        <p class="sample-label"><strong>AdaTT (Ours)</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="sample-card" id="sample-double-bass-to-trombone">
+                            <div class="sample-card-header">
+                                <h3>Double Bass → Trombone</h3>
+                            </div>
+                            <div class="sample-row-scroll">
+                                <div class="sample-row cols-5">
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_double_bass_to_trombone_sample_04_source.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_double_bass_to_trombone_sample_04_source.png" alt="Spectrogram for Double Bass to Trombone - Source" loading="lazy" width="960" height="360">
+                                        <p class="sample-label"><strong>Source</strong></p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_double_bass_to_trombone_sample_04_baseline.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_double_bass_to_trombone_sample_04_baseline.png" alt="Spectrogram for Double Bass to Trombone - Stable Audio Open" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">Stable Audio Open</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_double_bass_to_trombone_sample_04_sa-controlnet.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_double_bass_to_trombone_sample_04_sa-controlnet.png" alt="Spectrogram for Double Bass to Trombone - ControlNet" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">ControlNet</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_double_bass_to_trombone_sample_04_csps.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_double_bass_to_trombone_sample_04_csps.png" alt="Spectrogram for Double Bass to Trombone - SmartControl" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">SmartControl</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_double_bass_to_trombone_sample_04_pl-balancer.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_double_bass_to_trombone_sample_04_pl-balancer.png" alt="Spectrogram for Double Bass to Trombone - AdaTT (Ours)" loading="lazy" width="960" height="360">
+                                        <p class="sample-label"><strong>AdaTT (Ours)</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+
+                        <article class="sample-card" id="sample-saxophone-to-viola">
+                            <div class="sample-card-header">
+                                <h3>Saxophone → Viola</h3>
+                            </div>
+                            <div class="sample-row-scroll">
+                                <div class="sample-row cols-5">
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_saxophone_to_viola_sample_01_source.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_saxophone_to_viola_sample_01_source.png" alt="Spectrogram for Saxophone to Viola - Source" loading="lazy" width="960" height="360">
+                                        <p class="sample-label"><strong>Source</strong></p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_saxophone_to_viola_sample_01_baseline.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_saxophone_to_viola_sample_01_baseline.png" alt="Spectrogram for Saxophone to Viola - Stable Audio Open" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">Stable Audio Open</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_saxophone_to_viola_sample_01_sa-controlnet.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_saxophone_to_viola_sample_01_sa-controlnet.png" alt="Spectrogram for Saxophone to Viola - ControlNet" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">ControlNet</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_saxophone_to_viola_sample_01_csps.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_saxophone_to_viola_sample_01_csps.png" alt="Spectrogram for Saxophone to Viola - SmartControl" loading="lazy" width="960" height="360">
+                                        <p class="sample-label">SmartControl</p>
+                                    </div>
+                                    <div class="sample-item">
+                                        <audio controls preload="none" class="audio-player">
+                                            <source src="audio/generated_saxophone_to_viola_sample_01_pl-balancer.wav" type="audio/wav">
+                                        </audio>
+                                        <img class="spectrogram-preview" src="spectrograms/generated_saxophone_to_viola_sample_01_pl-balancer.png" alt="Spectrogram for Saxophone to Viola - AdaTT (Ours)" loading="lazy" width="960" height="360">
+                                        <p class="sample-label"><strong>AdaTT (Ours)</strong></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="main-footer">
+        <div class="shell footer-shell">
+            <p class="copyright">
+                &copy; 2026 Dabin Kim. AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control.
+            </p>
+        </div>
+    </footer>
+    <script defer src="../../assets/js/timbre-transfer.js"></script>
+</body>
+</html>
