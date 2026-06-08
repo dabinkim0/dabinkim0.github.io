@@ -235,6 +235,18 @@ h1 {
     margin-top: 8px;
 }
 
+.article-resource-list {
+    margin: 6px 0 0;
+    font-size: 1.02rem;
+    line-height: 1.45;
+}
+
+.article-resource-link.is-disabled {
+    color: var(--secondary-text-color);
+    cursor: default;
+    opacity: 0.72;
+}
+
 h2.section-title {
     margin: 0 0 18px;
     padding-top: 0;
