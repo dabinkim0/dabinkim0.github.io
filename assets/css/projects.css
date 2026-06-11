@@ -771,6 +771,25 @@ body.has-image-overlay {
 }
 
 @media (max-width: 940px) {
+    .project-list.is-grid-compact {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .project-list.is-list {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .project-list.is-grid-compact {
+        gap: var(--project-grid-gap);
+    }
+}
+
+@media (max-width: 720px) {
+    :root {
+        --project-meta-responsive-gap: 6px 14px;
+    }
+
     .project-list.is-list,
     .project-list.is-grid,
     .project-list.is-grid-compact {
@@ -882,12 +901,6 @@ body.has-image-overlay {
 
     .meta-link {
         white-space: nowrap;
-    }
-}
-
-@media (max-width: 720px) {
-    :root {
-        --project-meta-responsive-gap: 6px 14px;
     }
 
     .shell {
