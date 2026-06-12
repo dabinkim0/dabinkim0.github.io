@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Symbolic-Aware LALM Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="main-header">
+    <div class="shell header-shell">
+      <a href="https://dabinkim0.github.io/" class="logo">Dabin Kim</a>
+      <nav class="main-nav" aria-label="Primary">
+        <ul>
+          <li><a href="https://dabinkim0.github.io/publications/" class="is-active nav-current">Publications</a></li>
+          <li><a href="https://dabinkim0.github.io/projects/">Projects</a></li>
+          <li><a href="https://dabinkim0.github.io/">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="shell post-layout">
+    <main class="post-page">
+      <section id="overview" class="post-section">
+      <h1>Interactive Experiment Demo</h1>
+      <div class="article-meta">
+        <p class="article-authors">Symbolic-Aware Large Audio Language Models</p>
+        <p class="article-affiliations">Experiment-progress companion page for the Overleaf presentation</p>
+        <p class="article-supporting">Built around UniAudio2.0-style task organization with explicit current-claim boundaries.</p>
+        <p class="article-resource-list">
+          <a class="article-resource-link" href="https://dongchaoyang.top/UniAudio2Demo/" target="_blank" rel="noreferrer">[UniAudio2 Demo]</a>
+          <a class="article-resource-link" href="https://arxiv.org/abs/2602.04683" target="_blank" rel="noreferrer">[Paper]</a>
+          <a class="article-resource-link" href="https://github.com/dabinkim0/symbolic-fused-lalm-exp-progress-slides/blob/main/exp_progress_slides.html" target="_blank" rel="noreferrer">[Slides HTML]</a>
+        </p>
+      </div>
+      <div class="methodology">
+        <h3>Demo Scope</h3>
+        <p class="abstract-copy">
+          This page keeps the current claim boundary explicit: <code>S_plan</code>
+          is the learned symbolic planning token evaluated through reconstruction,
+          acoustic-token proxy, stream controls, and MIR recovery; <code>S_LLM</code>
+          is the planned LLM-supervised symbolic tokenizer/token stream and is not
+          trained yet.
+        </p>
+      </div>
+    </section>
+
+    <section id="claim-boundary" class="post-section">
+      <h2 class="section-title centered-title">Claim Boundary</h2>
+      <div class="demo-section">
+      <div class="claim-grid" aria-label="Claim boundary">
+      <article class="claim">
+        <span class="label">Current token</span>
+        <strong><code>S_plan</code></strong>
+        <p>Learned symbolic planning token from MIDI-derived structure. Evaluated through reconstruction, acoustic-token proxy, stream controls, and MIR recovery.</p>
+      </article>
+      <article class="claim caution">
+        <span class="label">Planned token</span>
+        <strong><code>S_LLM</code></strong>
+        <p>LLM-supervised symbolic tokenizer/token stream. Not trained yet; should follow EXP031A controls.</p>
+      </article>
+      <article class="claim">
+        <span class="label">Demo assets</span>
+        <strong>Slakh paired audio/MIDI</strong>
+        <p>All playable clips in this page are project-local Slakh audio assets, avoiding copied web-audio dataset material.</p>
+      </article>
+      </div>
+
+    <section class="provenance-card" aria-label="Inference provenance">
+      <div>
+        <p class="eyebrow">Inference provenance</p>
+        <h2>What is already real inference?</h2>
+        <p>
+          The demo separates held-out test-set aggregate results from fixed per-sample examples.
+          EXP001 uses Slakh test QA outputs directly. EXP029 and EXP031A include test-set aggregate
+          metrics, while the currently saved per-sample fixed examples come from validation windows.
+        </p>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Block</th><th>Actual artifact</th><th>Split</th><th>What the demo can claim</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>UniAudio compatibility</td><td>EXP001 Slakh QA model outputs</td><td class="good">test</td><td>Frozen UniAudio2 diagnostic behavior and failure cases</td></tr>
+          <tr><td>Music downstream gain</td><td>EXP029 stream-control final metrics + fixed examples</td><td>test aggregate + validation examples</td><td>Aligned <code>S_plan</code> improves token-level proxy; per-sample card is illustrative</td></tr>
+          <tr><td>Symbolic downstream</td><td>EXP031A MIR-supervised metrics + fixed examples</td><td>test aggregate + validation examples</td><td>MIR structure is recoverable; per-sample cards show capability and failure mode</td></tr>
+        </tbody>
+      </table>
+    </section>
+      </div>
+    </section>
+
+    <section id="demo-examples" class="post-section">
+      <h2 class="section-title centered-title">Demo Examples</h2>
+      <div class="demo-section">
+    <div class="tabs" role="tablist" aria-label="Demo sections">
+      <button class="tab active" type="button" data-target="preserve">1. UniAudio Compatibility</button>
+      <button class="tab" type="button" data-target="music">2. Music Downstream Gains</button>
+      <button class="tab" type="button" data-target="symbolic">3. Symbolic Music Tasks</button>
+    </div>
+
+    <section id="preserve" class="panel active" aria-labelledby="preserve-title">
+      <div class="section-head">
+          <p class="eyebrow">Demo block 01</p>
+          <h2 id="preserve-title">Existing UniAudio Behavior To Preserve</h2>
+          <p>
+          This block defines the baseline behavior that a future final LALM integration must preserve.
+          It is not yet a completed final-LALM preservation claim.
+        </p>
+      </div>
+
+      <div class="task-slot-grid" aria-label="Representative UniAudio2 compatibility task slots">
+        <article class="task-slot ready">
+          <span class="badge">Current evidence</span>
+          <h3>Music QA / Instrument Presence</h3>
+          <p>
+            Frozen UniAudio2 is evaluated on Slakh instrument-presence prompts.
+            This is the current representative compatibility diagnostic.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Music audio + constrained yes/no question</dd>
+            <dt>Artifact</dt><dd>EXP001 Slakh test QA outputs</dd>
+            <dt>Demo status</dt><dd class="good">Playable example below</dd>
+          </dl>
+        </article>
+
+        <article class="task-slot pending">
+          <span class="badge">Future slot</span>
+          <h3>Audio Codec Tokenizer Reconstruction Comparison</h3>
+          <p>
+            Add only after a symbolic-aware audio codec, residual codec branch, or
+            decode path is actually trained and evaluated.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Original audio, frozen codec reconstruction, symbolic-aware reconstruction</dd>
+            <dt>Metric</dt><dd>FAD/KL, mel/LSD, SI-SDR, listening sample</dd>
+            <dt>Current status</dt><dd class="missing">Not yet a project claim</dd>
+          </dl>
+        </article>
+
+        <article class="task-slot pending">
+          <span class="badge">Future slot</span>
+          <h3>Text-to-Speech</h3>
+          <p>
+            Placeholder for checking whether symbolic conditioning preserves general
+            UniAudio2 text-to-speech behavior.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Text prompt</dd>
+            <dt>Output</dt><dd>Speech waveform</dd>
+            <dt>Needed asset</dt><dd class="missing">Before/after symbolic conditioning samples</dd>
+          </dl>
+        </article>
+
+        <article class="task-slot pending">
+          <span class="badge">Future slot</span>
+          <h3>Text-to-Sound</h3>
+          <p>
+            Placeholder for non-speech audio generation examples where symbolic music
+            tokens should not degrade generic audio generation.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Sound-event text prompt</dd>
+            <dt>Output</dt><dd>Environmental or event audio</dd>
+            <dt>Needed asset</dt><dd class="missing">Matched baseline and symbolic-conditioned outputs</dd>
+          </dl>
+        </article>
+
+        <article class="task-slot pending">
+          <span class="badge">Future slot</span>
+          <h3>Text-to-Music</h3>
+          <p>
+            Placeholder for prompt-to-music generation where symbolic planning should
+            improve musical structure without hurting audio quality.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Music text prompt</dd>
+            <dt>Output</dt><dd>Generated music audio</dd>
+            <dt>Needed asset</dt><dd class="missing">Aligned vs control symbolic-generation comparison</dd>
+          </dl>
+        </article>
+
+        <article class="task-slot pending">
+          <span class="badge">Future slot</span>
+          <h3>Song Generation</h3>
+          <p>
+            Placeholder for vocal/music generation examples, separated from pure
+            instrumental text-to-music.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Lyrics, style, or song prompt</dd>
+            <dt>Output</dt><dd>Song audio with vocal/music structure</dd>
+            <dt>Needed asset</dt><dd class="missing">Generated sample and structure-control metrics</dd>
+          </dl>
+        </article>
+
+        <article class="task-slot pending">
+          <span class="badge">Future slot</span>
+          <h3>Text-Instructed TTS</h3>
+          <p>
+            Placeholder for instruction-following speech generation where text
+            controls style, speaker, emotion, or delivery.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Instruction + text</dd>
+            <dt>Output</dt><dd>Instruction-conditioned speech</dd>
+            <dt>Needed asset</dt><dd class="missing">Prompt, baseline output, symbolic-conditioned output</dd>
+          </dl>
+        </article>
+
+        <article class="task-slot pending">
+          <span class="badge">Future slot</span>
+          <h3>Audio-Instructed TTS</h3>
+          <p>
+            Placeholder for speech generation conditioned by an audio reference,
+            such as voice, prosody, or acoustic style.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Reference audio + text prompt</dd>
+            <dt>Output</dt><dd>Reference-conditioned speech</dd>
+            <dt>Needed asset</dt><dd class="missing">Reference clip, generated pair, similarity metrics</dd>
+          </dl>
+        </article>
+      </div>
+
+      <article class="demo-card">
+        <div class="demo-media sample-card-header">
+          <span class="badge">EXP001 baseline diagnostic</span>
+          <h3>Frozen UniAudio2 QA: label-prior failure case</h3>
+          <audio controls preload="metadata" src="assets/audio/slakh_track01877_qa_failure.wav"></audio>
+          <p class="caption">Sample: <code>Slakh_Track01877_w000_s0000400</code> | split: test | artifact: EXP001 model outputs</p>
+        </div>
+        <div class="demo-content">
+          <p class="objective">
+            Objective: show why compatibility and control demos are needed before claiming final music reasoning.
+          </p>
+          <table>
+            <thead>
+              <tr><th>Question</th><th>Target</th><th>Normal</th><th>No audio</th><th>Shuffled audio</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Bass present?</td><td>No</td><td class="bad">Yes</td><td class="bad">Yes</td><td>No</td></tr>
+              <tr><td>Guitar present?</td><td>No</td><td class="bad">Yes</td><td class="bad">Yes</td><td class="bad">free text</td></tr>
+              <tr><td>Strings present?</td><td>No</td><td class="bad">Yes</td><td class="bad">Yes</td><td class="bad">Yes</td></tr>
+              <tr><td>Synth present?</td><td>No</td><td class="bad">Yes</td><td class="bad">Yes</td><td class="bad">Yes</td></tr>
+            </tbody>
+          </table>
+          <p class="note">
+            Interpretation: the frozen baseline can answer some prompts, but it also shows yes-bias and control sensitivity.
+            A future symbolic LALM demo must show that adding <code>S_plan</code> or <code>S_LLM</code> does not break base audio-language behavior.
+          </p>
+          <table>
+            <thead>
+              <tr><th>Held-out Slakh QA summary</th><th>Value</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>QA rows</td><td>906</td></tr>
+              <tr><td>Exact accuracy</td><td>0.6181</td></tr>
+              <tr><td>Macro-F1</td><td>0.3782</td></tr>
+              <tr><td>Active invalid rate</td><td>0.1181</td></tr>
+            </tbody>
+          </table>
+          <p class="missing">Missing: final integrated LALM preservation demo with the same prompts before/after symbolic conditioning.</p>
+        </div>
+      </article>
+    </section>
+
+    <section id="music" class="panel" aria-labelledby="music-title">
+      <div class="section-head">
+        <p class="eyebrow">Demo block 02</p>
+        <h2 id="music-title">Existing Music Downstream Task Improvement</h2>
+        <p>
+          This block makes the metric gain audible and inspectable: the same clip is evaluated with aligned,
+          shuffled, and dummy symbolic streams.
+        </p>
+      </div>
+
+      <article class="demo-card">
+        <div class="demo-media sample-card-header">
+          <span class="badge">EXP029 stream control</span>
+          <h3>Aligned <code>S_plan</code> lowers semantic-token loss</h3>
+          <audio controls preload="metadata" src="assets/audio/slakh_track01501_w000_stream_control.wav"></audio>
+          <p class="caption">Sample: <code>Slakh_Track01501_w000_s0000000</code> | split: validation fixed example | artifact: EXP029 fixed examples</p>
+        </div>
+        <div class="demo-content">
+          <p class="objective">
+            Objective: test whether aligned symbolic context reduces teacher-forced UniAudio semantic-token uncertainty.
+          </p>
+          <div class="metric-bars" aria-label="EXP029 loss comparison">
+            <div><span>Aligned <code>S_plan</code></span><meter min="5.20" max="5.32" low="5.24" high="5.29" optimum="5.20" value="5.226"></meter><strong>5.226</strong></div>
+            <div><span>Shuffled</span><meter min="5.20" max="5.32" low="5.24" high="5.29" optimum="5.20" value="5.301"></meter><strong>5.301</strong></div>
+            <div><span>Dummy</span><meter min="5.20" max="5.32" low="5.24" high="5.29" optimum="5.20" value="5.280"></meter><strong>5.280</strong></div>
+          </div>
+          <table>
+            <thead>
+              <tr><th>Same-window fixed example</th><th>Loss ↓</th><th>Accuracy ↑</th><th>Claim</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Aligned <code>S_plan</code></td><td class="good">5.226</td><td class="good">0.138</td><td>Best same-sample proxy</td></tr>
+              <tr><td>Shuffled symbolic stream</td><td>5.301</td><td>0.119</td><td>Corrupted alignment</td></tr>
+              <tr><td>Dummy symbolic stream</td><td>5.280</td><td>0.125</td><td>Token-budget control</td></tr>
+            </tbody>
+          </table>
+          <table>
+            <thead>
+              <tr><th>Concrete inference artifact</th><th>Preview</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Implemented output</td><td><code>semantic_audio_token_preview</code></td></tr>
+              <tr><td>Target codebook-0 head</td><td><code>1519, 3072, 3072, 3072, 3072, 3072, 3072, 1880, 3072, 3072, 1519, 1519</code></td></tr>
+              <tr><td>Aligned prediction head</td><td><code>1519, 838, 1880, 838, 1880, 2071, 1880, 2071, 3072, 4099, 1519, 1397</code></td></tr>
+              <tr><td>Not yet output</td><td class="missing">decoded waveform, MIDI, or free-text answer</td></tr>
+            </tbody>
+          </table>
+          <table>
+            <thead>
+              <tr><th>Held-out test aggregate</th><th>Aligned <code>S_plan</code></th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Test windows</td><td>1,385</td></tr>
+              <tr><td>Test CE / PPL</td><td>5.7730 / 321.50</td></tr>
+              <tr><td>Test accuracy</td><td>0.1093</td></tr>
+              <tr><td>Prefix-8 accuracy</td><td>0.1707</td></tr>
+            </tbody>
+          </table>
+          <p class="note">
+            Interpretation: this supports causal token-level utility. It does not yet prove decoded waveform quality or open-ended music reasoning.
+          </p>
+        </div>
+      </article>
+    </section>
+
+    <section id="symbolic" class="panel" aria-labelledby="symbolic-title">
+      <div class="section-head">
+        <p class="eyebrow">Demo block 03</p>
+        <h2 id="symbolic-title">New Symbolic-Related Music Downstream Tasks</h2>
+        <p>
+          These cases show the new task family that is specific to the symbolic-token contribution:
+          recover human-readable MIR structure from <code>S_plan</code>.
+        </p>
+      </div>
+
+      <div class="case-grid">
+        <article class="task-card">
+          <span class="badge">EXP031A MIR recovery</span>
+          <h3>Success case: instruments, key, and meter recovered</h3>
+          <audio controls preload="metadata" src="assets/audio/slakh_track01501_w003_mir_success.wav"></audio>
+          <p class="caption"><code>Slakh_Track01501_w003_s0009000</code> | split: validation fixed example</p>
+          <figure class="roll-figure">
+            <img src="assets/figures/pianoroll_track01501_w003_target.png" alt="Piano roll for Slakh Track01501 window 003 target MIDI">
+            <figcaption>Input/target MIDI piano roll, 90-120 s window. The current EXP031A output is MIR JSON/caption proxy, not generated MIDI.</figcaption>
+          </figure>
+          <div class="chips" aria-label="Recovered instruments">
+            <span>bass</span><span>drums</span><span>guitar</span><span>other</span><span>piano</span>
+          </div>
+          <table class="comparison-table">
+            <thead>
+              <tr><th>Attribute</th><th>GT</th><th>Prediction</th><th>Score / Error</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="metric-name">Instrument set</td>
+                <td class="list-cell">bass, drums, guitar, other, piano</td>
+                <td class="list-cell">bass, drums, guitar, other, piano</td>
+                <td class="good">F1 1.000</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Key</td>
+                <td>A minor</td>
+                <td>A minor</td>
+                <td class="good">Match</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Meter</td>
+                <td>4/4</td>
+                <td>4/4</td>
+                <td class="good">Match</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Tempo</td>
+                <td>120.00 BPM</td>
+                <td>89.32 BPM</td>
+                <td class="warn">Error 30.68 BPM</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="quote">
+            Prediction caption proxy: This symbolic window contains drums, bass, guitar, piano, other; estimated around 89.32 BPM in 4/4, with weak key/chord evidence around A minor.
+          </p>
+        </article>
+
+        <article class="task-card">
+          <span class="badge">EXP031A boundary case</span>
+          <h3>Failure boundary: key and meter can still break</h3>
+          <audio controls preload="metadata" src="assets/audio/slakh_track01501_w005_mir_boundary.wav"></audio>
+          <p class="caption"><code>Slakh_Track01501_w005_s0015000</code> | split: validation fixed example</p>
+          <figure class="roll-figure">
+            <img src="assets/figures/pianoroll_track01501_w005_target.png" alt="Piano roll for Slakh Track01501 window 005 target MIDI">
+            <figcaption>Input/target MIDI piano roll, 150-180 s window. Output-MIDI visualization is marked missing until a MIDI-generation task is run.</figcaption>
+          </figure>
+          <div class="chips" aria-label="Predicted instruments">
+            <span>bass</span><span>drums</span><span>guitar</span><span>other</span><span>piano</span>
+          </div>
+          <table class="comparison-table">
+            <thead>
+              <tr><th>Attribute</th><th>GT</th><th>Prediction</th><th>Score / Error</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="metric-name">Instrument set</td>
+                <td class="list-cell">bass, drums, guitar, other, percussion, piano, strings</td>
+                <td class="list-cell">bass, drums, guitar, other, piano</td>
+                <td class="warn">F1 0.833</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Key</td>
+                <td>A# minor</td>
+                <td class="bad">C# major</td>
+                <td class="bad">Mismatch</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Meter</td>
+                <td>4/4</td>
+                <td class="bad">12/8</td>
+                <td class="bad">Mismatch</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Tempo</td>
+                <td>120.00 BPM</td>
+                <td>130.63 BPM</td>
+                <td class="warn">Error 10.63 BPM</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="note">
+            Interpretation: this is useful for a research demo because it shows both capability and failure mode.
+          </p>
+          <p class="quote">
+            Prediction caption proxy: This symbolic window contains drums, bass, guitar, piano, other; estimated around 130.63 BPM in 12/8, with weak key/chord evidence around C# major.
+          </p>
+        </article>
+      </div>
+
+      <article class="provenance-card">
+        <div>
+          <p class="eyebrow">EXP031A held-out test summary</p>
+          <h3>Symbolic-related downstream metrics</h3>
+          <p>
+            These are actual held-out test metrics from EXP031A at step 625. The cards above are qualitative fixed examples,
+            while this table is the test-set performance summary.
+          </p>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Metric</th><th>Test value</th><th>Interpretation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Instrument macro-F1</td><td>0.5014</td><td>Rare-class recovery remains difficult</td></tr>
+            <tr><td>Instrument micro-F1</td><td>0.7908</td><td>Common family recovery is stronger</td></tr>
+            <tr><td>Pitch-class macro-F1</td><td class="good">0.8541</td><td>Strong pitch-content recovery</td></tr>
+            <tr><td>Meter accuracy</td><td>0.7834</td><td>Useful but not perfect</td></tr>
+            <tr><td>Weak-key accuracy</td><td>0.5567</td><td>Key remains a weak-label challenge</td></tr>
+            <tr><td>Segment density / polyphony</td><td class="good">0.8743 / 0.7614</td><td>Local texture is recoverable</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="roadmap">
+        <h3>Next demo assets to add</h3>
+        <ul>
+          <li><span class="missing">Missing:</span> test-split per-sample EXP029/EXP031A inference cards; current cards use saved validation fixed examples.</li>
+          <li><span class="missing">Missing:</span> output MIDI piano-roll visualization, because EXP031A outputs MIR JSON/caption proxy rather than MIDI.</li>
+          <li><span class="missing">Missing:</span> decoded music captioning with aligned vs control prompts.</li>
+          <li><span class="missing">Missing:</span> waveform generation or editing after symbolic intervention.</li>
+          <li><span class="missing">Missing:</span> final <code>S_LLM</code> examples after LLM-supervised tokenizer training.</li>
+        </ul>
+      </article>
+    </section>
+      </div>
+    </section>
+    </main>
+  </div>
+
+  <footer class="main-footer">
+    <div class="shell footer-shell">
+    <p class="copyright">
+      Static demo page prepared for team discussion. Quantitative values are drawn from EXP001, EXP029, EXP031A, and EXP032 qualitative case-study artifacts.
+    </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
