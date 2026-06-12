@@ -243,17 +243,37 @@
           <div class="chips" aria-label="Recovered instruments">
             <span>bass</span><span>drums</span><span>guitar</span><span>other</span><span>piano</span>
           </div>
-          <table>
+          <table class="comparison-table">
+            <thead>
+              <tr><th>Attribute</th><th>GT</th><th>Prediction</th><th>Score / Error</th></tr>
+            </thead>
             <tbody>
-              <tr><th>Instrument F1</th><td class="good">1.000</td></tr>
-              <tr><th>Key</th><td>A minor → A minor</td></tr>
-              <tr><th>Meter</th><td>4/4 → 4/4</td></tr>
-              <tr><th>Tempo error</th><td>30.68 BPM</td></tr>
+              <tr>
+                <td class="metric-name">Instrument set</td>
+                <td class="list-cell">bass, drums, guitar, other, piano</td>
+                <td class="list-cell">bass, drums, guitar, other, piano</td>
+                <td class="good">F1 1.000</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Key</td>
+                <td>A minor</td>
+                <td>A minor</td>
+                <td class="good">Match</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Meter</td>
+                <td>4/4</td>
+                <td>4/4</td>
+                <td class="good">Match</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Tempo</td>
+                <td>120.00 BPM</td>
+                <td>89.32 BPM</td>
+                <td class="warn">Error 30.68 BPM</td>
+              </tr>
             </tbody>
           </table>
-          <p class="quote">
-            Target: bass, drums, guitar, other, piano. Prediction: drums, bass, guitar, piano, other.
-          </p>
           <p class="quote">
             Prediction caption proxy: This symbolic window contains drums, bass, guitar, piano, other; estimated around 89.32 BPM in 4/4, with weak key/chord evidence around A minor.
           </p>
@@ -271,12 +291,35 @@
           <div class="chips" aria-label="Predicted instruments">
             <span>bass</span><span>drums</span><span>guitar</span><span>other</span><span>piano</span>
           </div>
-          <table>
+          <table class="comparison-table">
+            <thead>
+              <tr><th>Attribute</th><th>GT</th><th>Prediction</th><th>Score / Error</th></tr>
+            </thead>
             <tbody>
-              <tr><th>Instrument F1</th><td>0.833</td></tr>
-              <tr><th>Key</th><td class="bad">A# minor → C# major</td></tr>
-              <tr><th>Meter</th><td class="bad">4/4 → 12/8</td></tr>
-              <tr><th>Tempo error</th><td>10.63 BPM</td></tr>
+              <tr>
+                <td class="metric-name">Instrument set</td>
+                <td class="list-cell">bass, drums, guitar, other, percussion, piano, strings</td>
+                <td class="list-cell">bass, drums, guitar, other, piano</td>
+                <td class="warn">F1 0.833</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Key</td>
+                <td>A# minor</td>
+                <td class="bad">C# major</td>
+                <td class="bad">Mismatch</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Meter</td>
+                <td>4/4</td>
+                <td class="bad">12/8</td>
+                <td class="bad">Mismatch</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Tempo</td>
+                <td>120.00 BPM</td>
+                <td>130.63 BPM</td>
+                <td class="warn">Error 10.63 BPM</td>
+              </tr>
             </tbody>
           </table>
           <p class="note">
