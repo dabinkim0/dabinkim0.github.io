@@ -123,11 +123,17 @@ main {
 .claim,
 .demo-card,
 .task-card,
+.provenance-card,
 .roadmap {
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: 8px;
   padding: 20px;
+}
+
+.provenance-card {
+  margin: 18px 0 24px;
+  overflow-x: auto;
 }
 
 .claim strong {
@@ -281,6 +287,29 @@ meter {
   padding-left: 12px;
   color: var(--muted);
   line-height: 1.55;
+}
+
+.roll-figure {
+  margin: 14px 0;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+}
+
+.roll-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.roll-figure figcaption {
+  margin: 0;
+  padding: 10px 12px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
 }
 
 .roadmap {
