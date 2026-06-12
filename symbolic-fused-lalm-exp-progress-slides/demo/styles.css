@@ -452,8 +452,35 @@ td:first-child {
   color: var(--ink);
 }
 
+.comparison-table {
+  font-size: 0.96rem;
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 9px 10px;
+}
+
+.comparison-table td {
+  overflow-wrap: anywhere;
+}
+
+.metric-name {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.list-cell {
+  line-height: 1.45;
+}
+
 .good {
   color: var(--good);
+  font-weight: 500;
+}
+
+.warn {
+  color: #8a5a00;
   font-weight: 500;
 }
 
