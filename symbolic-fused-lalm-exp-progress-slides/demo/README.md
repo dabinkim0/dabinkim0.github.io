@@ -5,7 +5,7 @@ This is a static companion site for the experiment-progress presentation.
 Recommended public URL after GitHub Pages is enabled for the slide repository:
 
 ```text
-https://dabinkim0.github.io/symbolic-fused-lalm-exp-progress-slides/demo/
+https://dabinkim0.github.io/symbolic-fused-lalm-experiments/demo/
 ```
 
 Sections:
