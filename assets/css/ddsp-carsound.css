@@ -224,6 +224,20 @@ h1 {
     font-size: 1.2rem;
 }
 
+.article-author-link {
+    text-decoration-line: underline;
+    text-decoration-color: transparent;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.16em;
+    transition: color 0.18s ease, text-decoration-color 0.18s ease;
+}
+
+.article-author-link:hover,
+.article-author-link:focus-visible {
+    color: var(--text-color);
+    text-decoration-color: currentColor;
+}
+
 .article-affiliations,
 .article-supporting {
     margin: 0;
