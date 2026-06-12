@@ -323,6 +323,28 @@ h3 {
   overflow-x: auto;
 }
 
+.eval-summary-card {
+  margin: 0 0 24px;
+}
+
+.eval-summary-card h3 {
+  margin-bottom: 8px;
+  font-family: var(--font-serif);
+  font-size: 1.34rem;
+  text-align: center;
+}
+
+.table-caption {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.eval-summary-card table + .table-caption {
+  margin-top: 18px;
+}
+
 .task-slot {
   display: block;
   padding: 18px;
