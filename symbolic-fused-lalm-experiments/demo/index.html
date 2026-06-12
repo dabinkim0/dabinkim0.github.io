@@ -191,6 +191,29 @@
         </a>
       </div>
 
+      <article class="provenance-card eval-summary-card">
+        <div>
+          <p class="eyebrow">Evaluation table 01</p>
+          <h3>Audio / speech preservation evidence required before claiming compatibility</h3>
+          <p class="table-caption">
+            Caption: this block is a preservation checklist, not a completed result table.
+            The current experiments have not yet produced paired baseline-vs-Symbolic-Aware
+            inference samples for UniAudio2.0 non-music audio or speech tasks.
+          </p>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Task family</th><th>Required comparison</th><th>Primary metrics / assets</th><th>Current claim status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Audio codec reconstruction</td><td>Frozen UniAudio2 codec vs symbolic-aware decode path</td><td>FAD/KL, mel/LSD, SI-SDR, side-by-side listening</td><td class="missing">Not trained / not claimed</td></tr>
+            <tr><td>Text-to-Speech</td><td>Same text prompt under baseline and Symbolic-Aware conditions</td><td>Speech sample pair, intelligibility, speaker/prosody quality</td><td class="missing">Future preservation demo</td></tr>
+            <tr><td>Text-to-Sound</td><td>Same sound-event prompt under baseline and Symbolic-Aware conditions</td><td>Prompt adherence, audio quality, event correctness</td><td class="missing">Future preservation demo</td></tr>
+            <tr><td>Instructional TTS</td><td>Text/audio instruction before and after symbolic conditioning</td><td>Instruction adherence, similarity, speech quality</td><td class="missing">Future preservation demo</td></tr>
+          </tbody>
+        </table>
+      </article>
+
       <div class="downstream-task-list" aria-label="UniAudio2 audio and speech task demo slots">
         <article id="compat-codec-reconstruction" class="placeholder-demo-card task-demo-slot">
           <p class="eyebrow">Downstream task slot</p>
@@ -345,6 +368,34 @@
           <span class="slot-cta">View placeholder</span>
         </a>
       </div>
+
+      <article class="provenance-card eval-summary-card">
+        <div>
+          <p class="eyebrow">Evaluation table 02</p>
+          <h3>Completed music-task evidence before qualitative examples</h3>
+          <p class="table-caption">
+            Caption: EXP001 is a frozen UniAudio2 music-QA diagnostic on the Slakh test split.
+            EXP029 is the current controlled Symbolic-Aware stream result; the aligned condition
+            is compared against shuffled and dummy symbolic streams under the same UniAudio-style packing.
+          </p>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Evaluation</th><th>Split / scale</th><th>Main result</th><th>Interpretation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>EXP001 frozen UniAudio2 Slakh QA</td><td>test, 151 clips / 906 QA rows</td><td>Exact acc. 0.6181; macro-F1 0.3782; active invalid 0.1181</td><td>Useful baseline diagnostic, but brittle and yes-biased</td></tr>
+            <tr><td>EXP029 aligned <code>S_plan</code></td><td>test aggregate, 1,385 windows</td><td>CE 5.7663; acc. 0.1097; gate 0.00327</td><td class="good">Best controlled stream condition</td></tr>
+            <tr><td>EXP029 shuffled <code>S_plan</code></td><td>test aggregate, matched setup</td><td>CE 5.7847; acc. 0.1067; gate 0.00319</td><td>Corrupting symbolic alignment hurts the proxy</td></tr>
+            <tr><td>EXP029 dummy stream</td><td>test aggregate, matched token budget</td><td>CE 5.7852; acc. 0.1068; gate 0.00335</td><td>Controls for extra context/token budget</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">
+          Caption: the demo cards below are qualitative examples. They should be read together
+          with this aggregate table; the current EXP029 playable card is illustrative, not a
+          broad decoded-music generation claim.
+        </p>
+      </article>
 
       <article id="compat-music-qa" class="demo-card task-demo-slot">
         <div class="demo-media sample-card-header">
@@ -542,6 +593,45 @@
         </a>
       </div>
 
+      <article class="provenance-card eval-summary-card">
+        <div>
+          <p class="eyebrow">Evaluation table 03</p>
+          <h3>EXP031A MIR-supervised <code>S_plan</code> gate: aggregate results before examples</h3>
+          <p class="table-caption">
+            Caption: this table reports completed EXP031A aggregate metrics. The qualitative
+            cards below are validation fixed examples; the table is the main quantitative evidence
+            for symbolic-aware MIR/music recovery.
+          </p>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Split / step</th><th>Loss</th><th>Inst. macro-F1</th><th>Inst. micro-F1</th><th>PC macro-F1</th><th>Meter acc.</th><th>Weak key acc.</th><th>Density acc.</th><th>Polyphony acc.</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Valid 375</td><td>8.6298</td><td class="good">0.5284</td><td>0.7172</td><td>0.8118</td><td>0.5321</td><td>0.3492</td><td>0.7074</td><td>0.6322</td></tr>
+            <tr><td>Valid 625</td><td class="good">6.5229</td><td>0.4986</td><td class="good">0.8047</td><td class="good">0.8514</td><td class="good">0.7661</td><td class="good">0.5484</td><td class="good">0.8873</td><td class="good">0.7697</td></tr>
+            <tr><td>Test 625</td><td>6.6153</td><td>0.5014</td><td>0.7908</td><td class="good">0.8541</td><td class="good">0.7834</td><td class="good">0.5567</td><td class="good">0.8743</td><td class="good">0.7614</td></tr>
+            <tr><td>Test 375</td><td>8.6788</td><td class="good">0.5143</td><td>0.7022</td><td>0.8124</td><td>0.5899</td><td>0.3776</td><td>0.7019</td><td>0.6297</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">
+          Caption: step 625 is better overall, while step 375 is better mainly on
+          instrument macro-F1. This suggests rare-instrument calibration/class imbalance
+          rather than a simple representation-collapse story.
+        </p>
+        <table>
+          <thead>
+            <tr><th>Control / missing evidence</th><th>Why it matters</th><th>Current observation</th><th>Next action</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Zero-feature control</td><td>Tests target priors and head bias</td><td>valid/375 snapshot remains high on micro-F1, pitch class, meter, density</td><td class="missing">Complete final valid/test run</td></tr>
+            <tr><td>Label-shuffle control</td><td>Tests feature-target alignment</td><td class="missing">Not completed in the main claim table</td><td class="missing">Run matched B4096/S625 setup</td></tr>
+            <tr><td>Threshold calibration</td><td>Tests fixed 0.5 multilabel threshold</td><td class="missing">Not run</td><td>Calibrate per-class thresholds on valid, report test</td></tr>
+            <tr><td>Test-split qualitative export</td><td>Avoids relying on validation fixed examples</td><td class="missing">Current demo examples are validation fixed windows</td><td>Export matched success/boundary cases from test split</td></tr>
+          </tbody>
+        </table>
+      </article>
+
       <div id="symbolic-mir-recovery" class="case-grid task-demo-slot">
         <article class="task-card">
           <span class="badge">EXP031A MIR recovery</span>
@@ -680,30 +770,6 @@
           </table>
         </article>
       </div>
-
-      <article class="provenance-card">
-        <div>
-          <p class="eyebrow">EXP031A held-out test summary</p>
-          <h3>Symbolic-aware MIDI/music recovery metrics</h3>
-          <p>
-            These are actual held-out test metrics from EXP031A at step 625. The cards above are qualitative fixed examples,
-            while this table is the current recovery-oriented test-set performance summary.
-          </p>
-        </div>
-        <table>
-          <thead>
-            <tr><th>Metric</th><th>Test value</th><th>Interpretation</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Instrument macro-F1</td><td>0.5014</td><td>Rare-class recovery remains difficult</td></tr>
-            <tr><td>Instrument micro-F1</td><td>0.7908</td><td>Common family recovery is stronger</td></tr>
-            <tr><td>Pitch-class macro-F1</td><td class="good">0.8541</td><td>Strong pitch-content recovery</td></tr>
-            <tr><td>Meter accuracy</td><td>0.7834</td><td>Useful but not perfect</td></tr>
-            <tr><td>Weak-key accuracy</td><td>0.5567</td><td>Key remains a weak-label challenge</td></tr>
-            <tr><td>Segment density / polyphony</td><td class="good">0.8743 / 0.7614</td><td>Local texture is recoverable</td></tr>
-          </tbody>
-        </table>
-      </article>
 
       <article class="roadmap">
         <h3>Next demo assets to add</h3>
