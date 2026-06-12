@@ -4,29 +4,55 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Symbolic-Aware LALM Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header class="topbar">
-    <div>
-      <p class="eyebrow">Symbolic-Aware Large Audio Language Models</p>
-      <h1>Interactive Experiment Demo</h1>
-      <p class="lede">
-        Demo-style companion page for the Overleaf presentation. It follows the
-        task-by-task organization of the UniAudio2.0 demo, but keeps our current
-        claim boundary explicit: <code>S_plan</code> is the learned symbolic
-        planning token; <code>S_LLM</code> is planned and not yet trained.
-      </p>
+  <header class="main-header">
+    <div class="shell header-shell">
+      <a href="https://dabinkim0.github.io/" class="logo">Dabin Kim</a>
+      <nav class="main-nav" aria-label="Primary">
+        <ul>
+          <li><a href="https://dabinkim0.github.io/publications/" class="is-active nav-current">Publications</a></li>
+          <li><a href="https://dabinkim0.github.io/projects/">Projects</a></li>
+          <li><a href="https://dabinkim0.github.io/">About</a></li>
+        </ul>
+      </nav>
     </div>
-    <nav class="links" aria-label="Reference links">
-      <a href="https://dongchaoyang.top/UniAudio2Demo/" target="_blank" rel="noreferrer">UniAudio2 Demo</a>
-      <a href="https://arxiv.org/abs/2602.04683" target="_blank" rel="noreferrer">Paper</a>
-      <a href="../exp_progress_slides.html">Slides HTML</a>
-    </nav>
   </header>
 
-  <main>
-    <section class="claim-grid" aria-label="Claim boundary">
+  <div class="shell post-layout">
+    <main class="post-page">
+      <section id="overview" class="post-section">
+      <h1>Interactive Experiment Demo</h1>
+      <div class="article-meta">
+        <p class="article-authors">Symbolic-Aware Large Audio Language Models</p>
+        <p class="article-affiliations">Experiment-progress companion page for the Overleaf presentation</p>
+        <p class="article-supporting">Built around UniAudio2.0-style task organization with explicit current-claim boundaries.</p>
+        <p class="article-resource-list">
+          <a class="article-resource-link" href="https://dongchaoyang.top/UniAudio2Demo/" target="_blank" rel="noreferrer">[UniAudio2 Demo]</a>
+          <a class="article-resource-link" href="https://arxiv.org/abs/2602.04683" target="_blank" rel="noreferrer">[Paper]</a>
+          <a class="article-resource-link" href="https://github.com/dabinkim0/symbolic-fused-lalm-exp-progress-slides/blob/main/exp_progress_slides.html" target="_blank" rel="noreferrer">[Slides HTML]</a>
+        </p>
+      </div>
+      <div class="methodology">
+        <h3>Demo Scope</h3>
+        <p class="abstract-copy">
+          This page keeps the current claim boundary explicit: <code>S_plan</code>
+          is the learned symbolic planning token evaluated through reconstruction,
+          acoustic-token proxy, stream controls, and MIR recovery; <code>S_LLM</code>
+          is the planned LLM-supervised symbolic tokenizer/token stream and is not
+          trained yet.
+        </p>
+      </div>
+    </section>
+
+    <section id="claim-boundary" class="post-section">
+      <h2 class="section-title centered-title">Claim Boundary</h2>
+      <div class="demo-section">
+      <div class="claim-grid" aria-label="Claim boundary">
       <article class="claim">
         <span class="label">Current token</span>
         <strong><code>S_plan</code></strong>
@@ -42,7 +68,7 @@
         <strong>Slakh paired audio/MIDI</strong>
         <p>All playable clips in this page are project-local Slakh audio assets, avoiding copied web-audio dataset material.</p>
       </article>
-    </section>
+      </div>
 
     <section class="provenance-card" aria-label="Inference provenance">
       <div>
@@ -65,7 +91,12 @@
         </tbody>
       </table>
     </section>
+      </div>
+    </section>
 
+    <section id="demo-examples" class="post-section">
+      <h2 class="section-title centered-title">Demo Examples</h2>
+      <div class="demo-section">
     <div class="tabs" role="tablist" aria-label="Demo sections">
       <button class="tab active" type="button" data-target="preserve">1. UniAudio Compatibility</button>
       <button class="tab" type="button" data-target="music">2. Music Downstream Gains</button>
@@ -74,16 +105,16 @@
 
     <section id="preserve" class="panel active" aria-labelledby="preserve-title">
       <div class="section-head">
-        <p class="eyebrow">Demo block 01</p>
-        <h2 id="preserve-title">Existing UniAudio Behavior To Preserve</h2>
-        <p>
+          <p class="eyebrow">Demo block 01</p>
+          <h2 id="preserve-title">Existing UniAudio Behavior To Preserve</h2>
+          <p>
           This block defines the baseline behavior that a future final LALM integration must preserve.
           It is not yet a completed final-LALM preservation claim.
         </p>
       </div>
 
       <article class="demo-card">
-        <div class="demo-media">
+        <div class="demo-media sample-card-header">
           <span class="badge">EXP001 baseline diagnostic</span>
           <h3>Frozen UniAudio2 QA: label-prior failure case</h3>
           <audio controls preload="metadata" src="assets/audio/slakh_track01877_qa_failure.wav"></audio>
@@ -135,7 +166,7 @@
       </div>
 
       <article class="demo-card">
-        <div class="demo-media">
+        <div class="demo-media sample-card-header">
           <span class="badge">EXP029 stream control</span>
           <h3>Aligned <code>S_plan</code> lowers semantic-token loss</h3>
           <audio controls preload="metadata" src="assets/audio/slakh_track01501_w000_stream_control.wav"></audio>
@@ -292,12 +323,17 @@
         </ul>
       </article>
     </section>
-  </main>
+      </div>
+    </section>
+    </main>
+  </div>
 
-  <footer>
-    <p>
+  <footer class="main-footer">
+    <div class="shell footer-shell">
+    <p class="copyright">
       Static demo page prepared for team discussion. Quantitative values are drawn from EXP001, EXP029, EXP031A, and EXP032 qualitative case-study artifacts.
     </p>
+    </div>
   </footer>
 
   <script src="script.js"></script>
