@@ -12,7 +12,7 @@ Sections:
 
 1. UniAudio 2.0 Audio / Speech Tasks.
 2. UniAudio 2.0 Music Tasks.
-3. Novel Symbolic-Related Music Tasks.
+3. Symbolic-Aware MIDI / Music Tasks.
 
 The page intentionally distinguishes `S_plan` from `S_LLM`:
 
@@ -25,8 +25,9 @@ Inference provenance:
   held-out Slakh QA aggregate metrics.
 - EXP029 stream-control reports held-out test aggregate metrics; its currently
   saved per-sample demo card uses validation fixed-example artifacts.
-- EXP031A MIR recovery reports held-out test aggregate metrics; its currently
-  saved per-sample demo cards use validation fixed-example artifacts.
+- EXP031A MIR recovery reports held-out test aggregate metrics for the
+  symbolic-aware MIDI/music task family; its currently saved per-sample demo
+  cards use validation fixed-example artifacts.
 - Output MIDI piano-roll comparison is not claimed yet because EXP031A outputs
   MIR JSON/caption proxies rather than generated MIDI.
 
