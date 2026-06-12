@@ -334,6 +334,13 @@ h3 {
   line-height: 1.6;
 }
 
+.caption code {
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 400;
+}
+
 .caution {
   background: var(--warn-bg);
 }
@@ -562,6 +569,7 @@ meter {
   color: var(--muted);
   font-size: 0.98rem;
   line-height: 1.5;
+  text-align: center;
 }
 
 .roadmap {
