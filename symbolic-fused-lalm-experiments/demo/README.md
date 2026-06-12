@@ -10,9 +10,9 @@ https://dabinkim0.github.io/symbolic-fused-lalm-experiments/demo/
 
 Sections:
 
-1. Existing UniAudio behavior to preserve.
-2. Existing music downstream proxy improvement.
-3. New symbolic-related music downstream behavior.
+1. UniAudio 2.0 Audio / Speech Tasks.
+2. UniAudio 2.0 Music Tasks.
+3. Novel Symbolic-Related Music Tasks.
 
 The page intentionally distinguishes `S_plan` from `S_LLM`:
 
@@ -21,8 +21,8 @@ The page intentionally distinguishes `S_plan` from `S_LLM`:
 
 Inference provenance:
 
-- EXP001 UniAudio compatibility uses a Slakh test-split QA sample and held-out
-  Slakh QA aggregate metrics.
+- EXP001 UniAudio2 music QA diagnostic uses a Slakh test-split QA sample and
+  held-out Slakh QA aggregate metrics.
 - EXP029 stream-control reports held-out test aggregate metrics; its currently
   saved per-sample demo card uses validation fixed-example artifacts.
 - EXP031A MIR recovery reports held-out test aggregate metrics; its currently
