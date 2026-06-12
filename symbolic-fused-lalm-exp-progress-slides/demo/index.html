@@ -100,7 +100,7 @@
     <div class="tabs" role="tablist" aria-label="Demo sections">
       <button class="tab active" type="button" data-target="preserve">1. UniAudio 2.0 Audio / Speech Tasks</button>
       <button class="tab" type="button" data-target="music">2. UniAudio 2.0 Music Tasks</button>
-      <button class="tab" type="button" data-target="symbolic">3. Novel Symbolic-Related Music Tasks</button>
+      <button class="tab" type="button" data-target="symbolic">3. Symbolic-Aware MIDI / Music Tasks</button>
     </div>
 
     <section id="preserve" class="panel active" aria-labelledby="preserve-title">
@@ -108,9 +108,9 @@
           <p class="eyebrow">Demo block 01</p>
           <h2 id="preserve-title">UniAudio 2.0 Audio / Speech Tasks</h2>
           <p>
-          This block tracks audio and speech task families inherited from UniAudio 2.0
-          that a future final LALM integration must preserve. It is not yet a
-          completed final-LALM preservation claim.
+          This block tracks non-music audio and speech task families inherited
+          from UniAudio 2.0 that a future final LALM integration must preserve.
+          It is not yet a completed final-LALM preservation claim.
         </p>
       </div>
 
@@ -275,10 +275,11 @@
         <p class="eyebrow">Demo block 02</p>
         <h2 id="music-title">UniAudio 2.0 Music Tasks</h2>
         <p>
-          This block separates UniAudio 2.0 music-language and music-generation
-          task families from general audio/speech compatibility. The current concrete
-          evidence includes frozen music QA and an EXP029 stream-control proxy;
-          text-to-music and song-generation demos are reserved as explicit future slots.
+          This block presents UniAudio 2.0 music-language and music-generation tasks
+          as comparison demos: frozen/non-symbolic UniAudio2 behavior versus
+          Symbolic-Aware conditions. The current concrete evidence includes frozen
+          music QA and an EXP029 aligned-vs-control stream proxy; text-to-music and
+          song-generation demos are reserved as explicit future slots.
         </p>
       </div>
 
@@ -288,12 +289,13 @@
           <h3>Music QA / Instrument Presence</h3>
           <p>
             Frozen UniAudio2 is evaluated on Slakh instrument-presence prompts.
-            This is the current representative music-language diagnostic.
+            The missing paired comparison is the same prompt set under a
+            Symbolic-Aware LALM condition.
           </p>
           <dl>
             <dt>Input</dt><dd>Music audio + constrained yes/no question</dd>
-            <dt>Artifact</dt><dd>EXP001 Slakh test QA outputs</dd>
-            <dt>Demo status</dt><dd class="good">Playable example below</dd>
+            <dt>Comparison</dt><dd>Frozen UniAudio2 vs Symbolic-Aware LALM</dd>
+            <dt>Demo status</dt><dd class="missing">Baseline available; paired symbolic result missing</dd>
           </dl>
           <span class="slot-cta">View current demo</span>
         </a>
@@ -323,7 +325,7 @@
           <dl>
             <dt>Input</dt><dd>Music text prompt</dd>
             <dt>Output</dt><dd>Generated music audio</dd>
-            <dt>Needed asset</dt><dd class="missing">Aligned vs control symbolic-generation comparison</dd>
+            <dt>Needed asset</dt><dd class="missing">Baseline UniAudio2 vs Symbolic-Aware generation pair</dd>
           </dl>
           <span class="slot-cta">View placeholder</span>
         </a>
@@ -338,7 +340,7 @@
           <dl>
             <dt>Input</dt><dd>Lyrics, style, or song prompt</dd>
             <dt>Output</dt><dd>Song audio with vocal/music structure</dd>
-            <dt>Needed asset</dt><dd class="missing">Generated sample and structure-control metrics</dd>
+            <dt>Needed asset</dt><dd class="missing">Baseline UniAudio2 vs Symbolic-Aware song-generation pair</dd>
           </dl>
           <span class="slot-cta">View placeholder</span>
         </a>
@@ -353,8 +355,18 @@
         </div>
         <div class="demo-content">
           <p class="objective">
-            Objective: show why compatibility and control demos are needed before claiming final music reasoning.
+            Objective: show the frozen UniAudio2 music-QA baseline before adding a
+            paired Symbolic-Aware comparison.
           </p>
+          <table>
+            <thead>
+              <tr><th>Condition</th><th>Current artifact</th><th>Interpretation</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Frozen UniAudio2</td><td class="good">Available below</td><td>Baseline music-language behavior and failure mode</td></tr>
+              <tr><td>Symbolic-Aware LALM</td><td class="missing">Not generated yet</td><td>Needed to claim symbolic conditioning improves or preserves music QA</td></tr>
+            </tbody>
+          </table>
           <table>
             <thead>
               <tr><th>Question</th><th>Target</th><th>Normal</th><th>No audio</th><th>Shuffled audio</th></tr>
@@ -445,12 +457,12 @@
           <h3>Text-to-Music</h3>
           <p>
             Future slot for prompt-to-music generation, where the key question is whether
-            symbolic planning improves musical structure without hurting audio quality.
+            Symbolic-Aware conditioning improves musical structure without hurting audio quality.
           </p>
           <table>
             <tbody>
               <tr><th>Prompt type</th><td>Music style, instrumentation, structure, or genre prompt.</td></tr>
-              <tr><th>Needed demo</th><td class="missing">Aligned vs shuffled/control symbolic-generation comparison.</td></tr>
+              <tr><th>Needed demo</th><td class="missing">Baseline UniAudio2 generation and Symbolic-Aware generation on the same prompt.</td></tr>
             </tbody>
           </table>
         </article>
@@ -465,7 +477,7 @@
           <table>
             <tbody>
               <tr><th>Prompt type</th><td>Lyrics, style, form, or song-level instruction.</td></tr>
-              <tr><th>Needed demo</th><td class="missing">Generated sample with vocal/music quality and structure-control metrics.</td></tr>
+              <tr><th>Needed demo</th><td class="missing">Baseline UniAudio2 song output and Symbolic-Aware song output with structure-control metrics.</td></tr>
             </tbody>
           </table>
         </article>
@@ -475,14 +487,62 @@
     <section id="symbolic" class="panel" aria-labelledby="symbolic-title">
       <div class="section-head">
         <p class="eyebrow">Demo block 03</p>
-        <h2 id="symbolic-title">Novel Symbolic-Related Music Tasks</h2>
+        <h2 id="symbolic-title">Symbolic-Aware MIDI / Music Tasks</h2>
         <p>
-          These cases show the new task family that is specific to the symbolic-token contribution:
-          recover human-readable MIR structure from <code>S_plan</code>.
+          These cases are not claimed as impossible for prior systems. They are the
+          symbolic-representation task family where this project should provide a
+          clearer interface: recover, convert, or condition on MIDI-like musical structure.
         </p>
       </div>
 
-      <div class="case-grid">
+      <div class="task-slot-grid" aria-label="Symbolic-aware MIDI and music task slots">
+        <a class="task-slot ready" href="#symbolic-mir-recovery">
+          <span class="badge">Current evidence</span>
+          <h3>MIR Structure Recovery</h3>
+          <p>
+            Recover instruments, key, meter, tempo, and texture attributes from
+            <code>S_plan</code> as a symbolic planning-token diagnostic.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Music audio window + learned symbolic stream</dd>
+            <dt>Output</dt><dd>MIR JSON/caption proxy</dd>
+            <dt>Status</dt><dd class="good">EXP031A examples below</dd>
+          </dl>
+          <span class="slot-cta">View current demo</span>
+        </a>
+
+        <a class="task-slot pending" href="#symbolic-midi-to-music">
+          <span class="badge">Future slot</span>
+          <h3>MIDI-to-Music</h3>
+          <p>
+            Use symbolic or MIDI-like input as a controllable plan for audio music
+            generation, then compare structure adherence and audio quality.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>MIDI or symbolic plan</dd>
+            <dt>Output</dt><dd>Generated music waveform</dd>
+            <dt>Needed asset</dt><dd class="missing">Generated audio plus piano-roll alignment</dd>
+          </dl>
+          <span class="slot-cta">View placeholder</span>
+        </a>
+
+        <a class="task-slot pending" href="#symbolic-music-to-midi">
+          <span class="badge">Future slot</span>
+          <h3>Music-to-MIDI</h3>
+          <p>
+            Convert music audio into MIDI-like structure and visualize input/output
+            piano rolls to make symbolic recovery inspectable.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Music audio</dd>
+            <dt>Output</dt><dd>MIDI or piano-roll representation</dd>
+            <dt>Needed asset</dt><dd class="missing">Predicted MIDI with GT/pseudo-GT comparison</dd>
+          </dl>
+          <span class="slot-cta">View placeholder</span>
+        </a>
+      </div>
+
+      <div id="symbolic-mir-recovery" class="case-grid task-demo-slot">
         <article class="task-card">
           <span class="badge">EXP031A MIR recovery</span>
           <h3>Success case: instruments, key, and meter recovered</h3>
@@ -583,13 +643,51 @@
         </article>
       </div>
 
+      <div class="downstream-task-list" aria-label="Symbolic-aware MIDI conversion demo slots">
+        <article id="symbolic-midi-to-music" class="placeholder-demo-card task-demo-slot">
+          <p class="eyebrow">Symbolic task slot</p>
+          <h3>MIDI-to-Music</h3>
+          <p>
+            Future demo slot for using MIDI or a MIDI-like symbolic plan as the
+            control input for music audio generation. The demo should show whether
+            the generated waveform follows instrument, pitch, rhythm, and form cues
+            while preserving audio quality.
+          </p>
+          <table>
+            <tbody>
+              <tr><th>Comparison</th><td>Symbolic-Aware generation from MIDI plan vs non-symbolic text/audio baseline.</td></tr>
+              <tr><th>Visualization</th><td class="missing">Input MIDI piano roll, generated-audio transcription or aligned proxy piano roll.</td></tr>
+              <tr><th>Metrics</th><td>Structure adherence, instrument F1, pitch/rhythm overlap, FAD/KL, listening notes.</td></tr>
+            </tbody>
+          </table>
+        </article>
+
+        <article id="symbolic-music-to-midi" class="placeholder-demo-card task-demo-slot">
+          <p class="eyebrow">Symbolic task slot</p>
+          <h3>Music-to-MIDI</h3>
+          <p>
+            Future demo slot for converting music audio into MIDI-like structure.
+            This is the natural visual companion to the current EXP031A MIR recovery:
+            users should see the input audio, target/pseudo-target piano roll, and
+            predicted piano roll side by side.
+          </p>
+          <table>
+            <tbody>
+              <tr><th>Comparison</th><td>Symbolic-Aware transcription/recovery vs baseline audio-only transcription or MIR extractor.</td></tr>
+              <tr><th>Visualization</th><td class="missing">GT MIDI piano roll and predicted MIDI piano roll for the same audio window.</td></tr>
+              <tr><th>Metrics</th><td>Note F1, onset/offset F1, instrument F1, key/meter/tempo accuracy.</td></tr>
+            </tbody>
+          </table>
+        </article>
+      </div>
+
       <article class="provenance-card">
         <div>
           <p class="eyebrow">EXP031A held-out test summary</p>
-          <h3>Symbolic-related downstream metrics</h3>
+          <h3>Symbolic-aware MIDI/music recovery metrics</h3>
           <p>
             These are actual held-out test metrics from EXP031A at step 625. The cards above are qualitative fixed examples,
-            while this table is the test-set performance summary.
+            while this table is the current recovery-oriented test-set performance summary.
           </p>
         </div>
         <table>
@@ -611,9 +709,9 @@
         <h3>Next demo assets to add</h3>
         <ul>
           <li><span class="missing">Missing:</span> test-split per-sample EXP029/EXP031A inference cards; current cards use saved validation fixed examples.</li>
-          <li><span class="missing">Missing:</span> output MIDI piano-roll visualization, because EXP031A outputs MIR JSON/caption proxy rather than MIDI.</li>
-          <li><span class="missing">Missing:</span> decoded music captioning with aligned vs control prompts.</li>
-          <li><span class="missing">Missing:</span> waveform generation or editing after symbolic intervention.</li>
+          <li><span class="missing">Missing:</span> baseline UniAudio2 vs Symbolic-Aware music-task pairs for QA, text-to-music, and song generation.</li>
+          <li><span class="missing">Missing:</span> Music-to-MIDI output piano-roll visualization, because EXP031A currently outputs MIR JSON/caption proxy rather than MIDI.</li>
+          <li><span class="missing">Missing:</span> MIDI-to-Music waveform generation after symbolic intervention.</li>
           <li><span class="missing">Missing:</span> final <code>S_LLM</code> examples after LLM-supervised tokenizer training.</li>
         </ul>
       </article>
