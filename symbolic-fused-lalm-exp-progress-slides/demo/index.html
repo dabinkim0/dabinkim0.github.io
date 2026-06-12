@@ -98,37 +98,23 @@
       <h2 class="section-title centered-title">Demo Examples</h2>
       <div class="demo-section">
     <div class="tabs" role="tablist" aria-label="Demo sections">
-      <button class="tab active" type="button" data-target="preserve">1. UniAudio Compatibility</button>
-      <button class="tab" type="button" data-target="music">2. Music Downstream Gains</button>
-      <button class="tab" type="button" data-target="symbolic">3. Symbolic Music Tasks</button>
+      <button class="tab active" type="button" data-target="preserve">1. UniAudio 2.0 Audio / Speech Tasks</button>
+      <button class="tab" type="button" data-target="music">2. UniAudio 2.0 Music Tasks</button>
+      <button class="tab" type="button" data-target="symbolic">3. Novel Symbolic-Related Music Tasks</button>
     </div>
 
     <section id="preserve" class="panel active" aria-labelledby="preserve-title">
       <div class="section-head">
           <p class="eyebrow">Demo block 01</p>
-          <h2 id="preserve-title">Existing UniAudio Behavior To Preserve</h2>
+          <h2 id="preserve-title">UniAudio 2.0 Audio / Speech Tasks</h2>
           <p>
-          This block defines the baseline behavior that a future final LALM integration must preserve.
-          It is not yet a completed final-LALM preservation claim.
+          This block tracks audio and speech task families inherited from UniAudio 2.0
+          that a future final LALM integration must preserve. It is not yet a
+          completed final-LALM preservation claim.
         </p>
       </div>
 
-      <div class="task-slot-grid" aria-label="Representative UniAudio2 compatibility task slots">
-        <a class="task-slot ready" href="#compat-music-qa">
-          <span class="badge">Current evidence</span>
-          <h3>Music QA / Instrument Presence</h3>
-          <p>
-            Frozen UniAudio2 is evaluated on Slakh instrument-presence prompts.
-            This is the current representative compatibility diagnostic.
-          </p>
-          <dl>
-            <dt>Input</dt><dd>Music audio + constrained yes/no question</dd>
-            <dt>Artifact</dt><dd>EXP001 Slakh test QA outputs</dd>
-            <dt>Demo status</dt><dd class="good">Playable example below</dd>
-          </dl>
-          <span class="slot-cta">View current demo</span>
-        </a>
-
+      <div class="task-slot-grid" aria-label="Representative UniAudio2 audio and speech task slots">
         <a class="task-slot pending" href="#compat-codec-reconstruction">
           <span class="badge">Future slot</span>
           <h3>Audio Codec Tokenizer Reconstruction Comparison</h3>
@@ -174,36 +160,6 @@
           <span class="slot-cta">View placeholder</span>
         </a>
 
-        <a class="task-slot pending" href="#compat-text-to-music">
-          <span class="badge">Future slot</span>
-          <h3>Text-to-Music</h3>
-          <p>
-            Placeholder for prompt-to-music generation where symbolic planning should
-            improve musical structure without hurting audio quality.
-          </p>
-          <dl>
-            <dt>Input</dt><dd>Music text prompt</dd>
-            <dt>Output</dt><dd>Generated music audio</dd>
-            <dt>Needed asset</dt><dd class="missing">Aligned vs control symbolic-generation comparison</dd>
-          </dl>
-          <span class="slot-cta">View placeholder</span>
-        </a>
-
-        <a class="task-slot pending" href="#compat-song-generation">
-          <span class="badge">Future slot</span>
-          <h3>Song Generation</h3>
-          <p>
-            Placeholder for vocal/music generation examples, separated from pure
-            instrumental text-to-music.
-          </p>
-          <dl>
-            <dt>Input</dt><dd>Lyrics, style, or song prompt</dd>
-            <dt>Output</dt><dd>Song audio with vocal/music structure</dd>
-            <dt>Needed asset</dt><dd class="missing">Generated sample and structure-control metrics</dd>
-          </dl>
-          <span class="slot-cta">View placeholder</span>
-        </a>
-
         <a class="task-slot pending" href="#compat-text-instructed-tts">
           <span class="badge">Future slot</span>
           <h3>Text-Instructed TTS</h3>
@@ -235,48 +191,7 @@
         </a>
       </div>
 
-      <article id="compat-music-qa" class="demo-card task-demo-slot">
-        <div class="demo-media sample-card-header">
-          <span class="badge">EXP001 baseline diagnostic</span>
-          <h3>Frozen UniAudio2 QA: label-prior failure case</h3>
-          <audio controls preload="metadata" src="assets/audio/slakh_track01877_qa_failure.wav"></audio>
-          <p class="caption">Sample: <code>Slakh_Track01877_w000_s0000400</code> | split: test | artifact: EXP001 model outputs</p>
-        </div>
-        <div class="demo-content">
-          <p class="objective">
-            Objective: show why compatibility and control demos are needed before claiming final music reasoning.
-          </p>
-          <table>
-            <thead>
-              <tr><th>Question</th><th>Target</th><th>Normal</th><th>No audio</th><th>Shuffled audio</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>Bass present?</td><td>No</td><td class="bad">Yes</td><td class="bad">Yes</td><td>No</td></tr>
-              <tr><td>Guitar present?</td><td>No</td><td class="bad">Yes</td><td class="bad">Yes</td><td class="bad">free text</td></tr>
-              <tr><td>Strings present?</td><td>No</td><td class="bad">Yes</td><td class="bad">Yes</td><td class="bad">Yes</td></tr>
-              <tr><td>Synth present?</td><td>No</td><td class="bad">Yes</td><td class="bad">Yes</td><td class="bad">Yes</td></tr>
-            </tbody>
-          </table>
-          <p class="note">
-            Interpretation: the frozen baseline can answer some prompts, but it also shows yes-bias and control sensitivity.
-            A future symbolic LALM demo must show that adding <code>S_plan</code> or <code>S_LLM</code> does not break base audio-language behavior.
-          </p>
-          <table>
-            <thead>
-              <tr><th>Held-out Slakh QA summary</th><th>Value</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>QA rows</td><td>906</td></tr>
-              <tr><td>Exact accuracy</td><td>0.6181</td></tr>
-              <tr><td>Macro-F1</td><td>0.3782</td></tr>
-              <tr><td>Active invalid rate</td><td>0.1181</td></tr>
-            </tbody>
-          </table>
-          <p class="missing">Missing: final integrated LALM preservation demo with the same prompts before/after symbolic conditioning.</p>
-        </div>
-      </article>
-
-      <div class="downstream-task-list" aria-label="UniAudio2 downstream task demo slots">
+      <div class="downstream-task-list" aria-label="UniAudio2 audio and speech task demo slots">
         <article id="compat-codec-reconstruction" class="placeholder-demo-card task-demo-slot">
           <p class="eyebrow">Downstream task slot</p>
           <h3>Audio Codec Tokenizer Reconstruction Comparison</h3>
@@ -323,36 +238,6 @@
           </table>
         </article>
 
-        <article id="compat-text-to-music" class="placeholder-demo-card task-demo-slot">
-          <p class="eyebrow">Downstream task slot</p>
-          <h3>Text-to-Music</h3>
-          <p>
-            Future slot for prompt-to-music generation, where the key question is whether
-            symbolic planning improves musical structure without hurting audio quality.
-          </p>
-          <table>
-            <tbody>
-              <tr><th>Prompt type</th><td>Music style, instrumentation, structure, or genre prompt.</td></tr>
-              <tr><th>Needed demo</th><td class="missing">Aligned vs shuffled/control symbolic-generation comparison.</td></tr>
-            </tbody>
-          </table>
-        </article>
-
-        <article id="compat-song-generation" class="placeholder-demo-card task-demo-slot">
-          <p class="eyebrow">Downstream task slot</p>
-          <h3>Song Generation</h3>
-          <p>
-            Future slot for vocal/music song generation, kept separate from instrumental
-            text-to-music because lyrics, vocal quality, and arrangement require different evidence.
-          </p>
-          <table>
-            <tbody>
-              <tr><th>Prompt type</th><td>Lyrics, style, form, or song-level instruction.</td></tr>
-              <tr><th>Needed demo</th><td class="missing">Generated sample with vocal/music quality and structure-control metrics.</td></tr>
-            </tbody>
-          </table>
-        </article>
-
         <article id="compat-text-instructed-tts" class="placeholder-demo-card task-demo-slot">
           <p class="eyebrow">Downstream task slot</p>
           <h3>Text-Instructed TTS</h3>
@@ -388,14 +273,119 @@
     <section id="music" class="panel" aria-labelledby="music-title">
       <div class="section-head">
         <p class="eyebrow">Demo block 02</p>
-        <h2 id="music-title">Existing Music Downstream Task Improvement</h2>
+        <h2 id="music-title">UniAudio 2.0 Music Tasks</h2>
         <p>
-          This block makes the metric gain audible and inspectable: the same clip is evaluated with aligned,
-          shuffled, and dummy symbolic streams.
+          This block separates UniAudio 2.0 music-language and music-generation
+          task families from general audio/speech compatibility. The current concrete
+          evidence includes frozen music QA and an EXP029 stream-control proxy;
+          text-to-music and song-generation demos are reserved as explicit future slots.
         </p>
       </div>
 
-      <article class="demo-card">
+      <div class="task-slot-grid" aria-label="Representative UniAudio2 music task slots">
+        <a class="task-slot ready" href="#compat-music-qa">
+          <span class="badge">Current evidence</span>
+          <h3>Music QA / Instrument Presence</h3>
+          <p>
+            Frozen UniAudio2 is evaluated on Slakh instrument-presence prompts.
+            This is the current representative music-language diagnostic.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Music audio + constrained yes/no question</dd>
+            <dt>Artifact</dt><dd>EXP001 Slakh test QA outputs</dd>
+            <dt>Demo status</dt><dd class="good">Playable example below</dd>
+          </dl>
+          <span class="slot-cta">View current demo</span>
+        </a>
+
+        <a class="task-slot ready" href="#music-stream-control">
+          <span class="badge">Current evidence</span>
+          <h3>Music Stream-Control Proxy</h3>
+          <p>
+            Same-window UniAudio semantic-token loss is compared under aligned,
+            shuffled, and dummy symbolic streams.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Music audio window + symbolic stream variant</dd>
+            <dt>Artifact</dt><dd>EXP029 held-out and fixed-example outputs</dd>
+            <dt>Demo status</dt><dd class="good">Playable proxy below</dd>
+          </dl>
+          <span class="slot-cta">View current demo</span>
+        </a>
+
+        <a class="task-slot pending" href="#compat-text-to-music">
+          <span class="badge">Future slot</span>
+          <h3>Text-to-Music</h3>
+          <p>
+            Placeholder for prompt-to-music generation where symbolic planning should
+            improve musical structure without hurting audio quality.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Music text prompt</dd>
+            <dt>Output</dt><dd>Generated music audio</dd>
+            <dt>Needed asset</dt><dd class="missing">Aligned vs control symbolic-generation comparison</dd>
+          </dl>
+          <span class="slot-cta">View placeholder</span>
+        </a>
+
+        <a class="task-slot pending" href="#compat-song-generation">
+          <span class="badge">Future slot</span>
+          <h3>Song Generation</h3>
+          <p>
+            Placeholder for vocal/music generation examples, separated from pure
+            instrumental text-to-music.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Lyrics, style, or song prompt</dd>
+            <dt>Output</dt><dd>Song audio with vocal/music structure</dd>
+            <dt>Needed asset</dt><dd class="missing">Generated sample and structure-control metrics</dd>
+          </dl>
+          <span class="slot-cta">View placeholder</span>
+        </a>
+      </div>
+
+      <article id="compat-music-qa" class="demo-card task-demo-slot">
+        <div class="demo-media sample-card-header">
+          <span class="badge">EXP001 baseline diagnostic</span>
+          <h3>Frozen UniAudio2 QA: label-prior failure case</h3>
+          <audio controls preload="metadata" src="assets/audio/slakh_track01877_qa_failure.wav"></audio>
+          <p class="caption">Sample: <code>Slakh_Track01877_w000_s0000400</code> | split: test | artifact: EXP001 model outputs</p>
+        </div>
+        <div class="demo-content">
+          <p class="objective">
+            Objective: show why compatibility and control demos are needed before claiming final music reasoning.
+          </p>
+          <table>
+            <thead>
+              <tr><th>Question</th><th>Target</th><th>Normal</th><th>No audio</th><th>Shuffled audio</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Bass present?</td><td>No</td><td class="bad">Yes</td><td class="bad">Yes</td><td>No</td></tr>
+              <tr><td>Guitar present?</td><td>No</td><td class="bad">Yes</td><td class="bad">Yes</td><td class="bad">free text</td></tr>
+              <tr><td>Strings present?</td><td>No</td><td class="bad">Yes</td><td class="bad">Yes</td><td class="bad">Yes</td></tr>
+              <tr><td>Synth present?</td><td>No</td><td class="bad">Yes</td><td class="bad">Yes</td><td class="bad">Yes</td></tr>
+            </tbody>
+          </table>
+          <p class="note">
+            Interpretation: the frozen baseline can answer some prompts, but it also shows yes-bias and control sensitivity.
+            A future symbolic LALM demo must show that adding <code>S_plan</code> or <code>S_LLM</code> does not break base audio-language behavior.
+          </p>
+          <table>
+            <thead>
+              <tr><th>Held-out Slakh QA summary</th><th>Value</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>QA rows</td><td>906</td></tr>
+              <tr><td>Exact accuracy</td><td>0.6181</td></tr>
+              <tr><td>Macro-F1</td><td>0.3782</td></tr>
+              <tr><td>Active invalid rate</td><td>0.1181</td></tr>
+            </tbody>
+          </table>
+          <p class="missing">Missing: final integrated LALM preservation demo with the same prompts before/after symbolic conditioning.</p>
+        </div>
+      </article>
+
+      <article id="music-stream-control" class="demo-card task-demo-slot">
         <div class="demo-media sample-card-header">
           <span class="badge">EXP029 stream control</span>
           <h3>Aligned <code>S_plan</code> lowers semantic-token loss</h3>
@@ -448,12 +438,44 @@
           </p>
         </div>
       </article>
+
+      <div class="downstream-task-list" aria-label="UniAudio2 music task demo slots">
+        <article id="compat-text-to-music" class="placeholder-demo-card task-demo-slot">
+          <p class="eyebrow">Downstream task slot</p>
+          <h3>Text-to-Music</h3>
+          <p>
+            Future slot for prompt-to-music generation, where the key question is whether
+            symbolic planning improves musical structure without hurting audio quality.
+          </p>
+          <table>
+            <tbody>
+              <tr><th>Prompt type</th><td>Music style, instrumentation, structure, or genre prompt.</td></tr>
+              <tr><th>Needed demo</th><td class="missing">Aligned vs shuffled/control symbolic-generation comparison.</td></tr>
+            </tbody>
+          </table>
+        </article>
+
+        <article id="compat-song-generation" class="placeholder-demo-card task-demo-slot">
+          <p class="eyebrow">Downstream task slot</p>
+          <h3>Song Generation</h3>
+          <p>
+            Future slot for vocal/music song generation, kept separate from instrumental
+            text-to-music because lyrics, vocal quality, and arrangement require different evidence.
+          </p>
+          <table>
+            <tbody>
+              <tr><th>Prompt type</th><td>Lyrics, style, form, or song-level instruction.</td></tr>
+              <tr><th>Needed demo</th><td class="missing">Generated sample with vocal/music quality and structure-control metrics.</td></tr>
+            </tbody>
+          </table>
+        </article>
+      </div>
     </section>
 
     <section id="symbolic" class="panel" aria-labelledby="symbolic-title">
       <div class="section-head">
         <p class="eyebrow">Demo block 03</p>
-        <h2 id="symbolic-title">New Symbolic-Related Music Downstream Tasks</h2>
+        <h2 id="symbolic-title">Novel Symbolic-Related Music Tasks</h2>
         <p>
           These cases show the new task family that is specific to the symbolic-token contribution:
           recover human-readable MIR structure from <code>S_plan</code>.
