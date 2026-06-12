@@ -113,6 +113,120 @@
         </p>
       </div>
 
+      <div class="task-slot-grid" aria-label="Representative UniAudio2 compatibility task slots">
+        <article class="task-slot ready">
+          <span class="badge">Current evidence</span>
+          <h3>Music QA / Instrument Presence</h3>
+          <p>
+            Frozen UniAudio2 is evaluated on Slakh instrument-presence prompts.
+            This is the current representative compatibility diagnostic.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Music audio + constrained yes/no question</dd>
+            <dt>Artifact</dt><dd>EXP001 Slakh test QA outputs</dd>
+            <dt>Demo status</dt><dd class="good">Playable example below</dd>
+          </dl>
+        </article>
+
+        <article class="task-slot pending">
+          <span class="badge">Future slot</span>
+          <h3>Audio Codec Tokenizer Reconstruction Comparison</h3>
+          <p>
+            Add only after a symbolic-aware audio codec, residual codec branch, or
+            decode path is actually trained and evaluated.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Original audio, frozen codec reconstruction, symbolic-aware reconstruction</dd>
+            <dt>Metric</dt><dd>FAD/KL, mel/LSD, SI-SDR, listening sample</dd>
+            <dt>Current status</dt><dd class="missing">Not yet a project claim</dd>
+          </dl>
+        </article>
+
+        <article class="task-slot pending">
+          <span class="badge">Future slot</span>
+          <h3>Text-to-Speech</h3>
+          <p>
+            Placeholder for checking whether symbolic conditioning preserves general
+            UniAudio2 text-to-speech behavior.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Text prompt</dd>
+            <dt>Output</dt><dd>Speech waveform</dd>
+            <dt>Needed asset</dt><dd class="missing">Before/after symbolic conditioning samples</dd>
+          </dl>
+        </article>
+
+        <article class="task-slot pending">
+          <span class="badge">Future slot</span>
+          <h3>Text-to-Sound</h3>
+          <p>
+            Placeholder for non-speech audio generation examples where symbolic music
+            tokens should not degrade generic audio generation.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Sound-event text prompt</dd>
+            <dt>Output</dt><dd>Environmental or event audio</dd>
+            <dt>Needed asset</dt><dd class="missing">Matched baseline and symbolic-conditioned outputs</dd>
+          </dl>
+        </article>
+
+        <article class="task-slot pending">
+          <span class="badge">Future slot</span>
+          <h3>Text-to-Music</h3>
+          <p>
+            Placeholder for prompt-to-music generation where symbolic planning should
+            improve musical structure without hurting audio quality.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Music text prompt</dd>
+            <dt>Output</dt><dd>Generated music audio</dd>
+            <dt>Needed asset</dt><dd class="missing">Aligned vs control symbolic-generation comparison</dd>
+          </dl>
+        </article>
+
+        <article class="task-slot pending">
+          <span class="badge">Future slot</span>
+          <h3>Song Generation</h3>
+          <p>
+            Placeholder for vocal/music generation examples, separated from pure
+            instrumental text-to-music.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Lyrics, style, or song prompt</dd>
+            <dt>Output</dt><dd>Song audio with vocal/music structure</dd>
+            <dt>Needed asset</dt><dd class="missing">Generated sample and structure-control metrics</dd>
+          </dl>
+        </article>
+
+        <article class="task-slot pending">
+          <span class="badge">Future slot</span>
+          <h3>Text-Instructed TTS</h3>
+          <p>
+            Placeholder for instruction-following speech generation where text
+            controls style, speaker, emotion, or delivery.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Instruction + text</dd>
+            <dt>Output</dt><dd>Instruction-conditioned speech</dd>
+            <dt>Needed asset</dt><dd class="missing">Prompt, baseline output, symbolic-conditioned output</dd>
+          </dl>
+        </article>
+
+        <article class="task-slot pending">
+          <span class="badge">Future slot</span>
+          <h3>Audio-Instructed TTS</h3>
+          <p>
+            Placeholder for speech generation conditioned by an audio reference,
+            such as voice, prosody, or acoustic style.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Reference audio + text prompt</dd>
+            <dt>Output</dt><dd>Reference-conditioned speech</dd>
+            <dt>Needed asset</dt><dd class="missing">Reference clip, generated pair, similarity metrics</dd>
+          </dl>
+        </article>
+      </div>
+
       <article class="demo-card">
         <div class="demo-media sample-card-header">
           <span class="badge">EXP001 baseline diagnostic</span>
