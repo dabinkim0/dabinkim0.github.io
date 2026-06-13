@@ -500,6 +500,13 @@ a {
     object-position: center center;
 }
 
+.publication-figure img.is-height-fit,
+.item-list.is-grid .publication-figure img.is-height-fit,
+.item-list.is-grid-compact .publication-figure img.is-height-fit {
+    width: auto;
+    height: 100%;
+}
+
 .publication-figure--poster {
     align-items: flex-start;
     justify-content: flex-end;
