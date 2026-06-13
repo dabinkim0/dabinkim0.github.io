@@ -47,9 +47,45 @@ document.addEventListener("DOMContentLoaded", () => {
         element.addEventListener("dragstart", preventImageSaveGesture);
     });
 
-    document.querySelectorAll(".item-list .publication-figure img").forEach((image) => {
+    const publicationFigureImages = Array.from(document.querySelectorAll(".item-list .publication-figure img"));
+
+    publicationFigureImages.forEach((image) => {
         image.setAttribute("draggable", "false");
     });
+
+    const syncPublicationFigureFit = () => {
+        publicationFigureImages.forEach((image) => {
+            const figure = image.closest(".publication-figure");
+
+            if (!figure || !image.naturalWidth || !image.naturalHeight) {
+                return;
+            }
+
+            const figureStyle = window.getComputedStyle(figure);
+            const usableWidth = figure.clientWidth - parseFloat(figureStyle.paddingLeft) - parseFloat(figureStyle.paddingRight);
+            const usableHeight = figure.clientHeight - parseFloat(figureStyle.paddingTop) - parseFloat(figureStyle.paddingBottom);
+
+            if (usableWidth <= 0 || usableHeight <= 0) {
+                return;
+            }
+
+            const imageRatio = image.naturalWidth / image.naturalHeight;
+            const figureRatio = usableWidth / usableHeight;
+
+            image.classList.toggle("is-height-fit", imageRatio < figureRatio);
+        });
+    };
+
+    publicationFigureImages.forEach((image) => {
+        if (image.complete) {
+            syncPublicationFigureFit();
+            return;
+        }
+
+        image.addEventListener("load", syncPublicationFigureFit, { once: true });
+    });
+
+    window.addEventListener("resize", syncPublicationFigureFit);
 
     const publicationList = document.querySelector("[data-publication-list]");
     const viewButtons = Array.from(document.querySelectorAll("[data-publication-view]"));
@@ -74,6 +110,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 button.classList.toggle("is-active", isActive);
                 button.setAttribute("aria-pressed", String(isActive));
             });
+
+            syncPublicationFigureFit();
         };
 
         viewButtons.forEach((button) => {
@@ -151,6 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
 
         updateFilterStatus();
+        syncPublicationFigureFit();
     };
 
     const handleFilterClick = (tag) => {
