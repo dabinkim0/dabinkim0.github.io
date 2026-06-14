@@ -273,6 +273,17 @@ h3 {
   text-align-last: left;
 }
 
+.abstract-copy + .abstract-copy {
+  margin-top: 14px;
+}
+
+.claim-statement {
+  background: var(--warn-bg);
+  border: 1px solid rgba(138, 90, 0, 0.24);
+  border-radius: 8px;
+  padding: 12px 14px;
+}
+
 .demo-section {
   background-color: rgba(255, 255, 255, 0.55);
 }
@@ -342,6 +353,130 @@ h3 {
 }
 
 .eval-summary-card table + .table-caption {
+  margin-top: 18px;
+}
+
+.dataset-split-card {
+  margin-top: 22px;
+  padding: 22px;
+  border: 1px solid var(--line-soft);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.split-card-header {
+  max-width: 900px;
+}
+
+.split-card-header h3 {
+  margin-bottom: 10px;
+  font-family: var(--font-serif);
+  font-size: 1.34rem;
+}
+
+.split-card-header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1.02rem;
+  line-height: 1.7;
+}
+
+.split-bars {
+  display: grid;
+  gap: 14px;
+  margin: 20px 0 18px;
+}
+
+.split-bar-row {
+  display: grid;
+  grid-template-columns: minmax(150px, 210px) minmax(180px, 1fr) 62px;
+  align-items: center;
+  gap: 12px;
+}
+
+.split-bar-label strong,
+.split-bar-label span {
+  display: block;
+}
+
+.split-bar-label strong {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.split-bar-label span,
+.split-bar-value {
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.split-bar-value {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.split-bar-track {
+  width: 100%;
+  height: 16px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+}
+
+.split-bar-fill {
+  display: block;
+  height: 100%;
+  min-width: 8px;
+  border-radius: inherit;
+}
+
+.split-train {
+  background: var(--good);
+}
+
+.split-valid {
+  background: #4f6f8f;
+}
+
+.split-test {
+  background: var(--bad);
+}
+
+.split-meta-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.split-meta-grid div {
+  min-width: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line-soft);
+  border-radius: 8px;
+  background: var(--surface);
+}
+
+.split-meta-grid span,
+.split-meta-grid strong {
+  display: block;
+  overflow-wrap: anywhere;
+}
+
+.split-meta-grid span {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.split-meta-grid strong {
+  margin-top: 4px;
+  color: var(--ink);
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.dataset-config-table {
   margin-top: 18px;
 }
 
@@ -532,6 +667,22 @@ h3 {
   padding-right: 24px;
 }
 
+.single-evidence-card {
+  min-width: 0;
+  margin-bottom: 22px;
+  background-color: #fff;
+  border: 1px solid var(--line-soft);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 18px 32px var(--shadow);
+}
+
+.single-evidence-card h3 {
+  font-family: var(--font-serif);
+  font-size: 1.28rem;
+  text-align: center;
+}
+
 .demo-media h3,
 .task-card h3 {
   font-family: var(--font-serif);
@@ -598,6 +749,47 @@ td:first-child {
 
 .comparison-table td {
   overflow-wrap: anywhere;
+}
+
+.structured-table .group-cell {
+  width: 150px;
+  background: rgba(245, 241, 234, 0.34);
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.structured-table .condition-cell {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.structured-table .control-row td {
+  color: var(--muted);
+}
+
+.structured-table .control-row .group-cell {
+  color: var(--ink);
+  font-weight: 500;
+}
+
+.structured-table .control-row .condition-cell {
+  color: var(--muted);
+  font-weight: 400;
+  padding-left: 26px;
+}
+
+.structured-table .delta-good {
+  color: var(--good);
+  font-weight: 500;
+}
+
+.structured-table .delta-bad {
+  color: var(--bad);
+  font-weight: 500;
+}
+
+.structured-table .delta-neutral {
+  color: var(--muted);
 }
 
 .metric-name {
@@ -754,6 +946,19 @@ meter {
   .metric-bars div {
     grid-template-columns: 1fr;
   }
+
+  .split-bar-row {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .split-bar-value {
+    text-align: left;
+  }
+
+  .split-meta-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 768px) {
@@ -801,5 +1006,13 @@ meter {
 
   .tabs {
     position: static;
+  }
+
+  .dataset-split-card {
+    padding: 16px;
+  }
+
+  .split-meta-grid {
+    grid-template-columns: 1fr;
   }
 }

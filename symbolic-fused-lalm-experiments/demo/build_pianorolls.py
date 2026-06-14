@@ -17,11 +17,32 @@ ROOT = Path(__file__).resolve().parent
 OUT_DIR = ROOT / "assets" / "figures"
 CASES = [
     {
+        "title": "Slakh Track01501 window 000 (0-30 s)",
+        "midi": Path("/mnt/hdd4/dabin/music_dataset/datasets/slakh2100/redux/slakh/validation/Track01501/all_src.mid"),
+        "start": 0.0,
+        "end": 30.0,
+        "out": "pianoroll_track01501_w000_target.png",
+    },
+    {
+        "title": "Slakh Track01501 window 002 (60-90 s)",
+        "midi": Path("/mnt/hdd4/dabin/music_dataset/datasets/slakh2100/redux/slakh/validation/Track01501/all_src.mid"),
+        "start": 60.0,
+        "end": 90.0,
+        "out": "pianoroll_track01501_w002_target.png",
+    },
+    {
         "title": "Slakh Track01501 window 003 (90-120 s)",
         "midi": Path("/mnt/hdd4/dabin/music_dataset/datasets/slakh2100/redux/slakh/validation/Track01501/all_src.mid"),
         "start": 90.0,
         "end": 120.0,
         "out": "pianoroll_track01501_w003_target.png",
+    },
+    {
+        "title": "Slakh Track01501 window 004 (120-150 s)",
+        "midi": Path("/mnt/hdd4/dabin/music_dataset/datasets/slakh2100/redux/slakh/validation/Track01501/all_src.mid"),
+        "start": 120.0,
+        "end": 150.0,
+        "out": "pianoroll_track01501_w004_target.png",
     },
     {
         "title": "Slakh Track01501 window 005 (150-180 s)",
@@ -90,7 +111,7 @@ def render_case(case: dict[str, object]) -> None:
     ax.set_ylim(24, 96)
     ax.set_xlabel("time in 30-second window (s)")
     ax.set_ylabel("MIDI pitch")
-    ax.set_title(str(case["title"]), loc="left", fontsize=12, weight="bold")
+    ax.set_title(str(case["title"]), loc="center", fontsize=12, weight="normal")
     ax.grid(True, axis="x", color="#d9d9d1", linewidth=0.7)
     ax.grid(True, axis="y", color="#eeeeea", linewidth=0.5)
     ax.set_facecolor("#fbfbf7")
