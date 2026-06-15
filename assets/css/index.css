@@ -160,7 +160,7 @@ a {
     border: 1px solid var(--rule);
     border-radius: 50%;
     box-shadow: 0 22px 40px var(--shadow);
-    margin: 28px auto 50px;
+    margin: 28px auto 30px;
 }
 
 .identity-kicker {
@@ -664,13 +664,38 @@ a {
     }
 
     .identity-sticky {
+        display: grid;
+        grid-template-areas:
+            ". profile name ."
+            ". profile kicker ."
+            "meta meta meta meta"
+            "links links links links";
+        grid-template-columns: minmax(0, 1fr) clamp(76px, 14vw, 112px) max-content minmax(0, 1fr);
+        gap: 8px 18px;
+        justify-content: center;
+        align-items: center;
         position: static;
     }
 
     .profile-image {
-        width: clamp(112px, 18vw, 148px);
-        box-shadow: 0 16px 30px var(--shadow);
-        margin: 8px auto 22px;
+        grid-area: profile;
+        width: 100%;
+        box-shadow: 0 12px 24px var(--shadow);
+        margin: 0;
+    }
+
+    .identity-rail h1 {
+        grid-area: name;
+        align-self: end;
+        margin: 0 0 2px;
+        text-align: left;
+    }
+
+    .identity-kicker {
+        grid-area: kicker;
+        align-self: start;
+        margin: 0;
+        text-align: left;
     }
 
     .identity-rail {
@@ -678,7 +703,15 @@ a {
     }
 
     .identity-meta {
+        grid-area: meta;
+        justify-self: stretch;
+        margin-top: 18px;
         margin-bottom: 12px;
+    }
+
+    .identity-links {
+        grid-area: links;
+        justify-self: stretch;
     }
 
     .document-column {
@@ -717,7 +750,7 @@ a {
     }
 
     .identity-rail h1 {
-        font-size: 3.5rem;
+        font-size: clamp(2.2rem, 7vw, 3.1rem);
     }
 
     .identity-meta {
