@@ -167,6 +167,7 @@ a {
     font-size: 1.14rem;
     letter-spacing: 0.02em;
     color: var(--muted);
+    text-align: center;
     margin: 0 0 18px;
 }
 
@@ -176,6 +177,7 @@ a {
     line-height: 0.95;
     letter-spacing: -0.06em;
     font-weight: 600;
+    text-align: center;
 }
 
 .identity-bio {
@@ -666,7 +668,9 @@ a {
     }
 
     .profile-image {
-        display: none;
+        width: clamp(112px, 18vw, 148px);
+        box-shadow: 0 16px 30px var(--shadow);
+        margin: 8px auto 22px;
     }
 
     .identity-rail {
