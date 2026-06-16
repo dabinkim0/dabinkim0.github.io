@@ -1,0 +1,1909 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Symbolic-Aware LALM Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script>
+    window.MathJax = { tex: { inlineMath: [["\\(", "\\)"]] }, svg: { fontCache: "global" } };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+</head>
+<body>
+  <header class="main-header">
+    <div class="shell header-shell">
+      <a href="https://dabinkim0.github.io/" class="logo">Dabin Kim</a>
+      <nav class="main-nav" aria-label="Primary">
+        <ul>
+          <li><a href="https://dabinkim0.github.io/publications/" class="is-active nav-current">Publications</a></li>
+          <li><a href="https://dabinkim0.github.io/projects/">Projects</a></li>
+          <li><a href="https://dabinkim0.github.io/">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="shell post-layout">
+    <main class="post-page">
+      <section id="overview" class="post-section">
+      <h1>Symbolic-Aware LALM Evidence Dashboard</h1>
+      <div class="article-meta">
+        <p class="article-authors">Symbolic-Aware Large Audio Language Models</p>
+        <p class="article-affiliations">Experiment-progress companion page for the Overleaf presentation</p>
+        <p class="article-supporting">Built around UniAudio2.0-style task organization with explicit current-claim boundaries.</p>
+        <p class="article-resource-list">
+          <a class="article-resource-link" href="https://dongchaoyang.top/UniAudio2Demo/" target="_blank" rel="noreferrer">[UniAudio2 Demo]</a>
+          <a class="article-resource-link" href="https://arxiv.org/abs/2602.04683" target="_blank" rel="noreferrer">[Paper]</a>
+          <a class="article-resource-link" href="https://github.com/dabinkim0/symbolic-fused-lalm-exp-progress-slides/blob/main/exp_progress_slides.html" target="_blank" rel="noreferrer">[Slides HTML]</a>
+        </p>
+      </div>
+      <div class="methodology">
+        <h3>Research Question and Evidence Scope</h3>
+        <p class="abstract-copy">
+          This page keeps the current claim boundary explicit: \(S_{\mathrm{plan}}\)
+          is the learned symbolic planning token evaluated through reconstruction,
+          acoustic-token proxy, stream controls, and MIR recovery; \(S_{\mathrm{LLM}}\)
+          is the planned LLM-supervised symbolic tokenizer/token stream and is not
+          trained yet.
+        </p>
+        <p class="abstract-copy claim-statement">
+          Current evidence supports \(S_{\mathrm{plan}}\) as a compact, MIDI-derived
+          symbolic planning codec with measurable acoustic-token and MIR-structure
+          utility. It does not yet establish decoded music generation,
+          audio-to-MIDI transcription, or LLM-supervised \(S_{\mathrm{LLM}}\) training.
+        </p>
+      </div>
+    </section>
+
+    <section id="claim-boundary" class="post-section">
+      <h2 class="section-title centered-title">Claim Map and Evidence Boundary</h2>
+      <div class="demo-section">
+      <div class="claim-grid" aria-label="Claim boundary">
+      <article class="claim">
+        <span class="label">Current token</span>
+        <strong>\(S_{\mathrm{plan}}\)</strong>
+        <p>Learned symbolic planning token from MIDI-derived structure. Evaluated through reconstruction, acoustic-token proxy, stream controls, and MIR recovery.</p>
+      </article>
+      <article class="claim caution">
+        <span class="label">Planned token</span>
+        <strong>\(S_{\mathrm{LLM}}\)</strong>
+        <p>LLM-supervised symbolic tokenizer/token stream. Not trained yet; should follow EXP031A controls.</p>
+      </article>
+      <article class="claim">
+        <span class="label">Demo assets</span>
+        <strong>Slakh paired audio/MIDI</strong>
+        <p>All playable clips in this page are project-local Slakh audio assets, avoiding copied web-audio dataset material.</p>
+      </article>
+      </div>
+
+      <article class="provenance-card eval-summary-card" aria-label="Reviewer reading route">
+        <div>
+          <p class="eyebrow">Reviewer reading route</p>
+          <h3>What an MIR/DL Reviewer Can Conclude Today</h3>
+          <p class="table-caption">
+            Caption: the page should be read as a claim ladder, not as a single
+            finished product demo. The central current claim is symbolic utility
+            in UniAudio-style music-token and MIR interfaces; preservation and
+            decoded generation are explicit follow-up gates.
+          </p>
+        </div>
+        <table class="structured-table">
+          <thead>
+            <tr><th>Claim tier</th><th>Current conclusion</th><th>Strongest evidence on this page</th><th>What is still missing</th><th>Recommended reading location</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="group-cell">C1: symbolic codec</td><td class="good">Supported</td><td>EXP024 reconstructs MIDI-derived symbolic features with low error and compact RVQ budget.</td><td>Full MIDI event reconstruction remains a separate decoder problem.</td><td>Symbolic-Aware MIDI / Music Tasks</td></tr>
+            <tr><td class="group-cell">C2: token-level utility</td><td class="good">Supported as proxy evidence</td><td>EXP025 and EXP029 show lower \(C_a\) uncertainty for aligned \(S_{\mathrm{plan}}\) versus corrupted controls.</td><td>Decoded waveform and task-level music scores are not implied by CE alone.</td><td>UniAudio 2.0 Music Tasks</td></tr>
+            <tr><td class="group-cell">C3: trainable stream comparison</td><td class="good">Supported at stream-proxy level</td><td>EXP034B now has a completed 2400-step full control suite: aligned \(S_{\mathrm{plan}}\) reaches test CE 5.5728 versus reason-only 5.6129, shuffled 5.5785, and dummy 5.5777, with the symbolic gate open at 0.2320.</td><td>Decoded waveform quality and final music-generation behavior remain separate gates.</td><td>EXP034B Open-Gate Stream Probe</td></tr>
+            <tr><td class="group-cell">C4: symbolic MIR task</td><td class="good">Axis-specific support</td><td>EXP031A improves instrument macro-F1, weak-key accuracy, pitch-class F1, and global numeric MAE over zero/prior baselines.</td><td>Label-shuffle control and test-split qualitative cards remain important.</td><td>Symbolic-Aware MIDI / Music Tasks</td></tr>
+            <tr><td class="group-cell">C5: decoded generation</td><td class="warn">Bridge diagnosed, not established</td><td>EXP035 free rollout remains weak, but gap diagnostics show aligned \(S_{\mathrm{plan}}\) is best under teacher-forced, oracle-prefix, and scheduled-oracle contexts.</td><td>Free decoded rollout still needs short-horizon bridge training before any waveform-generation claim.</td><td>Decoded Rollout Bridge</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="provenance-card eval-summary-card" aria-label="High priority missing evidence">
+        <div>
+          <p class="eyebrow">Reviewer-risk checklist</p>
+          <h3>Most Valuable Additions Before a Stronger Paper Claim</h3>
+          <p class="table-caption">
+            Caption: adding more validation examples is less valuable than closing
+            control and split gaps. The next demo assets should either complete a
+            causal comparison or make a real downstream-style music output inspectable.
+          </p>
+        </div>
+        <table class="structured-table">
+          <thead>
+            <tr><th>Priority</th><th>Missing evidence</th><th>Why a reviewer will ask for it</th><th>Fastest demo form</th><th>Current status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="group-cell">1</td><td>EXP036B short-horizon bridge training</td><td>EXP035 gap diagnostics show \(S_{\mathrm{plan}}\) helps when context stays near the target manifold; the next run should train directly for early semantic-token stability.</td><td>Short64 aligned/reason/shuffled/dummy table followed by free short16/32 rollout</td><td class="missing">Next CUDA run</td></tr>
+            <tr><td class="group-cell">2</td><td>EXP035 decoded rollout examples from matched checkpoints</td><td>Token CE is a proxy; listening examples show whether symbolic conditioning affects audible music trajectories.</td><td>Four-way audio card: reason-only / aligned / shuffled / dummy</td><td class="missing">256 local wavs exported; curation deferred until bridge improves</td></tr>
+            <tr><td class="group-cell">3</td><td>Decoded-rollout MIR consistency metrics</td><td>Audio waveforms alone are subjective; MIR consistency links generated audio back to symbolic structure.</td><td>Instrument/key/meter/tempo table for generated audio</td><td class="missing">Run after short-horizon bridge export</td></tr>
+            <tr><td class="group-cell">4</td><td>\(S_{\mathrm{plan}}\)-MIR to instrument-presence QA bridge</td><td>This is the cleanest near-term comparison against frozen UniAudio2.0 music QA on the same task family.</td><td>Exact acc., macro-F1, invalid rate, per-instrument F1 table</td><td class="missing">Mapping/export pending</td></tr>
+            <tr><td class="group-cell">5</td><td>Test-split qualitative MIR cards</td><td>Current fixed examples are validation cases; test examples reduce cherry-picking concerns.</td><td>Three test cards: success, middle, boundary</td><td class="missing">Not exported yet</td></tr>
+            <tr><td class="group-cell">6</td><td>Final LALM generation backend</td><td>EXP034B is still semantic-token stream training, not true text-to-music, song, or MIDI-to-audio generation.</td><td>Backend contract plus a small overfit rollout check</td><td class="missing">Design/code wiring pending</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+    <section class="provenance-card" aria-label="Inference provenance">
+      <div>
+        <p class="eyebrow">Evidence provenance</p>
+        <h2>Held-Out Evaluations versus Case-Study Examples</h2>
+        <p>
+          The demo separates held-out test-set aggregate results from fixed per-sample examples.
+          EXP001 uses Slakh test QA outputs directly. EXP025, EXP029, and EXP031A
+          include test-set aggregate metrics, while the currently saved per-sample
+          fixed examples mostly come from validation windows. Missing assets are left
+          as explicit <span class="missing">red</span> placeholders rather than being hidden.
+        </p>
+      </div>
+      <table>
+        <thead>
+          <tr><th>Block</th><th>Actual artifact</th><th>Split</th><th>What the demo can claim</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>UniAudio compatibility</td><td>EXP006 sanity slots + EXP001 Slakh QA model outputs</td><td>test summaries + placeholders</td><td>Frozen UniAudio2 sanity and brittle music-QA behavior; not a symbolic contribution</td></tr>
+          <tr><td>Symbolic codec</td><td>EXP024 \(S_{\mathrm{plan}}\) reconstruction RVQ</td><td>valid/test aggregate + validation fixed examples</td><td>Compact MIDI-derived structure can be reconstructed before downstream use</td></tr>
+          <tr><td>Acoustic utility bridge</td><td>EXP025 acoustic-token utility proxy</td><td class="good">test aggregate</td><td>Aligned \(S_{\mathrm{plan}}\) reduces semantic acoustic-token uncertainty versus controls</td></tr>
+          <tr><td>Music stream gain</td><td>EXP029 stream-control final metrics + EXP034B open-gate result</td><td>test aggregate + validation examples + completed 2400-step full control table</td><td>Aligned \(S_{\mathrm{plan}}\) improves over matched reason-only, shuffled, and dummy in the 2400-step run; this supports a stream-level claim, not decoded generation</td></tr>
+          <tr><td>MIR structure recovery</td><td>EXP031A MIR-supervised metrics + EXP032 fixed examples</td><td>test aggregate + validation examples</td><td>MIR structure is recoverable, but controls and claim boundaries remain active</td></tr>
+        </tbody>
+      </table>
+
+      <article class="dataset-split-card" aria-label="Training validation and test set configuration">
+        <div class="split-card-header">
+          <p class="eyebrow">Evaluation protocol</p>
+          <h3>Shared Slakh Audio-MIDI Split for Symbolic-Control Experiments</h3>
+          <p>
+            EXP025, EXP029, EXP034, and the EXP035 decoded-rollout export share the
+            same Slakh paired audio/MIDI cache structure: fixed track-level splits,
+            non-overlapping 30 s windows, frozen UniAudio2 \(R_a\)/\(C_a\) tokens, and
+            learned \(S_{\mathrm{plan}}\) RVQ tokens.
+          </p>
+        </div>
+
+        <div class="split-bars" role="img" aria-label="Training split 11279 windows, validation split 2334 windows, test split 1385 windows">
+          <div class="split-bar-row">
+            <div class="split-bar-label">
+              <strong>Training</strong>
+              <span>11,279 windows</span>
+            </div>
+            <div class="split-bar-track" aria-hidden="true">
+              <span class="split-bar-fill split-train" style="width: 100%"></span>
+            </div>
+            <span class="split-bar-value">75.2%</span>
+          </div>
+          <div class="split-bar-row">
+            <div class="split-bar-label">
+              <strong>Validation</strong>
+              <span>2,334 windows</span>
+            </div>
+            <div class="split-bar-track" aria-hidden="true">
+              <span class="split-bar-fill split-valid" style="width: 20.7%"></span>
+            </div>
+            <span class="split-bar-value">15.6%</span>
+          </div>
+          <div class="split-bar-row">
+            <div class="split-bar-label">
+              <strong>Test</strong>
+              <span>1,385 windows</span>
+            </div>
+            <div class="split-bar-track" aria-hidden="true">
+              <span class="split-bar-fill split-test" style="width: 12.3%"></span>
+            </div>
+            <span class="split-bar-value">9.2%</span>
+          </div>
+        </div>
+
+        <div class="split-meta-grid" aria-label="Split configuration details">
+          <div><span>Window length</span><strong>30 s</strong></div>
+          <div><span>Total windows</span><strong>14,998</strong></div>
+          <div><span>\(S_{\mathrm{plan}}\) frames</span><strong>30 / window</strong></div>
+          <div><span>RVQ depth</span><strong>4 books</strong></div>
+          <div><span>\(R_a\) frames</span><strong>151 / window</strong></div>
+          <div><span>\(C_a\) frames</span><strong>376 / window</strong></div>
+          <div><span>Audio codebooks</span><strong>8 + 8</strong></div>
+          <div><span>Split policy</span><strong>Track-level</strong></div>
+        </div>
+
+        <table class="dataset-config-table">
+          <thead>
+            <tr><th>Config axis</th><th>Setting</th><th>Why it matters</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Source</td><td>Slakh paired rendered audio and aligned MIDI</td><td>Keeps symbolic labels grounded in the same musical window as the audio tokens.</td></tr>
+            <tr><td>Cache row</td><td>Audio path, MIDI path, UniAudio2 \(R_a\)/\(C_a\), and \(S_{\mathrm{plan}}\)</td><td>Allows matched ablations where only the symbolic stream changes.</td></tr>
+            <tr><td>Evaluation role</td><td>Validation for fixed examples; test for aggregate claims</td><td>Prevents illustrative demo cases from replacing held-out aggregate evidence.</td></tr>
+          </tbody>
+        </table>
+      </article>
+    </section>
+      </div>
+    </section>
+
+    <section id="demo-examples" class="post-section">
+      <h2 class="section-title centered-title">Detailed Evidence and Demo Slots</h2>
+      <div class="demo-section">
+    <p class="table-caption">
+      Recommended route for research discussion: start with <strong>2. UniAudio 2.0 Music Tasks</strong>
+      for the current symbolic-stream claim, then inspect <strong>3. Symbolic-Aware MIDI / Music Tasks</strong>
+      for MIR and symbolic examples. <strong>1. UniAudio 2.0 Audio / Speech Tasks</strong>
+      is a preservation anchor for future final-LALM integration, not the current contribution headline.
+    </p>
+    <div class="tabs" role="tablist" aria-label="Demo sections">
+      <button class="tab active" type="button" data-target="preserve">1. UniAudio 2.0 Audio / Speech Tasks</button>
+      <button class="tab" type="button" data-target="music">2. UniAudio 2.0 Music Tasks</button>
+      <button class="tab" type="button" data-target="symbolic">3. Symbolic-Aware MIDI / Music Tasks</button>
+    </div>
+
+    <section id="preserve" class="panel active" aria-labelledby="preserve-title">
+      <div class="section-head">
+          <p class="eyebrow">Task family 01</p>
+          <h2 id="preserve-title">UniAudio 2.0 Audio / Speech Tasks</h2>
+          <p>
+          This block tracks non-music audio and speech task families inherited
+          from UniAudio 2.0 that a future final LALM integration must preserve.
+          It is deliberately shown as a preservation anchor, not as the current
+          symbolic-music contribution.
+        </p>
+      </div>
+
+      <div class="task-slot-grid" aria-label="Representative UniAudio2 audio and speech task slots">
+        <a class="task-slot pending" href="#compat-tts">
+          <span class="badge">Future slot</span>
+          <h3>Text-to-Speech</h3>
+          <p>
+            Placeholder for the future paired check: released UniAudio2.0 baseline
+            versus a trained Symbolic-Aware generation checkpoint.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Text prompt</dd>
+            <dt>Output</dt><dd>Speech waveform</dd>
+            <dt>Needed asset</dt><dd class="missing">Baseline and Symbolic-Aware checkpoint samples</dd>
+          </dl>
+          <span class="slot-cta">View placeholder</span>
+        </a>
+
+        <a class="task-slot pending" href="#compat-text-to-sound">
+          <span class="badge">Future slot</span>
+          <h3>Text-to-Sound</h3>
+          <p>
+            Placeholder for checking whether the future Symbolic-Aware generation
+            checkpoint preserves generic non-speech audio generation.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Sound-event text prompt</dd>
+            <dt>Output</dt><dd>Environmental or event audio</dd>
+            <dt>Needed asset</dt><dd class="missing">Matched baseline and Symbolic-Aware checkpoint outputs</dd>
+          </dl>
+          <span class="slot-cta">View placeholder</span>
+        </a>
+
+        <a class="task-slot pending" href="#compat-text-instructed-tts">
+          <span class="badge">Future slot</span>
+          <h3>Text-Instructed TTS</h3>
+          <p>
+            Placeholder for instruction-following speech generation where text
+            controls style, speaker, emotion, or delivery.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Instruction + text</dd>
+            <dt>Output</dt><dd>Instruction-conditioned speech</dd>
+            <dt>Needed asset</dt><dd class="missing">Prompt, baseline output, Symbolic-Aware checkpoint output</dd>
+          </dl>
+          <span class="slot-cta">View placeholder</span>
+        </a>
+
+      </div>
+
+      <article class="provenance-card eval-summary-card">
+        <div>
+          <p class="eyebrow">Base-model reference</p>
+          <h3>Frozen UniAudio2.0 Task Anchors for Future Preservation Checks</h3>
+          <p class="table-caption">
+            Caption: these rows anchor the released UniAudio2.0 behavior before any
+            Symbolic-Aware LALM claim. The baseline metrics or generated wavs are
+            already available; what remains missing is the paired Symbolic-Aware
+            checkpoint output under the same prompts and decoding settings.
+          </p>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Task family</th><th>Existing evidence source</th><th>Baseline metric / asset</th><th>Demo status</th><th>Claim boundary</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>ASR / speech understanding</td><td>EXP006 frozen UniAudio2 sanity summary</td><td class="good">WER 0.1492</td><td class="good">Baseline metric shown below</td><td>Compatibility sanity only</td></tr>
+            <tr><td>Audio caption / AudioCaps-style understanding</td><td>EXP006 frozen UniAudio2 sanity summary</td><td class="good">CIDEr 0.2607</td><td class="good">Baseline metric shown below</td><td>Compatibility sanity only</td></tr>
+            <tr><td>GTZAN / music genre sanity</td><td>EXP006 frozen UniAudio2 sanity summary</td><td>Acc. 0.2663; macro-F1 0.2626</td><td class="good">Baseline metric shown in the music section</td><td>Frozen music-understanding diagnostic</td></tr>
+            <tr><td>TTS / text-to-sound preservation</td><td>UniAudio2.0 English demo prompt suite</td><td class="good">8 baseline wavs</td><td class="good">Playable baseline; Symbolic-Aware checkpoint pending</td><td>Required before final-LALM preservation claim</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="provenance-card eval-summary-card">
+        <div>
+          <p class="eyebrow">Compatibility inference suite</p>
+          <h3>Released UniAudio2.0 Prompts Used as Preservation References</h3>
+          <p class="table-caption">
+            Caption: the runnable code is managed under <code>source/demo</code>.
+            It uses the English UniAudio2.0 public-demo prompts for Text-to-Speech,
+            Text-to-Sound, and Text-Instructed TTS. Audio-Instructed TTS is excluded
+            from this suite. These examples are a UniAudio2.0 baseline anchor;
+            preservation after symbolic augmentation is not claimed until a
+            Symbolic-Aware generation checkpoint is trained and evaluated.
+          </p>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Task family</th><th>Prompt source</th><th>Required comparison</th><th>Expected output</th><th>Current status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Text-to-Speech</td><td>3 English UniAudio2.0 demo text prompts</td><td>UniAudio2.0 baseline vs Symbolic-Aware generation checkpoint</td><td>Speech waveform + ASR/WER slot</td><td class="good">UniAudio2.0 baseline wavs generated</td></tr>
+            <tr><td>Text-to-Sound</td><td>3 English UniAudio2.0 demo sound descriptions</td><td>UniAudio2.0 baseline vs Symbolic-Aware generation checkpoint</td><td>Sound-event waveform + CLAP/PANNs slot</td><td class="good">UniAudio2.0 baseline wavs generated</td></tr>
+            <tr><td>Text-Instructed TTS</td><td>2 English UniAudio2.0 demo style/content pairs</td><td>UniAudio2.0 baseline vs Symbolic-Aware generation checkpoint</td><td>Style-conditioned speech + ASR/style slot</td><td class="good">UniAudio2.0 baseline wavs generated</td></tr>
+          </tbody>
+        </table>
+        <table>
+          <thead>
+            <tr><th>Runner</th><th>Command</th><th>Manifest</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>tmux baseline run</td>
+              <td><code>CUDA_DEVICE=0 SESSION=uniaudio2_compat_demo bash source/demo/run_uniaudio2_compatibility_tmux.sh</code></td>
+              <td><code>source/demo/outputs/latest_manifest.json</code></td>
+            </tr>
+            <tr>
+              <td>Preservation comparison</td>
+              <td class="missing">Pending until a Symbolic-Aware generation checkpoint exists</td>
+              <td class="missing">No preservation claim yet</td>
+            </tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="provenance-card eval-summary-card">
+        <div>
+          <p class="eyebrow">Claim requirement</p>
+          <h3>What Must Be Compared Before Claiming Audio/Speech Preservation</h3>
+          <p class="table-caption">
+            Caption: this block is a preservation checklist, not a completed result table.
+            The current experiments have not yet produced paired baseline-vs-Symbolic-Aware
+            inference samples for UniAudio2.0 non-music audio or speech tasks.
+          </p>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Task family</th><th>Required comparison</th><th>Primary metrics / assets</th><th>Current claim status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Text-to-Speech</td><td>Same text prompt under baseline and trained Symbolic-Aware checkpoint</td><td>Speech sample pair, ASR WER/CER, intelligibility, speaker/prosody quality</td><td class="missing">Baseline generated; Symbolic-Aware checkpoint pending</td></tr>
+            <tr><td>Text-to-Sound</td><td>Same sound-event prompt under baseline and trained Symbolic-Aware checkpoint</td><td>Prompt adherence, audio quality, CLAP/PANNs-style proxy</td><td class="missing">Baseline generated; Symbolic-Aware checkpoint pending</td></tr>
+            <tr><td>Instructional TTS</td><td>Same style/content pair under baseline and trained Symbolic-Aware checkpoint</td><td>Instruction adherence, ASR WER/CER, speech quality</td><td class="missing">Baseline generated; Symbolic-Aware checkpoint pending</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="provenance-card eval-summary-card">
+        <div>
+          <p class="eyebrow">Readiness audit</p>
+          <h3>Current Feasibility of a Preservation Claim</h3>
+          <p class="table-caption">
+            Caption: this is the current fast-check result for the required
+            preservation comparison. The baseline prompt set and decoding
+            settings are ready; the missing blocker is a trained
+            Symbolic-Aware generation checkpoint that can decode audio for the
+            same prompts.
+          </p>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Comparison requirement</th><th>Current status</th><th>Evidence</th><th>Can verify now?</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>UniAudio2.0 original</td><td class="good">Available</td><td>8/8 baseline wavs generated from the English UniAudio2.0 demo prompts.</td><td class="good">Yes, listening anchor only</td></tr>
+            <tr><td>Symbolic-augmented UniAudio2.0 checkpoint</td><td class="missing">Missing</td><td>Existing EXP027/EXP028/EXP029/EXP031 checkpoints are proxy or MIR checkpoints, not decoded generation checkpoints.</td><td class="missing">No</td></tr>
+            <tr><td>Identical prompt set</td><td class="good">Available</td><td><code>source/demo/configs/uniaudio2_english_demo_prompts.yaml</code> fixes 8 prompts.</td><td class="good">Yes</td></tr>
+            <tr><td>Identical decoding setting</td><td class="good">Recorded</td><td>Seed 260612, temperature 0.9, top-k 50, CFG 1.0, codec steps 25.</td><td class="good">Yes for future paired runs</td></tr>
+            <tr><td>Objective metric + listening demo</td><td class="missing">Partial</td><td>Listening baseline exists; paired WER/CER, CLAP/PANNs-style scores, and listening comparison require Symbolic-Aware outputs.</td><td class="missing">Not yet</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="provenance-card eval-summary-card">
+        <div>
+          <p class="eyebrow">Base-model measurements</p>
+          <h3>Frozen UniAudio2.0 Official-Task Sanity Anchors</h3>
+          <p class="table-caption">
+            Caption: these are baseline sanity metrics from existing UniAudio2.0
+            outputs. They are useful anchors for future preservation comparisons,
+            but they do not yet show that a Symbolic-Aware checkpoint preserves or
+            improves non-music tasks.
+          </p>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Task family</th><th>Artifact</th><th>Split / scale</th><th>Metric</th><th>Current interpretation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>ASR</td><td>EXP006 LibriSpeech official-task sanity</td><td>test-clean, 2,620 clips</td><td class="good">WER 0.1492</td><td>Base speech sanity anchor for later preservation tests</td></tr>
+            <tr><td>Audio captioning</td><td>EXP006 AudioCaps official-task sanity</td><td>test, 943 clips with references</td><td class="good">CIDEr 0.2607</td><td>Base audio-language sanity anchor; paired Symbolic-Aware result pending</td></tr>
+            <tr><td>Music genre classification</td><td>EXP006 GTZAN official-task sanity</td><td>999 clips</td><td>Acc. 0.2663; macro-F1 0.2626</td><td>Frozen music baseline; not a symbolic contribution</td></tr>
+            <tr><td>Compatibility prompts</td><td>UniAudio2.0 public-demo English prompts</td><td>8 generated wavs</td><td class="good">Playable baseline generated</td><td>Listening anchor only until Symbolic-Aware generated wavs exist</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <div class="downstream-task-list" aria-label="UniAudio2 audio and speech task demo slots">
+        <article id="compat-tts" class="placeholder-demo-card task-demo-slot">
+          <p class="eyebrow">Future preservation pair</p>
+          <h3>Text-to-Speech</h3>
+          <p>
+            UniAudio2.0 baseline generations from the English public-demo prompts.
+            This is the baseline anchor for a future preservation test; it does
+            not yet prove that symbolic augmentation preserves TTS quality.
+          </p>
+          <table>
+            <thead>
+              <tr><th>Prompt</th><th>UniAudio2.0 baseline</th><th>Symbolic-Aware checkpoint</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>he began a confused complaint against the wizard who had vanished behind the curtain on the left</td>
+                <td><audio controls preload="metadata" src="assets/audio/uniaudio2_compat/tts_en_001.wav"></audio></td>
+                <td class="missing">-</td>
+              </tr>
+              <tr>
+                <td>give not so earnest a mind to these mummeries child</td>
+                <td><audio controls preload="metadata" src="assets/audio/uniaudio2_compat/tts_en_002.wav"></audio></td>
+                <td class="missing">-</td>
+              </tr>
+              <tr>
+                <td>a golden fortune and a happy life</td>
+                <td><audio controls preload="metadata" src="assets/audio/uniaudio2_compat/tts_en_003.wav"></audio></td>
+                <td class="missing">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+
+        <article id="compat-text-to-sound" class="placeholder-demo-card task-demo-slot">
+          <p class="eyebrow">Future preservation pair</p>
+          <h3>Text-to-Sound</h3>
+          <p>
+            UniAudio2.0 baseline text-to-sound generations from the public-demo
+            English descriptions. These are compatibility examples, not symbolic
+            music-structure contributions.
+          </p>
+          <table>
+            <thead>
+              <tr><th>Description</th><th>UniAudio2.0 baseline</th><th>Symbolic-Aware checkpoint</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>A large crowd cheers and applauds</td>
+                <td><audio controls preload="metadata" src="assets/audio/uniaudio2_compat/tta_en_001.wav"></audio></td>
+                <td class="missing">-</td>
+              </tr>
+              <tr>
+                <td>A race car approaches quickly and slows down squealing tires</td>
+                <td><audio controls preload="metadata" src="assets/audio/uniaudio2_compat/tta_en_002.wav"></audio></td>
+                <td class="missing">-</td>
+              </tr>
+              <tr>
+                <td>A man speaks as a vehicle engine idles</td>
+                <td><audio controls preload="metadata" src="assets/audio/uniaudio2_compat/tta_en_003.wav"></audio></td>
+                <td class="missing">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+
+        <article id="compat-text-instructed-tts" class="placeholder-demo-card task-demo-slot">
+          <p class="eyebrow">Future preservation pair</p>
+          <h3>Text-Instructed TTS</h3>
+          <p>
+            UniAudio2.0 baseline style-conditioned speech generations from the
+            public-demo English InstructTTS examples. The style caption and spoken
+            content are separated in the runner.
+          </p>
+          <table>
+            <thead>
+              <tr><th>Style / content</th><th>UniAudio2.0 baseline</th><th>Symbolic-Aware checkpoint</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <span class="metric-name">Style:</span> enthusiastic young adult female, subtle pauses, slightly low-pitch melodious tone.<br>
+                  <span class="metric-name">Content:</span> Help, oh help. What kind of help? Speak man? What means that? Bloody knife tis hot, it smokes.
+                </td>
+                <td><audio controls preload="metadata" src="assets/audio/uniaudio2_compat/instruct_tts_en_001.wav"></audio></td>
+                <td class="missing">-</td>
+              </tr>
+              <tr>
+                <td>
+                  <span class="metric-name">Style:</span> middle-aged man, rich emotion, animated expressions.<br>
+                  <span class="metric-name">Content:</span> On november sixteen twenty sixteen, catherine vargas, an executive assistant to kushner, received a request for a meeting with russian ambassador sergey kislyak.
+                </td>
+                <td><audio controls preload="metadata" src="assets/audio/uniaudio2_compat/instruct_tts_en_002.wav"></audio></td>
+                <td class="missing">-</td>
+              </tr>
+            </tbody>
+          </table>
+        </article>
+
+      </div>
+    </section>
+
+    <section id="music" class="panel" aria-labelledby="music-title">
+      <div class="section-head">
+        <p class="eyebrow">Task family 02</p>
+        <h2 id="music-title">UniAudio 2.0 Music Tasks</h2>
+        <p>
+          This section follows the music evidence ladder from frozen UniAudio2.0
+          diagnostics to symbolic conditioning probes. The current concrete evidence
+          includes frozen music QA, EXP025/EXP029 token-level utility evidence,
+          the negative EXP034A matched LoRA probe, and the completed EXP034B
+          2400-step open-gate full control suite.
+          A MIR-to-QA bridge card marks the shortest direct path
+          from symbolic recovery to a music-understanding comparison against
+          released UniAudio2.0. Text-to-music and song-generation demos remain
+          explicit future slots until decoded Symbolic-Aware generation exists.
+        </p>
+      </div>
+
+      <div class="task-slot-grid" aria-label="Representative UniAudio2 music task slots">
+        <a class="task-slot ready" href="#compat-music-qa">
+          <span class="badge">Current evidence</span>
+          <h3>Instrument-Presence QA Diagnostic</h3>
+          <p>
+            Frozen UniAudio2 is evaluated on Slakh instrument-presence prompts.
+            This card diagnoses the released baseline before any Symbolic-Aware
+            comparison is claimed.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Music audio + constrained yes/no question</dd>
+            <dt>Comparison</dt><dd>Normal audio vs no-audio and shuffled-audio controls</dd>
+            <dt>Demo status</dt><dd class="good">Baseline diagnostic shown below</dd>
+          </dl>
+          <span class="slot-cta">View current demo</span>
+        </a>
+
+        <a class="task-slot pending" href="#music-qa-bridge">
+          <span class="badge">Priority bridge</span>
+          <h3>Instrument-Presence QA Bridge</h3>
+          <p>
+            Converts \(S_{\mathrm{plan}}\)-MIR instrument predictions into the same
+            yes/no QA family used for the frozen UniAudio2.0 baseline.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Same Slakh windows represented by \(S_{\mathrm{plan}}\)</dd>
+            <dt>Comparison</dt><dd>Frozen UniAudio2 QA vs symbolic MIR-to-QA path</dd>
+            <dt>Demo status</dt><dd class="missing">Bridge score pending</dd>
+          </dl>
+          <span class="slot-cta">View bridge spec</span>
+        </a>
+
+        <a class="task-slot ready" href="#music-acoustic-utility">
+          <span class="badge">Mechanistic evidence</span>
+          <h3>Token-Level Utility Evidence</h3>
+          <p>
+            Aligned \(S_{\mathrm{plan}}\) is compared against reason-only, rule-symbolic,
+            shuffled, and dummy controls for predicting UniAudio semantic audio tokens.
+            This is not a downstream improvement claim.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Reason tokens + optional symbolic stream</dd>
+            <dt>Artifact</dt><dd>EXP025 held-out aggregate table</dd>
+            <dt>Demo status</dt><dd class="good">Causal proxy below</dd>
+          </dl>
+          <span class="slot-cta">View proxy evidence</span>
+        </a>
+
+        <a class="task-slot ready" href="#music-stream-control">
+          <span class="badge">Mechanistic evidence</span>
+          <h3>Why the Symbolic Stream Should Help</h3>
+          <p>
+            Same-window UniAudio semantic-token loss is compared under aligned,
+            shuffled, and dummy symbolic streams. This tests whether symbolic
+            alignment matters before claiming task-level gains.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Music audio window + symbolic stream variant</dd>
+            <dt>Artifact</dt><dd>EXP029 held-out and fixed-example outputs</dd>
+            <dt>Demo status</dt><dd class="good">Playable proxy below</dd>
+          </dl>
+          <span class="slot-cta">View current demo</span>
+        </a>
+
+        <a class="task-slot pending" href="#music-decoded-rollout-bridge">
+          <span class="badge">Bridge diagnosed</span>
+          <h3>Decoded Rollout Bridge</h3>
+          <p>
+            EXP034B/EXP036 checkpoints are designed to feed EXP035, which rolls out
+            UniAudio semantic tokens and decodes them to waveform for listening.
+            The latest gap diagnostics separate teacher-forced utility from
+            free-rollout exposure bias.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>\(R_a + S_{\mathrm{plan}}\)</dd>
+            <dt>Output</dt><dd>Rolled-out \(C_a\) then waveform decode</dd>
+            <dt>Status</dt><dd class="warn">Gap diagnostics positive; free decoded quality still pending</dd>
+          </dl>
+          <span class="slot-cta">View bridge slot</span>
+        </a>
+
+        <a class="task-slot pending" href="#compat-text-to-music">
+          <span class="badge">Future slot</span>
+          <h3>Text-to-Music</h3>
+          <p>
+            Placeholder for prompt-to-music generation where symbolic planning should
+            improve musical structure without hurting audio quality.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Music text prompt</dd>
+            <dt>Output</dt><dd>Generated music audio</dd>
+            <dt>Needed asset</dt><dd class="missing">Baseline UniAudio2 vs Symbolic-Aware generation pair</dd>
+          </dl>
+          <span class="slot-cta">View placeholder</span>
+        </a>
+
+        <a class="task-slot pending" href="#compat-song-generation">
+          <span class="badge">Future slot</span>
+          <h3>Song Generation</h3>
+          <p>
+            Placeholder for vocal/music generation examples, separated from pure
+            instrumental text-to-music.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Lyrics, style, or song prompt</dd>
+            <dt>Output</dt><dd>Song audio with vocal/music structure</dd>
+            <dt>Needed asset</dt><dd class="missing">Baseline UniAudio2 vs Symbolic-Aware song-generation pair</dd>
+          </dl>
+          <span class="slot-cta">View placeholder</span>
+        </a>
+      </div>
+
+      <article class="provenance-card eval-summary-card">
+        <div>
+          <p class="eyebrow">Music claim audit</p>
+          <h3>Evidence Required to Claim Improvement over Released UniAudio2.0</h3>
+          <p class="table-caption">
+            Caption: a strong paper claim must compare released UniAudio2.0 and a
+            Symbolic-Aware model on the same music task, with identical prompts,
+            decoding settings, and held-out examples. Current evidence supports
+            mechanistic utility at the token/stream level, while direct decoded
+            music-generation and symbolic-conditioned music-QA comparisons remain
+            open.
+          </p>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Claim level</th><th>Required comparison</th><th>Current evidence</th><th>Demo status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Baseline diagnostic</td><td>Released UniAudio2.0 on Slakh music QA</td><td>EXP001 normal exact acc. 0.4426; macro-F1 0.3260; invalid 0.3366</td><td class="good">Shown</td></tr>
+            <tr><td>Token-level utility evidence</td><td>Reason-only vs aligned \(S_{\mathrm{plan}}\) vs shuffled/dummy controls</td><td>EXP025 aligned \(S_{\mathrm{plan}}\) lowers test CE by 0.0610 vs reason-only and 0.0344 vs shuffled</td><td class="good">Shown as mechanistic proxy</td></tr>
+            <tr><td>Stream-alignment evidence</td><td>Aligned \(S_{\mathrm{plan}}\) stream vs shuffled/dummy under matched stream packing</td><td>EXP029 aligned stream has best test CE among controlled symbolic streams</td><td class="good">Shown as mechanistic proxy</td></tr>
+            <tr><td>Closed-gate trainable stream comparison</td><td>No-symbolic LoRA baseline vs aligned/shuffled/dummy \(S_{\mathrm{plan}}\) under identical update budget</td><td>EXP034A completed; reason-only test CE 5.3524 beats aligned \(S_{\mathrm{plan}}\) CE 5.4563</td><td class="missing">Negative control result</td></tr>
+            <tr><td>Open-gate trainable stream comparison</td><td>Matched reason-only vs aligned/shuffled/dummy \(S_{\mathrm{plan}}\) with a less closed symbolic gate</td><td>EXP034B 2400-step full suite: aligned CE 5.5728 vs reason-only 5.6129, shuffled 5.5785, and dummy 5.5777; aligned gate 0.2320.</td><td class="good">Completed stream-level full-control result</td></tr>
+            <tr><td>Generation-bridge diagnostic</td><td>Free rollout vs teacher-forced, oracle-prefix, and scheduled-oracle contexts from the same checkpoints</td><td>EXP035 gap suite: aligned \(S_{\mathrm{plan}}\) is best in teacher-forced, oracle-prefix8, and scheduled-oracle4 token metrics.</td><td class="warn">Positive bridge diagnostic; not decoded-generation quality</td></tr>
+            <tr><td>Symbolic music-understanding bridge</td><td>Frozen UniAudio2 QA vs \(S_{\mathrm{plan}}\)-MIR answers on the same instrument-presence family</td><td>EXP031A instrument macro-F1 0.5014 vs prior/zero 0.4280; exact QA bridge score pending</td><td class="missing">Bridge card added below</td></tr>
+            <tr><td>Direct final-LALM music-QA improvement</td><td>Same Slakh QA prompts under UniAudio2.0 original vs integrated Symbolic-Aware LALM</td><td>Baseline exists; symbolic-conditioned final-LALM QA output is not generated yet</td><td class="missing">Generation-stage blocker</td></tr>
+            <tr><td>Decoded music-generation improvement</td><td>Text/MIDI prompt to waveform under UniAudio2.0 original vs Symbolic-Aware checkpoint</td><td>No decoded Symbolic-Aware generation checkpoint yet</td><td class="missing">Future final-LALM stage</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="provenance-card eval-summary-card">
+        <div>
+          <p class="eyebrow">Task definitions</p>
+          <h3>Music Understanding Evaluations with Explicit Inputs and Labels</h3>
+          <p class="table-caption">
+            Caption: each row states the concrete music task, the model input,
+            the expected output format, and the external score used for
+            evaluation. These rows diagnose frozen UniAudio2.0 music behavior;
+            they do not yet prove Symbolic-Aware generation or Symbolic-Aware
+            music-QA improvement.
+          </p>
+        </div>
+        <table class="structured-table">
+          <thead>
+            <tr><th>Evaluation task</th><th>Input</th><th>Expected output</th><th>Condition</th><th>Metric / result</th><th>Interpretation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="group-cell" rowspan="4">Instrument-presence QA</td><td>30 s Slakh rendered music clip + constrained yes/no question, 906 QA rows</td><td>One label: yes or no</td><td class="condition-cell">UniAudio2.0 normal</td><td>Exact acc. 0.4426; macro-F1 0.3260; invalid 0.3366</td><td>Brittle baseline with strong prompt-following and yes-bias issues</td></tr>
+            <tr class="control-row"><td>Same questions with audio removed</td><td>One label: yes or no</td><td class="condition-cell">↳ No-audio control</td><td class="warn">Exact acc. 0.6976</td><td>Majority/label-prior confound is stronger than the normal audio-conditioned run</td></tr>
+            <tr class="control-row"><td>Same questions with mismatched audio</td><td>One label: yes or no</td><td class="condition-cell">↳ Shuffled-audio control</td><td>Exact acc. 0.4547</td><td>Temporal audio use is not cleanly established by this QA protocol</td></tr>
+            <tr class="control-row"><td>Same instrument-presence family answered from \(S_{\mathrm{plan}}\)-MIR predictions</td><td>One label: yes or no</td><td class="condition-cell">↳ \(S_{\mathrm{plan}}\)-MIR bridge</td><td class="missing">Exact QA score pending; supporting inst. macro-F1 0.5014</td><td>Direct bridge needed before claiming symbolic music-QA improvement over UniAudio2.0</td></tr>
+            <tr><td class="group-cell">Music genre classification</td><td>GTZAN music clip, 999 test clips</td><td>One genre label from the 10 GTZAN classes</td><td class="condition-cell">UniAudio2.0 genre sanity</td><td>Best acc. 0.2663; macro-F1 0.2626</td><td>Weak music-classification baseline; not a symbolic contribution</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="provenance-card eval-summary-card">
+        <div>
+          <p class="eyebrow">Mechanistic evidence ladder</p>
+          <h3>From Frozen Music-QA Diagnosis to Controlled Symbolic Probes</h3>
+          <p class="table-caption">
+            Caption: this table organizes the key music-side evidence by what each
+            experiment can actually support. EXP001 establishes the frozen
+            UniAudio2.0 music-QA baseline. EXP025 asks whether aligned
+            \(S_{\mathrm{plan}}\) helps predict semantic audio tokens. EXP029 tests
+            whether aligned symbolic context remains useful in a UniAudio-style
+            stream interface. These rows explain why the symbolic stream should
+            help; they are not downstream task-improvement results. EXP034A is the
+            stricter matched LoRA probe, and it is negative for the current configuration.
+            EXP034B opens the symbolic gate and now completes the 2400-step
+            aligned-vs-reason-only-vs-shuffled-vs-dummy control suite. The aligned
+            \(S_{\mathrm{plan}}\) stream is best on final test CE, but the margin
+            over shuffled and dummy controls is intentionally reported as small.
+            Decoded waveform generation remains a separate evidence tier.
+          </p>
+        </div>
+        <table class="structured-table">
+          <thead>
+            <tr><th>Evidence group</th><th>Condition</th><th>Split / scale</th><th>Main result</th><th>Delta reference</th><th>Interpretation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="group-cell">Frozen music QA</td><td class="condition-cell">UniAudio2.0 original</td><td>test, 151 clips / 906 QA rows</td><td>Exact acc. 0.4426; macro-F1 0.3260; invalid 0.3366</td><td class="delta-neutral">diagnostic baseline</td><td>Useful baseline diagnostic, but brittle and yes-biased</td></tr>
+            <tr><td class="group-cell">Priority MIR-to-QA bridge</td><td class="condition-cell">\(S_{\mathrm{plan}}\)-MIR answers</td><td class="missing">same Slakh QA family; bridge export pending</td><td>Supporting EXP031A inst. macro-F1 0.5014 vs prior/zero 0.4280</td><td class="delta-neutral">exact QA delta pending</td><td>Most direct near-term path toward a symbolic music-understanding comparison</td></tr>
+            <tr><td class="group-cell" rowspan="3">EXP025 acoustic-token proxy</td><td class="condition-cell">Reason only</td><td>test aggregate, 1,385 windows</td><td>CE 7.6573; PPL 2116.06</td><td class="delta-neutral">0.0000 vs reason-only</td><td>Audio-token-only baseline for the bridge experiment</td></tr>
+            <tr><td class="condition-cell good">Aligned \(S_{\mathrm{plan}}\)</td><td>test aggregate, same windows</td><td class="good">CE 7.5963; PPL 1990.88</td><td class="delta-good">-0.0610 vs reason-only</td><td class="good">Best acoustic-token utility proxy</td></tr>
+            <tr class="control-row"><td class="condition-cell">↳ Shuffled \(S_{\mathrm{plan}}\)</td><td>test aggregate, matched symbolic budget</td><td>CE 7.6307; PPL 2060.58</td><td class="delta-good">-0.0266 vs reason-only</td><td>Alignment-corrupted control, worse than aligned</td></tr>
+            <tr><td class="group-cell" rowspan="3">EXP029 UniAudio-style stream proxy</td><td class="condition-cell good">Aligned \(S_{\mathrm{plan}}\)</td><td>test aggregate, 1,385 windows</td><td class="good">CE 5.7663; acc. 0.1097; gate 0.00327</td><td class="delta-good">-0.0183 vs best corrupted control</td><td class="good">Best controlled stream condition</td></tr>
+            <tr class="control-row"><td class="condition-cell">↳ Shuffled \(S_{\mathrm{plan}}\)</td><td>test aggregate, matched setup</td><td>CE 5.7847; acc. 0.1067; gate 0.00319</td><td class="delta-neutral">corrupted control</td><td>Temporal alignment is broken</td></tr>
+            <tr class="control-row"><td class="condition-cell">↳ Dummy stream</td><td>test aggregate, matched token budget</td><td>CE 5.7852; acc. 0.1068; gate 0.00335</td><td class="delta-neutral">token-budget control</td><td>Controls for extra context/token budget</td></tr>
+            <tr><td class="group-cell" rowspan="4">EXP034A matched LoRA probe</td><td class="condition-cell good">Reason-only trainable baseline</td><td>test aggregate, 512-window eval cap</td><td class="good">CE 5.3524; acc. 0.1358</td><td class="delta-neutral">0.0000 vs reason-only</td><td class="good">Best condition; no symbolic path</td></tr>
+            <tr class="control-row"><td class="condition-cell">↳ Aligned \(S_{\mathrm{plan}}\) stream</td><td>same setup</td><td>CE 5.4563; acc. 0.1290; gate 0.00252</td><td class="delta-bad">+0.1039 vs reason-only</td><td>Negative for current matched LoRA claim</td></tr>
+            <tr class="control-row"><td class="condition-cell">↳ Shuffled \(S_{\mathrm{plan}}\)</td><td>same setup</td><td>CE 5.4563; acc. 0.1291; gate 0.00248</td><td class="delta-bad">+0.1040 vs reason-only</td><td>Aligned and shuffled are effectively tied</td></tr>
+            <tr class="control-row"><td class="condition-cell">↳ Dummy stream</td><td>same setup</td><td>CE 5.4544; acc. 0.1291; gate 0.00247</td><td class="delta-bad">+0.1020 vs reason-only</td><td>Rules out current symbolic-stream improvement claim</td></tr>
+            <tr><td class="group-cell" rowspan="4">EXP034B open-gate probe</td><td class="condition-cell good">Aligned \(S_{\mathrm{plan}}\)</td><td>test aggregate, step 2400</td><td class="good">CE 5.5728; acc. 0.1223; gate 0.2320</td><td class="delta-good">-0.0401 vs reason-only; -0.0056 vs shuffled; -0.0049 vs dummy</td><td class="good">Best completed full-control row</td></tr>
+            <tr class="control-row"><td class="condition-cell">↳ Reason-only open-gate baseline</td><td>test aggregate, step 2400</td><td>CE 5.6129; acc. 0.1195</td><td class="delta-neutral">0.0000 vs reason-only</td><td>Matched no-symbolic baseline for the same update schedule</td></tr>
+            <tr class="control-row"><td class="condition-cell">↳ Shuffled \(S_{\mathrm{plan}}\)</td><td>test aggregate, step 2400</td><td>CE 5.5785; acc. 0.1215; gate 0.1950</td><td class="delta-good">-0.0345 vs reason-only</td><td>Alignment-corrupted control; aligned remains lower by 0.0056 CE</td></tr>
+            <tr class="control-row"><td class="condition-cell">↳ Dummy stream</td><td>test aggregate, step 2400</td><td>CE 5.5777; acc. 0.1215; gate 0.1951</td><td class="delta-good">-0.0352 vs reason-only</td><td>Token-budget control; aligned remains lower by 0.0049 CE</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">
+          Caption: the qualitative cards below illustrate failure modes and useful
+          cases, but the aggregate rows above carry the claim weight. The current
+          EXP029 playable card is not a broad decoded-music generation claim.
+          EXP034B strengthens the stream-level story over EXP034A. The 2400-step
+          suite now closes the aligned-vs-reason-only-vs-shuffled-vs-dummy
+          comparison, with a small but consistent aligned advantage over both
+          corrupted symbolic controls. The next missing layer is decoded waveform
+          evidence.
+        </p>
+      </article>
+
+      <article id="music-open-gate-trend" class="provenance-card eval-summary-card task-demo-slot">
+        <div>
+          <p class="eyebrow">Open-gate stream-level evidence</p>
+          <h3>EXP034B Open-Gate Stream Probe: 2400-Step Full Controls</h3>
+          <p class="table-caption">
+            Objective: rerun the matched trainable UniAudio-style stream comparison
+            with a less closed symbolic gate. EXP034A was negative because the gate
+            stayed near zero and aligned, shuffled, and dummy streams were effectively
+            tied. EXP034B tests whether \(S_{\mathrm{plan}}\) becomes useful when the
+            symbolic branch is allowed to open. The completed 2400-step suite shows
+            aligned \(S_{\mathrm{plan}}\) below reason-only, shuffled, and dummy
+            controls. This supports a stream-level \(S_{\mathrm{plan}}\) utility
+            claim, not a decoded-generation claim.
+          </p>
+        </div>
+        <table class="structured-table">
+          <thead>
+            <tr><th>Condition</th><th>Status</th><th>Evidence split / step</th><th>CE ↓</th><th>Accuracy ↑</th><th>Prefix-8 acc. ↑</th><th>Prefix-32 acc. ↑</th><th>Symbolic gate</th><th>Δ CE vs reason-only</th><th>Interpretation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Reason-only open-gate baseline</td><td class="good">done</td><td>test / 2400</td><td>5.6129</td><td>0.1195</td><td>0.1840</td><td>0.1223</td><td>0.0000</td><td class="delta-neutral">0.0000</td><td>Matched no-symbolic baseline for the 2400-step suite.</td></tr>
+            <tr><td>Aligned \(S_{\mathrm{plan}}\) stream</td><td class="good">done</td><td>test / 2400</td><td class="good">5.5728</td><td class="good">0.1223</td><td class="good">0.1929</td><td class="good">0.1295</td><td class="good">0.2320</td><td class="delta-good">-0.0401</td><td class="good">Best completed long-run row; improves CE and early-prefix accuracy.</td></tr>
+            <tr class="control-row"><td>↳ Shuffled \(S_{\mathrm{plan}}\)</td><td class="good">done</td><td>test / 2400</td><td>5.5785</td><td>0.1215</td><td>0.1900</td><td>0.1280</td><td>0.1950</td><td class="delta-good">-0.0345</td><td>Matched alignment-corrupted control; aligned remains lower by 0.0056 CE.</td></tr>
+            <tr class="control-row"><td>↳ Dummy stream</td><td class="good">done</td><td>test / 2400</td><td>5.5777</td><td>0.1215</td><td>0.1902</td><td>0.1284</td><td>0.1951</td><td class="delta-good">-0.0352</td><td>Token-budget control; aligned remains lower by 0.0049 CE.</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">
+          Earlier 800-step results are retained below as a trend sanity check, but
+          the 2400-step table above is the current claim-bearing EXP034B control suite.
+        </p>
+        <table class="structured-table">
+          <thead>
+            <tr><th>Condition</th><th>Status</th><th>Evidence split / step</th><th>CE ↓</th><th>Accuracy ↑</th><th>Δ CE vs reason-only</th><th>Δ CE vs shuffled</th><th>Δ CE vs dummy</th><th>Interpretation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Reason-only open-gate baseline</td><td class="good">done</td><td>test / 800</td><td>5.8590</td><td>0.1039</td><td>0.0000</td><td>-</td><td>-</td><td>Open-gate no-symbolic baseline.</td></tr>
+            <tr><td>Aligned \(S_{\mathrm{plan}}\) stream</td><td class="good">done</td><td>test / 800</td><td class="good">5.5998</td><td class="good">0.1207</td><td class="delta-good">-0.2591</td><td class="delta-good">-0.0145</td><td class="delta-good">-0.0145</td><td>Completed aligned row; gate opens to 0.1765 and improves over all controls.</td></tr>
+            <tr><td>↳ Shuffled \(S_{\mathrm{plan}}\)</td><td class="good">done</td><td>test / 800</td><td>5.6144</td><td>0.1191</td><td class="delta-good">-0.2446</td><td>0.0000</td><td>-</td><td>Alignment-corrupted control; aligned remains lower on final test CE.</td></tr>
+            <tr><td>↳ Dummy stream</td><td class="good">done</td><td>test / 800</td><td>5.6143</td><td>0.1193</td><td class="delta-good">-0.2446</td><td>0.0000</td><td>0.0000</td><td>Token-budget control; aligned remains lower on final test CE.</td></tr>
+          </tbody>
+        </table>
+        <table class="structured-table">
+          <thead>
+            <tr><th>Aligned \(S_{\mathrm{plan}}\) step</th><th>CE ↓</th><th>Accuracy ↑</th><th>Prefix-8 CE ↓</th><th>Prefix-32 CE ↓</th><th>Symbolic gate</th><th>Interpretation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>200 valid</td><td>5.7188</td><td>0.1156</td><td>5.8252</td><td>5.9583</td><td>0.1333</td><td>Gate starts open under the 2400-step schedule.</td></tr>
+            <tr><td>400 valid</td><td>5.6418</td><td>0.1205</td><td>5.6109</td><td>5.8143</td><td>0.1632</td><td>Rapid early CE improvement while gate opens.</td></tr>
+            <tr><td>600 valid</td><td>5.6245</td><td>0.1205</td><td>5.5555</td><td>5.7731</td><td>0.1842</td><td>Prefix metrics improve before the full-sequence CE stabilizes.</td></tr>
+            <tr><td>800 valid</td><td>5.6073</td><td>0.1221</td><td>5.5266</td><td>5.7478</td><td>0.1971</td><td>Already below the matched reason-only final validation CE.</td></tr>
+            <tr><td>1200 valid</td><td>5.5957</td><td>0.1233</td><td>5.5096</td><td>5.7364</td><td>0.2156</td><td>Slow but stable gain continues after the 800-step point.</td></tr>
+            <tr><td>1600 valid</td><td>5.5929</td><td>0.1234</td><td>5.5069</td><td>5.7337</td><td>0.2245</td><td>Gate remains open rather than collapsing.</td></tr>
+            <tr><td>2000 valid</td><td>5.5884</td><td>0.1240</td><td>5.4979</td><td>5.7276</td><td>0.2302</td><td>Validation CE continues to improve near convergence.</td></tr>
+            <tr><td>2400 valid</td><td class="good">5.5876</td><td class="good">0.1241</td><td class="good">5.4974</td><td class="good">5.7270</td><td class="good">0.2320</td><td class="good">Best aligned validation row in the 2400-step suite.</td></tr>
+            <tr><td>2400 test</td><td class="good">5.5728</td><td class="good">0.1223</td><td class="good">5.4980</td><td class="good">5.7368</td><td class="good">0.2320</td><td class="good">Final aligned test row; CE improves over matched reason-only by 0.0401.</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">
+          Claim-safe reading: the 2400-step aligned run improves over the matched
+          reason-only baseline and remains lower than both the shuffled and dummy
+          symbolic controls. The control margins are small, so this is a
+          stream-level utility result rather than a decoded music-generation result.
+        </p>
+      </article>
+
+      <article id="music-generation-bridge-readiness" class="provenance-card eval-summary-card task-demo-slot">
+        <div>
+          <p class="eyebrow">Generation bridge readiness</p>
+          <h3>EXP036 Backend Wiring for \(S_{\mathrm{plan}}\)-Aware UniAudio Token Generation</h3>
+          <p class="table-caption">
+            Objective: turn the current symbolic-stream evidence into a checkpoint
+            that can be decoded by EXP035. This is still a semantic-token training
+            bridge, not a completed text-to-music or song-generation LALM. It
+            establishes the backend contract needed to export waveform examples
+            once training finishes.
+          </p>
+        </div>
+        <table class="structured-table">
+          <thead>
+            <tr><th>Backend component</th><th>EXP036 implementation</th><th>Why it matters</th><th>Claim boundary</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="group-cell">Backbone</td><td>Released UniAudio2 LALM checkpoint loaded through the existing local stack</td><td>Keeps the experiment in the UniAudio2-style stream interface</td><td>Not full UniAudio2 pretraining</td></tr>
+            <tr><td class="group-cell">Trainable path</td><td>LoRA + symbolic stream expert + scalar gate</td><td>Allows \(S_{\mathrm{plan}}\) to influence semantic-token prediction while preserving base model structure</td><td>Requires controls before claiming improvement</td></tr>
+            <tr><td class="group-cell">Input / target</td><td>\(R_a + S_{\mathrm{plan}} \rightarrow C_a\)</td><td>Directly matches the current music-token bridge objective</td><td>Not natural-language text-to-music yet</td></tr>
+            <tr><td class="group-cell">Loss</td><td>Autoregressive semantic-token CE over \(C_a\)</td><td>Same measurable target as EXP029/EXP034 stream probes</td><td>Proxy until decoded rollout is evaluated</td></tr>
+            <tr><td class="group-cell">Checkpoint contract</td><td><code>best.pt</code>, <code>last.pt</code>, <code>final_metrics.json</code>, EXP035-compatible <code>trainable_state_dict</code></td><td>Lets the decoded rollout bridge load the exact trained symbolic path</td><td>Readiness, not completed audio demo</td></tr>
+          </tbody>
+        </table>
+        <table class="structured-table">
+          <thead>
+            <tr><th>Immediate bridge-training plan</th><th>Configuration</th><th>Why this follows from EXP035</th><th>Expected decision point</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="group-cell">EXP036B short-horizon bridge</td>
+              <td><code>MAX_SEMANTIC_FRAMES=64</code>, <code>BATCH_SIZE=2</code>, <code>GRAD_ACCUM=8</code>, open gate, matched reason/aligned/shuffled/dummy controls</td>
+              <td>Teacher-forced and oracle-assisted EXP035 diagnostics show aligned \(S_{\mathrm{plan}}\) is useful near the target semantic-token manifold.</td>
+              <td>After training, rerun EXP035 free short16/short32 rollout and require aligned to beat shuffled/dummy before decoding claims.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="note">
+          Research interpretation: EXP036 is the practical bridge between
+          token-level evidence and listening demos. It should be presented as
+          generation-backend readiness. EXP035 has produced fair step-matched
+          waveform exports and token-only gap diagnostics. The gap diagnostics
+          support \(S_{\mathrm{plan}}\) utility under teacher-forced/oracle-assisted
+          contexts, but the free-rollout quality is not yet strong enough for a
+          decoded-generation claim.
+        </p>
+      </article>
+
+      <article id="compat-music-qa" class="demo-card task-demo-slot">
+        <div class="demo-media sample-card-header">
+          <span class="badge">EXP001 baseline diagnostic</span>
+          <h3>Frozen UniAudio2 QA: Label-Prior Failure Case</h3>
+          <audio controls preload="metadata" src="assets/audio/slakh_track01877_qa_failure.wav"></audio>
+          <p class="caption">Sample: <code>Slakh_Track01877_w000_s0000400</code> | split: test | artifact: EXP001 model outputs</p>
+        </div>
+        <div class="demo-content">
+          <p class="objective">
+            Objective: show the frozen UniAudio2 music-QA baseline before adding a
+            paired Symbolic-Aware comparison.
+          </p>
+          <table>
+            <thead>
+              <tr><th>Condition</th><th>Current artifact</th><th>Interpretation</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Frozen UniAudio2</td><td class="good">Available below</td><td>Baseline music-language behavior and failure mode</td></tr>
+              <tr><td>Symbolic-Aware LALM</td><td class="missing">Not generated yet</td><td>Needed to claim symbolic conditioning improves or preserves music QA</td></tr>
+            </tbody>
+          </table>
+          <table>
+            <thead>
+              <tr><th>Question</th><th>Target</th><th>Normal</th><th>No audio</th><th>Shuffled audio</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Bass present?</td><td>No</td><td class="bad">Yes</td><td class="bad">Yes</td><td>No</td></tr>
+              <tr><td>Guitar present?</td><td>No</td><td class="bad">Yes</td><td class="bad">Yes</td><td class="bad">free text</td></tr>
+              <tr><td>Strings present?</td><td>No</td><td class="bad">Yes</td><td class="bad">Yes</td><td class="bad">Yes</td></tr>
+              <tr><td>Synth present?</td><td>No</td><td class="bad">Yes</td><td class="bad">Yes</td><td class="bad">Yes</td></tr>
+            </tbody>
+          </table>
+          <p class="note">
+            Interpretation: the frozen baseline can answer some prompts, but it also shows yes-bias and control sensitivity.
+            A future symbolic LALM demo must show that adding \(S_{\mathrm{plan}}\) or \(S_{\mathrm{LLM}}\) does not break base audio-language behavior.
+          </p>
+          <table>
+            <thead>
+              <tr><th>Held-out Slakh QA summary</th><th>Value</th></tr>
+            </thead>
+          <tbody>
+              <tr><td>QA rows</td><td>906</td></tr>
+              <tr><td>Exact accuracy</td><td>0.4426</td></tr>
+              <tr><td>Macro-F1</td><td>0.3260</td></tr>
+              <tr><td>Invalid rate</td><td>0.3366</td></tr>
+              <tr><td>No-audio exact accuracy</td><td class="warn">0.6976</td></tr>
+              <tr><td>Shuffled-audio exact accuracy</td><td>0.4547</td></tr>
+            </tbody>
+          </table>
+          <p class="missing">Missing: final integrated LALM preservation demo with the same prompts before/after symbolic conditioning.</p>
+        </div>
+      </article>
+
+      <article id="music-qa-bridge" class="provenance-card eval-summary-card task-demo-slot">
+        <div>
+          <p class="eyebrow">Priority direct comparison</p>
+          <h3>Instrument-Presence QA: Frozen UniAudio2.0 versus \(S_{\mathrm{plan}}\)-MIR Bridge</h3>
+          <p class="table-caption">
+            Objective: convert \(S_{\mathrm{plan}}\)-MIR instrument predictions into the
+            same yes/no instrument-presence QA format used by the frozen UniAudio2.0
+            diagnostic. This is the fastest defensible bridge from symbolic recovery
+            to a music-understanding task, but it is not a final decoded
+            Symbolic-Aware LALM generation result.
+          </p>
+        </div>
+        <table class="structured-table">
+          <thead>
+            <tr><th>Evaluation path</th><th>Input representation</th><th>Output format</th><th>Current metric</th><th>Claim status</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="group-cell">Frozen UniAudio2.0 QA</td>
+              <td>Rendered Slakh music audio + constrained yes/no prompt</td>
+              <td>Free-form model answer normalized to yes/no/invalid</td>
+              <td>Exact acc. 0.4426; macro-F1 0.3260; invalid 0.3366</td>
+              <td class="good">Baseline available</td>
+            </tr>
+            <tr>
+              <td class="group-cell">\(S_{\mathrm{plan}}\)-MIR bridge</td>
+              <td>Same window represented by learned \(S_{\mathrm{plan}}\) features</td>
+              <td>Deterministic yes/no answers from predicted instrument set</td>
+              <td class="missing">Exact QA score pending; EXP031A inst. macro-F1 0.5014</td>
+              <td class="missing">Needed before saying symbolic path beats frozen UniAudio2.0 on QA</td>
+            </tr>
+            <tr class="control-row">
+              <td class="group-cell">↳ Prior / zero-feature control</td>
+              <td>No useful sample-specific symbolic feature</td>
+              <td>Prior-driven yes/no answers</td>
+              <td>EXP031A prior/zero inst. macro-F1 0.4280</td>
+              <td>Required to rule out instrument-frequency priors</td>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <thead>
+            <tr><th>Bridge implementation requirement</th><th>Why it matters</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Use the same instrument family vocabulary as EXP001 QA</td><td>Makes the symbolic answer directly comparable to the frozen UniAudio2.0 yes/no prompts</td><td class="missing">Mapping/export pending</td></tr>
+            <tr><td>Score exact accuracy, macro-F1, invalid rate, and per-instrument F1</td><td>Separates headline QA gain from class imbalance and prompt-invalid behavior</td><td class="missing">Evaluation script pending</td></tr>
+            <tr><td>Report matched-window coverage</td><td>Prevents comparing a convenient symbolic subset against the full UniAudio2.0 QA baseline</td><td class="missing">Coverage audit pending</td></tr>
+          </tbody>
+        </table>
+        <p class="note">
+          Research interpretation: if this bridge improves over frozen UniAudio2.0 on
+          the same instrument-presence family and stays above prior/zero controls,
+          it supports the claim that symbolic structure helps music understanding.
+          It still would not prove text-to-music, song generation, or decoded
+          waveform improvement.
+        </p>
+      </article>
+
+      <article id="music-acoustic-utility" class="provenance-card eval-summary-card task-demo-slot">
+        <div>
+          <p class="eyebrow">Token-level utility evidence</p>
+          <h3>Token-Level Utility Evidence: \(S_{\mathrm{plan}}\) Reduces \(C_a\) Uncertainty</h3>
+          <p class="table-caption">
+            Objective: test whether fixed \(S_{\mathrm{plan}}\) reduces uncertainty about
+            UniAudio2 semantic acoustic tokens \(C_a\) before attempting full
+            LALM integration. This is mechanistic evidence for the symbolic stream,
+            not decoded waveform generation and not a downstream task-improvement result.
+          </p>
+        </div>
+        <table class="structured-table">
+          <thead>
+            <tr><th>Group</th><th>Condition</th><th>Valid CE ↓</th><th>Test CE ↓</th><th>Test PPL ↓</th><th>Δ Test CE vs reason-only</th><th>Role</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="group-cell">Baseline</td><td class="condition-cell">Reason only</td><td>7.5650</td><td>7.6573</td><td>2116.06</td><td class="delta-neutral">0.0000</td><td>Audio-token-only baseline</td></tr>
+            <tr><td class="group-cell" rowspan="2">Rule-symbolic summary</td><td class="condition-cell">Low-rate rule summary</td><td>7.5534</td><td>7.6445</td><td>2089.16</td><td class="delta-good">-0.0128</td><td>Small rule-symbolic gain</td></tr>
+            <tr class="control-row"><td class="condition-cell">↳ Low-rate shuffled</td><td>7.5697</td><td>7.6598</td><td>2121.42</td><td class="delta-bad">+0.0025</td><td>Temporal mismatch control</td></tr>
+            <tr><td class="group-cell" rowspan="3">Learned symbolic codec</td><td class="condition-cell good">Aligned \(S_{\mathrm{plan}}\)</td><td class="good">7.5073</td><td class="good">7.5963</td><td class="good">1990.88</td><td class="delta-good">-0.0610</td><td class="good">Best proxy result</td></tr>
+            <tr class="control-row"><td class="condition-cell">↳ Shuffled \(S_{\mathrm{plan}}\)</td><td>7.5376</td><td>7.6307</td><td>2060.58</td><td class="delta-good">-0.0266</td><td>Alignment-corrupted control, worse than aligned</td></tr>
+            <tr class="control-row"><td class="condition-cell">↳ Dummy/random controls</td><td>7.54-7.69</td><td>7.63-7.69</td><td>2064-2196</td><td class="delta-neutral">mixed</td><td>Rules out pure extra-token/context explanation</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">
+          Discussion: EXP025 connects the symbolic codec result to an audio-token
+          objective: if aligned \(S_{\mathrm{plan}}\) lowers semantic-token CE more
+          than shuffled or dummy controls, the token is carrying useful musical
+          structure rather than merely adding context length.
+        </p>
+        <table>
+          <thead>
+            <tr><th>Demo artifact</th><th>Value</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Decoded waveform pair</td><td>-</td><td class="missing">Not produced by EXP025</td></tr>
+            <tr><td>Held-out aggregate table</td><td>Available above</td><td class="good">Primary EXP025 evidence</td></tr>
+            <tr><td>Validation fixed-preview table</td><td>Exported from saved fixed-example logs</td><td class="good">Sanity preview, not the main claim</td></tr>
+          </tbody>
+        </table>
+        <table class="structured-table">
+          <thead>
+            <tr><th>Validation fixed example</th><th>Reason acc. ↑</th><th>Aligned \(S_{\mathrm{plan}}\) acc. ↑</th><th>Shuffled acc. ↑</th><th>Dummy acc. ↑</th><th>Aligned - reason</th><th>Interpretation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>Slakh_Track01501_w000_s0000000</code></td><td>0.0615</td><td>0.0595</td><td>0.0625</td><td>0.0602</td><td class="delta-bad">-0.0020</td><td>Aggregate metric, not this single case, carries the EXP025 claim.</td></tr>
+            <tr><td><code>Slakh_Track01501_w001_s0003000</code></td><td>0.0206</td><td>0.0223</td><td>0.0186</td><td>0.0153</td><td class="delta-good">0.0017</td><td>Aligned fixed preview improves over reason-only.</td></tr>
+            <tr><td><code>Slakh_Track01501_w002_s0006000</code></td><td>0.0130</td><td>0.0209</td><td>0.0153</td><td>0.0163</td><td class="delta-good">0.0080</td><td>Aligned fixed preview improves over reason-only.</td></tr>
+            <tr><td><code>Slakh_Track01501_w003_s0009000</code></td><td>0.0206</td><td>0.0239</td><td>0.0206</td><td>0.0193</td><td class="delta-good">0.0033</td><td>Aligned fixed preview improves over reason-only.</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">
+          Caption: these validation fixed examples make the saved wandb-style
+          token previews visible on the demo page. The held-out aggregate CE/PPL
+          table remains the claim-bearing EXP025 evidence.
+        </p>
+      </article>
+
+      <article id="music-stream-control" class="demo-card task-demo-slot">
+        <div class="demo-media sample-card-header">
+          <span class="badge">EXP029 stream control</span>
+          <h3>Why the Symbolic Stream Should Help: Stream-Control Proxy</h3>
+          <audio controls preload="metadata" src="assets/audio/slakh_track01501_w000_stream_control.wav"></audio>
+          <p class="caption">Sample: <code>Slakh_Track01501_w000_s0000000</code> | split: validation fixed example | artifact: EXP029 fixed examples</p>
+        </div>
+        <div class="demo-content">
+          <p class="objective">
+            Objective: test whether aligned symbolic context reduces teacher-forced
+            UniAudio semantic-token uncertainty inside a UniAudio-style stream
+            packing. This is a mechanism check before downstream claims.
+          </p>
+          <div class="metric-bars" aria-label="EXP029 loss comparison">
+            <div><span>Aligned \(S_{\mathrm{plan}}\)</span><meter min="5.20" max="5.32" low="5.24" high="5.29" optimum="5.20" value="5.226"></meter><strong>5.226</strong></div>
+            <div><span>Shuffled</span><meter min="5.20" max="5.32" low="5.24" high="5.29" optimum="5.20" value="5.301"></meter><strong>5.301</strong></div>
+            <div><span>Dummy</span><meter min="5.20" max="5.32" low="5.24" high="5.29" optimum="5.20" value="5.280"></meter><strong>5.280</strong></div>
+          </div>
+          <table class="structured-table">
+            <thead>
+              <tr><th>Group</th><th>Condition</th><th>Loss ↓</th><th>Accuracy ↑</th><th>Δ loss vs aligned</th><th>Role</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="group-cell" rowspan="3">Same-window stream proxy</td><td class="condition-cell good">Aligned \(S_{\mathrm{plan}}\)</td><td class="good">5.226</td><td class="good">0.138</td><td class="delta-neutral">0.000</td><td class="good">Best same-sample proxy</td></tr>
+              <tr class="control-row"><td class="condition-cell">↳ Shuffled stream</td><td>5.301</td><td>0.119</td><td class="delta-bad">+0.075</td><td>Corrupted temporal alignment</td></tr>
+              <tr class="control-row"><td class="condition-cell">↳ Dummy stream</td><td>5.280</td><td>0.125</td><td class="delta-bad">+0.054</td><td>Token-budget control</td></tr>
+            </tbody>
+          </table>
+          <table class="structured-table">
+            <thead>
+              <tr><th>Representative stream-control case</th><th>Aligned loss ↓</th><th>Best corrupted-control loss ↓</th><th>Margin</th><th>Aligned token acc. ↑</th><th>Interpretation</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>Slakh_Track01501_w000_s0000000</code></td><td class="good">5.226</td><td>5.280</td><td class="delta-good">0.054</td><td class="good">0.138</td><td>Strong positive fixed-case margin</td></tr>
+              <tr><td><code>Slakh_Track01501_w001_s0003000</code></td><td>6.159</td><td>6.163</td><td class="delta-good">0.004</td><td>0.071</td><td>Small positive fixed-case margin</td></tr>
+              <tr><td><code>Slakh_Track01501_w002_s0006000</code></td><td>6.097</td><td>6.091</td><td class="delta-bad">-0.006</td><td>0.069</td><td>Boundary/failure case for claim calibration</td></tr>
+              <tr><td><code>Slakh_Track01501_w003_s0009000</code></td><td>5.876</td><td>5.869</td><td class="delta-bad">-0.007</td><td>0.090</td><td>Boundary/failure case for claim calibration</td></tr>
+            </tbody>
+          </table>
+          <table>
+            <thead>
+              <tr><th>Concrete inference artifact</th><th>Preview</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Implemented output</td><td><code>semantic_audio_token_preview</code></td></tr>
+              <tr><td>Target codebook-0 head</td><td><code>1519, 3072, 3072, 3072, 3072, 3072, 3072, 1880, 3072, 3072, 1519, 1519</code></td></tr>
+              <tr><td>Aligned prediction head</td><td><code>1519, 838, 1880, 838, 1880, 2071, 1880, 2071, 3072, 4099, 1519, 1397</code></td></tr>
+              <tr><td>Not yet output</td><td class="missing">decoded waveform, MIDI, or free-text answer</td></tr>
+            </tbody>
+          </table>
+          <table>
+            <thead>
+              <tr><th>Held-out test aggregate</th><th>Aligned \(S_{\mathrm{plan}}\)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Test windows</td><td>1,385</td></tr>
+              <tr><td>Test CE / PPL</td><td>5.7730 / 321.50</td></tr>
+              <tr><td>Test accuracy</td><td>0.1093</td></tr>
+              <tr><td>Prefix-8 accuracy</td><td>0.1707</td></tr>
+            </tbody>
+          </table>
+          <p class="note">
+            Interpretation: this supports causal token-level utility. It does not yet prove decoded waveform quality or open-ended music reasoning.
+          </p>
+        </div>
+      </article>
+
+      <div class="downstream-task-list" aria-label="UniAudio2 music task demo slots">
+        <article id="music-decoded-rollout-bridge" class="placeholder-demo-card task-demo-slot">
+          <p class="eyebrow">Near-term decoded evidence slot</p>
+          <h3>EXP035 Decoded Rollout Preview: \(R_a + S_{\mathrm{plan}} \rightarrow C_a\) to Waveform</h3>
+          <p>
+            This slot is prepared for the first listening evidence from the
+            symbolic-stream checkpoint. The intended comparison is not
+            text-to-music yet: it is a controlled rollout from the same music
+            window under reason-only, aligned \(S_{\mathrm{plan}}\), shuffled
+            \(S_{\mathrm{plan}}\), and dummy symbolic conditions.
+          </p>
+          <table class="structured-table">
+            <thead>
+              <tr><th>Demo item</th><th>Required artifact</th><th>Comparison role</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="group-cell">Conditioning context</td><td>Original Slakh audio window, \(R_a\), and aligned \(S_{\mathrm{plan}}\)</td><td>Shows what information is available before rollout</td><td class="good">Cache available</td></tr>
+              <tr><td class="group-cell">Aligned rollout</td><td>EXP034B last checkpoint loaded by EXP035 decoded-waveform export</td><td>Main symbolic-conditioned listening sample</td><td class="good">64 local wavs exported</td></tr>
+              <tr class="control-row"><td class="group-cell">↳ Reason-only rollout</td><td>No symbolic stream, same decode settings</td><td>Trainable UniAudio-style baseline</td><td class="good">64 local wavs exported</td></tr>
+              <tr class="control-row"><td class="group-cell">↳ Shuffled/dummy rollouts</td><td>Corrupted or non-informative symbolic streams</td><td>Controls for alignment and token budget</td><td class="good">128 local wavs exported</td></tr>
+              <tr><td class="group-cell">Inspection metrics</td><td>Semantic-token rollout accuracy, decoded audio, and MIR consistency probes</td><td>Combines quantitative proxy with listening evidence</td><td class="missing">Rollout metrics available; listening/MIR consistency still pending</td></tr>
+            </tbody>
+          </table>
+          <table class="structured-table">
+            <thead>
+              <tr><th>Condition</th><th>Local wavs</th><th>Rollout token acc. ↑</th><th>Exact-frame acc. ↑</th><th>Frame repeat rate ↓</th><th>Current reading</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Reason-only</td><td>64</td><td>0.00537</td><td>0.0000</td><td>0.5041</td><td>Baseline rollout is unstable and repetitive.</td></tr>
+              <tr><td>Aligned \(S_{\mathrm{plan}}\)</td><td>64</td><td>0.00651</td><td>0.0000</td><td class="good">0.4252</td><td>Less repetitive than reason-only, but token accuracy is not claim-bearing.</td></tr>
+              <tr class="control-row"><td>↳ Shuffled \(S_{\mathrm{plan}}\)</td><td>64</td><td class="warn">0.00834</td><td>0.0000</td><td class="good">0.4237</td><td>Control is not clearly worse under free rollout; this blocks a decoded-quality claim.</td></tr>
+              <tr class="control-row"><td>↳ Dummy stream</td><td>64</td><td>0.00513</td><td>0.0000</td><td>0.4530</td><td>Token-budget control also produces decodable wavs.</td></tr>
+            </tbody>
+          </table>
+          <table class="structured-table">
+            <thead>
+              <tr><th>Gap diagnostic mode</th><th>Context policy</th><th>Horizon / scale</th><th>Reason-only acc. ↑</th><th>Aligned \(S_{\mathrm{plan}}\) acc. ↑</th><th>Shuffled acc. ↑</th><th>Dummy acc. ↑</th><th>Interpretation</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="group-cell">Free rollout</td>
+                <td>Model predictions are fed back as context</td>
+                <td>32 frames, 128 test windows</td>
+                <td>0.01147</td>
+                <td>0.01093</td>
+                <td class="warn">0.01321</td>
+                <td>0.00992</td>
+                <td class="missing">Aligned does not beat shuffled; free rollout is not claim-bearing.</td>
+              </tr>
+              <tr>
+                <td class="group-cell">Teacher-forced</td>
+                <td>GT semantic frames are fed back after each prediction</td>
+                <td>64 frames, 512 test windows</td>
+                <td>0.05826</td>
+                <td class="good">0.06343</td>
+                <td>0.06229</td>
+                <td>0.06240</td>
+                <td class="good">Aligned is best, so the stream signal survives when context is on-manifold.</td>
+              </tr>
+              <tr>
+                <td class="group-cell">Oracle-prefix8</td>
+                <td>First 8 GT semantic frames are given, then free rollout</td>
+                <td>32 frames, 512 test windows</td>
+                <td>0.02544</td>
+                <td class="good">0.02654</td>
+                <td>0.02504</td>
+                <td>0.02637</td>
+                <td class="good">A short oracle prefix restores a small aligned advantage.</td>
+              </tr>
+              <tr>
+                <td class="group-cell">Scheduled-oracle4</td>
+                <td>Every fourth context frame is reset to the GT semantic frame</td>
+                <td>64 frames, 512 test windows</td>
+                <td>0.02403</td>
+                <td class="good">0.02525</td>
+                <td>0.02476</td>
+                <td>0.02421</td>
+                <td class="good">Periodic correction preserves a small aligned advantage.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="structured-table">
+            <thead>
+              <tr><th>Diagnostic conclusion</th><th>Evidence</th><th>Next experiment</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="group-cell">The symbolic stream is not the immediate failure point.</td>
+                <td>Aligned \(S_{\mathrm{plan}}\) beats reason-only, shuffled, and dummy in teacher-forced, oracle-prefix8, and scheduled-oracle4 settings.</td>
+                <td>Train a short-horizon bridge with <code>MAX_SEMANTIC_FRAMES=64</code>, then rerun free 16/32-frame rollout.</td>
+              </tr>
+              <tr>
+                <td class="group-cell">Free decoded rollout remains the bottleneck.</td>
+                <td>Unassisted free rollout has very low token accuracy and shuffled can outperform aligned.</td>
+                <td>Do not use EXP035 free wavs as evidence of decoded music-generation quality yet.</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="note">
+            Claim boundary: EXP035 now verifies that the oracle \(R_a + S_{\mathrm{plan}}\)
+            rollout can be decoded into waveform files, and the new gap diagnostics
+            show that aligned \(S_{\mathrm{plan}}\) helps when the semantic context
+            stays near the target manifold. It still does not show that aligned
+            \(S_{\mathrm{plan}}\) improves free decoded music quality. The next gate
+            is short-horizon bridge training followed by free 16/32-frame rollout
+            and MIR-consistency evaluation.
+          </p>
+        </article>
+
+        <article id="compat-text-to-music" class="placeholder-demo-card task-demo-slot">
+          <p class="eyebrow">Future generation task</p>
+          <h3>Text-to-Music</h3>
+          <p>
+            Future slot for prompt-to-music generation, where the key question is whether
+            Symbolic-Aware conditioning improves musical structure without hurting audio quality.
+          </p>
+          <table>
+            <tbody>
+              <tr><th>Prompt type</th><td>Music style, instrumentation, structure, or genre prompt.</td></tr>
+              <tr><th>Needed demo</th><td class="missing">Baseline UniAudio2 generation and Symbolic-Aware generation on the same prompt.</td></tr>
+            </tbody>
+          </table>
+        </article>
+
+        <article id="compat-song-generation" class="placeholder-demo-card task-demo-slot">
+          <p class="eyebrow">Future generation task</p>
+          <h3>Song Generation</h3>
+          <p>
+            Future slot for vocal/music song generation, kept separate from instrumental
+            text-to-music because lyrics, vocal quality, and arrangement require different evidence.
+          </p>
+          <table>
+            <tbody>
+              <tr><th>Prompt type</th><td>Lyrics, style, form, or song-level instruction.</td></tr>
+              <tr><th>Needed demo</th><td class="missing">Baseline UniAudio2 song output and Symbolic-Aware song output with structure-control metrics.</td></tr>
+            </tbody>
+          </table>
+        </article>
+      </div>
+    </section>
+
+    <section id="symbolic" class="panel" aria-labelledby="symbolic-title">
+      <div class="section-head">
+        <p class="eyebrow">Task family 03</p>
+        <h2 id="symbolic-title">Symbolic-Aware MIDI / Music Tasks</h2>
+        <p>
+          These cases are not claimed as impossible for prior systems. They are the
+          symbolic-representation task family where this project should provide a
+          clearer interface: recover, convert, or condition on MIDI-like musical
+          structure. The current completed downstream-style symbolic task is MIR
+          attribute recovery: given \(S_{\mathrm{plan}}\), predict interpretable
+          music attributes such as instrument set, key, meter, tempo, and density.
+        </p>
+      </div>
+
+      <div class="task-slot-grid" aria-label="Symbolic-related downstream task slots">
+        <a class="task-slot ready" href="#symbolic-tokenizer-reconstruction">
+          <span class="badge">Current evidence</span>
+          <h3>\(S_{\mathrm{plan}}\) Feature Reconstruction</h3>
+          <p>
+            Compare MIDI-derived target structure with the EXP024 \(S_{\mathrm{plan}}\)
+            reconstruction before using the token in downstream LALM-style interfaces.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>MIDI-derived symbolic features</dd>
+            <dt>Output</dt><dd>Reconstructed features + RVQ codes</dd>
+            <dt>Status</dt><dd class="good">EXP024 example below</dd>
+          </dl>
+          <span class="slot-cta">View current demo</span>
+        </a>
+
+        <a class="task-slot ready" href="#symbolic-mir-attribute-recovery">
+          <span class="badge">Current symbolic task</span>
+          <h3>MIR Attribute Recovery</h3>
+          <p>
+            Treat \(S_{\mathrm{plan}}\) as the input representation and recover
+            instrument, key, meter, tempo, and density as explicit task outputs.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>\(S_{\mathrm{plan}}\) sequence from a Slakh window</dd>
+            <dt>Output</dt><dd>Instrument set, key, meter, tempo, density</dd>
+            <dt>Status</dt><dd class="good">EXP031A table and case cards below</dd>
+          </dl>
+          <span class="slot-cta">View MIR task</span>
+        </a>
+
+        <a class="task-slot pending" href="#symbolic-midi-to-audio">
+          <span class="badge">Future slot</span>
+          <h3>MIDI-to-Audio Generation</h3>
+          <p>
+            Use symbolic or MIDI-like input as a controllable plan for audio music
+            generation, then compare structure adherence and audio quality.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>MIDI or symbolic plan</dd>
+            <dt>Output</dt><dd>Generated audio waveform</dd>
+            <dt>Needed asset</dt><dd class="missing">Generated audio plus piano-roll/audio-alignment evaluation</dd>
+          </dl>
+          <span class="slot-cta">View placeholder</span>
+        </a>
+
+        <a class="task-slot pending" href="#symbolic-audio-to-midi">
+          <span class="badge">Future slot</span>
+          <h3>Audio-to-MIDI Transcription</h3>
+          <p>
+            Convert music audio into MIDI-like structure and visualize input/output
+            piano rolls to make symbolic recovery inspectable.
+          </p>
+          <dl>
+            <dt>Input</dt><dd>Music audio</dd>
+            <dt>Output</dt><dd>MIDI or piano-roll transcription</dd>
+            <dt>Needed asset</dt><dd class="missing">Predicted MIDI with GT/pseudo-GT comparison</dd>
+          </dl>
+          <span class="slot-cta">View placeholder</span>
+        </a>
+      </div>
+
+      <article class="provenance-card eval-summary-card">
+        <div>
+          <p class="eyebrow">Symbolic task taxonomy</p>
+          <h3>Which Symbolic Music Task Is Actually Being Demonstrated?</h3>
+          <p class="table-caption">
+            Caption: this table prevents a common confusion. EXP024 is a codec
+            reconstruction check, EXP031A is a structured MIR downstream task, and
+            MIDI-to-audio / audio-to-MIDI are future conversion or generation tasks.
+          </p>
+        </div>
+        <table class="structured-table">
+          <thead>
+            <tr><th>Task type</th><th>Input</th><th>Output</th><th>Current evidence</th><th>What the demo should show</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="group-cell">Feature reconstruction</td><td>MIDI-derived feature sequence</td><td>Reconstructed symbolic feature sequence and RVQ code usage</td><td class="good">EXP024 feature heatmaps and aggregate reconstruction metrics</td><td>Target / reconstruction / error heatmap, not piano-roll generation</td></tr>
+            <tr><td class="group-cell">MIR attribute recovery</td><td>\(S_{\mathrm{plan}}\) sequence</td><td>Instrument set, key, meter, tempo, density</td><td class="good">EXP031A aggregate metrics and EXP032 case cards</td><td>GT/pred table plus input MIDI piano roll for interpretability</td></tr>
+            <tr><td class="group-cell">MIDI-to-audio generation</td><td>MIDI or symbolic plan</td><td>Generated music waveform</td><td class="missing">No decoded symbolic-conditioned audio yet</td><td>Audio pair plus structure-consistency metrics</td></tr>
+            <tr><td class="group-cell">Audio-to-MIDI transcription</td><td>Music audio</td><td>Predicted MIDI or piano-roll-like output</td><td class="missing">No MIDI event decoder/transcriber yet</td><td>GT piano roll versus predicted piano roll</td></tr>
+            <tr><td class="group-cell">MIR-to-QA bridge</td><td>\(S_{\mathrm{plan}}\)-MIR prediction for the same Slakh QA window</td><td>Yes/no instrument-presence answer</td><td class="missing">Bridge score pending</td><td>Same QA metrics as frozen UniAudio2.0: exact acc., macro-F1, invalid rate</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="provenance-card eval-summary-card">
+        <div>
+          <p class="eyebrow">Symbolic codec evidence</p>
+          <h3>\(S_{\mathrm{plan}}\) Tokenizer Reconstruction at the Feature Level</h3>
+          <p class="table-caption">
+            Caption: EXP024 verifies the compression target before downstream use:
+            \(S_{\mathrm{plan}}\) should reconstruct MIDI-derived symbolic features
+            with a compact RVQ budget. This is feature reconstruction, not audio
+            codec reconstruction and not full MIDI transcription.
+          </p>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Evaluation axis</th><th>Configuration / split</th><th>Result</th><th>Interpretation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Token budget</td><td>30 frames x 4 RVQ codebooks</td><td>120 \(S_{\mathrm{plan}}\) tokens / 30 s</td><td>Compact enough for UniAudio-style stream insertion</td></tr>
+            <tr><td>Validation reconstruction</td><td>EXP024 long-run, step 42,000</td><td class="good">loss 0.00918</td><td>Low reconstruction error for symbolic planning features</td></tr>
+            <tr><td>Binary feature recovery</td><td>Pitch class, octave, instrument, rhythm bins</td><td class="good">binary acc. 0.99777; BCE 0.00746</td><td>Discrete symbolic activity is preserved well</td></tr>
+            <tr><td>Continuous feature recovery</td><td>Density, polyphony, pitch/velocity statistics</td><td class="good">MSE 0.00172</td><td>Local texture statistics are also recoverable</td></tr>
+            <tr><td>Codebook health</td><td>4 x 1024-entry RVQ</td><td>usage 0.313 / 0.719 / 0.807 / 0.812</td><td>Later codebooks are broad; codebook 0 remains the weakest</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article id="symbolic-tokenizer-reconstruction" class="single-evidence-card task-demo-slot">
+        <div class="sample-card-header">
+          <span class="badge">EXP024 reconstruction</span>
+          <h3>Target Symbolic Features versus Reconstructed \(S_{\mathrm{plan}}\) Features</h3>
+          <figure class="roll-figure">
+            <img src="assets/figures/splan_recon_track01501_w003_s0009000_feature_heatmap.png" alt="EXP024 target, reconstructed, and absolute-error symbolic feature heatmaps for Slakh Track01501 window 003">
+            <figcaption>
+              Target/reconstruction/error heatmap over 30 one-second frames and 58 symbolic
+              features. This is the direct reconstruction view used to justify
+              \(S_{\mathrm{plan}}\) as a compact symbolic codec.
+            </figcaption>
+          </figure>
+          <p class="objective">
+            Objective: verify that the learned symbolic tokenizer reconstructs the
+            MIDI-derived structure it was trained to compress before claiming downstream
+            symbolic utility.
+          </p>
+          <table>
+            <thead>
+              <tr><th>Fixed example</th><th>Value</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Sample</td><td><code>Slakh_Track01501_w003_s0009000</code>, validation split, 90-120 s window</td></tr>
+              <tr><td>Binary feature accuracy</td><td class="good">1.000</td></tr>
+              <tr><td>Continuous feature MSE</td><td class="good">0.00130</td></tr>
+              <tr><td>Unique codes per RVQ book</td><td><code>q0:17, q1:17, q2:21, q3:25</code></td></tr>
+              <tr><td>Claim boundary</td><td>Symbolic feature reconstruction, not waveform generation and not full MIDI transcription</td></tr>
+            </tbody>
+          </table>
+          <p class="note">
+            The piano-roll-style proxy comparison was removed from the main card
+            because it visually overlaps with the EXP031A MIR examples. EXP024 is
+            better read as feature-level tokenizer reconstruction evidence.
+          </p>
+          <div class="case-grid" aria-label="EXP024 reconstruction heatmap gallery">
+            <article>
+              <figure class="roll-figure">
+                <img src="assets/figures/splan_recon_track01501_w000_s0000000_feature_heatmap.png" alt="EXP024 target, reconstruction, and error heatmap for Slakh Track01501 window 000">
+                <figcaption><code>Slakh_Track01501_w000_s0000000</code>: target, reconstruction, and absolute-error feature heatmaps.</figcaption>
+              </figure>
+            </article>
+            <article>
+              <figure class="roll-figure">
+                <img src="assets/figures/splan_recon_track01501_w001_s0003000_feature_heatmap.png" alt="EXP024 target, reconstruction, and error heatmap for Slakh Track01501 window 001">
+                <figcaption><code>Slakh_Track01501_w001_s0003000</code>: target, reconstruction, and absolute-error feature heatmaps.</figcaption>
+              </figure>
+            </article>
+            <article>
+              <figure class="roll-figure">
+                <img src="assets/figures/splan_recon_track01501_w003_s0009000_feature_heatmap.png" alt="EXP024 target, reconstruction, and error heatmap for Slakh Track01501 window 003">
+                <figcaption><code>Slakh_Track01501_w003_s0009000</code>: target, reconstruction, and absolute-error feature heatmaps.</figcaption>
+              </figure>
+            </article>
+          </div>
+          <table>
+            <thead>
+              <tr><th>EXP024 fixed reconstruction gallery</th><th>Binary acc. ↑</th><th>Continuous MSE ↓</th><th>Unique RVQ codes</th><th>Figure status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>Slakh_Track01501_w000_s0000000</code></td><td class="good">1.000</td><td class="good">0.00174</td><td><code>q0:15, q1:15, q2:17, q3:17</code></td><td class="good">Heatmap exported</td></tr>
+              <tr><td><code>Slakh_Track01501_w001_s0003000</code></td><td class="good">1.000</td><td class="good">0.00246</td><td><code>q0:20, q1:24, q2:26, q3:25</code></td><td class="good">Heatmap exported</td></tr>
+              <tr><td><code>Slakh_Track01501_w003_s0009000</code></td><td class="good">1.000</td><td class="good">0.00130</td><td><code>q0:17, q1:17, q2:21, q3:25</code></td><td class="good">Heatmap exported</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </article>
+
+      <article id="symbolic-mir-attribute-recovery" class="provenance-card eval-summary-card task-demo-slot">
+        <div>
+          <p class="eyebrow">Symbolic downstream task</p>
+          <h3>MIR Attribute Recovery as a Symbolic Downstream Task</h3>
+          <p class="table-caption">
+            Task definition: given the learned symbolic representation
+            \(S_{\mathrm{plan}}\) for a 30 s music window, predict interpretable MIR
+            attributes that can be checked against MIDI-derived targets. This is a
+            symbolic downstream task because the output is not token loss: it is a
+            structured music description with instrument, key, meter, tempo, and
+            density fields.
+          </p>
+        </div>
+        <table class="structured-table">
+          <thead>
+            <tr><th>Task output</th><th>Prediction type</th><th>Primary metric / display</th><th>Current evidence</th><th>Claim-safety note</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="group-cell">Instrument set</td><td>Multi-label instrument-family prediction</td><td>Macro-F1, micro-F1, per-case GT/pred table</td><td class="good">Macro-F1 0.5014 vs prior/zero 0.4280; case cards show GT/pred instruments</td><td class="good">Best current symbolic-task headline axis</td></tr>
+            <tr><td class="group-cell">Key</td><td>Weak key / mode label</td><td>Weak-key accuracy and GT/pred table</td><td class="good">Weak-key acc. 0.5567 vs prior/zero 0.0859</td><td class="good">Useful, with weak-label caveat</td></tr>
+            <tr><td class="group-cell">Meter</td><td>Discrete meter class</td><td>Meter accuracy and GT/pred table</td><td>Meter acc. 0.7834; case cards show 4/4 and 12/8 predictions</td><td class="missing">Prior dominated; do not headline alone</td></tr>
+            <tr><td class="group-cell">Tempo</td><td>Continuous BPM estimate</td><td>Per-case BPM error in the qualitative table</td><td>Examples include 6.35-30.68 BPM errors</td><td class="missing">Needs aggregate BPM MAE export before headline use</td></tr>
+            <tr><td class="group-cell">Density</td><td>Continuous note-density estimate or binned density class</td><td>Density error / density accuracy and GT/pred table</td><td>Case-level density errors shown; density acc. 0.8743</td><td class="missing">Accuracy is prior dominated; use case table as qualitative evidence</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">
+          The piano-roll figures below remain as input/target context for human
+          inspection. The model output is the GT/pred attribute table and caption
+          proxy, not generated MIDI and not a decoded waveform.
+        </p>
+        <table class="structured-table">
+          <thead>
+            <tr><th>Group</th><th>Comparison</th><th>Split / step</th><th>Feature / target condition</th><th>Inst. macro-F1</th><th>Inst. micro-F1</th><th>PC macro-F1</th><th>Meter acc.</th><th>Weak key acc.</th><th>Density acc.</th><th>Interpretation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="group-cell">Main representation</td><td class="condition-cell">Aligned \(S_{\mathrm{plan}}\)</td><td>test / 625</td><td>Frozen EXP024 features + true MIR targets</td><td class="good">0.5014</td><td>0.7908</td><td class="good">0.8541</td><td>0.7834</td><td class="good">0.5567</td><td>0.8743</td><td>Main positive row; not sufficient alone for a causal claim</td></tr>
+            <tr class="control-row"><td class="group-cell" rowspan="3">Controls</td><td class="condition-cell">↳ Zero-feature control</td><td>test / 625</td><td>Feature vectors zeroed + true MIR targets</td><td>0.4280</td><td class="warn">0.8378</td><td>0.8244</td><td class="warn">0.9162</td><td class="bad">0.0859</td><td class="warn">0.8858</td><td>Shows micro-F1, meter, and density can be prior/head dominated</td></tr>
+            <tr class="control-row"><td class="condition-cell">↳ Label-shuffle control</td><td class="missing">not complete</td><td>Frozen EXP024 features + shuffled train targets</td><td class="missing">-</td><td class="missing">-</td><td class="missing">-</td><td class="missing">-</td><td class="missing">-</td><td class="missing">-</td><td class="missing">Required to test feature-target alignment</td></tr>
+            <tr class="control-row"><td class="condition-cell">↳ Target-prior baseline</td><td>test</td><td>No features; train-split empirical priors only</td><td>0.4280</td><td class="warn">0.8378</td><td>0.8244</td><td class="warn">0.9162</td><td class="bad">0.0859</td><td class="warn">0.8858</td><td>Confirms which axes are explainable from priors alone</td></tr>
+          </tbody>
+        </table>
+        <p class="table-caption">
+          Caption: the strongest currently defensible reading is axis-specific:
+          instrument macro-F1, pitch-class macro-F1, weak-key recovery, and global
+          numeric MAE are currently claim-safe against zero-feature and train-prior
+          controls. Instrument micro-F1, meter, density, and segment numeric MAE
+          should be marked as prior-dominated or unsafe.
+        </p>
+        <table class="structured-table">
+          <thead>
+            <tr><th>Group</th><th>Metric axis</th><th>Normal test 625</th><th>Macro-peak test 375</th><th>Zero-feature test 625</th><th>Train-prior test</th><th>Current interpretation</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="group-cell" rowspan="4">Claim-safe vs zero/prior</td><td class="condition-cell">Instrument macro-F1</td><td class="good">0.5014</td><td class="good">0.5143</td><td>0.4280</td><td>0.4280</td><td class="good">Sample-specific gain; macro-peak checkpoint is strongest for this axis</td></tr>
+            <tr><td class="condition-cell">Pitch-class macro-F1</td><td class="good">0.8541</td><td>0.8124</td><td>0.8244</td><td>0.8244</td><td class="good">Positive but modest gap over priors</td></tr>
+            <tr><td class="condition-cell">Weak key accuracy</td><td class="good">0.5567</td><td>0.3776</td><td class="bad">0.0859</td><td class="bad">0.0859</td><td class="good">Largest feature-dependent gain, but weak-label caveat remains</td></tr>
+            <tr><td class="condition-cell">Global numeric MAE ↓</td><td class="good">0.1244</td><td>0.1608</td><td>0.1594</td><td>0.1593</td><td class="good">Lower error than both zero-feature and prior baselines</td></tr>
+            <tr class="control-row"><td class="group-cell" rowspan="4">Prior-dominated or unsafe</td><td class="condition-cell">↳ Instrument micro-F1</td><td>0.7908</td><td>0.7022</td><td class="warn">0.8378</td><td class="warn">0.8378</td><td class="missing">Do not use as headline; prior/majority effect is stronger</td></tr>
+            <tr class="control-row"><td class="condition-cell">↳ Meter accuracy</td><td>0.7834</td><td>0.5899</td><td class="warn">0.9162</td><td class="warn">0.9162</td><td class="missing">Common-meter prior dominates this axis</td></tr>
+            <tr class="control-row"><td class="condition-cell">↳ Segment density accuracy</td><td>0.8743</td><td>0.7019</td><td class="warn">0.8858</td><td class="warn">0.8858</td><td class="missing">Nearly fully explained by prior/zero-feature behavior</td></tr>
+            <tr class="control-row"><td class="condition-cell">↳ Segment numeric MAE ↓</td><td>0.6778</td><td>0.8742</td><td>0.7984</td><td class="warn">0.1998</td><td class="missing">Prior baseline is much stronger; current model is unsafe on this axis</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <article class="provenance-card eval-summary-card">
+        <div>
+          <p class="eyebrow">MIR case spectrum</p>
+          <h3>Qualitative MIR Recovery Cases from Success to Boundary</h3>
+          <p class="table-caption">
+            Caption: EXP032 selected five validation fixed examples to make the MIR
+            gate inspectable. All five now have exported audio and target-MIDI
+            piano-roll cards; they are ordered from strongest success to boundary.
+          </p>
+        </div>
+        <table>
+          <thead>
+            <tr><th>Case</th><th>Instrument F1</th><th>Key GT -> pred</th><th>Meter GT -> pred</th><th>Tempo error</th><th>Density error</th><th>Media status</th><th>Why shown</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>w003_s0009000</code></td><td class="good">1.000</td><td class="good">A minor -> A minor</td><td class="good">4/4 -> 4/4</td><td class="warn">30.68 BPM</td><td>2.579</td><td class="good">audio + piano roll</td><td>Instrument/key/meter success with tempo boundary</td></tr>
+            <tr><td><code>w002_s0006000</code></td><td>0.833</td><td class="good">A minor -> A minor</td><td class="good">4/4 -> 4/4</td><td class="good">6.35 BPM</td><td>12.533</td><td class="good">audio + piano roll</td><td>Good key/meter but misses extra instrument families</td></tr>
+            <tr><td><code>w004_s0012000</code></td><td>0.833</td><td class="good">A minor -> A minor</td><td class="good">4/4 -> 4/4</td><td class="warn">23.97 BPM</td><td>18.992</td><td class="good">audio + piano roll</td><td>Density and tempo boundary despite stable key/meter</td></tr>
+            <tr><td><code>w000_s0000000</code></td><td>0.800</td><td class="good">A minor -> A minor</td><td class="good">4/4 -> 4/4</td><td class="warn">20.45 BPM</td><td>3.265</td><td class="good">audio + piano roll</td><td>False guitar plus percussion miss; useful middle case</td></tr>
+            <tr><td><code>w005_s0015000</code></td><td>0.833</td><td class="bad">A# minor -> C# major</td><td class="bad">4/4 -> 12/8</td><td>10.63 BPM</td><td>18.583</td><td class="good">audio + piano roll</td><td>Boundary failure for key and meter</td></tr>
+          </tbody>
+        </table>
+        <table>
+          <thead>
+            <tr><th>Qualitative export item</th><th>Status</th><th>Reason it matters</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>GT/prediction caption proxy for all five cases</td><td class="good">shown in cards</td><td>Lets readers see whether predicted text reflects the same failure mode as the metrics</td></tr>
+            <tr><td>Piano-roll figures for w000, w002, w004</td><td class="good">added</td><td>Prevents cherry-picking only the strongest and weakest visual examples</td></tr>
+            <tr><td>Matched test-split qualitative cards</td><td class="missing">-</td><td>Needed before using examples as final paper evidence</td></tr>
+          </tbody>
+        </table>
+      </article>
+
+      <div id="symbolic-mir-recovery" class="case-grid task-demo-slot">
+        <article class="task-card">
+          <span class="badge">EXP031A MIR recovery</span>
+          <h3>Success Case: Instruments, Key, and Meter Recovered</h3>
+          <audio controls preload="metadata" src="assets/audio/slakh_track01501_w003_mir_success.wav"></audio>
+          <p class="caption"><code>Slakh_Track01501_w003_s0009000</code> | split: validation fixed example</p>
+          <figure class="roll-figure">
+            <img src="assets/figures/pianoroll_track01501_w003_target.png" alt="Piano roll for Slakh Track01501 window 003 target MIDI">
+            <figcaption>Input/target MIDI piano roll, 90-120 s window. The current EXP031A output is MIR JSON/caption proxy, not generated MIDI.</figcaption>
+          </figure>
+          <div class="chips" aria-label="Recovered instruments">
+            <span>bass</span><span>drums</span><span>guitar</span><span>other</span><span>piano</span>
+          </div>
+          <table class="comparison-table">
+            <thead>
+              <tr><th>Attribute</th><th>GT</th><th>Prediction</th><th>Score / Error</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="metric-name">Instrument set</td>
+                <td class="list-cell">bass, drums, guitar, other, piano</td>
+                <td class="list-cell">bass, drums, guitar, other, piano</td>
+                <td class="good">F1 1.000</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Key</td>
+                <td>A minor</td>
+                <td>A minor</td>
+                <td class="good">Match</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Meter</td>
+                <td>4/4</td>
+                <td>4/4</td>
+                <td class="good">Match</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Tempo</td>
+                <td>120.00 BPM</td>
+                <td>89.32 BPM</td>
+                <td class="warn">Error 30.68 BPM</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Density</td>
+                <td>22.00 notes/s</td>
+                <td>24.58 notes/s</td>
+                <td class="good">Error 2.58</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="quote">
+            Prediction caption proxy: This symbolic window contains drums, bass, guitar, piano, other; estimated around 89.32 BPM in 4/4, with weak key/chord evidence around A minor.
+          </p>
+        </article>
+
+        <article class="task-card">
+          <span class="badge">EXP031A MIR recovery</span>
+          <h3>Success Case: Key and Meter Stable with Small Tempo Error</h3>
+          <audio controls preload="metadata" src="assets/audio/slakh_track01501_w002_mir_success.wav"></audio>
+          <p class="caption"><code>Slakh_Track01501_w002_s0006000</code> | split: validation fixed example</p>
+          <figure class="roll-figure">
+            <img src="assets/figures/pianoroll_track01501_w002_target.png" alt="Piano roll for Slakh Track01501 window 002 target MIDI">
+            <figcaption>Input/target MIDI piano roll, 60-90 s window. This is a strong MIR-caption proxy example, not generated MIDI.</figcaption>
+          </figure>
+          <div class="chips" aria-label="Predicted instruments">
+            <span>bass</span><span>drums</span><span>guitar</span><span>other</span><span>piano</span>
+          </div>
+          <table class="comparison-table">
+            <thead>
+              <tr><th>Attribute</th><th>GT</th><th>Prediction</th><th>Score / Error</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="metric-name">Instrument set</td>
+                <td class="list-cell">bass, drums, guitar, other, percussion, piano, strings</td>
+                <td class="list-cell">bass, drums, guitar, other, piano</td>
+                <td class="warn">F1 0.833</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Key</td>
+                <td>A minor</td>
+                <td>A minor</td>
+                <td class="good">Match</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Meter</td>
+                <td>4/4</td>
+                <td>4/4</td>
+                <td class="good">Match</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Tempo</td>
+                <td>120.00 BPM</td>
+                <td>113.65 BPM</td>
+                <td class="good">Error 6.35 BPM</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Density</td>
+                <td>38.10 notes/s</td>
+                <td>25.57 notes/s</td>
+                <td class="warn">Error 12.53</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="quote">
+            Prediction caption proxy: This symbolic window contains drums, bass, guitar, piano, other; estimated around 113.65 BPM in 4/4, with weak key/chord evidence around A minor.
+          </p>
+        </article>
+
+        <article class="task-card">
+          <span class="badge">EXP031A MIR recovery</span>
+          <h3>Success-Boundary Case: Key and Meter Hold, Density Drifts</h3>
+          <audio controls preload="metadata" src="assets/audio/slakh_track01501_w004_mir_success.wav"></audio>
+          <p class="caption"><code>Slakh_Track01501_w004_s0012000</code> | split: validation fixed example</p>
+          <figure class="roll-figure">
+            <img src="assets/figures/pianoroll_track01501_w004_target.png" alt="Piano roll for Slakh Track01501 window 004 target MIDI">
+            <figcaption>Input/target MIDI piano roll, 120-150 s window. The recovered global structure is stable, while density remains under-estimated.</figcaption>
+          </figure>
+          <div class="chips" aria-label="Predicted instruments">
+            <span>bass</span><span>drums</span><span>guitar</span><span>other</span><span>piano</span>
+          </div>
+          <table class="comparison-table">
+            <thead>
+              <tr><th>Attribute</th><th>GT</th><th>Prediction</th><th>Score / Error</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="metric-name">Instrument set</td>
+                <td class="list-cell">bass, drums, guitar, other, percussion, piano, strings</td>
+                <td class="list-cell">bass, drums, guitar, other, piano</td>
+                <td class="warn">F1 0.833</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Key</td>
+                <td>A minor</td>
+                <td>A minor</td>
+                <td class="good">Match</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Meter</td>
+                <td>4/4</td>
+                <td>4/4</td>
+                <td class="good">Match</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Tempo</td>
+                <td>120.00 BPM</td>
+                <td>96.03 BPM</td>
+                <td class="warn">Error 23.97 BPM</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Density</td>
+                <td>45.17 notes/s</td>
+                <td>26.18 notes/s</td>
+                <td class="warn">Error 18.99</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="quote">
+            Prediction caption proxy: This symbolic window contains drums, bass, guitar, piano, other; estimated around 96.03 BPM in 4/4, with weak key/chord evidence around A minor.
+          </p>
+        </article>
+
+        <article class="task-card">
+          <span class="badge">EXP031A middle case</span>
+          <h3>Middle Case: Key and Meter Stable with Instrument False-Positive</h3>
+          <audio controls preload="metadata" src="assets/audio/slakh_track01501_w000_mir_middle.wav"></audio>
+          <p class="caption"><code>Slakh_Track01501_w000_s0000000</code> | split: validation fixed example</p>
+          <figure class="roll-figure">
+            <img src="assets/figures/pianoroll_track01501_w000_target.png" alt="Piano roll for Slakh Track01501 window 000 target MIDI">
+            <figcaption>Input/target MIDI piano roll, 0-30 s window. This case is useful because the model keeps key/meter but adds guitar and misses percussion.</figcaption>
+          </figure>
+          <div class="chips" aria-label="Predicted instruments">
+            <span>bass</span><span>drums</span><span>guitar</span><span>other</span><span>piano</span>
+          </div>
+          <table class="comparison-table">
+            <thead>
+              <tr><th>Attribute</th><th>GT</th><th>Prediction</th><th>Score / Error</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="metric-name">Instrument set</td>
+                <td class="list-cell">bass, drums, other, percussion, piano</td>
+                <td class="list-cell">bass, drums, guitar, other, piano</td>
+                <td class="warn">F1 0.800</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Key</td>
+                <td>A minor</td>
+                <td>A minor</td>
+                <td class="good">Match</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Meter</td>
+                <td>4/4</td>
+                <td>4/4</td>
+                <td class="good">Match</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Tempo</td>
+                <td>120.00 BPM</td>
+                <td>99.55 BPM</td>
+                <td class="warn">Error 20.45 BPM</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Density</td>
+                <td>21.10 notes/s</td>
+                <td>17.84 notes/s</td>
+                <td class="good">Error 3.27</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="quote">
+            Prediction caption proxy: This symbolic window contains drums, bass, guitar, piano, other; estimated around 99.55 BPM in 4/4, with weak key/chord evidence around A minor.
+          </p>
+        </article>
+
+        <article class="task-card">
+          <span class="badge">EXP031A boundary case</span>
+          <h3>Failure Boundary: Key and Meter Can Still Break</h3>
+          <audio controls preload="metadata" src="assets/audio/slakh_track01501_w005_mir_boundary.wav"></audio>
+          <p class="caption"><code>Slakh_Track01501_w005_s0015000</code> | split: validation fixed example</p>
+          <figure class="roll-figure">
+            <img src="assets/figures/pianoroll_track01501_w005_target.png" alt="Piano roll for Slakh Track01501 window 005 target MIDI">
+            <figcaption>Input/target MIDI piano roll, 150-180 s window. Output-MIDI visualization is marked missing until a MIDI-generation task is run.</figcaption>
+          </figure>
+          <div class="chips" aria-label="Predicted instruments">
+            <span>bass</span><span>drums</span><span>guitar</span><span>other</span><span>piano</span>
+          </div>
+          <table class="comparison-table">
+            <thead>
+              <tr><th>Attribute</th><th>GT</th><th>Prediction</th><th>Score / Error</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="metric-name">Instrument set</td>
+                <td class="list-cell">bass, drums, guitar, other, percussion, piano, strings</td>
+                <td class="list-cell">bass, drums, guitar, other, piano</td>
+                <td class="warn">F1 0.833</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Key</td>
+                <td>A# minor</td>
+                <td class="bad">C# major</td>
+                <td class="bad">Mismatch</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Meter</td>
+                <td>4/4</td>
+                <td class="bad">12/8</td>
+                <td class="bad">Mismatch</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Tempo</td>
+                <td>120.00 BPM</td>
+                <td>130.63 BPM</td>
+                <td class="warn">Error 10.63 BPM</td>
+              </tr>
+              <tr>
+                <td class="metric-name">Density</td>
+                <td>44.90 notes/s</td>
+                <td>26.32 notes/s</td>
+                <td class="warn">Error 18.58</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="note">
+            Interpretation: this is useful for a research demo because it shows both capability and failure mode.
+          </p>
+          <p class="quote">
+            Prediction caption proxy: This symbolic window contains drums, bass, guitar, piano, other; estimated around 130.63 BPM in 12/8, with weak key/chord evidence around C# major.
+          </p>
+        </article>
+      </div>
+
+      <div class="downstream-task-list" aria-label="Symbolic-aware MIDI conversion demo slots">
+        <article id="symbolic-midi-to-audio" class="placeholder-demo-card task-demo-slot">
+          <p class="eyebrow">Future symbolic generation task</p>
+          <h3>MIDI-to-Audio Generation</h3>
+          <p>
+            Future demo slot for using MIDI or a MIDI-like symbolic plan as the
+            control input for music audio generation. The demo should show whether
+            the generated waveform follows instrument, pitch, rhythm, and form cues
+            while preserving audio quality.
+          </p>
+          <table>
+            <tbody>
+              <tr><th>Comparison</th><td>Symbolic-Aware generation from MIDI plan vs non-symbolic text/audio baseline.</td></tr>
+              <tr><th>Visualization</th><td class="missing">Input MIDI piano roll, generated-audio sample, and generated-audio transcription or aligned proxy piano roll.</td></tr>
+              <tr><th>Metrics</th><td>Structure adherence, instrument F1, pitch/rhythm overlap, FAD/KL, listening notes.</td></tr>
+            </tbody>
+          </table>
+        </article>
+
+        <article id="symbolic-audio-to-midi" class="placeholder-demo-card task-demo-slot">
+          <p class="eyebrow">Future symbolic transcription task</p>
+          <h3>Audio-to-MIDI Transcription</h3>
+          <p>
+            Future demo slot for converting music audio into MIDI-like structure.
+            This is the natural visual companion to the current EXP031A MIR recovery:
+            users should see the input audio, target/pseudo-target piano roll, and
+            predicted piano roll side by side.
+          </p>
+          <table>
+            <tbody>
+              <tr><th>Comparison</th><td>Symbolic-Aware transcription/recovery vs baseline audio-only transcription or MIR extractor.</td></tr>
+              <tr><th>Visualization</th><td class="missing">GT MIDI piano roll and predicted MIDI piano roll for the same audio window.</td></tr>
+              <tr><th>Metrics</th><td>Note F1, onset/offset F1, instrument F1, key/meter/tempo accuracy.</td></tr>
+            </tbody>
+          </table>
+        </article>
+      </div>
+
+      <article class="roadmap">
+        <h3>Open Evidence Gaps Before Stronger Claims</h3>
+        <ul>
+          <li><span class="good">Added:</span> EXP025 fixed-example token-preview table is now exported, but it remains a validation sanity preview rather than claim-bearing evidence.</li>
+          <li><span class="good">Added:</span> EXP024 reconstruction gallery now includes w000, w001, and w003 feature-level heatmaps.</li>
+          <li><span class="good">Added:</span> EXP035 gap diagnostics now separate teacher-forced/oracle-assisted symbolic utility from weak unassisted free rollout.</li>
+          <li><span class="missing">Missing:</span> EXP036B short-horizon bridge training and follow-up free short16/short32 rollout are needed before decoded waveform claims.</li>
+          <li><span class="missing">Missing:</span> test-split per-sample EXP029/EXP031A inference cards; current cards use saved validation fixed examples.</li>
+          <li><span class="missing">Missing:</span> baseline UniAudio2 vs Symbolic-Aware music-task pairs for QA, text-to-music, and song generation.</li>
+          <li><span class="missing">Missing:</span> Audio-to-MIDI transcription output piano-roll visualization, because EXP031A currently outputs MIR JSON/caption proxy rather than MIDI.</li>
+          <li><span class="missing">Missing:</span> MIDI-to-Audio Generation waveform output after symbolic intervention.</li>
+          <li><span class="missing">Missing:</span> final \(S_{\mathrm{LLM}}\) examples after LLM-supervised tokenizer training.</li>
+        </ul>
+      </article>
+    </section>
+      </div>
+    </section>
+    </main>
+  </div>
+
+  <footer class="main-footer">
+    <div class="shell footer-shell">
+    <p class="copyright">
+      Static demo page prepared for team discussion. Quantitative values are drawn from EXP001, EXP006, EXP024, EXP025, EXP029, EXP031A, EXP032 qualitative case-study artifacts, EXP034A/EXP034B stream controls, and EXP035 rollout/gap diagnostics.
+    </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

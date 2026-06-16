@@ -1,0 +1,60 @@
+{
+  "claim_boundary": "EXP035 gap diagnostics show S_plan utility under teacher-forced and oracle-assisted contexts, but do not establish free decoded waveform generation quality.",
+  "source_roots": {
+    "free_short32": "exp_outputs/060528_uniaudio2-understanding-eval/exp035_minimal_splan_generation/from_exp034b_2400_full_controls_seed260637_short32_lastpt/decoded_exports",
+    "oracle_prefix8": "exp_outputs/060528_uniaudio2-understanding-eval/exp035_minimal_splan_generation/gap_oracle_prefix8_from_exp034b_2400_seed260637/decoded_exports",
+    "scheduled_oracle4": "exp_outputs/060528_uniaudio2-understanding-eval/exp035_minimal_splan_generation/gap_scheduled_oracle4_from_exp034b_2400_seed260637/decoded_exports",
+    "teacher_forced": "exp_outputs/060528_uniaudio2-understanding-eval/exp035_minimal_splan_generation/gap_teacher_forced_from_exp034b_2400_seed260637/decoded_exports"
+  },
+  "results": [
+    {
+      "mode": "free",
+      "horizon_frames": 32,
+      "n_examples": 128,
+      "conditions": {
+        "reason_only": {"token_acc": 0.01147461, "exact_frame_acc": 0.0, "frame_repeat_rate": 0.359627},
+        "splan_stream": {"token_acc": 0.01092529, "exact_frame_acc": 0.0, "frame_repeat_rate": 0.343246},
+        "splan_stream_shuffled": {"token_acc": 0.01321411, "exact_frame_acc": 0.0, "frame_repeat_rate": 0.344758},
+        "splan_stream_dummy": {"token_acc": 0.00991821, "exact_frame_acc": 0.0, "frame_repeat_rate": 0.369456}
+      },
+      "interpretation": "Aligned S_plan does not beat shuffled under unassisted free rollout."
+    },
+    {
+      "mode": "teacher_forced",
+      "horizon_frames": 64,
+      "n_examples": 512,
+      "conditions": {
+        "reason_only": {"token_acc": 0.05826187, "exact_frame_acc": 0.000397, "frame_repeat_rate": 0.00744},
+        "splan_stream": {"token_acc": 0.06343079, "exact_frame_acc": 0.000824, "frame_repeat_rate": 0.0102},
+        "splan_stream_shuffled": {"token_acc": 0.06229401, "exact_frame_acc": 0.000519, "frame_repeat_rate": 0.010386},
+        "splan_stream_dummy": {"token_acc": 0.06240463, "exact_frame_acc": 0.000549, "frame_repeat_rate": 0.012091}
+      },
+      "interpretation": "Aligned S_plan is best when GT semantic context is fed back after each prediction."
+    },
+    {
+      "mode": "oracle_prefix8",
+      "horizon_frames": 32,
+      "n_examples": 512,
+      "conditions": {
+        "reason_only": {"token_acc": 0.02544403, "exact_frame_acc": 0.000061, "frame_repeat_rate": 0.265562},
+        "splan_stream": {"token_acc": 0.02653503, "exact_frame_acc": 0.000122, "frame_repeat_rate": 0.230154},
+        "splan_stream_shuffled": {"token_acc": 0.02503967, "exact_frame_acc": 0.000183, "frame_repeat_rate": 0.223727},
+        "splan_stream_dummy": {"token_acc": 0.02637482, "exact_frame_acc": 0.000122, "frame_repeat_rate": 0.232989}
+      },
+      "interpretation": "An 8-frame oracle semantic prefix restores a small aligned advantage."
+    },
+    {
+      "mode": "scheduled_oracle4",
+      "horizon_frames": 64,
+      "n_examples": 512,
+      "conditions": {
+        "reason_only": {"token_acc": 0.02403259, "exact_frame_acc": 0.000092, "frame_repeat_rate": 0.092014},
+        "splan_stream": {"token_acc": 0.02524567, "exact_frame_acc": 0.0, "frame_repeat_rate": 0.086403},
+        "splan_stream_shuffled": {"token_acc": 0.02475739, "exact_frame_acc": 0.0, "frame_repeat_rate": 0.086124},
+        "splan_stream_dummy": {"token_acc": 0.02421188, "exact_frame_acc": 0.0, "frame_repeat_rate": 0.089658}
+      },
+      "interpretation": "Periodic GT context correction preserves a small aligned advantage."
+    }
+  ],
+  "next_step": "Train EXP036B short-horizon bridge with MAX_SEMANTIC_FRAMES=64 and rerun free short16/short32 rollout before decoded waveform claims."
+}
