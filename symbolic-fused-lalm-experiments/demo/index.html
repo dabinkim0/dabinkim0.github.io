@@ -100,7 +100,7 @@
             <tr><td class="group-cell">C2: token-level utility</td><td class="good">Supported as proxy evidence</td><td>EXP025 and EXP029 show lower \(C_a\) uncertainty for aligned \(S_{\mathrm{plan}}\) versus corrupted controls.</td><td>Decoded waveform and task-level music scores are not implied by CE alone.</td><td>UniAudio 2.0 Music Tasks</td></tr>
             <tr><td class="group-cell">C3: trainable stream comparison</td><td class="good">Supported at stream-proxy level</td><td>EXP034B now has a completed 2400-step full control suite: aligned \(S_{\mathrm{plan}}\) reaches test CE 5.5728 versus reason-only 5.6129, shuffled 5.5785, and dummy 5.5777, with the symbolic gate open at 0.2320.</td><td>Decoded waveform quality and final music-generation behavior remain separate gates.</td><td>EXP034B Open-Gate Stream Probe</td></tr>
             <tr><td class="group-cell">C4: symbolic MIR task</td><td class="good">Axis-specific support</td><td>EXP031A improves instrument macro-F1, weak-key accuracy, pitch-class F1, and global numeric MAE over zero/prior baselines.</td><td>Label-shuffle control and test-split qualitative cards remain important.</td><td>Symbolic-Aware MIDI / Music Tasks</td></tr>
-            <tr><td class="group-cell">C5: decoded generation</td><td class="warn">Bridge diagnosed, not established</td><td>EXP035 free rollout remains weak, but gap diagnostics show aligned \(S_{\mathrm{plan}}\) is best under teacher-forced, oracle-prefix, and scheduled-oracle contexts.</td><td>Free decoded rollout still needs short-horizon bridge training before any waveform-generation claim.</td><td>Decoded Rollout Bridge</td></tr>
+            <tr><td class="group-cell">C5: decoded generation</td><td class="warn">Bridge training started, not established</td><td>EXP035 free rollout remains weak, but gap diagnostics show aligned \(S_{\mathrm{plan}}\) is best under teacher-forced, oracle-prefix, and scheduled-oracle contexts. EXP036B short64 now improves aligned \(S_{\mathrm{plan}}\) over reason-only at test step 1600.</td><td>Shuffled/dummy EXP036B controls and a follow-up EXP035 free rollout are still required before any waveform-generation claim.</td><td>Decoded Rollout Bridge</td></tr>
           </tbody>
         </table>
       </article>
@@ -120,8 +120,8 @@
             <tr><th>Priority</th><th>Missing evidence</th><th>Why a reviewer will ask for it</th><th>Fastest demo form</th><th>Current status</th></tr>
           </thead>
           <tbody>
-            <tr><td class="group-cell">1</td><td>EXP036B short-horizon bridge training</td><td>EXP035 gap diagnostics show \(S_{\mathrm{plan}}\) helps when context stays near the target manifold; the next run should train directly for early semantic-token stability.</td><td>Short64 aligned/reason/shuffled/dummy table followed by free short16/32 rollout</td><td class="missing">Next CUDA run</td></tr>
-            <tr><td class="group-cell">2</td><td>EXP035 decoded rollout examples from matched checkpoints</td><td>Token CE is a proxy; listening examples show whether symbolic conditioning affects audible music trajectories.</td><td>Four-way audio card: reason-only / aligned / shuffled / dummy</td><td class="missing">256 local wavs exported; curation deferred until bridge improves</td></tr>
+            <tr><td class="group-cell">1</td><td>Complete EXP036B short-horizon controls</td><td>Aligned \(S_{\mathrm{plan}}\) already beats reason-only in short64 training, but shuffled and dummy controls must finish before the bridge claim is causal.</td><td>Short64 aligned/reason/shuffled/dummy table followed by free short16/32 rollout</td><td class="warn">Reason-only and aligned done; controls running/pending</td></tr>
+            <tr><td class="group-cell">2</td><td>EXP035 decoded rollout examples from EXP036B checkpoints</td><td>Token CE is a proxy; listening examples show whether the short-horizon bridge improves audible music trajectories.</td><td>Four-way audio card: reason-only / aligned / shuffled / dummy</td><td class="missing">Rerun after full EXP036B controls finish</td></tr>
             <tr><td class="group-cell">3</td><td>Decoded-rollout MIR consistency metrics</td><td>Audio waveforms alone are subjective; MIR consistency links generated audio back to symbolic structure.</td><td>Instrument/key/meter/tempo table for generated audio</td><td class="missing">Run after short-horizon bridge export</td></tr>
             <tr><td class="group-cell">4</td><td>\(S_{\mathrm{plan}}\)-MIR to instrument-presence QA bridge</td><td>This is the cleanest near-term comparison against frozen UniAudio2.0 music QA on the same task family.</td><td>Exact acc., macro-F1, invalid rate, per-instrument F1 table</td><td class="missing">Mapping/export pending</td></tr>
             <tr><td class="group-cell">5</td><td>Test-split qualitative MIR cards</td><td>Current fixed examples are validation cases; test examples reduce cherry-picking concerns.</td><td>Three test cards: success, middle, boundary</td><td class="missing">Not exported yet</td></tr>
@@ -150,7 +150,7 @@
           <tr><td>UniAudio compatibility</td><td>EXP006 sanity slots + EXP001 Slakh QA model outputs</td><td>test summaries + placeholders</td><td>Frozen UniAudio2 sanity and brittle music-QA behavior; not a symbolic contribution</td></tr>
           <tr><td>Symbolic codec</td><td>EXP024 \(S_{\mathrm{plan}}\) reconstruction RVQ</td><td>valid/test aggregate + validation fixed examples</td><td>Compact MIDI-derived structure can be reconstructed before downstream use</td></tr>
           <tr><td>Acoustic utility bridge</td><td>EXP025 acoustic-token utility proxy</td><td class="good">test aggregate</td><td>Aligned \(S_{\mathrm{plan}}\) reduces semantic acoustic-token uncertainty versus controls</td></tr>
-          <tr><td>Music stream gain</td><td>EXP029 stream-control final metrics + EXP034B open-gate result</td><td>test aggregate + validation examples + completed 2400-step full control table</td><td>Aligned \(S_{\mathrm{plan}}\) improves over matched reason-only, shuffled, and dummy in the 2400-step run; this supports a stream-level claim, not decoded generation</td></tr>
+          <tr><td>Music stream gain</td><td>EXP029 stream-control final metrics + EXP034B open-gate result + EXP036B short64 bridge partial</td><td>test aggregate + validation examples + completed 2400-step full control table + short64 partial bridge table</td><td>Aligned \(S_{\mathrm{plan}}\) improves over matched reason-only, shuffled, and dummy in EXP034B; EXP036B currently shows aligned short64 improvement over reason-only, with controls still pending</td></tr>
           <tr><td>MIR structure recovery</td><td>EXP031A MIR-supervised metrics + EXP032 fixed examples</td><td>test aggregate + validation examples</td><td>MIR structure is recoverable, but controls and claim boundaries remain active</td></tr>
         </tbody>
       </table>
@@ -548,8 +548,9 @@
           This section follows the music evidence ladder from frozen UniAudio2.0
           diagnostics to symbolic conditioning probes. The current concrete evidence
           includes frozen music QA, EXP025/EXP029 token-level utility evidence,
-          the negative EXP034A matched LoRA probe, and the completed EXP034B
-          2400-step open-gate full control suite.
+          the negative EXP034A matched LoRA probe, the completed EXP034B
+          2400-step open-gate full control suite, and the partial EXP036B
+          short-horizon bridge result.
           A MIR-to-QA bridge card marks the shortest direct path
           from symbolic recovery to a music-understanding comparison against
           released UniAudio2.0. Text-to-music and song-generation demos remain
@@ -628,12 +629,13 @@
             EXP034B/EXP036 checkpoints are designed to feed EXP035, which rolls out
             UniAudio semantic tokens and decodes them to waveform for listening.
             The latest gap diagnostics separate teacher-forced utility from
-            free-rollout exposure bias.
+            free-rollout exposure bias, and EXP036B begins the short64 bridge
+            training needed to reduce that gap.
           </p>
           <dl>
             <dt>Input</dt><dd>\(R_a + S_{\mathrm{plan}}\)</dd>
             <dt>Output</dt><dd>Rolled-out \(C_a\) then waveform decode</dd>
-            <dt>Status</dt><dd class="warn">Gap diagnostics positive; free decoded quality still pending</dd>
+            <dt>Status</dt><dd class="warn">Short64 bridge partial; full controls and free rollout pending</dd>
           </dl>
           <span class="slot-cta">View bridge slot</span>
         </a>
@@ -693,6 +695,7 @@
             <tr><td>Closed-gate trainable stream comparison</td><td>No-symbolic LoRA baseline vs aligned/shuffled/dummy \(S_{\mathrm{plan}}\) under identical update budget</td><td>EXP034A completed; reason-only test CE 5.3524 beats aligned \(S_{\mathrm{plan}}\) CE 5.4563</td><td class="missing">Negative control result</td></tr>
             <tr><td>Open-gate trainable stream comparison</td><td>Matched reason-only vs aligned/shuffled/dummy \(S_{\mathrm{plan}}\) with a less closed symbolic gate</td><td>EXP034B 2400-step full suite: aligned CE 5.5728 vs reason-only 5.6129, shuffled 5.5785, and dummy 5.5777; aligned gate 0.2320.</td><td class="good">Completed stream-level full-control result</td></tr>
             <tr><td>Generation-bridge diagnostic</td><td>Free rollout vs teacher-forced, oracle-prefix, and scheduled-oracle contexts from the same checkpoints</td><td>EXP035 gap suite: aligned \(S_{\mathrm{plan}}\) is best in teacher-forced, oracle-prefix8, and scheduled-oracle4 token metrics.</td><td class="warn">Positive bridge diagnostic; not decoded-generation quality</td></tr>
+            <tr><td>Short-horizon bridge training</td><td>Reason-only versus aligned \(S_{\mathrm{plan}}\) under a 64-frame semantic-token horizon</td><td>EXP036B partial: aligned CE 5.7197 versus reason-only CE 5.8162 at test step 1600; aligned gate 0.2045 and symbolic norm 0.3349.</td><td class="warn">Positive partial result; shuffled/dummy controls still required</td></tr>
             <tr><td>Symbolic music-understanding bridge</td><td>Frozen UniAudio2 QA vs \(S_{\mathrm{plan}}\)-MIR answers on the same instrument-presence family</td><td>EXP031A instrument macro-F1 0.5014 vs prior/zero 0.4280; exact QA bridge score pending</td><td class="missing">Bridge card added below</td></tr>
             <tr><td>Direct final-LALM music-QA improvement</td><td>Same Slakh QA prompts under UniAudio2.0 original vs integrated Symbolic-Aware LALM</td><td>Baseline exists; symbolic-conditioned final-LALM QA output is not generated yet</td><td class="missing">Generation-stage blocker</td></tr>
             <tr><td>Decoded music-generation improvement</td><td>Text/MIDI prompt to waveform under UniAudio2.0 original vs Symbolic-Aware checkpoint</td><td>No decoded Symbolic-Aware generation checkpoint yet</td><td class="missing">Future final-LALM stage</td></tr>
@@ -767,6 +770,8 @@
             <tr class="control-row"><td class="condition-cell">↳ Reason-only open-gate baseline</td><td>test aggregate, step 2400</td><td>CE 5.6129; acc. 0.1195</td><td class="delta-neutral">0.0000 vs reason-only</td><td>Matched no-symbolic baseline for the same update schedule</td></tr>
             <tr class="control-row"><td class="condition-cell">↳ Shuffled \(S_{\mathrm{plan}}\)</td><td>test aggregate, step 2400</td><td>CE 5.5785; acc. 0.1215; gate 0.1950</td><td class="delta-good">-0.0345 vs reason-only</td><td>Alignment-corrupted control; aligned remains lower by 0.0056 CE</td></tr>
             <tr class="control-row"><td class="condition-cell">↳ Dummy stream</td><td>test aggregate, step 2400</td><td>CE 5.5777; acc. 0.1215; gate 0.1951</td><td class="delta-good">-0.0352 vs reason-only</td><td>Token-budget control; aligned remains lower by 0.0049 CE</td></tr>
+            <tr><td class="group-cell" rowspan="2">EXP036B short64 bridge</td><td class="condition-cell">Reason-only bridge baseline</td><td>test aggregate, step 1600</td><td>CE 5.8162; acc. 0.1182; prefix8 acc. 0.1830</td><td class="delta-neutral">0.0000 vs reason-only</td><td>Short-horizon baseline for reducing free-rollout exposure bias</td></tr>
+            <tr><td class="condition-cell good">Aligned \(S_{\mathrm{plan}}\) bridge</td><td>test aggregate, step 1600</td><td class="good">CE 5.7197; acc. 0.1246; prefix8 acc. 0.1923; gate 0.2045</td><td class="delta-good">-0.0965 vs reason-only</td><td class="good">Positive bridge result so far; shuffled/dummy controls are still missing</td></tr>
           </tbody>
         </table>
         <p class="table-caption">
@@ -883,13 +888,72 @@
             </tr>
           </tbody>
         </table>
+        <table class="structured-table">
+          <thead>
+            <tr><th>EXP036B short64 condition</th><th>Status</th><th>Split / step</th><th>CE ↓</th><th>Accuracy ↑</th><th>Prefix-8 acc. ↑</th><th>Prefix-32 acc. ↑</th><th>Symbolic gate</th><th>Interpretation</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Reason-only bridge baseline</td>
+              <td class="good">done</td>
+              <td>test / 1600</td>
+              <td>5.8162</td>
+              <td>0.1182</td>
+              <td>0.1830</td>
+              <td>0.1218</td>
+              <td>0.0000</td>
+              <td>Short-horizon no-symbolic reference.</td>
+            </tr>
+            <tr>
+              <td>Aligned \(S_{\mathrm{plan}}\) bridge</td>
+              <td class="good">done</td>
+              <td>test / 1600</td>
+              <td class="good">5.7197</td>
+              <td class="good">0.1246</td>
+              <td class="good">0.1923</td>
+              <td class="good">0.1284</td>
+              <td class="good">0.2045</td>
+              <td class="good">Improves over reason-only by 0.0965 CE and opens the symbolic branch.</td>
+            </tr>
+            <tr class="control-row">
+              <td>↳ Shuffled \(S_{\mathrm{plan}}\)</td>
+              <td class="warn">running</td>
+              <td>valid / 800 snapshot</td>
+              <td>5.8657</td>
+              <td>0.1151</td>
+              <td>0.1805</td>
+              <td>0.1247</td>
+              <td>0.1713</td>
+              <td>Mid-run alignment-corrupted control; final test row is still required.</td>
+            </tr>
+            <tr class="control-row">
+              <td>↳ Dummy stream</td>
+              <td class="missing">pending</td>
+              <td>-</td>
+              <td class="missing">-</td>
+              <td class="missing">-</td>
+              <td class="missing">-</td>
+              <td class="missing">-</td>
+              <td class="missing">-</td>
+              <td>Token-budget control needed before a causal bridge claim.</td>
+            </tr>
+          </tbody>
+        </table>
+        <p class="table-caption">
+          Partial conclusion: EXP036B is moving in the intended direction. The aligned
+          \(S_{\mathrm{plan}}\) short64 bridge improves over reason-only on CE,
+          full-sequence token accuracy, and early-prefix token accuracy. This should
+          not yet be presented as a completed control suite, because shuffled and
+          dummy final test rows are still missing.
+        </p>
         <p class="note">
           Research interpretation: EXP036 is the practical bridge between
           token-level evidence and listening demos. It should be presented as
           generation-backend readiness. EXP035 has produced fair step-matched
           waveform exports and token-only gap diagnostics. The gap diagnostics
           support \(S_{\mathrm{plan}}\) utility under teacher-forced/oracle-assisted
-          contexts, but the free-rollout quality is not yet strong enough for a
+          contexts. EXP036B now shows the first short-horizon training gain over
+          reason-only, but the free-rollout quality is not yet strong enough for a
           decoded-generation claim.
         </p>
       </article>
@@ -1226,6 +1290,25 @@
                 <td class="group-cell">Free decoded rollout remains the bottleneck.</td>
                 <td>Unassisted free rollout has very low token accuracy and shuffled can outperform aligned.</td>
                 <td>Do not use EXP035 free wavs as evidence of decoded music-generation quality yet.</td>
+              </tr>
+            </tbody>
+          </table>
+          <table class="structured-table">
+            <thead>
+              <tr><th>Latest EXP036B export attempt</th><th>What happened</th><th>Current interpretation</th><th>Required rerun</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="group-cell">EXP035 free64 from EXP036B</td>
+                <td>Reason-only baseline exported on 512 test examples, but the run was launched before the aligned/control checkpoints were all available.</td>
+                <td>Baseline-only rollout anchor; not a symbolic comparison.</td>
+                <td class="missing">Rerun EXP035 after reason-only, aligned, shuffled, and dummy EXP036B checkpoints all exist.</td>
+              </tr>
+              <tr>
+                <td class="group-cell">Reason-only free64 metric</td>
+                <td>Token acc. 0.01097; exact-frame acc. 0.0000; frame repeat rate 0.4353.</td>
+                <td>Confirms that unassisted free rollout remains difficult even after short-horizon framing.</td>
+                <td>Compare against aligned \(S_{\mathrm{plan}}\), shuffled, and dummy under identical export settings.</td>
               </tr>
             </tbody>
           </table>
@@ -1882,7 +1965,8 @@
           <li><span class="good">Added:</span> EXP025 fixed-example token-preview table is now exported, but it remains a validation sanity preview rather than claim-bearing evidence.</li>
           <li><span class="good">Added:</span> EXP024 reconstruction gallery now includes w000, w001, and w003 feature-level heatmaps.</li>
           <li><span class="good">Added:</span> EXP035 gap diagnostics now separate teacher-forced/oracle-assisted symbolic utility from weak unassisted free rollout.</li>
-          <li><span class="missing">Missing:</span> EXP036B short-horizon bridge training and follow-up free short16/short32 rollout are needed before decoded waveform claims.</li>
+          <li><span class="good">Added:</span> EXP036B short64 partial bridge result now shows aligned \(S_{\mathrm{plan}}\) beating reason-only at test step 1600.</li>
+          <li><span class="missing">Missing:</span> EXP036B shuffled/dummy final controls and follow-up free short16/short32 rollout are needed before decoded waveform claims.</li>
           <li><span class="missing">Missing:</span> test-split per-sample EXP029/EXP031A inference cards; current cards use saved validation fixed examples.</li>
           <li><span class="missing">Missing:</span> baseline UniAudio2 vs Symbolic-Aware music-task pairs for QA, text-to-music, and song generation.</li>
           <li><span class="missing">Missing:</span> Audio-to-MIDI transcription output piano-roll visualization, because EXP031A currently outputs MIR JSON/caption proxy rather than MIDI.</li>
@@ -1899,7 +1983,7 @@
   <footer class="main-footer">
     <div class="shell footer-shell">
     <p class="copyright">
-      Static demo page prepared for team discussion. Quantitative values are drawn from EXP001, EXP006, EXP024, EXP025, EXP029, EXP031A, EXP032 qualitative case-study artifacts, EXP034A/EXP034B stream controls, and EXP035 rollout/gap diagnostics.
+      Static demo page prepared for team discussion. Quantitative values are drawn from EXP001, EXP006, EXP024, EXP025, EXP029, EXP031A, EXP032 qualitative case-study artifacts, EXP034A/EXP034B stream controls, EXP035 rollout/gap diagnostics, and EXP036B short-horizon bridge partial results.
     </p>
     </div>
   </footer>
