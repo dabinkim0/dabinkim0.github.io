@@ -566,6 +566,7 @@ a {
 .contact-links a {
     flex: 0 1 auto;
     white-space: nowrap;
+    color: #3f3d38;
     font-size: clamp(0.95rem, 1.08vw, 1.14rem);
     font-weight: 500;
     text-decoration: none;
