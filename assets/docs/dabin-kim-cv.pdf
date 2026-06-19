@@ -137,7 +137,7 @@ ET
 endstream
 endobj
 4 0 obj
-<< /Length 411 >>
+<< /Length 399 >>
 stream
 BT
 /F1 10 Tf
@@ -148,7 +148,7 @@ BT
 (Skills) Tj
 /F1 10 Tf
 1 0 0 1 54 694 Tm
-(- Programming Languages: Python, JavaScript) Tj
+(- Programming Languages: Python) Tj
 /F1 10 Tf
 1 0 0 1 54 677 Tm
 (- ML/DL Frameworks: PyTorch, PyTorch Lightning) Tj
@@ -180,13 +180,13 @@ xref
 0000000085 00000 n 
 0000000160 00000 n 
 0000004461 00000 n 
-0000004923 00000 n 
-0000005059 00000 n 
-0000005195 00000 n 
-0000005258 00000 n 
-0000005307 00000 n 
+0000004911 00000 n 
+0000005047 00000 n 
+0000005183 00000 n 
+0000005246 00000 n 
+0000005295 00000 n 
 trailer
 << /Size 10 /Root 8 0 R /Info 9 0 R >>
 startxref
-5398
+5386
 %%EOF
