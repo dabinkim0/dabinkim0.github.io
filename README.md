@@ -9,62 +9,95 @@ Personal website hosted with GitHub Pages.
 ├── index.html
 ├── projects/
 │   ├── index.html
+│   ├── figs/
 │   └── posters/
 ├── publications/
 │   ├── index.html
-│   ├── ddsp-carsound/
+│   ├── README.md
+│   ├── adatt/                  # canonical AdaTT demo page and media
 │   │   ├── index.html
 │   │   ├── audio/
 │   │   ├── figs/
 │   │   ├── spectrograms/
 │   │   └── scripts/
-│   ├── timbre-transfer/
+│   ├── ddsp-carsound/          # canonical DDSP car-sound demo page and media
 │   │   ├── index.html
 │   │   ├── audio/
 │   │   ├── figs/
 │   │   ├── spectrograms/
 │   │   └── scripts/
-│   └── figs/
-│       ├── pitch-controlnet/
-│       └── video-foley/
+│   ├── timbre-transfer/        # legacy redirect to publications/adatt/
+│   └── figs/                   # figures for publication entries without own pages
+├── adatt/                      # short-url redirect to publications/adatt/
+├── experiments/                # unpublished or in-progress experiment pages
+├── symbolic-fused-lalm-experiments/
+│   └── demo/                   # legacy redirect to experiments/.../demo/
+├── scripts/
+│   └── build_cv_pdf.py
 ├── assets/
 │   ├── css/
+│   │   ├── adatt.css
 │   │   ├── ddsp-carsound.css
 │   │   ├── index.css
 │   │   ├── projects.css
 │   │   ├── publications.css
-│   │   └── timbre-transfer.css
+│   │   └── typography.css
 │   ├── images/
 │   │   └── profile/
+│   ├── docs/
+│   │   └── dabin-kim-cv.pdf
 │   └── js/
+│       ├── adatt.js
 │       ├── index.js
 │       ├── mathjax-config.js
-│       └── timbre-transfer.js
-└── _legacy/
+│       ├── projects.js
+│       └── publications.js
+└── favicon.svg
 ```
+
+## Route Rules
+
+- Canonical publication demo pages live at `publications/<slug>/`.
+- AdaTT's canonical page is `publications/adatt/`.
+- `adatt/` is a short compatibility redirect for `https://dabinkim0.github.io/adatt/`.
+- `publications/timbre-transfer/` is a legacy compatibility redirect for older AdaTT demo links.
+- `symbolic-fused-lalm-experiments/demo/` is a legacy compatibility redirect to `experiments/symbolic-fused-lalm-experiments/demo/`.
+- Do not add demo media, CSS, or JavaScript to redirect-only folders. Put those files in the canonical page folder or in `assets/`.
 
 ## Frontend Organization
 
 - Page-specific styles are stored in `assets/css/*.css` and linked from each HTML page.
 - Page-specific scripts are stored in `assets/js/*.js`.
 - Shared site-wide images such as profile photos are stored in `assets/images/`.
-- Project-page poster assets live under `projects/posters/`.
-- Publication demo pages live under `publications/` and keep their own media next to the page, for example `publications/timbre-transfer/figs` and `publications/ddsp-carsound/figs`.
+- Project-page figure assets live under `projects/figs/`; poster assets live under `projects/posters/`.
+- Publication demo pages keep their own media next to the page, for example `publications/adatt/figs` and `publications/ddsp-carsound/figs`.
 - Publication entries without standalone pages store representative figures in `publications/figs/<slug>/`.
 
 ## Editing Rules
 
 - Prefer editing CSS/JS files in `assets/` instead of adding new large inline `<style>` or `<script>` blocks.
-- Keep static resources near the page that owns them (`publications/timbre-transfer/audio`, `publications/ddsp-carsound/figs`, etc.).
-- Avoid creating root-level folders that mix shared assets with page-specific media.
-- When adding demo audio in `publications/timbre-transfer/audio`, generate matching spectrograms in `publications/timbre-transfer/spectrograms`.
+- Keep static resources near the page that owns them (`publications/adatt/audio`, `publications/ddsp-carsound/figs`, etc.).
+- Avoid creating root-level folders unless they are required for stable public URLs.
+- If a public URL changes, keep a tiny redirect page at the old path and document it under Route Rules.
+- When adding demo audio in `publications/adatt/audio`, generate matching spectrograms in `publications/adatt/spectrograms`.
+- Update `assets/docs/dabin-kim-cv.pdf` by editing and running `scripts/build_cv_pdf.py`.
+
+## CV PDF
+
+Run:
+
+```bash
+python3 scripts/build_cv_pdf.py
+```
+
+This regenerates `assets/docs/dabin-kim-cv.pdf`, which is used by the `Download CV` links.
 
 ## Spectrogram Generation
 
 Run:
 
 ```bash
-MPLCONFIGDIR=/tmp/mpl python3 publications/timbre-transfer/scripts/generate_spectrograms.py
+MPLCONFIGDIR=/tmp/mpl python3 publications/adatt/scripts/generate_spectrograms.py
 ```
 
-This generates PNG spectrograms from all WAV files in `publications/timbre-transfer/audio/` to `publications/timbre-transfer/spectrograms/`.
+This generates PNG spectrograms from all WAV files in `publications/adatt/audio/` to `publications/adatt/spectrograms/`.
