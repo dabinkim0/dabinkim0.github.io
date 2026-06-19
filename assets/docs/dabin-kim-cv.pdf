@@ -7,7 +7,7 @@ endobj
 << /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
 endobj
 3 0 obj
-<< /Length 4205 >>
+<< /Length 4249 >>
 stream
 BT
 /F2 24 Tf
@@ -24,22 +24,22 @@ BT
 (Profile) Tj
 /F1 10 Tf
 1 0 0 1 54 652 Tm
-(- An ML/DL researcher focused on controllable generative modeling, representation learning, and) Tj
+(- An ML/DL researcher focused on music generation, editing, and representation learning. My work) Tj
 /F1 10 Tf
 1 0 0 1 54 638 Tm
-(  audio/music understanding. I build systems that translate musical intent and structured) Tj
+(  explores how learned representations can expand both what can be edited in music and how) Tj
 /F1 10 Tf
 1 0 0 1 54 624 Tm
-(  conditions into precise control over timbre, pitch, loudness, temporal events, and sound) Tj
+(  flexibly those edits can be controlled. I build models that connect musical structure, timbre,) Tj
 /F1 10 Tf
 1 0 0 1 54 610 Tm
-(  behavior. My work combines deep generative models, differentiable signal processing, and) Tj
+(  and expressive intent, and extend these capabilities through grounded relationships with text,) Tj
 /F1 10 Tf
 1 0 0 1 54 596 Tm
-(  evaluation design, with composer and sound-artist experience serving as a practical lens for) Tj
+(  image, and video. My goal is to develop controllable music AI systems that are technically) Tj
 /F1 10 Tf
 1 0 0 1 54 582 Tm
-(  musically meaningful model behavior.) Tj
+(  rigorous, perceptually meaningful, and useful in creative workflows.) Tj
 /F1 10 Tf
 1 0 0 1 54 565 Tm
 (- Affiliation: Music and Audio Computing \(MAC\) Lab, KAIST) Tj
@@ -179,14 +179,14 @@ xref
 0000000015 00000 n 
 0000000085 00000 n 
 0000000160 00000 n 
-0000004417 00000 n 
-0000004879 00000 n 
-0000005015 00000 n 
-0000005151 00000 n 
-0000005214 00000 n 
-0000005263 00000 n 
+0000004461 00000 n 
+0000004923 00000 n 
+0000005059 00000 n 
+0000005195 00000 n 
+0000005258 00000 n 
+0000005307 00000 n 
 trailer
 << /Size 10 /Root 8 0 R /Info 9 0 R >>
 startxref
-5354
+5398
 %%EOF

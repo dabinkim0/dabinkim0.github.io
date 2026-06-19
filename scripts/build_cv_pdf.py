@@ -10,7 +10,7 @@ SECTIONS = [
     (
         "Profile",
         [
-            "An ML/DL researcher focused on controllable generative modeling, representation learning, and audio/music understanding. I build systems that translate musical intent and structured conditions into precise control over timbre, pitch, loudness, temporal events, and sound behavior. My work combines deep generative models, differentiable signal processing, and evaluation design, with composer and sound-artist experience serving as a practical lens for musically meaningful model behavior.",
+            "An ML/DL researcher focused on music generation, editing, and representation learning. My work explores how learned representations can expand both what can be edited in music and how flexibly those edits can be controlled. I build models that connect musical structure, timbre, and expressive intent, and extend these capabilities through grounded relationships with text, image, and video. My goal is to develop controllable music AI systems that are technically rigorous, perceptually meaningful, and useful in creative workflows.",
             "Affiliation: Music and Audio Computing (MAC) Lab, KAIST",
             "Research Interests: controllable audio generation, music generation and editing, musical representation learning",
         ],
