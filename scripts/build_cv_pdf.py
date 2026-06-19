@@ -48,7 +48,7 @@ SECTIONS = [
     (
         "Skills",
         [
-            "Programming Languages: Python, JavaScript",
+            "Programming Languages: Python",
             "ML/DL Frameworks: PyTorch, PyTorch Lightning",
             "Creative & Audio Tools: Ableton Live, Logic Pro, Max/MSP, SuperCollider",
         ],
