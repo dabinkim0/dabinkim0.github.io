@@ -91,7 +91,7 @@ def build_lines():
     add_line("Dabin Kim", TITLE_SIZE, "F2", 26, 2)
     add_line("ML / DL Researcher", SUB_SIZE, "F1", 14, 2)
     add_line(
-        "Daejeon, South Korea | dabinchi9598@kaist.ac.kr | https://dabinkim0.github.io | https://github.com/dabinkim0",
+        "Daejeon, South Korea | dabinchi9598@kaist.ac.kr | https://dabinkim0.github.io",
         9,
         "F1",
         12,
