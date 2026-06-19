@@ -1,0 +1,192 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+2 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>
+endobj
+3 0 obj
+<< /Length 4205 >>
+stream
+BT
+/F2 24 Tf
+1 0 0 1 54 734 Tm
+(Dabin Kim) Tj
+/F1 10 Tf
+1 0 0 1 54 706 Tm
+(ML / DL Researcher) Tj
+/F1 9 Tf
+1 0 0 1 54 690 Tm
+(Daejeon, South Korea | dabinchi9598@kaist.ac.kr | https://dabinkim0.github.io | https://github.com/dabinkim0) Tj
+/F2 12 Tf
+1 0 0 1 54 670 Tm
+(Profile) Tj
+/F1 10 Tf
+1 0 0 1 54 652 Tm
+(- An ML/DL researcher focused on controllable generative modeling, representation learning, and) Tj
+/F1 10 Tf
+1 0 0 1 54 638 Tm
+(  audio/music understanding. I build systems that translate musical intent and structured) Tj
+/F1 10 Tf
+1 0 0 1 54 624 Tm
+(  conditions into precise control over timbre, pitch, loudness, temporal events, and sound) Tj
+/F1 10 Tf
+1 0 0 1 54 610 Tm
+(  behavior. My work combines deep generative models, differentiable signal processing, and) Tj
+/F1 10 Tf
+1 0 0 1 54 596 Tm
+(  evaluation design, with composer and sound-artist experience serving as a practical lens for) Tj
+/F1 10 Tf
+1 0 0 1 54 582 Tm
+(  musically meaningful model behavior.) Tj
+/F1 10 Tf
+1 0 0 1 54 565 Tm
+(- Affiliation: Music and Audio Computing \(MAC\) Lab, KAIST) Tj
+/F1 10 Tf
+1 0 0 1 54 548 Tm
+(- Research Interests: controllable audio generation, music generation and editing, musical) Tj
+/F1 10 Tf
+1 0 0 1 54 534 Tm
+(  representation learning) Tj
+/F2 12 Tf
+1 0 0 1 54 512 Tm
+(Education) Tj
+/F1 10 Tf
+1 0 0 1 54 494 Tm
+(- Mar 2026 - Present | Ph.D. in Music and Audio Computing \(MAC\) Lab, KAIST) Tj
+/F1 10 Tf
+1 0 0 1 54 477 Tm
+(- Aug 2023 - Aug 2025 | M.S. in Music and Audio Computing \(MAC\) Lab, KAIST) Tj
+/F1 10 Tf
+1 0 0 1 54 460 Tm
+(- Feb 2017 - Feb 2023 | B.S. in Art & Technology, Sogang University; Double major in Big Data) Tj
+/F1 10 Tf
+1 0 0 1 54 446 Tm
+(  Science) Tj
+/F2 12 Tf
+1 0 0 1 54 424 Tm
+(Experience) Tj
+/F1 10 Tf
+1 0 0 1 54 406 Tm
+(- Jul 2025 - Oct 2025 | Assistant Researcher, Sony Computer Science Laboratories \(Sony CSL\)) Tj
+/F2 12 Tf
+1 0 0 1 54 384 Tm
+(Publications) Tj
+/F1 10 Tf
+1 0 0 1 54 366 Tm
+(- AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control. Dabin) Tj
+/F1 10 Tf
+1 0 0 1 54 352 Tm
+(  Kim, Junwon Lee, Juhan Nam. 27th Annual Conference of the International Speech Communication) Tj
+/F1 10 Tf
+1 0 0 1 54 338 Tm
+(  Association \(INTERSPEECH\), 2026. Paper: https://arxiv.org/abs/2606.15813 | Demo:) Tj
+/F1 10 Tf
+1 0 0 1 54 324 Tm
+(  https://dabinkim0.github.io/publications/adatt/) Tj
+/F1 10 Tf
+1 0 0 1 54 307 Tm
+(- DDSP-Based Neural Vehicle Sound Synthesis from Driving Signals. Minsuk Choi, Dabin Kim, Daehun) Tj
+/F1 10 Tf
+1 0 0 1 54 293 Tm
+(  Song, Juhan Nam. 6th AES International Conference on Automotive Audio, 2026. Demo:) Tj
+/F1 10 Tf
+1 0 0 1 54 279 Tm
+(  https://dabinkim0.github.io/publications/ddsp-carsound/) Tj
+/F1 10 Tf
+1 0 0 1 54 262 Tm
+(- Video-Foley: Two-Stage Video-To-Sound Generation via Temporal Event Condition for Foley Sound.) Tj
+/F1 10 Tf
+1 0 0 1 54 248 Tm
+(  Junwon Lee, Jaekwon Im, Dabin Kim, Juhan Nam. IEEE/ACM Transactions on Audio, Speech, and) Tj
+/F1 10 Tf
+1 0 0 1 54 234 Tm
+(  Language Processing \(TASLP\), 2025. Paper: https://arxiv.org/abs/2408.11915 | Demo:) Tj
+/F1 10 Tf
+1 0 0 1 54 220 Tm
+(  https://jnwnlee.github.io/video-foley-demo/ | Code: https://github.com/jnwnlee/video-foley) Tj
+/F1 10 Tf
+1 0 0 1 54 203 Tm
+(- Pitch-ControlNet: Continuous Pitch Control for Monophonic Instrument Sound Generation. Dabin) Tj
+/F1 10 Tf
+1 0 0 1 54 189 Tm
+(  Kim*, Junwon Lee*, Minseo Kim*, Juhan Nam \(*equal contribution\). Late-Breaking/Demo \(LBD\),) Tj
+/F1 10 Tf
+1 0 0 1 54 175 Tm
+(  25th International Society for Music Information Retrieval Conference \(ISMIR\), 2024. Paper:) Tj
+/F1 10 Tf
+1 0 0 1 54 161 Tm
+(  https://ismir2024program.ismir.net/lbd_480.html) Tj
+/F2 12 Tf
+1 0 0 1 54 139 Tm
+(Selected Presentations) Tj
+/F1 10 Tf
+1 0 0 1 54 121 Tm
+(- May 30, 2026 | AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural) Tj
+/F1 10 Tf
+1 0 0 1 54 107 Tm
+(  Control. Short Oral and Poster Sessions, Korean Society for Music Informatics \(KSMI\) 2026.) Tj
+/F1 10 Tf
+1 0 0 1 54 93 Tm
+(  Jeong Ha Sang Hall, Sogang University, Seoul, South Korea.) Tj
+/F1 10 Tf
+1 0 0 1 54 76 Tm
+(- May 12, 2026 | AI generative models for controllable music and Foley sound synthesis. KOBA) Tj
+ET
+endstream
+endobj
+4 0 obj
+<< /Length 411 >>
+stream
+BT
+/F1 10 Tf
+1 0 0 1 54 734 Tm
+(  2026 AI Audio/Sound Day. COEX Conference Room, Seoul, South Korea.) Tj
+/F2 12 Tf
+1 0 0 1 54 712 Tm
+(Skills) Tj
+/F1 10 Tf
+1 0 0 1 54 694 Tm
+(- Programming Languages: Python, JavaScript) Tj
+/F1 10 Tf
+1 0 0 1 54 677 Tm
+(- ML/DL Frameworks: PyTorch, PyTorch Lightning) Tj
+/F1 10 Tf
+1 0 0 1 54 660 Tm
+(- Creative & Audio Tools: Ableton Live, Logic Pro, Max/MSP, SuperCollider) Tj
+ET
+endstream
+endobj
+5 0 obj
+<< /Type /Page /Parent 7 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 3 0 R >>
+endobj
+6 0 obj
+<< /Type /Page /Parent 7 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 1 0 R /F2 2 0 R >> >> /Contents 4 0 R >>
+endobj
+7 0 obj
+<< /Type /Pages /Kids [5 0 R 6 0 R] /Count 2 >>
+endobj
+8 0 obj
+<< /Type /Catalog /Pages 7 0 R >>
+endobj
+9 0 obj
+<< /Title (Dabin Kim CV) /Author (Dabin Kim) /Subject (Curriculum Vitae) >>
+endobj
+xref
+0 10
+0000000000 65535 f 
+0000000015 00000 n 
+0000000085 00000 n 
+0000000160 00000 n 
+0000004417 00000 n 
+0000004879 00000 n 
+0000005015 00000 n 
+0000005151 00000 n 
+0000005214 00000 n 
+0000005263 00000 n 
+trailer
+<< /Size 10 /Root 8 0 R /Info 9 0 R >>
+startxref
+5354
+%%EOF

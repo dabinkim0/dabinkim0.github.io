@@ -9,6 +9,8 @@ are not yet stable publication pages or portfolio projects.
   Symbolic-Aware LALM experiment line.
 - `symbolic-fused-lalm-exp-progress-slides/`: smaller progress-slide companion
   demo for the same experiment line.
+- The root-level `symbolic-fused-lalm-experiments/demo/` path is kept only as a
+  compatibility redirect to preserve older public links.
 
 ## Maintenance Rules
 
