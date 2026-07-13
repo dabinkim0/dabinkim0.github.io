@@ -417,11 +417,19 @@ function renderEvidence(caseItem) {
   const container = $("[data-evidence-list]");
   container.innerHTML = "";
   const evidenceItems = [];
+  if (caseItem.control_pair) {
+    evidenceItems.push(
+      { label: "Control Axis", value: caseItem.control_pair.control_axis || "—" },
+      { label: "Direction", value: caseItem.control_pair.direction || "—" },
+      { label: "Opposite", value: caseItem.control_pair.opposite_direction || "—" },
+      { label: "Edit Type", value: caseItem.control_pair.edit_type || "—" },
+    );
+  }
   caseItem.preprocess_steps[2].fields.forEach((field) => evidenceItems.push(field));
   caseItem.controls.forEach((control) => {
     evidenceItems.push({
       label: control.control_id,
-      value: `${control.canonical_phrase} · ${control.proxy?.satisfied ? "supported" : "not supported"}`,
+      value: `${control.canonical_phrase} · ${control.direction || "direction_unknown"} · ${control.proxy?.satisfied ? "supported" : "not supported"}`,
     });
   });
   evidenceItems.forEach((item) => {
@@ -512,7 +520,7 @@ function renderAll() {
 }
 
 async function init() {
-  const response = await fetch("assets/data/cases.json?v=20260713-thicker-roll");
+  const response = await fetch("assets/data/cases.json?v=20260713-control-pairs");
   if (!response.ok) throw new Error(`Failed to load cases.json: ${response.status}`);
   state.data = await response.json();
   state.taskId = state.data.tasks[0].task_id;

@@ -3,6 +3,16 @@
     {
       "case_id": "pilot_pitch_key_0001",
       "case_type": "editing",
+      "control_pair": {
+        "control_axis": "pitch_key_fit",
+        "direction": "toward_key_fit",
+        "edit_type": "key_constrained_pitch_repair",
+        "inverse_validity": "controlled_perturbation",
+        "is_inverse_pair": true,
+        "opposite_direction": "away_from_key_fit",
+        "opposite_edit_type": "controlled_chromatic_pitch_perturbation",
+        "pair_id": "pitch_key_fit_pair_0001"
+      },
       "controls": [
         {
           "allowed_phrases": [
@@ -17,6 +27,7 @@
           ],
           "canonical_phrase": "fits the local D minor melody",
           "control_id": "key_fit.in_key",
+          "direction": "toward_key_fit",
           "family": "key_fit",
           "proxy": {
             "criterion": "target pitch class is supported by local key or melodic context",
@@ -45,6 +56,7 @@
           ],
           "canonical_phrase": "descending top-line melody",
           "control_id": "pitch_contour.descending_stepwise",
+          "direction": "toward_contour_preservation",
           "family": "pitch_contour",
           "proxy": {
             "criterion": "target contour status is supported and rhythm preservation is true",
@@ -79,6 +91,7 @@
           "no_changes_outside_span",
           "preserve_melody_rhythm"
         ],
+        "edit_type": "key_constrained_pitch_repair",
         "preserve": [
           "left_hand_accompaniment",
           "melody_rhythm",
@@ -1064,6 +1077,18 @@
           "body": "Use MIDI-diff evidence to decide which controls are supported and which claims must be omitted.",
           "fields": [
             {
+              "label": "Control Axis",
+              "value": "pitch_key_fit"
+            },
+            {
+              "label": "Direction",
+              "value": "toward_key_fit"
+            },
+            {
+              "label": "Opposite Direction",
+              "value": "away_from_key_fit"
+            },
+            {
               "label": "Changed Roles",
               "value": "melody"
             },
@@ -1171,6 +1196,16 @@
     {
       "case_id": "pilot_timing_0001",
       "case_type": "editing",
+      "control_pair": {
+        "control_axis": "timing_grid_alignment",
+        "direction": "toward_grid_alignment",
+        "edit_type": "onset_dejitter",
+        "inverse_validity": "valid_inverse",
+        "is_inverse_pair": true,
+        "opposite_direction": "away_from_grid_alignment",
+        "opposite_edit_type": "expressive_microtiming_humanization",
+        "pair_id": "timing_grid_alignment_pair_0001"
+      },
       "controls": [
         {
           "allowed_phrases": [
@@ -1185,6 +1220,7 @@
           ],
           "canonical_phrase": "steadier against the local eighth-note grid",
           "control_id": "timing_grid.less_jittered",
+          "direction": "toward_grid_alignment",
           "family": "timing_grid",
           "proxy": {
             "criterion": "target <= source * 0.75 and source - target >= 15 ms",
@@ -1220,6 +1256,7 @@
           "preserve_pitch_content",
           "preserve_right_hand_melody"
         ],
+        "edit_type": "onset_dejitter",
         "preserve": [
           "pitch_content",
           "right_hand_melody",
@@ -2332,6 +2369,18 @@
           "body": "Use MIDI-diff evidence to decide which controls are supported and which claims must be omitted.",
           "fields": [
             {
+              "label": "Control Axis",
+              "value": "timing_grid_alignment"
+            },
+            {
+              "label": "Direction",
+              "value": "toward_grid_alignment"
+            },
+            {
+              "label": "Opposite Direction",
+              "value": "away_from_grid_alignment"
+            },
+            {
               "label": "Changed Roles",
               "value": "left_hand"
             },
@@ -2445,6 +2494,16 @@
     {
       "case_id": "pilot_texture_0001",
       "case_type": "editing",
+      "control_pair": {
+        "control_axis": "texture_density",
+        "direction": "toward_sparser_texture",
+        "edit_type": "accompaniment_density_reduction",
+        "inverse_validity": "valid_inverse",
+        "is_inverse_pair": true,
+        "opposite_direction": "toward_denser_texture",
+        "opposite_edit_type": "accompaniment_density_increase",
+        "pair_id": "texture_density_pair_0001"
+      },
       "controls": [
         {
           "allowed_phrases": [
@@ -2459,6 +2518,7 @@
           ],
           "canonical_phrase": "lighter accompaniment texture",
           "control_id": "texture_density.sparser",
+          "direction": "toward_sparser_texture",
           "family": "texture_density",
           "proxy": {
             "criterion": "target/source <= 0.75",
@@ -2487,6 +2547,7 @@
           ],
           "canonical_phrase": "only the accompaniment",
           "control_id": "role_scope.accompaniment_only",
+          "direction": "toward_role_restriction",
           "family": "role_scope",
           "proxy": {
             "criterion": "changed roles are a subset of accompaniment and melody hash is unchanged",
@@ -2524,6 +2585,7 @@
           "reduce_accompaniment_density",
           "no_changes_outside_span"
         ],
+        "edit_type": "accompaniment_density_reduction",
         "preserve": [
           "melody_pitch",
           "melody_onset_duration",
@@ -4066,6 +4128,18 @@
         {
           "body": "Use MIDI-diff evidence to decide which controls are supported and which claims must be omitted.",
           "fields": [
+            {
+              "label": "Control Axis",
+              "value": "texture_density"
+            },
+            {
+              "label": "Direction",
+              "value": "toward_sparser_texture"
+            },
+            {
+              "label": "Opposite Direction",
+              "value": "toward_denser_texture"
+            },
             {
               "label": "Changed Roles",
               "value": "accompaniment"
