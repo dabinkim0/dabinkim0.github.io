@@ -181,7 +181,7 @@ function renderPianoRoll(caseItem) {
   const pitchMax = Math.max(...pitchValues) + 2;
   const pitchRange = Math.max(12, pitchMax - pitchMin + 1);
   const width = 1280;
-  const panelHeight = Math.max(170, pitchRange * 8);
+  const panelHeight = Math.max(210, pitchRange * 10);
   const gap = 58;
   const topMargin = 38;
   const leftMargin = 58;
@@ -192,7 +192,7 @@ function renderPianoRoll(caseItem) {
   const timeSpan = windowEnd - windowStart || 1;
   const x = (seconds) => leftMargin + ((seconds - windowStart) / timeSpan) * rollWidth;
   const y = (pitch, panelOffset) => panelOffset + panelHeight - ((pitch - pitchMin) / pitchRange) * panelHeight;
-  const noteHeight = Math.max(5.5, Math.min(10, panelHeight / pitchRange * 0.72));
+  const noteHeight = Math.max(7, Math.min(13, panelHeight / pitchRange * 0.82));
   const panelOffsets = [topMargin, topMargin + panelHeight + gap];
 
   const svgParts = [
@@ -235,7 +235,7 @@ function renderPianoRoll(caseItem) {
       const widthRect = Math.max(3, x2 - x1);
       const fill = noteColor(note, isTarget);
       const stroke = noteStroke(note, isTarget);
-      svgParts.push(`<rect x="${x1.toFixed(2)}" y="${(yy - noteHeight / 2).toFixed(2)}" width="${widthRect.toFixed(2)}" height="${noteHeight.toFixed(2)}" rx="2" fill="${fill}" stroke="${stroke}" stroke-width="1"/>`);
+      svgParts.push(`<rect x="${x1.toFixed(2)}" y="${(yy - noteHeight / 2).toFixed(2)}" width="${widthRect.toFixed(2)}" height="${noteHeight.toFixed(2)}" rx="2.5" fill="${fill}" stroke="${stroke}" stroke-width="1.15"/>`);
       if (widthRect > 34 || note.highlight !== "preserved") {
         svgParts.push(`<text x="${(x1 + 4).toFixed(2)}" y="${(yy + 3).toFixed(2)}" font-size="10" fill="#171717">${midiToNoteName(note.pitch)}</text>`);
       }
@@ -353,7 +353,7 @@ function renderAll() {
 }
 
 async function init() {
-  const response = await fetch("assets/data/cases.json?v=20260713-controls-under-roll");
+  const response = await fetch("assets/data/cases.json?v=20260713-thicker-roll");
   if (!response.ok) throw new Error(`Failed to load cases.json: ${response.status}`);
   state.data = await response.json();
   state.taskId = state.data.tasks[0].task_id;

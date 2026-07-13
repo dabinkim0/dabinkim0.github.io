@@ -560,7 +560,7 @@ select {
 }
 
 .piano-roll-frame {
-  min-height: 440px;
+  min-height: 520px;
   overflow: hidden;
   border: 1px solid var(--line-soft);
   border-radius: 12px;
