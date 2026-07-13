@@ -1028,7 +1028,7 @@
               "value": "[3.0, 4.5)"
             },
             {
-              "label": "Bar / beat",
+              "label": "Bar / Beat",
               "value": "bar 2 beat 3 → bar 3 beat 2"
             }
           ],
@@ -1038,15 +1038,15 @@
           "body": "Compute only the symbolic features required by the selected subtask.",
           "fields": [
             {
-              "label": "Local key",
+              "label": "Local Key",
               "value": "D minor"
             },
             {
-              "label": "Melody sequence",
+              "label": "Melody Sequence",
               "value": "A4--G4--F4--E4"
             },
             {
-              "label": "Rhythm pattern",
+              "label": "Rhythm Pattern",
               "value": "quarter-eighth-eighth-quarter"
             },
             {
@@ -1054,7 +1054,7 @@
               "value": "descending stepwise"
             },
             {
-              "label": "Changed note",
+              "label": "Changed Note",
               "value": "F#4 → F4"
             }
           ],
@@ -1064,7 +1064,7 @@
           "body": "Use MIDI-diff evidence to decide which controls are supported and which claims must be omitted.",
           "fields": [
             {
-              "label": "Changed roles",
+              "label": "Changed Roles",
               "value": "melody"
             },
             {
@@ -1072,7 +1072,7 @@
               "value": "key_fit.in_key, pitch_contour.descending_stepwise"
             },
             {
-              "label": "Outside-change rate",
+              "label": "Outside-Change Rate",
               "value": "0.0"
             }
           ],
@@ -1145,7 +1145,7 @@
       },
       "task_id": "pitch_key_consistency",
       "task_label": "Pitch / Key",
-      "title": "Off-key top-line repair with melody rhythm preservation",
+      "title": "Off-Key Top-Line Repair With Melody Rhythm Preservation",
       "validation": {
         "deterministic": {
           "outside_change_rate": 0.0,
@@ -2312,7 +2312,7 @@
               "value": "[6.0, 8.5)"
             },
             {
-              "label": "Bar / beat",
+              "label": "Bar / Beat",
               "value": "bar 4 beat 1 → bar 5 beat 2"
             }
           ],
@@ -2322,7 +2322,7 @@
           "body": "Compute only the symbolic features required by the selected subtask.",
           "fields": [
             {
-              "label": "Onset deviation",
+              "label": "Onset Deviation",
               "value": "39.6 ms → 0.0 ms"
             }
           ],
@@ -2332,7 +2332,7 @@
           "body": "Use MIDI-diff evidence to decide which controls are supported and which claims must be omitted.",
           "fields": [
             {
-              "label": "Changed roles",
+              "label": "Changed Roles",
               "value": "left_hand"
             },
             {
@@ -2340,7 +2340,7 @@
               "value": "timing_grid.less_jittered"
             },
             {
-              "label": "Outside-change rate",
+              "label": "Outside-Change Rate",
               "value": "0.0"
             },
             {
@@ -2417,7 +2417,7 @@
       },
       "task_id": "timing_dynamics_control",
       "task_label": "Timing / Dynamics",
-      "title": "Left-hand onset de-jittering against the beat grid",
+      "title": "Left-Hand Onset De-Jittering Against The Beat Grid",
       "validation": {
         "deterministic": {
           "outside_change_rate": 0.0,
@@ -4027,7 +4027,7 @@
               "value": "[4.0, 8.0)"
             },
             {
-              "label": "Bar / beat",
+              "label": "Bar / Beat",
               "value": "bar 3 beat 1 → bar 5 beat 1"
             }
           ],
@@ -4037,15 +4037,15 @@
           "body": "Compute only the symbolic features required by the selected subtask.",
           "fields": [
             {
-              "label": "Local key",
+              "label": "Local Key",
               "value": "G major"
             },
             {
-              "label": "Melody sequence",
+              "label": "Melody Sequence",
               "value": "B4--D5--E5--D5"
             },
             {
-              "label": "Rhythm pattern",
+              "label": "Rhythm Pattern",
               "value": "quarter-quarter-eighth-eighth"
             },
             {
@@ -4053,11 +4053,11 @@
               "value": "arch"
             },
             {
-              "label": "Accompaniment density",
+              "label": "Accompaniment Density",
               "value": "16 notes → 8 notes"
             },
             {
-              "label": "Density ratio",
+              "label": "Density Ratio",
               "value": "0.5"
             }
           ],
@@ -4067,7 +4067,7 @@
           "body": "Use MIDI-diff evidence to decide which controls are supported and which claims must be omitted.",
           "fields": [
             {
-              "label": "Changed roles",
+              "label": "Changed Roles",
               "value": "accompaniment"
             },
             {
@@ -4075,7 +4075,7 @@
               "value": "texture_density.sparser, role_scope.accompaniment_only"
             },
             {
-              "label": "Outside-change rate",
+              "label": "Outside-Change Rate",
               "value": "0.0"
             }
           ],
@@ -4148,7 +4148,7 @@
       },
       "task_id": "melody_conditioned_texture",
       "task_label": "Melody-Conditioned Texture",
-      "title": "Accompaniment density reduction with fixed melody",
+      "title": "Accompaniment Density Reduction With Fixed Melody",
       "validation": {
         "deterministic": {
           "outside_change_rate": 0.0,
@@ -4196,5 +4196,5 @@
       "task_id": "melody_conditioned_texture"
     }
   ],
-  "title": "Fine-grained Temporal Grounding for Symbolic Music Generation and Editing"
+  "title": "Fine-Grained Temporal Grounding For Symbolic Music Generation And Editing"
 }

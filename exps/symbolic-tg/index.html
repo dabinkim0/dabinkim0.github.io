@@ -27,7 +27,7 @@
   <main class="shell wide-shell page-shell">
     <section class="hero">
       <p class="eyebrow">Experiment Dashboard</p>
-      <h1>Fine-grained Temporal Grounding for Symbolic Music Generation and Editing</h1>
+      <h1>Fine-Grained Temporal Grounding For Symbolic Music Generation And Editing</h1>
       <p class="hero-copy">
         A compact inspection page for Dynamic Performance Edit Mixer examples. Each case shows
         original and predicted piano rolls with ±5 s surrounding context, the grounded edit span, MIDI-derived evidence,
@@ -38,7 +38,7 @@
           <button class="metric-button" type="button" data-metric-toggle="tasks" aria-expanded="false" aria-controls="task-quick-menu">
             <span>Tasks</span>
             <strong data-summary="tasks">—</strong>
-            <em data-summary-detail="tasks">Click to choose a task family</em>
+            <em data-summary-detail="tasks">Click To Choose A Task Family</em>
           </button>
           <div class="metric-menu" id="task-quick-menu" data-metric-menu="tasks" hidden></div>
         </div>
@@ -46,7 +46,7 @@
           <button class="metric-button" type="button" data-metric-toggle="cases" aria-expanded="false" aria-controls="case-quick-menu">
             <span>Cases</span>
             <strong data-summary="cases">—</strong>
-            <em data-summary-detail="cases">Click to choose an example</em>
+            <em data-summary-detail="cases">Click To Choose An Example</em>
           </button>
           <div class="metric-menu metric-menu-wide" id="case-quick-menu" data-metric-menu="cases" hidden></div>
         </div>
@@ -55,17 +55,17 @@
       </div>
     </section>
 
-    <section class="control-panel" aria-label="Task and case controls">
+    <section class="control-panel" aria-label="Task And Case Controls">
       <div>
         <p class="section-kicker">Task Family</p>
         <div class="task-tabs" data-task-tabs></div>
       </div>
       <div class="case-control">
-        <label for="case-select">Case index</label>
+        <label for="case-select">Case Index</label>
         <div class="case-select-row">
-          <button class="mini-button" type="button" data-case-prev aria-label="Previous case">←</button>
+          <button class="mini-button" type="button" data-case-prev aria-label="Previous Case">←</button>
           <select id="case-select" data-case-select></select>
-          <button class="mini-button" type="button" data-case-next aria-label="Next case">→</button>
+          <button class="mini-button" type="button" data-case-next aria-label="Next Case">→</button>
         </div>
       </div>
     </section>
@@ -73,14 +73,14 @@
     <section class="case-header" aria-live="polite">
       <div>
         <p class="eyebrow" data-case-task>—</p>
-        <h2 data-case-title>Loading examples…</h2>
+        <h2 data-case-title>Loading Examples…</h2>
         <p data-case-description></p>
       </div>
       <dl class="case-meta">
         <div><dt>Split</dt><dd data-case-split>—</dd></div>
         <div><dt>Source ID</dt><dd data-case-source>—</dd></div>
-        <div><dt>Edit span</dt><dd data-case-span>—</dd></div>
-        <div><dt>Target role</dt><dd data-case-role>—</dd></div>
+        <div><dt>Edit Span</dt><dd data-case-span>—</dd></div>
+        <div><dt>Target Role</dt><dd data-case-role>—</dd></div>
       </dl>
     </section>
 
@@ -89,13 +89,13 @@
         <div class="card-head">
           <div>
             <p class="section-kicker">Original (Top) / Predicted (Bottom)</p>
-            <h3>Piano Roll With Grounded Edit Span And ±5 s Context</h3>
+            <h3>Piano Roll With Grounded Edit Span And ±5 Sec Context</h3>
           </div>
-          <div class="legend" aria-label="Piano roll color legend">
-            <span><i class="legend-box melody"></i> preserved</span>
-            <span><i class="legend-box source"></i> original edit</span>
-            <span><i class="legend-box target"></i> predicted edit</span>
-            <span><i class="legend-box span"></i> edit span</span>
+          <div class="legend" aria-label="Piano Roll Color Legend">
+            <span><i class="legend-box melody"></i> Preserved</span>
+            <span><i class="legend-box source"></i> Original Edit</span>
+            <span><i class="legend-box target"></i> Predicted Edit</span>
+            <span><i class="legend-box span"></i> Edit Span</span>
           </div>
         </div>
         <div class="piano-roll-frame" data-piano-roll></div>
@@ -120,10 +120,10 @@
     <section class="panel-card process-card">
       <div class="card-head">
         <div>
-          <p class="section-kicker">Step-by-step Trace</p>
+          <p class="section-kicker">Step-By-Step Trace</p>
           <h3>Preprocess Path Before Text Rendering</h3>
         </div>
-        <p class="process-note">The renderer is allowed to mention only claims whose status is supported.</p>
+        <p class="process-note">Supported Evidence Only For Text Rendering.</p>
       </div>
       <div class="process-steps" data-process-steps></div>
     </section>
@@ -147,10 +147,10 @@
 
   <footer class="main-footer">
     <div class="shell footer-shell">
-      <p class="copyright">&copy; 2026 Dabin Kim. Dynamic Performance Edit Mixer inspection page.</p>
+      <p class="copyright">&copy; 2026 Dabin Kim. Dynamic Performance Edit Mixer Inspection Page.</p>
     </div>
   </footer>
 
-  <script src="script.js?v=20260713-metric-picker"></script>
+  <script src="script.js?v=20260713-title-case"></script>
 </body>
 </html>

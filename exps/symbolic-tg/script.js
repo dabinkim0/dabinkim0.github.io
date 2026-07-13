@@ -19,7 +19,9 @@ function el(tagName, className, textContent) {
 }
 
 function formatRole(role) {
-  return String(role || "—").replaceAll("_", " ");
+  return String(role || "—")
+    .replaceAll("_", " ")
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
 function currentCases() {
@@ -84,16 +86,16 @@ function renderHeroMenus() {
   const caseItem = currentCase();
   const caseIndexWithinTask = currentCases().findIndex((item) => item.case_id === state.caseId);
   $("[data-summary='tasks']").textContent = currentTask?.label || "—";
-  $("[data-summary-detail='tasks']").textContent = `${state.data.tasks.length} task families available`;
-  $("[data-summary='cases']").textContent = `idx ${String(Math.max(0, caseIndexWithinTask)).padStart(2, "0")}`;
-  $("[data-summary-detail='cases']").textContent = caseItem?.title || "Choose an example";
+  $("[data-summary-detail='tasks']").textContent = `${state.data.tasks.length} Task Families Available`;
+  $("[data-summary='cases']").textContent = `Idx ${String(Math.max(0, caseIndexWithinTask)).padStart(2, "0")}`;
+  $("[data-summary-detail='cases']").textContent = caseItem?.title || "Choose An Example";
 
   const taskMenu = $("[data-metric-menu='tasks']");
   taskMenu.innerHTML = "";
   state.data.tasks.forEach((task) => {
     const button = el("button", `metric-option${task.task_id === state.taskId ? " active" : ""}`);
     button.type = "button";
-    button.innerHTML = `<span>${task.label}</span><small>${task.case_count} case${task.case_count === 1 ? "" : "s"} · ${task.description}</small>`;
+    button.innerHTML = `<span>${task.label}</span><small>${task.case_count} Case${task.case_count === 1 ? "" : "s"} · ${task.description}</small>`;
     button.addEventListener("click", () => {
       setTask(task.task_id);
       closeMetricMenus();
@@ -108,7 +110,7 @@ function renderHeroMenus() {
     const candidateIndex = taskCases.findIndex((item) => item.case_id === candidate.case_id);
     const button = el("button", `metric-option${candidate.case_id === state.caseId ? " active" : ""}`);
     button.type = "button";
-    button.innerHTML = `<span>${candidate.task_label} · idx ${String(candidateIndex).padStart(2, "0")}</span><small>${candidate.title}</small>`;
+    button.innerHTML = `<span>${candidate.task_label} · Idx ${String(candidateIndex).padStart(2, "0")}</span><small>${candidate.title}</small>`;
     button.addEventListener("click", () => {
       setTask(candidate.task_id, candidate.case_id);
       closeMetricMenus();
@@ -123,7 +125,7 @@ function renderCaseSelect() {
   currentCases().forEach((caseItem, index) => {
     const option = document.createElement("option");
     option.value = caseItem.case_id;
-    option.textContent = `idx ${String(index).padStart(2, "0")} · ${caseItem.title}`;
+    option.textContent = `Idx ${String(index).padStart(2, "0")} · ${caseItem.title}`;
     option.selected = caseItem.case_id === state.caseId;
     select.appendChild(option);
   });
@@ -196,7 +198,7 @@ function renderPianoRoll(caseItem) {
   const panelOffsets = [topMargin, topMargin + panelHeight + gap];
 
   const svgParts = [
-    `<svg viewBox="0 0 ${width} ${totalHeight}" role="img" aria-label="Original and predicted piano roll">`,
+    `<svg viewBox="0 0 ${width} ${totalHeight}" role="img" aria-label="Original And Predicted Piano Roll">`,
     `<rect x="0" y="0" width="${width}" height="${totalHeight}" fill="#fff"/>`,
   ];
 
@@ -224,7 +226,7 @@ function renderPianoRoll(caseItem) {
     });
 
     if (!notes.length) {
-      svgParts.push(`<text x="${leftMargin + rollWidth / 2}" y="${offset + panelHeight / 2}" text-anchor="middle" font-size="18" fill="#706d66">No original context for generation</text>`);
+      svgParts.push(`<text x="${leftMargin + rollWidth / 2}" y="${offset + panelHeight / 2}" text-anchor="middle" font-size="18" fill="#706d66">No Original Context For Generation</text>`);
     }
 
     notes.forEach((note) => {
@@ -353,7 +355,7 @@ function renderAll() {
 }
 
 async function init() {
-  const response = await fetch("assets/data/cases.json?v=20260713-metric-picker");
+  const response = await fetch("assets/data/cases.json?v=20260713-title-case");
   if (!response.ok) throw new Error(`Failed to load cases.json: ${response.status}`);
   state.data = await response.json();
   state.taskId = state.data.tasks[0].task_id;
@@ -381,6 +383,6 @@ async function init() {
 
 init().catch((error) => {
   console.error(error);
-  $("[data-case-title]").textContent = "Failed to load dashboard data";
+  $("[data-case-title]").textContent = "Failed To Load Dashboard Data";
   $("[data-case-description]").textContent = String(error);
 });

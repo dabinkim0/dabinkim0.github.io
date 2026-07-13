@@ -115,26 +115,26 @@ def concise_evidence(row: dict[str, Any]) -> list[dict[str, str]]:
     items: list[dict[str, str]] = []
     local_key = values.get("local_key")
     if isinstance(local_key, dict) and local_key.get("status") == "supported":
-        items.append({"label": "Local key", "value": str(local_key.get("value"))})
+        items.append({"label": "Local Key", "value": str(local_key.get("value"))})
     melody = values.get("melody_sequence")
     if isinstance(melody, dict) and melody.get("status") == "supported":
         pitches = "--".join(melody.get("pitch_sequence", []))
         rhythm = melody.get("rhythm_pattern", "")
         contour = melody.get("pitch_contour", {}).get("value", "")
         if pitches:
-            items.append({"label": "Melody sequence", "value": pitches})
+            items.append({"label": "Melody Sequence", "value": pitches})
         if rhythm:
-            items.append({"label": "Rhythm pattern", "value": rhythm})
+            items.append({"label": "Rhythm Pattern", "value": rhythm})
         if contour:
             items.append({"label": "Contour", "value": str(contour).replace("_", " ")})
     changed_note = values.get("changed_note_diff")
     if isinstance(changed_note, dict) and changed_note.get("status") == "supported":
-        items.append({"label": "Changed note", "value": f"{changed_note.get('source_note')} → {changed_note.get('target_note')}"})
+        items.append({"label": "Changed Note", "value": f"{changed_note.get('source_note')} → {changed_note.get('target_note')}"})
     timing = values.get("timing_grid")
     if isinstance(timing, dict) and timing.get("status") == "supported":
         items.append(
             {
-                "label": "Onset deviation",
+                "label": "Onset Deviation",
                 "value": f"{timing.get('source_left_hand_onset_deviation_ms')} ms → {timing.get('target_left_hand_onset_deviation_ms')} ms",
             }
         )
@@ -142,8 +142,8 @@ def concise_evidence(row: dict[str, Any]) -> list[dict[str, str]]:
         source_count = values.get("source_accompaniment_notes", {}).get("value")
         target_count = values.get("target_accompaniment_notes", {}).get("value")
         ratio = values.get("density_ratio", {}).get("value")
-        items.append({"label": "Accompaniment density", "value": f"{source_count} notes → {target_count} notes"})
-        items.append({"label": "Density ratio", "value": str(ratio)})
+        items.append({"label": "Accompaniment Density", "value": f"{source_count} notes → {target_count} notes"})
+        items.append({"label": "Density Ratio", "value": str(ratio)})
     return items
 
 
@@ -165,7 +165,7 @@ def preprocess_steps(row: dict[str, Any], prompts: list[dict[str, Any]]) -> list
             "body": "Apply half-open temporal grounding to crop the local edit region.",
             "fields": [
                 {"label": "Seconds", "value": f"[{span['start_sec']}, {span['end_sec']})"},
-                {"label": "Bar / beat", "value": f"{span.get('start_barbeat')} → {span.get('end_barbeat')}"},
+                {"label": "Bar / Beat", "value": f"{span.get('start_barbeat')} → {span.get('end_barbeat')}"},
             ],
         },
         {
@@ -177,9 +177,9 @@ def preprocess_steps(row: dict[str, Any], prompts: list[dict[str, Any]]) -> list
             "title": "4. Validate Diff And Controls",
             "body": "Use MIDI-diff evidence to decide which controls are supported and which claims must be omitted.",
             "fields": [
-                {"label": "Changed roles", "value": ", ".join(row["diff_evidence"].get("changed_roles", []))},
+                {"label": "Changed Roles", "value": ", ".join(row["diff_evidence"].get("changed_roles", []))},
                 {"label": "Controls", "value": ", ".join(control["control_id"] for control in row.get("controls", []))},
-                {"label": "Outside-change rate", "value": str(row["diff_evidence"].get("outside_change_rate"))},
+                {"label": "Outside-Change Rate", "value": str(row["diff_evidence"].get("outside_change_rate"))},
             ],
         },
         {
@@ -280,7 +280,7 @@ def build_cases(sori_root: Path) -> dict[str, Any]:
     return {
         "schema_version": "symbolic_tg_dashboard_v0.1",
         "generated_from": str(sori_root),
-        "title": "Fine-grained Temporal Grounding for Symbolic Music Generation and Editing",
+        "title": "Fine-Grained Temporal Grounding For Symbolic Music Generation And Editing",
         "tasks": tasks,
         "cases": cases,
     }
@@ -298,11 +298,11 @@ def task_description(task_id: str) -> str:
 def case_title(row: dict[str, Any]) -> str:
     family = row["subtask"]["family"]
     if family == "pitch_key_consistency":
-        return "Off-key top-line repair with melody rhythm preservation"
+        return "Off-Key Top-Line Repair With Melody Rhythm Preservation"
     if family == "timing_dynamics_control":
-        return "Left-hand onset de-jittering against the beat grid"
+        return "Left-Hand Onset De-Jittering Against The Beat Grid"
     if family == "melody_conditioned_texture":
-        return "Accompaniment density reduction with fixed melody"
+        return "Accompaniment Density Reduction With Fixed Melody"
     return row["triple_id"]
 
 
