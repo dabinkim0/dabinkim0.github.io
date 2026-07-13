@@ -30,6 +30,7 @@ Personal website hosted with GitHub Pages.
 │   └── figs/                   # figures for publication entries without own pages
 ├── adatt/                      # short-url redirect to publications/adatt/
 ├── experiments/                # unpublished or in-progress experiment pages
+├── exps/                       # short public routes for active experiment dashboards
 ├── symbolic-fused-lalm-experiments/
 │   └── demo/                   # legacy redirect to experiments/.../demo/
 ├── scripts/
@@ -62,6 +63,7 @@ Personal website hosted with GitHub Pages.
 - `adatt/` is a short compatibility redirect for `https://dabinkim0.github.io/adatt/`.
 - `publications/timbre-transfer/` is a legacy compatibility redirect for older AdaTT demo links.
 - `symbolic-fused-lalm-experiments/demo/` is a legacy compatibility redirect to `experiments/symbolic-fused-lalm-experiments/demo/`.
+- `exps/symbolic-tg/` is the active short URL for the Symbolic Temporal Grounding inspection dashboard.
 - Do not add demo media, CSS, or JavaScript to redirect-only folders. Put those files in the canonical page folder or in `assets/`.
 
 ## Frontend Organization
@@ -77,6 +79,7 @@ Personal website hosted with GitHub Pages.
 
 - Prefer editing CSS/JS files in `assets/` instead of adding new large inline `<style>` or `<script>` blocks.
 - Keep static resources near the page that owns them (`publications/adatt/audio`, `publications/ddsp-carsound/figs`, etc.).
+- Active experiment dashboards under `exps/` may keep page-local CSS, JavaScript, JSON, and small MIDI assets together for easier inspection and sharing.
 - Avoid creating root-level folders unless they are required for stable public URLs.
 - If a public URL changes, keep a tiny redirect page at the old path and document it under Route Rules.
 - When adding demo audio in `publications/adatt/audio`, generate matching spectrograms in `publications/adatt/spectrograms`.
