@@ -87,8 +87,8 @@ function renderHeroMenus() {
   const caseIndexWithinTask = currentCases().findIndex((item) => item.case_id === state.caseId);
   $("[data-summary='tasks']").textContent = currentTask?.label || "—";
   $("[data-summary-detail='tasks']").textContent = `${state.data.tasks.length} Task Families Available`;
-  $("[data-summary='cases']").textContent = `Idx ${String(Math.max(0, caseIndexWithinTask)).padStart(2, "0")}`;
-  $("[data-summary-detail='cases']").textContent = `${currentCases().length} Sample Idx Option${currentCases().length === 1 ? "" : "s"}`;
+  $("[data-summary='cases']").textContent = `IDX ${String(Math.max(0, caseIndexWithinTask)).padStart(2, "0")}`;
+  $("[data-summary-detail='cases']").textContent = `${currentCases().length} Sample IDX Option${currentCases().length === 1 ? "" : "s"}`;
 
   const taskMenu = $("[data-metric-menu='tasks']");
   taskMenu.innerHTML = "";
@@ -108,7 +108,7 @@ function renderHeroMenus() {
   currentCases().forEach((candidate, candidateIndex) => {
     const button = el("button", `metric-option${candidate.case_id === state.caseId ? " active" : ""}`);
     button.type = "button";
-    button.innerHTML = `<span>Idx ${String(candidateIndex).padStart(2, "0")}</span>`;
+    button.innerHTML = `<span>IDX ${String(candidateIndex).padStart(2, "0")}</span>`;
     button.addEventListener("click", () => {
       setCase(candidate.case_id);
       closeMetricMenus();
@@ -123,7 +123,7 @@ function renderCaseSelect() {
   currentCases().forEach((caseItem, index) => {
     const option = document.createElement("option");
     option.value = caseItem.case_id;
-    option.textContent = `Idx ${String(index).padStart(2, "0")}`;
+    option.textContent = `IDX ${String(index).padStart(2, "0")}`;
     option.selected = caseItem.case_id === state.caseId;
     select.appendChild(option);
   });
@@ -353,7 +353,7 @@ function renderAll() {
 }
 
 async function init() {
-  const response = await fetch("assets/data/cases.json?v=20260713-idx-only");
+  const response = await fetch("assets/data/cases.json?v=20260713-controls-under-roll");
   if (!response.ok) throw new Error(`Failed to load cases.json: ${response.status}`);
   state.data = await response.json();
   state.taskId = state.data.tasks[0].task_id;

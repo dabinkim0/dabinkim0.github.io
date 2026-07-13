@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260713-hover-tone">
+  <link rel="stylesheet" href="styles.css?v=20260713-controls-under-roll">
 </head>
 <body>
   <header class="main-header">
@@ -46,7 +46,7 @@
           <button class="metric-button" type="button" data-metric-toggle="cases" aria-expanded="false" aria-controls="case-quick-menu">
             <span>Cases</span>
             <strong data-summary="cases">—</strong>
-            <em data-summary-detail="cases">Click To Choose A Sample Idx</em>
+            <em data-summary-detail="cases">Click To Choose A Sample IDX</em>
           </button>
           <div class="metric-menu" id="case-quick-menu" data-metric-menu="cases" hidden></div>
         </div>
@@ -99,16 +99,15 @@
           </div>
         </div>
         <div class="piano-roll-frame" data-piano-roll></div>
-        <p class="caption" data-piano-caption></p>
-      </article>
-
-      <aside class="side-stack">
-        <article class="panel-card">
+        <p class="caption piano-caption" data-piano-caption></p>
+        <section class="inline-controls-panel">
           <p class="section-kicker">Validated Evidence</p>
           <h3>Symbolic Controls</h3>
           <div class="evidence-list" data-evidence-list></div>
-        </article>
+        </section>
+      </article>
 
+      <aside class="side-stack">
         <article class="panel-card">
           <p class="section-kicker">Prompt Rendering</p>
           <h3>Instruction Families</h3>
@@ -151,6 +150,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260713-idx-only"></script>
+  <script src="script.js?v=20260713-controls-under-roll"></script>
 </body>
 </html>

@@ -580,6 +580,16 @@ select {
   text-align: center;
 }
 
+.piano-caption {
+  text-align: left;
+}
+
+.inline-controls-panel {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line-soft);
+}
+
 .evidence-list,
 .prompt-stack,
 .process-steps {
