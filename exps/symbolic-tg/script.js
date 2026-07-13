@@ -88,7 +88,7 @@ function renderHeroMenus() {
   $("[data-summary='tasks']").textContent = currentTask?.label || "—";
   $("[data-summary-detail='tasks']").textContent = `${state.data.tasks.length} Task Families Available`;
   $("[data-summary='cases']").textContent = `Idx ${String(Math.max(0, caseIndexWithinTask)).padStart(2, "0")}`;
-  $("[data-summary-detail='cases']").textContent = caseItem?.title || "Choose An Example";
+  $("[data-summary-detail='cases']").textContent = `${currentCases().length} Sample Idx Option${currentCases().length === 1 ? "" : "s"}`;
 
   const taskMenu = $("[data-metric-menu='tasks']");
   taskMenu.innerHTML = "";
@@ -105,14 +105,12 @@ function renderHeroMenus() {
 
   const caseMenu = $("[data-metric-menu='cases']");
   caseMenu.innerHTML = "";
-  state.data.cases.forEach((candidate) => {
-    const taskCases = state.data.cases.filter((item) => item.task_id === candidate.task_id);
-    const candidateIndex = taskCases.findIndex((item) => item.case_id === candidate.case_id);
+  currentCases().forEach((candidate, candidateIndex) => {
     const button = el("button", `metric-option${candidate.case_id === state.caseId ? " active" : ""}`);
     button.type = "button";
-    button.innerHTML = `<span>${candidate.task_label} · Idx ${String(candidateIndex).padStart(2, "0")}</span><small>${candidate.title}</small>`;
+    button.innerHTML = `<span>Idx ${String(candidateIndex).padStart(2, "0")}</span>`;
     button.addEventListener("click", () => {
-      setTask(candidate.task_id, candidate.case_id);
+      setCase(candidate.case_id);
       closeMetricMenus();
     });
     caseMenu.appendChild(button);
@@ -125,7 +123,7 @@ function renderCaseSelect() {
   currentCases().forEach((caseItem, index) => {
     const option = document.createElement("option");
     option.value = caseItem.case_id;
-    option.textContent = `Idx ${String(index).padStart(2, "0")} · ${caseItem.title}`;
+    option.textContent = `Idx ${String(index).padStart(2, "0")}`;
     option.selected = caseItem.case_id === state.caseId;
     select.appendChild(option);
   });
@@ -355,7 +353,7 @@ function renderAll() {
 }
 
 async function init() {
-  const response = await fetch("assets/data/cases.json?v=20260713-title-case");
+  const response = await fetch("assets/data/cases.json?v=20260713-idx-only");
   if (!response.ok) throw new Error(`Failed to load cases.json: ${response.status}`);
   state.data = await response.json();
   state.taskId = state.data.tasks[0].task_id;

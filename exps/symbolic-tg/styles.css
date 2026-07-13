@@ -316,10 +316,6 @@ h3 {
   animation: menuToneIn 0.18s ease both;
 }
 
-.metric-menu-wide {
-  width: min(520px, calc(100vw - 48px));
-}
-
 .metric-option {
   display: block;
   width: 100%;
