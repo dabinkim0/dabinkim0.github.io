@@ -106,8 +106,12 @@ function renderPianoRoll(caseItem) {
   const targetNotes = caseItem.piano_roll.target_notes || [];
   const allNotes = [...sourceNotes, ...targetNotes];
   const span = caseItem.span;
-  const windowStart = Math.max(0, Math.min(caseItem.window.start_sec || 0, span.start_sec - 0.8));
-  const windowEnd = Math.max(caseItem.window.end_sec || span.end_sec + 0.8, span.end_sec + 0.8);
+  const contextSeconds = 5;
+  const windowStart = Math.max(caseItem.window.start_sec ?? 0, span.start_sec - contextSeconds);
+  const windowEnd = Math.max(
+    windowStart + 1,
+    Math.min(caseItem.window.end_sec ?? span.end_sec + contextSeconds, span.end_sec + contextSeconds),
+  );
   const visibleNotes = allNotes.filter((note) => note.end_sec > windowStart && note.start_sec < windowEnd);
   const pitchValues = visibleNotes.length ? visibleNotes.map((note) => note.pitch) : [60, 72];
   const pitchMin = Math.min(...pitchValues) - 2;
@@ -138,12 +142,13 @@ function renderPianoRoll(caseItem) {
     svgParts.push(`<rect x="${leftMargin}" y="${offset}" width="${rollWidth}" height="${panelHeight}" fill="#ffffff" stroke="#d8d2c8"/>`);
     svgParts.push(`<rect x="${x(span.start_sec)}" y="${offset}" width="${Math.max(1, x(span.end_sec) - x(span.start_sec))}" height="${panelHeight}" fill="#f4d77a" opacity="0.28"/>`);
 
+    const tickStep = timeSpan > 12 ? 2 : timeSpan > 7 ? 1 : 0.5;
     const ticks = [];
-    for (let t = Math.ceil(windowStart * 2) / 2; t <= windowEnd + 1e-6; t += 0.5) ticks.push(Number(t.toFixed(2)));
+    for (let t = Math.ceil(windowStart / tickStep) * tickStep; t <= windowEnd + 1e-6; t += tickStep) ticks.push(Number(t.toFixed(2)));
     ticks.forEach((tick) => {
       const xx = x(tick);
       svgParts.push(`<line x1="${xx}" y1="${offset}" x2="${xx}" y2="${offset + panelHeight}" stroke="#d8d2c8" opacity="${Math.abs(tick - Math.round(tick)) < 1e-6 ? 0.55 : 0.24}"/>`);
-      if (isTarget && Math.abs(tick - Math.round(tick * 2) / 2) < 1e-6) {
+      if (isTarget) {
         svgParts.push(`<text x="${xx}" y="${offset + panelHeight + 17}" text-anchor="middle" font-size="10" fill="#706d66">${tick.toFixed(1)}s</text>`);
       }
     });
@@ -179,7 +184,7 @@ function renderPianoRoll(caseItem) {
 
   svgParts.push(`</svg>`);
   frame.innerHTML = svgParts.join("");
-  $("[data-piano-caption]").textContent = `${caseItem.title}. Highlighted region shows the edit span ${span.start_sec}s–${span.end_sec}s; source-side edits are red and predicted-side edits are green.`;
+  $("[data-piano-caption]").textContent = `${caseItem.title}. The view shows up to ±5 seconds around the edit span ${span.start_sec}s–${span.end_sec}s; unedited context remains visible around the highlighted region.`;
 }
 
 function midiToNoteName(pitch) {
