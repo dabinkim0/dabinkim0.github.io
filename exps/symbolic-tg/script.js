@@ -2,6 +2,7 @@ const state = {
   data: null,
   taskId: null,
   caseId: null,
+  openMenu: null,
 };
 
 const promptOrder = ["base_M", "base_D", "base_MD"];
@@ -51,6 +52,68 @@ function renderTaskTabs() {
     button.type = "button";
     button.addEventListener("click", () => setTask(task.task_id));
     container.appendChild(button);
+  });
+}
+
+function closeMetricMenus() {
+  state.openMenu = null;
+  document.querySelectorAll("[data-metric-menu]").forEach((menu) => {
+    menu.hidden = true;
+  });
+  document.querySelectorAll("[data-metric-toggle]").forEach((button) => {
+    button.setAttribute("aria-expanded", "false");
+  });
+}
+
+function toggleMetricMenu(menuId) {
+  if (state.openMenu === menuId) {
+    closeMetricMenus();
+    return;
+  }
+  state.openMenu = menuId;
+  document.querySelectorAll("[data-metric-menu]").forEach((menu) => {
+    menu.hidden = menu.dataset.metricMenu !== menuId;
+  });
+  document.querySelectorAll("[data-metric-toggle]").forEach((button) => {
+    button.setAttribute("aria-expanded", String(button.dataset.metricToggle === menuId));
+  });
+}
+
+function renderHeroMenus() {
+  const currentTask = state.data.tasks.find((task) => task.task_id === state.taskId);
+  const caseItem = currentCase();
+  const caseIndexWithinTask = currentCases().findIndex((item) => item.case_id === state.caseId);
+  $("[data-summary='tasks']").textContent = currentTask?.label || "—";
+  $("[data-summary-detail='tasks']").textContent = `${state.data.tasks.length} task families available`;
+  $("[data-summary='cases']").textContent = `idx ${String(Math.max(0, caseIndexWithinTask)).padStart(2, "0")}`;
+  $("[data-summary-detail='cases']").textContent = caseItem?.title || "Choose an example";
+
+  const taskMenu = $("[data-metric-menu='tasks']");
+  taskMenu.innerHTML = "";
+  state.data.tasks.forEach((task) => {
+    const button = el("button", `metric-option${task.task_id === state.taskId ? " active" : ""}`);
+    button.type = "button";
+    button.innerHTML = `<span>${task.label}</span><small>${task.case_count} case${task.case_count === 1 ? "" : "s"} · ${task.description}</small>`;
+    button.addEventListener("click", () => {
+      setTask(task.task_id);
+      closeMetricMenus();
+    });
+    taskMenu.appendChild(button);
+  });
+
+  const caseMenu = $("[data-metric-menu='cases']");
+  caseMenu.innerHTML = "";
+  state.data.cases.forEach((candidate) => {
+    const taskCases = state.data.cases.filter((item) => item.task_id === candidate.task_id);
+    const candidateIndex = taskCases.findIndex((item) => item.case_id === candidate.case_id);
+    const button = el("button", `metric-option${candidate.case_id === state.caseId ? " active" : ""}`);
+    button.type = "button";
+    button.innerHTML = `<span>${candidate.task_label} · idx ${String(candidateIndex).padStart(2, "0")}</span><small>${candidate.title}</small>`;
+    button.addEventListener("click", () => {
+      setTask(candidate.task_id, candidate.case_id);
+      closeMetricMenus();
+    });
+    caseMenu.appendChild(button);
   });
 }
 
@@ -276,6 +339,7 @@ function renderRaw(caseItem) {
 }
 
 function renderAll() {
+  renderHeroMenus();
   renderTaskTabs();
   renderCaseSelect();
   const caseItem = currentCase();
@@ -289,15 +353,29 @@ function renderAll() {
 }
 
 async function init() {
-  const response = await fetch("assets/data/cases.json?v=20260713-context5");
+  const response = await fetch("assets/data/cases.json?v=20260713-metric-picker");
   if (!response.ok) throw new Error(`Failed to load cases.json: ${response.status}`);
   state.data = await response.json();
-  $("[data-summary='tasks']").textContent = String(state.data.tasks.length);
-  $("[data-summary='cases']").textContent = String(state.data.cases.length);
   state.taskId = state.data.tasks[0].task_id;
   state.caseId = state.data.cases.find((item) => item.task_id === state.taskId)?.case_id;
   $("[data-case-prev]").addEventListener("click", () => moveCase(-1));
   $("[data-case-next]").addEventListener("click", () => moveCase(1));
+  document.querySelectorAll("[data-metric-toggle]").forEach((button) => {
+    button.addEventListener("click", (event) => {
+      event.stopPropagation();
+      toggleMetricMenu(button.dataset.metricToggle);
+    });
+  });
+  document.addEventListener("click", (event) => {
+    if (!event.target.closest("[data-metric-picker]")) {
+      closeMetricMenus();
+    }
+  });
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+      closeMetricMenus();
+    }
+  });
   renderAll();
 }
 
