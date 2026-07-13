@@ -3,6 +3,12 @@ const state = {
   taskId: null,
   caseId: null,
   openMenu: null,
+  audio: {
+    context: null,
+    cleanupTimer: null,
+    sources: [],
+    connections: [],
+  },
 };
 
 const promptOrder = ["base_M", "base_D", "base_MD"];
@@ -32,7 +38,19 @@ function currentCase() {
   return state.data.cases.find((item) => item.case_id === state.caseId) || state.data.cases[0];
 }
 
+function displayedWindow(caseItem) {
+  const span = caseItem.span;
+  const contextSeconds = 5;
+  const windowStart = Math.max(caseItem.window.start_sec ?? 0, span.start_sec - contextSeconds);
+  const windowEnd = Math.max(
+    windowStart + 1,
+    Math.min(caseItem.window.end_sec ?? span.end_sec + contextSeconds, span.end_sec + contextSeconds),
+  );
+  return { windowStart, windowEnd };
+}
+
 function setTask(taskId, preferredCaseId = null) {
+  stopAudioPlayback(false);
   state.taskId = taskId;
   const cases = currentCases();
   state.caseId = preferredCaseId && cases.some((item) => item.case_id === preferredCaseId)
@@ -42,6 +60,7 @@ function setTask(taskId, preferredCaseId = null) {
 }
 
 function setCase(caseId) {
+  stopAudioPlayback(false);
   state.caseId = caseId;
   renderAll();
 }
@@ -169,12 +188,7 @@ function renderPianoRoll(caseItem) {
   const targetNotes = caseItem.piano_roll.target_notes || [];
   const allNotes = [...sourceNotes, ...targetNotes];
   const span = caseItem.span;
-  const contextSeconds = 5;
-  const windowStart = Math.max(caseItem.window.start_sec ?? 0, span.start_sec - contextSeconds);
-  const windowEnd = Math.max(
-    windowStart + 1,
-    Math.min(caseItem.window.end_sec ?? span.end_sec + contextSeconds, span.end_sec + contextSeconds),
-  );
+  const { windowStart, windowEnd } = displayedWindow(caseItem);
   const visibleNotes = allNotes.filter((note) => note.end_sec > windowStart && note.start_sec < windowEnd);
   const pitchValues = visibleNotes.length ? visibleNotes.map((note) => note.pitch) : [60, 72];
   const pitchMin = Math.min(...pitchValues) - 2;
@@ -248,6 +262,150 @@ function renderPianoRoll(caseItem) {
   svgParts.push(`</svg>`);
   frame.innerHTML = svgParts.join("");
   $("[data-piano-caption]").textContent = `${caseItem.title}. The view shows up to ±5 seconds around the edit span ${span.start_sec}s–${span.end_sec}s; unedited context remains visible around the highlighted region.`;
+}
+
+function notesInDisplayedWindow(notes, caseItem) {
+  const { windowStart, windowEnd } = displayedWindow(caseItem);
+  return notes.filter((note) => note.end_sec > windowStart && note.start_sec < windowEnd);
+}
+
+function renderPlaybackControls(caseItem) {
+  const sourceButton = $("[data-play-source]");
+  const targetButton = $("[data-play-target]");
+  const compareButton = $("[data-play-compare]");
+  const sourceHasNotes = notesInDisplayedWindow(caseItem.piano_roll.source_notes || [], caseItem).length > 0;
+  const targetHasNotes = notesInDisplayedWindow(caseItem.piano_roll.target_notes || [], caseItem).length > 0;
+  sourceButton.disabled = !sourceHasNotes;
+  targetButton.disabled = !targetHasNotes;
+  compareButton.disabled = !sourceHasNotes || !targetHasNotes;
+  setPlaybackStatus("Ready");
+}
+
+function setPlaybackStatus(text) {
+  const status = $("[data-play-status]");
+  if (status) status.textContent = text;
+}
+
+function getAudioContext() {
+  const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContextClass) return null;
+  if (!state.audio.context) {
+    state.audio.context = new AudioContextClass();
+  }
+  return state.audio.context;
+}
+
+function midiToFrequency(pitch) {
+  return 440 * (2 ** ((pitch - 69) / 12));
+}
+
+function stopAudioPlayback(updateStatus = true) {
+  if (state.audio.cleanupTimer) {
+    window.clearTimeout(state.audio.cleanupTimer);
+    state.audio.cleanupTimer = null;
+  }
+  state.audio.sources.forEach((source) => {
+    try {
+      source.stop();
+    } catch {
+      // Source may already have ended.
+    }
+    try {
+      source.disconnect();
+    } catch {
+      // Node may already be disconnected.
+    }
+  });
+  state.audio.connections.forEach((node) => {
+    try {
+      node.disconnect();
+    } catch {
+      // Node may already be disconnected.
+    }
+  });
+  state.audio.sources = [];
+  state.audio.connections = [];
+  if (updateStatus) setPlaybackStatus("Ready");
+}
+
+function scheduleNoteSet(context, masterGain, notes, caseItem, offsetSeconds) {
+  const { windowStart, windowEnd } = displayedWindow(caseItem);
+  const leadTime = 0.08;
+  let scheduledCount = 0;
+  notesInDisplayedWindow(notes, caseItem).forEach((note) => {
+    const clippedStart = Math.max(note.start_sec, windowStart);
+    const clippedEnd = Math.min(note.end_sec, windowEnd);
+    const duration = clippedEnd - clippedStart;
+    if (duration <= 0.03) return;
+
+    const startAt = context.currentTime + leadTime + offsetSeconds + clippedStart - windowStart;
+    const stopAt = startAt + duration;
+    const velocityGain = Math.max(0.18, Math.min(0.9, (note.velocity || 64) / 127));
+    const source = context.createOscillator();
+    const gain = context.createGain();
+    source.type = note.role === "left_hand" || note.role === "bass" ? "sine" : "triangle";
+    source.frequency.setValueAtTime(midiToFrequency(note.pitch), startAt);
+    gain.gain.setValueAtTime(0.0001, startAt);
+    gain.gain.linearRampToValueAtTime(0.13 * velocityGain, startAt + 0.018);
+    gain.gain.exponentialRampToValueAtTime(0.0001, stopAt + 0.16);
+    source.connect(gain);
+    gain.connect(masterGain);
+    source.start(startAt);
+    source.stop(stopAt + 0.18);
+    state.audio.sources.push(source);
+    state.audio.connections.push(gain);
+    scheduledCount += 1;
+  });
+  return scheduledCount;
+}
+
+async function playDisplayedWindow(kind) {
+  const caseItem = currentCase();
+  const context = getAudioContext();
+  if (!context) {
+    setPlaybackStatus("Audio Unsupported");
+    return;
+  }
+  stopAudioPlayback(false);
+  await context.resume();
+
+  const { windowStart, windowEnd } = displayedWindow(caseItem);
+  const displayDuration = windowEnd - windowStart;
+  const masterGain = context.createGain();
+  const compressor = context.createDynamicsCompressor();
+  masterGain.gain.value = 0.64;
+  masterGain.connect(compressor);
+  compressor.connect(context.destination);
+  state.audio.connections.push(masterGain, compressor);
+
+  const sourceNotes = caseItem.piano_roll.source_notes || [];
+  const targetNotes = caseItem.piano_roll.target_notes || [];
+  let scheduledCount = 0;
+  let totalDuration = displayDuration;
+
+  if (kind === "source") {
+    scheduledCount = scheduleNoteSet(context, masterGain, sourceNotes, caseItem, 0);
+    setPlaybackStatus("Playing Original");
+  } else if (kind === "target") {
+    scheduledCount = scheduleNoteSet(context, masterGain, targetNotes, caseItem, 0);
+    setPlaybackStatus("Playing Predicted");
+  } else {
+    const gapSeconds = 0.75;
+    scheduledCount += scheduleNoteSet(context, masterGain, sourceNotes, caseItem, 0);
+    scheduledCount += scheduleNoteSet(context, masterGain, targetNotes, caseItem, displayDuration + gapSeconds);
+    totalDuration = displayDuration * 2 + gapSeconds;
+    setPlaybackStatus("Playing A/B");
+  }
+
+  if (!scheduledCount) {
+    stopAudioPlayback(false);
+    setPlaybackStatus("No Notes");
+    return;
+  }
+
+  state.audio.cleanupTimer = window.setTimeout(() => {
+    stopAudioPlayback(true);
+  }, (totalDuration + 0.45) * 1000);
 }
 
 function midiToNoteName(pitch) {
@@ -345,6 +503,7 @@ function renderAll() {
   const caseItem = currentCase();
   renderHeader(caseItem);
   renderPianoRoll(caseItem);
+  renderPlaybackControls(caseItem);
   renderEvidence(caseItem);
   renderPrompts(caseItem);
   renderProcess(caseItem);
@@ -360,6 +519,10 @@ async function init() {
   state.caseId = state.data.cases.find((item) => item.task_id === state.taskId)?.case_id;
   $("[data-case-prev]").addEventListener("click", () => moveCase(-1));
   $("[data-case-next]").addEventListener("click", () => moveCase(1));
+  $("[data-play-source]").addEventListener("click", () => playDisplayedWindow("source"));
+  $("[data-play-target]").addEventListener("click", () => playDisplayedWindow("target"));
+  $("[data-play-compare]").addEventListener("click", () => playDisplayedWindow("compare"));
+  $("[data-play-stop]").addEventListener("click", () => stopAudioPlayback(true));
   document.querySelectorAll("[data-metric-toggle]").forEach((button) => {
     button.addEventListener("click", (event) => {
       event.stopPropagation();

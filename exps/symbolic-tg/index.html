@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260713-controls-under-roll">
+  <link rel="stylesheet" href="styles.css?v=20260713-audio-playback">
 </head>
 <body>
   <header class="main-header">
@@ -98,6 +98,16 @@
             <span><i class="legend-box span"></i> Edit Span</span>
           </div>
         </div>
+        <div class="roll-toolbar" aria-label="Piano Roll Playback Controls">
+          <span>Playback Displayed Window</span>
+          <div class="roll-actions">
+            <button class="audio-button" type="button" data-play-source>Play Original</button>
+            <button class="audio-button" type="button" data-play-target>Play Predicted</button>
+            <button class="audio-button" type="button" data-play-compare>A/B Compare</button>
+            <button class="audio-button ghost" type="button" data-play-stop>Stop</button>
+          </div>
+          <em data-play-status>Ready</em>
+        </div>
         <div class="piano-roll-frame" data-piano-roll></div>
         <p class="caption piano-caption" data-piano-caption></p>
         <section class="inline-controls-panel">
@@ -150,6 +160,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260713-thicker-roll"></script>
+  <script src="script.js?v=20260713-audio-playback"></script>
 </body>
 </html>

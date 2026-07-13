@@ -559,6 +559,76 @@ select {
   background: #f4d77a;
 }
 
+.roll-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 14px;
+  padding: 11px 12px;
+  border: 1px solid var(--line-soft);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.roll-toolbar span {
+  color: var(--muted);
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.roll-toolbar em {
+  min-width: 110px;
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-style: normal;
+  text-align: right;
+}
+
+.roll-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.audio-button {
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fff;
+  color: var(--ink);
+  padding: 7px 12px;
+  cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+.audio-button:hover,
+.audio-button:focus-visible {
+  border-color: var(--green);
+  background: linear-gradient(135deg, #ffffff 0%, #edf4ee 100%);
+  box-shadow: 0 10px 18px rgba(23, 23, 23, 0.055);
+  color: var(--green);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.audio-button.ghost {
+  color: var(--muted);
+}
+
+.audio-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+  transform: none;
+}
+
 .piano-roll-frame {
   min-height: 520px;
   overflow: hidden;
