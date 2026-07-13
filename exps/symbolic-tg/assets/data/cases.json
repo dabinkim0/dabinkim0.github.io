@@ -1,0 +1,1938 @@
+{
+  "cases": [
+    {
+      "case_id": "pilot_pitch_key_0001",
+      "case_type": "editing",
+      "controls": [
+        {
+          "allowed_phrases": [
+            "fits the local key",
+            "fits the local D minor melody",
+            "in key"
+          ],
+          "attribute": "pitch_class_support",
+          "blocked_phrases": [
+            "more emotional",
+            "more lyrical"
+          ],
+          "canonical_phrase": "fits the local D minor melody",
+          "control_id": "key_fit.in_key",
+          "family": "key_fit",
+          "proxy": {
+            "criterion": "target pitch class is supported by local key or melodic context",
+            "metric": "local_key_pitch_class_support",
+            "satisfied": true,
+            "source_value": false,
+            "target_value": true
+          },
+          "source_descriptor": "off_key",
+          "span_ids": [
+            "s0"
+          ],
+          "target_descriptor": "in_key",
+          "target_role": "melody",
+          "validation_level": "deterministic"
+        },
+        {
+          "allowed_phrases": [
+            "descending melody",
+            "descending top-line contour"
+          ],
+          "attribute": "melody_pitch_sequence",
+          "blocked_phrases": [
+            "sad melody",
+            "lyrical melody"
+          ],
+          "canonical_phrase": "descending top-line melody",
+          "control_id": "pitch_contour.descending_stepwise",
+          "family": "pitch_contour",
+          "proxy": {
+            "criterion": "target contour status is supported and rhythm preservation is true",
+            "metric": "pitch_slope_and_interval_sign",
+            "satisfied": true,
+            "source_value": "partially_off_key",
+            "target_value": "descending_stepwise"
+          },
+          "source_descriptor": "partially_off_key",
+          "span_ids": [
+            "s0"
+          ],
+          "target_descriptor": "descending_stepwise",
+          "target_role": "melody",
+          "validation_level": "deterministic"
+        }
+      ],
+      "diff_evidence": {
+        "changed_roles": [
+          "melody"
+        ],
+        "n_changed_notes": 1,
+        "outside_change_rate": 0.0,
+        "role_preservation": {
+          "accompaniment_note_hash_unchanged": true,
+          "melody_onset_duration_unchanged": true
+        }
+      },
+      "edit_plan": {
+        "action": "correct",
+        "constraints": [
+          "no_changes_outside_span",
+          "preserve_melody_rhythm"
+        ],
+        "preserve": [
+          "left_hand_accompaniment",
+          "melody_rhythm",
+          "timing_outside_span",
+          "velocity_outside_span"
+        ],
+        "source_state": "one top-line note is outside the local key context",
+        "target_state": "the repaired note fits the local melody"
+      },
+      "evidence": {
+        "required": [
+          "local_key",
+          "target_role_notes",
+          "pitch_class_support",
+          "changed_note_diff",
+          "melody_sequence"
+        ],
+        "values": {
+          "changed_note_diff": {
+            "confidence": 1.0,
+            "source_note": "F#4",
+            "status": "supported",
+            "target_note": "F4"
+          },
+          "local_key": {
+            "confidence": 0.962,
+            "evidence": {
+              "profile_correlation": 0.924
+            },
+            "status": "supported",
+            "value": "D minor"
+          },
+          "melody_sequence": {
+            "confidence": 0.95,
+            "duration_pattern_beat": [
+              1.0,
+              0.5,
+              0.5,
+              1.0
+            ],
+            "events": [
+              {
+                "duration_beat": 1.0,
+                "onset_beat": 0.0,
+                "pitch": "A4",
+                "velocity": 72
+              },
+              {
+                "duration_beat": 0.5,
+                "onset_beat": 1.0,
+                "pitch": "G4",
+                "velocity": 70
+              },
+              {
+                "duration_beat": 0.5,
+                "onset_beat": 1.5,
+                "pitch": "F4",
+                "velocity": 68
+              },
+              {
+                "duration_beat": 1.0,
+                "onset_beat": 2.0,
+                "pitch": "E4",
+                "velocity": 69
+              }
+            ],
+            "pitch_class_sequence": [
+              "A",
+              "G",
+              "F",
+              "E"
+            ],
+            "pitch_contour": {
+              "confidence": 0.95,
+              "evidence": {
+                "negative_interval_ratio": 1.0,
+                "pitch_slope_semitones_per_note": -1.667,
+                "positive_interval_ratio": 0.0,
+                "stepwise_ratio": 1.0
+              },
+              "status": "supported",
+              "value": "descending_stepwise"
+            },
+            "pitch_sequence": [
+              "A4",
+              "G4",
+              "F4",
+              "E4"
+            ],
+            "relative_onsets_beat": [
+              0.0,
+              1.0,
+              1.5,
+              2.0
+            ],
+            "rhythm_pattern": "quarter-eighth-eighth-quarter",
+            "status": "supported"
+          },
+          "pitch_class_supported_after_edit": {
+            "confidence": 0.95,
+            "status": "supported",
+            "value": true
+          }
+        }
+      },
+      "idx": 0,
+      "midi": {
+        "source": "assets/midi/pilot_pitch_key_0001.source.mid",
+        "target": "assets/midi/pilot_pitch_key_0001.target.mid"
+      },
+      "piano_roll": {
+        "original_label": "Original",
+        "predicted_label": "Predicted",
+        "source_notes": [
+          {
+            "duration_beat": 2.0,
+            "end_sec": 3.8,
+            "end_tick": 3648,
+            "highlight": "preserved",
+            "note": "D3",
+            "pitch": 50,
+            "role": "left_hand",
+            "start_sec": 2.8,
+            "start_tick": 2688,
+            "track_name": "left_hand",
+            "velocity": 58
+          },
+          {
+            "duration_beat": 1.0,
+            "end_sec": 3.5,
+            "end_tick": 3360,
+            "highlight": "preserved",
+            "note": "A4",
+            "pitch": 69,
+            "role": "melody",
+            "start_sec": 3.0,
+            "start_tick": 2880,
+            "track_name": "melody",
+            "velocity": 72
+          },
+          {
+            "duration_beat": 2.0,
+            "end_sec": 4.3,
+            "end_tick": 4128,
+            "highlight": "preserved",
+            "note": "A3",
+            "pitch": 57,
+            "role": "left_hand",
+            "start_sec": 3.3,
+            "start_tick": 3168,
+            "track_name": "left_hand",
+            "velocity": 55
+          },
+          {
+            "duration_beat": 0.5,
+            "end_sec": 3.75,
+            "end_tick": 3600,
+            "highlight": "preserved",
+            "note": "G4",
+            "pitch": 67,
+            "role": "melody",
+            "start_sec": 3.5,
+            "start_tick": 3360,
+            "track_name": "melody",
+            "velocity": 70
+          },
+          {
+            "duration_beat": 0.5,
+            "end_sec": 4.0,
+            "end_tick": 3840,
+            "highlight": "changed_source",
+            "note": "F#4",
+            "pitch": 66,
+            "role": "melody",
+            "start_sec": 3.75,
+            "start_tick": 3600,
+            "track_name": "melody",
+            "velocity": 68
+          },
+          {
+            "duration_beat": 2.0,
+            "end_sec": 4.8,
+            "end_tick": 4608,
+            "highlight": "preserved",
+            "note": "F3",
+            "pitch": 53,
+            "role": "left_hand",
+            "start_sec": 3.8,
+            "start_tick": 3648,
+            "track_name": "left_hand",
+            "velocity": 57
+          },
+          {
+            "duration_beat": 1.0,
+            "end_sec": 4.5,
+            "end_tick": 4320,
+            "highlight": "preserved",
+            "note": "E4",
+            "pitch": 64,
+            "role": "melody",
+            "start_sec": 4.0,
+            "start_tick": 3840,
+            "track_name": "melody",
+            "velocity": 69
+          },
+          {
+            "duration_beat": 2.0,
+            "end_sec": 5.3,
+            "end_tick": 5088,
+            "highlight": "preserved",
+            "note": "D3",
+            "pitch": 50,
+            "role": "left_hand",
+            "start_sec": 4.3,
+            "start_tick": 4128,
+            "track_name": "left_hand",
+            "velocity": 56
+          },
+          {
+            "duration_beat": 1.0,
+            "end_sec": 5.3,
+            "end_tick": 5088,
+            "highlight": "preserved",
+            "note": "C4",
+            "pitch": 60,
+            "role": "left_hand",
+            "start_sec": 4.8,
+            "start_tick": 4608,
+            "track_name": "left_hand",
+            "velocity": 54
+          }
+        ],
+        "target_notes": [
+          {
+            "duration_beat": 2.0,
+            "end_sec": 3.8,
+            "end_tick": 3648,
+            "highlight": "preserved",
+            "note": "D3",
+            "pitch": 50,
+            "role": "left_hand",
+            "start_sec": 2.8,
+            "start_tick": 2688,
+            "track_name": "left_hand",
+            "velocity": 58
+          },
+          {
+            "duration_beat": 1.0,
+            "end_sec": 3.5,
+            "end_tick": 3360,
+            "highlight": "preserved",
+            "note": "A4",
+            "pitch": 69,
+            "role": "melody",
+            "start_sec": 3.0,
+            "start_tick": 2880,
+            "track_name": "melody",
+            "velocity": 72
+          },
+          {
+            "duration_beat": 2.0,
+            "end_sec": 4.3,
+            "end_tick": 4128,
+            "highlight": "preserved",
+            "note": "A3",
+            "pitch": 57,
+            "role": "left_hand",
+            "start_sec": 3.3,
+            "start_tick": 3168,
+            "track_name": "left_hand",
+            "velocity": 55
+          },
+          {
+            "duration_beat": 0.5,
+            "end_sec": 3.75,
+            "end_tick": 3600,
+            "highlight": "preserved",
+            "note": "G4",
+            "pitch": 67,
+            "role": "melody",
+            "start_sec": 3.5,
+            "start_tick": 3360,
+            "track_name": "melody",
+            "velocity": 70
+          },
+          {
+            "duration_beat": 0.5,
+            "end_sec": 4.0,
+            "end_tick": 3840,
+            "highlight": "changed_target",
+            "note": "F4",
+            "pitch": 65,
+            "role": "melody",
+            "start_sec": 3.75,
+            "start_tick": 3600,
+            "track_name": "melody",
+            "velocity": 68
+          },
+          {
+            "duration_beat": 2.0,
+            "end_sec": 4.8,
+            "end_tick": 4608,
+            "highlight": "preserved",
+            "note": "F3",
+            "pitch": 53,
+            "role": "left_hand",
+            "start_sec": 3.8,
+            "start_tick": 3648,
+            "track_name": "left_hand",
+            "velocity": 57
+          },
+          {
+            "duration_beat": 1.0,
+            "end_sec": 4.5,
+            "end_tick": 4320,
+            "highlight": "preserved",
+            "note": "E4",
+            "pitch": 64,
+            "role": "melody",
+            "start_sec": 4.0,
+            "start_tick": 3840,
+            "track_name": "melody",
+            "velocity": 69
+          },
+          {
+            "duration_beat": 2.0,
+            "end_sec": 5.3,
+            "end_tick": 5088,
+            "highlight": "preserved",
+            "note": "D3",
+            "pitch": 50,
+            "role": "left_hand",
+            "start_sec": 4.3,
+            "start_tick": 4128,
+            "track_name": "left_hand",
+            "velocity": 56
+          },
+          {
+            "duration_beat": 1.0,
+            "end_sec": 5.3,
+            "end_tick": 5088,
+            "highlight": "preserved",
+            "note": "C4",
+            "pitch": 60,
+            "role": "left_hand",
+            "start_sec": 4.8,
+            "start_tick": 4608,
+            "track_name": "left_hand",
+            "velocity": 54
+          }
+        ],
+        "tempo_us_per_beat": 500000,
+        "ticks_per_beat": 480
+      },
+      "preprocess_steps": [
+        {
+          "body": "Read the paired MIDI files and normalize notes into a common note table.",
+          "fields": [
+            {
+              "label": "Source",
+              "value": "pilot_pitch_key_0001.source.mid"
+            },
+            {
+              "label": "Target",
+              "value": "pilot_pitch_key_0001.target.mid"
+            }
+          ],
+          "title": "1. Load Source / Target MIDI"
+        },
+        {
+          "body": "Apply half-open temporal grounding to crop the local edit region.",
+          "fields": [
+            {
+              "label": "Seconds",
+              "value": "[3.0, 4.5)"
+            },
+            {
+              "label": "Bar / beat",
+              "value": "bar 2 beat 3 → bar 3 beat 2"
+            }
+          ],
+          "title": "2. Crop Edit Span"
+        },
+        {
+          "body": "Compute only the symbolic features required by the selected subtask.",
+          "fields": [
+            {
+              "label": "Local key",
+              "value": "D minor"
+            },
+            {
+              "label": "Melody sequence",
+              "value": "A4--G4--F4--E4"
+            },
+            {
+              "label": "Rhythm pattern",
+              "value": "quarter-eighth-eighth-quarter"
+            },
+            {
+              "label": "Contour",
+              "value": "descending stepwise"
+            },
+            {
+              "label": "Changed note",
+              "value": "F#4 → F4"
+            }
+          ],
+          "title": "3. Extract Task Evidence"
+        },
+        {
+          "body": "Use MIDI-diff evidence to decide which controls are supported and which claims must be omitted.",
+          "fields": [
+            {
+              "label": "Changed roles",
+              "value": "melody"
+            },
+            {
+              "label": "Controls",
+              "value": "key_fit.in_key, pitch_contour.descending_stepwise"
+            },
+            {
+              "label": "Outside-change rate",
+              "value": "0.0"
+            }
+          ],
+          "title": "4. Validate Diff And Controls"
+        },
+        {
+          "body": "Render caption/instruction variants from supported metadata and diff evidence.",
+          "fields": [
+            {
+              "label": "base_M",
+              "value": "The MIDI segment contains a local D minor context and a descending A4--G4--F4--E4 top-line melody with its quarter-eighth-eighth-quarter rhythm."
+            },
+            {
+              "label": "base_D",
+              "value": "From 3.0s to before 4.5s, correct the changed melody pitch so it fits the local D minor melody, while preserving non-target roles and all material outside the span."
+            },
+            {
+              "label": "base_MD",
+              "value": "From 3.0s to before 4.5s, correct only the off-key top-line note so it fits the local D minor context; preserve the descending A4--G4--F4--E4 top-line melody with its quarter-eighth-eighth-quarter rhythm, keep the accompaniment and outside-span timing unchanged."
+            }
+          ],
+          "title": "5. Render Prompt Families"
+        }
+      ],
+      "prompts": [
+        {
+          "mode": "music_caption",
+          "omitted_features": "",
+          "prompt_family": "base_M",
+          "rendered_text": "The MIDI segment contains a local D minor context and a descending A4--G4--F4--E4 top-line melody with its quarter-eighth-eighth-quarter rhythm.",
+          "training_stage": "caption_pretrain",
+          "used_controls": "key_fit.in_key|pitch_contour.descending_stepwise"
+        },
+        {
+          "mode": "editing_instruction",
+          "omitted_features": "",
+          "prompt_family": "base_D",
+          "rendered_text": "From 3.0s to before 4.5s, correct the changed melody pitch so it fits the local D minor melody, while preserving non-target roles and all material outside the span.",
+          "training_stage": "editing_sft",
+          "used_controls": "key_fit.in_key|pitch_contour.descending_stepwise"
+        },
+        {
+          "mode": "editing_instruction",
+          "omitted_features": "",
+          "prompt_family": "base_MD",
+          "rendered_text": "From 3.0s to before 4.5s, correct only the off-key top-line note so it fits the local D minor context; preserve the descending A4--G4--F4--E4 top-line melody with its quarter-eighth-eighth-quarter rhythm, keep the accompaniment and outside-span timing unchanged.",
+          "training_stage": "editing_sft",
+          "used_controls": "key_fit.in_key|pitch_contour.descending_stepwise"
+        }
+      ],
+      "source_id": "pilot:maestro:piece_0001",
+      "span": {
+        "end_barbeat": "bar 3 beat 2",
+        "end_sec": 4.5,
+        "end_tick": 4320,
+        "span_id": "s0",
+        "start_barbeat": "bar 2 beat 3",
+        "start_sec": 3.0,
+        "start_tick": 2880
+      },
+      "split": "train",
+      "subtask": {
+        "difficulty": "medium",
+        "edit_mode": "repair",
+        "edit_ops": [
+          "pitch_substitution"
+        ],
+        "family": "pitch_key_consistency",
+        "target_role": "melody"
+      },
+      "task_id": "pitch_key_consistency",
+      "task_label": "Pitch / Key",
+      "title": "Off-key top-line repair with melody rhythm preservation",
+      "validation": {
+        "deterministic": {
+          "outside_change_rate": 0.0,
+          "span_iou": 1.0,
+          "target_parse_ok": true,
+          "task_success": true
+        },
+        "llm_filtering": {
+          "required": false,
+          "support_label": null
+        }
+      },
+      "window": {
+        "end_barbeat": "bar 4 beat 1",
+        "end_sec": 6.0,
+        "end_tick": 5760,
+        "start_barbeat": "bar 1 beat 1",
+        "start_sec": 0.0,
+        "start_tick": 0,
+        "window_id": "w0001"
+      }
+    },
+    {
+      "case_id": "pilot_timing_0001",
+      "case_type": "editing",
+      "controls": [
+        {
+          "allowed_phrases": [
+            "steadier",
+            "more aligned to the beat",
+            "less jittered"
+          ],
+          "attribute": "onset_deviation",
+          "blocked_phrases": [
+            "more professional",
+            "more human"
+          ],
+          "canonical_phrase": "steadier against the local eighth-note grid",
+          "control_id": "timing_grid.less_jittered",
+          "family": "timing_grid",
+          "proxy": {
+            "criterion": "target <= source * 0.75 and source - target >= 15 ms",
+            "metric": "median_grid_distance_ms",
+            "satisfied": true,
+            "source_value": 39.6,
+            "target_value": 0.0
+          },
+          "source_descriptor": "jittered",
+          "span_ids": [
+            "s0"
+          ],
+          "target_descriptor": "less_jittered",
+          "target_role": "left_hand",
+          "validation_level": "deterministic"
+        }
+      ],
+      "diff_evidence": {
+        "changed_roles": [
+          "left_hand"
+        ],
+        "n_changed_notes": 5,
+        "outside_change_rate": 0.0,
+        "role_preservation": {
+          "pitch_content_unchanged": true,
+          "right_hand_melody_hash_unchanged": true
+        }
+      },
+      "edit_plan": {
+        "action": "quantize",
+        "constraints": [
+          "no_changes_outside_span",
+          "preserve_pitch_content",
+          "preserve_right_hand_melody"
+        ],
+        "preserve": [
+          "pitch_content",
+          "right_hand_melody",
+          "outside_span"
+        ],
+        "source_state": "left-hand accompaniment onsets are locally jittered against the eighth-note grid",
+        "target_state": "left-hand accompaniment onsets are closer to the local grid"
+      },
+      "evidence": {
+        "required": [
+          "tempo_or_beat_map",
+          "target_role_notes",
+          "onset_deviation",
+          "velocity_contour"
+        ],
+        "values": {
+          "grid": {
+            "confidence": 0.96,
+            "status": "supported",
+            "value": "eighth_note"
+          },
+          "left_hand_pattern": {
+            "confidence": 0.89,
+            "duration_pattern_beat": [
+              0.5,
+              0.5,
+              0.5,
+              0.5,
+              0.5
+            ],
+            "source_relative_onsets_beat": [
+              0.06,
+              0.94,
+              2.16,
+              3.079,
+              4.079
+            ],
+            "status": "supported",
+            "target_relative_onsets_beat": [
+              0.0,
+              1.0,
+              2.0,
+              3.0,
+              4.0
+            ]
+          },
+          "right_hand_melody_hash_unchanged": {
+            "confidence": 1.0,
+            "status": "supported",
+            "value": true
+          },
+          "timing_grid": {
+            "confidence": 0.94,
+            "relative_reduction": 1.0,
+            "source_left_hand_onset_deviation_ms": 39.6,
+            "status": "supported",
+            "target_left_hand_onset_deviation_ms": 0.0
+          },
+          "velocity_contour": {
+            "confidence": 0.0,
+            "reason": "pilot edit changes timing only",
+            "status": "unknown",
+            "value": "unknown"
+          }
+        }
+      },
+      "idx": 0,
+      "midi": {
+        "source": "assets/midi/pilot_timing_0001.source.mid",
+        "target": "assets/midi/pilot_timing_0001.target.mid"
+      },
+      "piano_roll": {
+        "original_label": "Original",
+        "predicted_label": "Predicted",
+        "source_notes": [
+          {
+            "duration_beat": 1.0,
+            "end_sec": 6.5,
+            "end_tick": 6240,
+            "highlight": "preserved",
+            "note": "E5",
+            "pitch": 76,
+            "role": "right_hand",
+            "start_sec": 6.0,
+            "start_tick": 5760,
+            "track_name": "right_hand",
+            "velocity": 76
+          },
+          {
+            "duration_beat": 0.44,
+            "end_sec": 6.25,
+            "end_tick": 6000,
+            "highlight": "changed_source",
+            "note": "C3",
+            "pitch": 48,
+            "role": "left_hand",
+            "start_sec": 6.03,
+            "start_tick": 5789,
+            "track_name": "left_hand",
+            "velocity": 58
+          },
+          {
+            "duration_beat": 0.46,
+            "end_sec": 6.7,
+            "end_tick": 6432,
+            "highlight": "changed_source",
+            "note": "G3",
+            "pitch": 55,
+            "role": "left_hand",
+            "start_sec": 6.47,
+            "start_tick": 6211,
+            "track_name": "left_hand",
+            "velocity": 60
+          },
+          {
+            "duration_beat": 1.0,
+            "end_sec": 7.0,
+            "end_tick": 6720,
+            "highlight": "preserved",
+            "note": "F5",
+            "pitch": 77,
+            "role": "right_hand",
+            "start_sec": 6.5,
+            "start_tick": 6240,
+            "track_name": "right_hand",
+            "velocity": 75
+          },
+          {
+            "duration_beat": 1.0,
+            "end_sec": 7.5,
+            "end_tick": 7200,
+            "highlight": "preserved",
+            "note": "G5",
+            "pitch": 79,
+            "role": "right_hand",
+            "start_sec": 7.0,
+            "start_tick": 6720,
+            "track_name": "right_hand",
+            "velocity": 77
+          },
+          {
+            "duration_beat": 0.5,
+            "end_sec": 7.33,
+            "end_tick": 7037,
+            "highlight": "changed_source",
+            "note": "C3",
+            "pitch": 48,
+            "role": "left_hand",
+            "start_sec": 7.08,
+            "start_tick": 6797,
+            "track_name": "left_hand",
+            "velocity": 59
+          },
+          {
+            "duration_beat": 1.0,
+            "end_sec": 8.0,
+            "end_tick": 7680,
+            "highlight": "preserved",
+            "note": "E5",
+            "pitch": 76,
+            "role": "right_hand",
+            "start_sec": 7.5,
+            "start_tick": 7200,
+            "track_name": "right_hand",
+            "velocity": 74
+          },
+          {
+            "duration_beat": 0.481,
+            "end_sec": 7.78,
+            "end_tick": 7469,
+            "highlight": "changed_source",
+            "note": "G3",
+            "pitch": 55,
+            "role": "left_hand",
+            "start_sec": 7.54,
+            "start_tick": 7238,
+            "track_name": "left_hand",
+            "velocity": 61
+          },
+          {
+            "duration_beat": 0.481,
+            "end_sec": 8.28,
+            "end_tick": 7949,
+            "highlight": "changed_source",
+            "note": "C3",
+            "pitch": 48,
+            "role": "left_hand",
+            "start_sec": 8.04,
+            "start_tick": 7718,
+            "track_name": "left_hand",
+            "velocity": 59
+          }
+        ],
+        "target_notes": [
+          {
+            "duration_beat": 0.5,
+            "end_sec": 6.25,
+            "end_tick": 6000,
+            "highlight": "changed_target",
+            "note": "C3",
+            "pitch": 48,
+            "role": "left_hand",
+            "start_sec": 6.0,
+            "start_tick": 5760,
+            "track_name": "left_hand",
+            "velocity": 58
+          },
+          {
+            "duration_beat": 1.0,
+            "end_sec": 6.5,
+            "end_tick": 6240,
+            "highlight": "preserved",
+            "note": "E5",
+            "pitch": 76,
+            "role": "right_hand",
+            "start_sec": 6.0,
+            "start_tick": 5760,
+            "track_name": "right_hand",
+            "velocity": 76
+          },
+          {
+            "duration_beat": 0.5,
+            "end_sec": 6.75,
+            "end_tick": 6480,
+            "highlight": "changed_target",
+            "note": "G3",
+            "pitch": 55,
+            "role": "left_hand",
+            "start_sec": 6.5,
+            "start_tick": 6240,
+            "track_name": "left_hand",
+            "velocity": 60
+          },
+          {
+            "duration_beat": 1.0,
+            "end_sec": 7.0,
+            "end_tick": 6720,
+            "highlight": "preserved",
+            "note": "F5",
+            "pitch": 77,
+            "role": "right_hand",
+            "start_sec": 6.5,
+            "start_tick": 6240,
+            "track_name": "right_hand",
+            "velocity": 75
+          },
+          {
+            "duration_beat": 0.5,
+            "end_sec": 7.25,
+            "end_tick": 6960,
+            "highlight": "changed_target",
+            "note": "C3",
+            "pitch": 48,
+            "role": "left_hand",
+            "start_sec": 7.0,
+            "start_tick": 6720,
+            "track_name": "left_hand",
+            "velocity": 59
+          },
+          {
+            "duration_beat": 1.0,
+            "end_sec": 7.5,
+            "end_tick": 7200,
+            "highlight": "preserved",
+            "note": "G5",
+            "pitch": 79,
+            "role": "right_hand",
+            "start_sec": 7.0,
+            "start_tick": 6720,
+            "track_name": "right_hand",
+            "velocity": 77
+          },
+          {
+            "duration_beat": 0.5,
+            "end_sec": 7.75,
+            "end_tick": 7440,
+            "highlight": "changed_target",
+            "note": "G3",
+            "pitch": 55,
+            "role": "left_hand",
+            "start_sec": 7.5,
+            "start_tick": 7200,
+            "track_name": "left_hand",
+            "velocity": 61
+          },
+          {
+            "duration_beat": 1.0,
+            "end_sec": 8.0,
+            "end_tick": 7680,
+            "highlight": "preserved",
+            "note": "E5",
+            "pitch": 76,
+            "role": "right_hand",
+            "start_sec": 7.5,
+            "start_tick": 7200,
+            "track_name": "right_hand",
+            "velocity": 74
+          },
+          {
+            "duration_beat": 0.5,
+            "end_sec": 8.25,
+            "end_tick": 7920,
+            "highlight": "changed_target",
+            "note": "C3",
+            "pitch": 48,
+            "role": "left_hand",
+            "start_sec": 8.0,
+            "start_tick": 7680,
+            "track_name": "left_hand",
+            "velocity": 59
+          }
+        ],
+        "tempo_us_per_beat": 500000,
+        "ticks_per_beat": 480
+      },
+      "preprocess_steps": [
+        {
+          "body": "Read the paired MIDI files and normalize notes into a common note table.",
+          "fields": [
+            {
+              "label": "Source",
+              "value": "pilot_timing_0001.source.mid"
+            },
+            {
+              "label": "Target",
+              "value": "pilot_timing_0001.target.mid"
+            }
+          ],
+          "title": "1. Load Source / Target MIDI"
+        },
+        {
+          "body": "Apply half-open temporal grounding to crop the local edit region.",
+          "fields": [
+            {
+              "label": "Seconds",
+              "value": "[6.0, 8.5)"
+            },
+            {
+              "label": "Bar / beat",
+              "value": "bar 4 beat 1 → bar 5 beat 2"
+            }
+          ],
+          "title": "2. Crop Edit Span"
+        },
+        {
+          "body": "Compute only the symbolic features required by the selected subtask.",
+          "fields": [
+            {
+              "label": "Onset deviation",
+              "value": "39.6 ms → 0.0 ms"
+            }
+          ],
+          "title": "3. Extract Task Evidence"
+        },
+        {
+          "body": "Use MIDI-diff evidence to decide which controls are supported and which claims must be omitted.",
+          "fields": [
+            {
+              "label": "Changed roles",
+              "value": "left_hand"
+            },
+            {
+              "label": "Controls",
+              "value": "timing_grid.less_jittered"
+            },
+            {
+              "label": "Outside-change rate",
+              "value": "0.0"
+            },
+            {
+              "label": "Omitted",
+              "value": "velocity_contour:unknown"
+            }
+          ],
+          "title": "4. Validate Diff And Controls"
+        },
+        {
+          "body": "Render caption/instruction variants from supported metadata and diff evidence.",
+          "fields": [
+            {
+              "label": "base_M",
+              "value": "The MIDI segment contains left-hand accompaniment against a local eighth-note grid, with the right-hand melody treated as protected material."
+            },
+            {
+              "label": "base_D",
+              "value": "From 6.0s to before 8.5s, reduce only the left-hand onset jitter toward the validated beat grid while preserving pitch content, the right-hand melody, and all material outside the span."
+            },
+            {
+              "label": "base_MD",
+              "value": "From 6.0s to before 8.5s, make the left hand steadier against the eighth-note grid by reducing median grid deviation from 40 ms to 0 ms, while keeping pitches and the right-hand melody unchanged."
+            }
+          ],
+          "title": "5. Render Prompt Families"
+        }
+      ],
+      "prompts": [
+        {
+          "mode": "music_caption",
+          "omitted_features": "velocity_contour:unknown",
+          "prompt_family": "base_M",
+          "rendered_text": "The MIDI segment contains left-hand accompaniment against a local eighth-note grid, with the right-hand melody treated as protected material.",
+          "training_stage": "caption_pretrain",
+          "used_controls": "timing_grid.less_jittered"
+        },
+        {
+          "mode": "editing_instruction",
+          "omitted_features": "velocity_contour:unknown",
+          "prompt_family": "base_D",
+          "rendered_text": "From 6.0s to before 8.5s, reduce only the left-hand onset jitter toward the validated beat grid while preserving pitch content, the right-hand melody, and all material outside the span.",
+          "training_stage": "editing_sft",
+          "used_controls": "timing_grid.less_jittered"
+        },
+        {
+          "mode": "editing_instruction",
+          "omitted_features": "velocity_contour:unknown",
+          "prompt_family": "base_MD",
+          "rendered_text": "From 6.0s to before 8.5s, make the left hand steadier against the eighth-note grid by reducing median grid deviation from 40 ms to 0 ms, while keeping pitches and the right-hand melody unchanged.",
+          "training_stage": "editing_sft",
+          "used_controls": "timing_grid.less_jittered"
+        }
+      ],
+      "source_id": "pilot:maestro:piece_0002",
+      "span": {
+        "end_barbeat": "bar 5 beat 2",
+        "end_sec": 8.5,
+        "end_tick": 8160,
+        "span_id": "s0",
+        "start_barbeat": "bar 4 beat 1",
+        "start_sec": 6.0,
+        "start_tick": 5760
+      },
+      "split": "train",
+      "subtask": {
+        "difficulty": "medium",
+        "edit_mode": "repair",
+        "edit_ops": [
+          "onset_dejitter"
+        ],
+        "family": "timing_dynamics_control",
+        "target_role": "left_hand"
+      },
+      "task_id": "timing_dynamics_control",
+      "task_label": "Timing / Dynamics",
+      "title": "Left-hand onset de-jittering against the beat grid",
+      "validation": {
+        "deterministic": {
+          "outside_change_rate": 0.0,
+          "source_left_hand_onset_deviation_ms": 39.6,
+          "span_iou": 1.0,
+          "target_left_hand_onset_deviation_ms": 0.0,
+          "target_parse_ok": true,
+          "task_success": true
+        },
+        "llm_filtering": {
+          "required": true,
+          "support_label": "supported_by_reduced_left_hand_onset_deviation"
+        }
+      },
+      "window": {
+        "end_barbeat": "bar 6 beat 1",
+        "end_sec": 10.0,
+        "end_tick": 9600,
+        "start_barbeat": "bar 1 beat 1",
+        "start_sec": 0.0,
+        "start_tick": 0,
+        "window_id": "w0001"
+      }
+    },
+    {
+      "case_id": "pilot_texture_0001",
+      "case_type": "editing",
+      "controls": [
+        {
+          "allowed_phrases": [
+            "lighter texture",
+            "sparser accompaniment",
+            "less busy backing part"
+          ],
+          "attribute": "notes_per_second",
+          "blocked_phrases": [
+            "more transparent",
+            "more delicate"
+          ],
+          "canonical_phrase": "lighter accompaniment texture",
+          "control_id": "texture_density.sparser",
+          "family": "texture_density",
+          "proxy": {
+            "criterion": "target/source <= 0.75",
+            "metric": "accompaniment_note_count",
+            "satisfied": true,
+            "source_value": 16,
+            "target_value": 8
+          },
+          "source_descriptor": "dense",
+          "span_ids": [
+            "s0"
+          ],
+          "target_descriptor": "sparser",
+          "target_role": "accompaniment",
+          "validation_level": "deterministic"
+        },
+        {
+          "allowed_phrases": [
+            "only the accompaniment",
+            "backing part only",
+            "leave the melody unchanged"
+          ],
+          "attribute": "changed_role_set",
+          "blocked_phrases": [
+            "change the whole segment"
+          ],
+          "canonical_phrase": "only the accompaniment",
+          "control_id": "role_scope.accompaniment_only",
+          "family": "role_scope",
+          "proxy": {
+            "criterion": "changed roles are a subset of accompaniment and melody hash is unchanged",
+            "metric": "changed_roles_subset",
+            "satisfied": true,
+            "source_value": "full_texture",
+            "target_value": [
+              "accompaniment"
+            ]
+          },
+          "source_descriptor": "full_texture",
+          "span_ids": [
+            "s0"
+          ],
+          "target_descriptor": "accompaniment_only",
+          "target_role": "accompaniment",
+          "validation_level": "deterministic"
+        }
+      ],
+      "diff_evidence": {
+        "changed_roles": [
+          "accompaniment"
+        ],
+        "n_changed_notes": 8,
+        "outside_change_rate": 0.0,
+        "role_preservation": {
+          "local_key_preserved": true,
+          "melody_hash_unchanged": true
+        }
+      },
+      "edit_plan": {
+        "action": "simplify",
+        "constraints": [
+          "preserve_melody_hash",
+          "reduce_accompaniment_density",
+          "no_changes_outside_span"
+        ],
+        "preserve": [
+          "melody_pitch",
+          "melody_onset_duration",
+          "local_key",
+          "outside_span"
+        ],
+        "source_state": "the accompaniment is relatively dense under a fixed top-line melody",
+        "target_state": "the accompaniment is lighter while the melody is unchanged"
+      },
+      "evidence": {
+        "required": [
+          "melody_note_hash",
+          "accompaniment_notes",
+          "density_by_role",
+          "register_by_role"
+        ],
+        "values": {
+          "density_ratio": {
+            "confidence": 1.0,
+            "status": "supported",
+            "value": 0.5
+          },
+          "local_key": {
+            "confidence": 0.899,
+            "evidence": {
+              "profile_correlation": 0.798
+            },
+            "status": "supported",
+            "value": "G major"
+          },
+          "melody_hash_unchanged": {
+            "confidence": 1.0,
+            "status": "supported",
+            "value": true
+          },
+          "melody_sequence": {
+            "confidence": 0.883,
+            "duration_pattern_beat": [
+              1.0,
+              1.0,
+              0.5,
+              0.5
+            ],
+            "events": [
+              {
+                "duration_beat": 1.0,
+                "onset_beat": 0.0,
+                "pitch": "B4",
+                "velocity": 76
+              },
+              {
+                "duration_beat": 1.0,
+                "onset_beat": 1.0,
+                "pitch": "D5",
+                "velocity": 75
+              },
+              {
+                "duration_beat": 0.5,
+                "onset_beat": 2.0,
+                "pitch": "E5",
+                "velocity": 78
+              },
+              {
+                "duration_beat": 0.5,
+                "onset_beat": 2.5,
+                "pitch": "D5",
+                "velocity": 74
+              }
+            ],
+            "pitch_class_sequence": [
+              "B",
+              "D",
+              "E",
+              "D"
+            ],
+            "pitch_contour": {
+              "confidence": 0.883,
+              "evidence": {
+                "negative_interval_ratio": 0.333,
+                "pitch_slope_semitones_per_note": 1.0,
+                "positive_interval_ratio": 0.667,
+                "stepwise_ratio": 0.667
+              },
+              "status": "supported",
+              "value": "arch"
+            },
+            "pitch_sequence": [
+              "B4",
+              "D5",
+              "E5",
+              "D5"
+            ],
+            "relative_onsets_beat": [
+              0.0,
+              1.0,
+              2.0,
+              2.5
+            ],
+            "rhythm_pattern": "quarter-quarter-eighth-eighth",
+            "status": "supported"
+          },
+          "source_accompaniment_notes": {
+            "confidence": 1.0,
+            "status": "supported",
+            "value": 16
+          },
+          "target_accompaniment_notes": {
+            "confidence": 1.0,
+            "status": "supported",
+            "value": 8
+          }
+        }
+      },
+      "idx": 0,
+      "midi": {
+        "source": "assets/midi/pilot_texture_0001.source.mid",
+        "target": "assets/midi/pilot_texture_0001.target.mid"
+      },
+      "piano_roll": {
+        "original_label": "Original",
+        "predicted_label": "Predicted",
+        "source_notes": [
+          {
+            "duration_beat": 0.36,
+            "end_sec": 4.18,
+            "end_tick": 4013,
+            "highlight": "changed_source",
+            "note": "G3",
+            "pitch": 55,
+            "role": "accompaniment",
+            "start_sec": 4.0,
+            "start_tick": 3840,
+            "track_name": "accompaniment",
+            "velocity": 58
+          },
+          {
+            "duration_beat": 1.0,
+            "end_sec": 4.5,
+            "end_tick": 4320,
+            "highlight": "preserved",
+            "note": "B4",
+            "pitch": 71,
+            "role": "melody",
+            "start_sec": 4.0,
+            "start_tick": 3840,
+            "track_name": "melody",
+            "velocity": 76
+          },
+          {
+            "duration_beat": 0.36,
+            "end_sec": 4.43,
+            "end_tick": 4253,
+            "highlight": "changed_source",
+            "note": "B3",
+            "pitch": 59,
+            "role": "accompaniment",
+            "start_sec": 4.25,
+            "start_tick": 4080,
+            "track_name": "accompaniment",
+            "velocity": 59
+          },
+          {
+            "duration_beat": 0.36,
+            "end_sec": 4.68,
+            "end_tick": 4493,
+            "highlight": "changed_source",
+            "note": "D4",
+            "pitch": 62,
+            "role": "accompaniment",
+            "start_sec": 4.5,
+            "start_tick": 4320,
+            "track_name": "accompaniment",
+            "velocity": 60
+          },
+          {
+            "duration_beat": 1.0,
+            "end_sec": 5.0,
+            "end_tick": 4800,
+            "highlight": "preserved",
+            "note": "D5",
+            "pitch": 74,
+            "role": "melody",
+            "start_sec": 4.5,
+            "start_tick": 4320,
+            "track_name": "melody",
+            "velocity": 75
+          },
+          {
+            "duration_beat": 0.36,
+            "end_sec": 4.93,
+            "end_tick": 4733,
+            "highlight": "changed_source",
+            "note": "E4",
+            "pitch": 64,
+            "role": "accompaniment",
+            "start_sec": 4.75,
+            "start_tick": 4560,
+            "track_name": "accompaniment",
+            "velocity": 61
+          },
+          {
+            "duration_beat": 0.36,
+            "end_sec": 5.18,
+            "end_tick": 4973,
+            "highlight": "changed_source",
+            "note": "G3",
+            "pitch": 55,
+            "role": "accompaniment",
+            "start_sec": 5.0,
+            "start_tick": 4800,
+            "track_name": "accompaniment",
+            "velocity": 62
+          },
+          {
+            "duration_beat": 0.5,
+            "end_sec": 5.25,
+            "end_tick": 5040,
+            "highlight": "preserved",
+            "note": "E5",
+            "pitch": 76,
+            "role": "melody",
+            "start_sec": 5.0,
+            "start_tick": 4800,
+            "track_name": "melody",
+            "velocity": 78
+          },
+          {
+            "duration_beat": 0.36,
+            "end_sec": 5.43,
+            "end_tick": 5213,
+            "highlight": "changed_source",
+            "note": "B3",
+            "pitch": 59,
+            "role": "accompaniment",
+            "start_sec": 5.25,
+            "start_tick": 5040,
+            "track_name": "accompaniment",
+            "velocity": 58
+          },
+          {
+            "duration_beat": 0.5,
+            "end_sec": 5.5,
+            "end_tick": 5280,
+            "highlight": "preserved",
+            "note": "D5",
+            "pitch": 74,
+            "role": "melody",
+            "start_sec": 5.25,
+            "start_tick": 5040,
+            "track_name": "melody",
+            "velocity": 74
+          },
+          {
+            "duration_beat": 0.36,
+            "end_sec": 5.68,
+            "end_tick": 5453,
+            "highlight": "changed_source",
+            "note": "D4",
+            "pitch": 62,
+            "role": "accompaniment",
+            "start_sec": 5.5,
+            "start_tick": 5280,
+            "track_name": "accompaniment",
+            "velocity": 59
+          },
+          {
+            "duration_beat": 0.36,
+            "end_sec": 5.93,
+            "end_tick": 5693,
+            "highlight": "changed_source",
+            "note": "E4",
+            "pitch": 64,
+            "role": "accompaniment",
+            "start_sec": 5.75,
+            "start_tick": 5520,
+            "track_name": "accompaniment",
+            "velocity": 60
+          },
+          {
+            "duration_beat": 0.36,
+            "end_sec": 6.18,
+            "end_tick": 5933,
+            "highlight": "changed_source",
+            "note": "G3",
+            "pitch": 55,
+            "role": "accompaniment",
+            "start_sec": 6.0,
+            "start_tick": 5760,
+            "track_name": "accompaniment",
+            "velocity": 61
+          },
+          {
+            "duration_beat": 0.36,
+            "end_sec": 6.43,
+            "end_tick": 6173,
+            "highlight": "changed_source",
+            "note": "B3",
+            "pitch": 59,
+            "role": "accompaniment",
+            "start_sec": 6.25,
+            "start_tick": 6000,
+            "track_name": "accompaniment",
+            "velocity": 62
+          },
+          {
+            "duration_beat": 0.36,
+            "end_sec": 6.68,
+            "end_tick": 6413,
+            "highlight": "changed_source",
+            "note": "D4",
+            "pitch": 62,
+            "role": "accompaniment",
+            "start_sec": 6.5,
+            "start_tick": 6240,
+            "track_name": "accompaniment",
+            "velocity": 58
+          },
+          {
+            "duration_beat": 0.36,
+            "end_sec": 6.93,
+            "end_tick": 6653,
+            "highlight": "changed_source",
+            "note": "E4",
+            "pitch": 64,
+            "role": "accompaniment",
+            "start_sec": 6.75,
+            "start_tick": 6480,
+            "track_name": "accompaniment",
+            "velocity": 59
+          },
+          {
+            "duration_beat": 0.36,
+            "end_sec": 7.18,
+            "end_tick": 6893,
+            "highlight": "changed_source",
+            "note": "G3",
+            "pitch": 55,
+            "role": "accompaniment",
+            "start_sec": 7.0,
+            "start_tick": 6720,
+            "track_name": "accompaniment",
+            "velocity": 60
+          },
+          {
+            "duration_beat": 0.36,
+            "end_sec": 7.43,
+            "end_tick": 7133,
+            "highlight": "changed_source",
+            "note": "B3",
+            "pitch": 59,
+            "role": "accompaniment",
+            "start_sec": 7.25,
+            "start_tick": 6960,
+            "track_name": "accompaniment",
+            "velocity": 61
+          },
+          {
+            "duration_beat": 0.36,
+            "end_sec": 7.68,
+            "end_tick": 7373,
+            "highlight": "changed_source",
+            "note": "D4",
+            "pitch": 62,
+            "role": "accompaniment",
+            "start_sec": 7.5,
+            "start_tick": 7200,
+            "track_name": "accompaniment",
+            "velocity": 62
+          },
+          {
+            "duration_beat": 0.36,
+            "end_sec": 7.93,
+            "end_tick": 7613,
+            "highlight": "changed_source",
+            "note": "E4",
+            "pitch": 64,
+            "role": "accompaniment",
+            "start_sec": 7.75,
+            "start_tick": 7440,
+            "track_name": "accompaniment",
+            "velocity": 58
+          }
+        ],
+        "target_notes": [
+          {
+            "duration_beat": 0.56,
+            "end_sec": 4.28,
+            "end_tick": 4109,
+            "highlight": "changed_target",
+            "note": "G3",
+            "pitch": 55,
+            "role": "accompaniment",
+            "start_sec": 4.0,
+            "start_tick": 3840,
+            "track_name": "accompaniment",
+            "velocity": 56
+          },
+          {
+            "duration_beat": 1.0,
+            "end_sec": 4.5,
+            "end_tick": 4320,
+            "highlight": "preserved",
+            "note": "B4",
+            "pitch": 71,
+            "role": "melody",
+            "start_sec": 4.0,
+            "start_tick": 3840,
+            "track_name": "melody",
+            "velocity": 76
+          },
+          {
+            "duration_beat": 0.56,
+            "end_sec": 4.78,
+            "end_tick": 4589,
+            "highlight": "changed_target",
+            "note": "D4",
+            "pitch": 62,
+            "role": "accompaniment",
+            "start_sec": 4.5,
+            "start_tick": 4320,
+            "track_name": "accompaniment",
+            "velocity": 56
+          },
+          {
+            "duration_beat": 1.0,
+            "end_sec": 5.0,
+            "end_tick": 4800,
+            "highlight": "preserved",
+            "note": "D5",
+            "pitch": 74,
+            "role": "melody",
+            "start_sec": 4.5,
+            "start_tick": 4320,
+            "track_name": "melody",
+            "velocity": 75
+          },
+          {
+            "duration_beat": 0.56,
+            "end_sec": 5.28,
+            "end_tick": 5069,
+            "highlight": "changed_target",
+            "note": "G3",
+            "pitch": 55,
+            "role": "accompaniment",
+            "start_sec": 5.0,
+            "start_tick": 4800,
+            "track_name": "accompaniment",
+            "velocity": 56
+          },
+          {
+            "duration_beat": 0.5,
+            "end_sec": 5.25,
+            "end_tick": 5040,
+            "highlight": "preserved",
+            "note": "E5",
+            "pitch": 76,
+            "role": "melody",
+            "start_sec": 5.0,
+            "start_tick": 4800,
+            "track_name": "melody",
+            "velocity": 78
+          },
+          {
+            "duration_beat": 0.5,
+            "end_sec": 5.5,
+            "end_tick": 5280,
+            "highlight": "preserved",
+            "note": "D5",
+            "pitch": 74,
+            "role": "melody",
+            "start_sec": 5.25,
+            "start_tick": 5040,
+            "track_name": "melody",
+            "velocity": 74
+          },
+          {
+            "duration_beat": 0.56,
+            "end_sec": 5.78,
+            "end_tick": 5549,
+            "highlight": "changed_target",
+            "note": "D4",
+            "pitch": 62,
+            "role": "accompaniment",
+            "start_sec": 5.5,
+            "start_tick": 5280,
+            "track_name": "accompaniment",
+            "velocity": 56
+          },
+          {
+            "duration_beat": 0.56,
+            "end_sec": 6.28,
+            "end_tick": 6029,
+            "highlight": "changed_target",
+            "note": "G3",
+            "pitch": 55,
+            "role": "accompaniment",
+            "start_sec": 6.0,
+            "start_tick": 5760,
+            "track_name": "accompaniment",
+            "velocity": 56
+          },
+          {
+            "duration_beat": 0.56,
+            "end_sec": 6.78,
+            "end_tick": 6509,
+            "highlight": "changed_target",
+            "note": "D4",
+            "pitch": 62,
+            "role": "accompaniment",
+            "start_sec": 6.5,
+            "start_tick": 6240,
+            "track_name": "accompaniment",
+            "velocity": 56
+          },
+          {
+            "duration_beat": 0.56,
+            "end_sec": 7.28,
+            "end_tick": 6989,
+            "highlight": "changed_target",
+            "note": "G3",
+            "pitch": 55,
+            "role": "accompaniment",
+            "start_sec": 7.0,
+            "start_tick": 6720,
+            "track_name": "accompaniment",
+            "velocity": 56
+          },
+          {
+            "duration_beat": 0.56,
+            "end_sec": 7.78,
+            "end_tick": 7469,
+            "highlight": "changed_target",
+            "note": "D4",
+            "pitch": 62,
+            "role": "accompaniment",
+            "start_sec": 7.5,
+            "start_tick": 7200,
+            "track_name": "accompaniment",
+            "velocity": 56
+          }
+        ],
+        "tempo_us_per_beat": 500000,
+        "ticks_per_beat": 480
+      },
+      "preprocess_steps": [
+        {
+          "body": "Read the paired MIDI files and normalize notes into a common note table.",
+          "fields": [
+            {
+              "label": "Source",
+              "value": "pilot_texture_0001.source.mid"
+            },
+            {
+              "label": "Target",
+              "value": "pilot_texture_0001.target.mid"
+            }
+          ],
+          "title": "1. Load Source / Target MIDI"
+        },
+        {
+          "body": "Apply half-open temporal grounding to crop the local edit region.",
+          "fields": [
+            {
+              "label": "Seconds",
+              "value": "[4.0, 8.0)"
+            },
+            {
+              "label": "Bar / beat",
+              "value": "bar 3 beat 1 → bar 5 beat 1"
+            }
+          ],
+          "title": "2. Crop Edit Span"
+        },
+        {
+          "body": "Compute only the symbolic features required by the selected subtask.",
+          "fields": [
+            {
+              "label": "Local key",
+              "value": "G major"
+            },
+            {
+              "label": "Melody sequence",
+              "value": "B4--D5--E5--D5"
+            },
+            {
+              "label": "Rhythm pattern",
+              "value": "quarter-quarter-eighth-eighth"
+            },
+            {
+              "label": "Contour",
+              "value": "arch"
+            },
+            {
+              "label": "Accompaniment density",
+              "value": "16 notes → 8 notes"
+            },
+            {
+              "label": "Density ratio",
+              "value": "0.5"
+            }
+          ],
+          "title": "3. Extract Task Evidence"
+        },
+        {
+          "body": "Use MIDI-diff evidence to decide which controls are supported and which claims must be omitted.",
+          "fields": [
+            {
+              "label": "Changed roles",
+              "value": "accompaniment"
+            },
+            {
+              "label": "Controls",
+              "value": "texture_density.sparser, role_scope.accompaniment_only"
+            },
+            {
+              "label": "Outside-change rate",
+              "value": "0.0"
+            }
+          ],
+          "title": "4. Validate Diff And Controls"
+        },
+        {
+          "body": "Render caption/instruction variants from supported metadata and diff evidence.",
+          "fields": [
+            {
+              "label": "base_M",
+              "value": "The MIDI segment has local G major context and arch-shaped B4--D5--E5--D5 top-line melody with its quarter-quarter-eighth-eighth rhythm over an accompaniment texture."
+            },
+            {
+              "label": "base_D",
+              "value": "From 4.0s to before 8.0s, make only the accompaniment texture lighter according to the validated density reduction, while preserving the melody and leaving material outside the span unchanged."
+            },
+            {
+              "label": "base_MD",
+              "value": "From 4.0s to before 8.0s, simplify only the accompaniment under the arch-shaped B4--D5--E5--D5 top-line melody with its quarter-quarter-eighth-eighth rhythm in G major, reducing density while preserving the melody's pitch and rhythm and all outside-span material."
+            }
+          ],
+          "title": "5. Render Prompt Families"
+        }
+      ],
+      "prompts": [
+        {
+          "mode": "music_caption",
+          "omitted_features": "",
+          "prompt_family": "base_M",
+          "rendered_text": "The MIDI segment has local G major context and arch-shaped B4--D5--E5--D5 top-line melody with its quarter-quarter-eighth-eighth rhythm over an accompaniment texture.",
+          "training_stage": "caption_pretrain",
+          "used_controls": "texture_density.sparser|role_scope.accompaniment_only"
+        },
+        {
+          "mode": "editing_instruction",
+          "omitted_features": "",
+          "prompt_family": "base_D",
+          "rendered_text": "From 4.0s to before 8.0s, make only the accompaniment texture lighter according to the validated density reduction, while preserving the melody and leaving material outside the span unchanged.",
+          "training_stage": "editing_sft",
+          "used_controls": "texture_density.sparser|role_scope.accompaniment_only"
+        },
+        {
+          "mode": "editing_instruction",
+          "omitted_features": "",
+          "prompt_family": "base_MD",
+          "rendered_text": "From 4.0s to before 8.0s, simplify only the accompaniment under the arch-shaped B4--D5--E5--D5 top-line melody with its quarter-quarter-eighth-eighth rhythm in G major, reducing density while preserving the melody's pitch and rhythm and all outside-span material.",
+          "training_stage": "editing_sft",
+          "used_controls": "texture_density.sparser|role_scope.accompaniment_only"
+        }
+      ],
+      "source_id": "pilot:pop909:song_0001",
+      "span": {
+        "end_barbeat": "bar 5 beat 1",
+        "end_sec": 8.0,
+        "end_tick": 7680,
+        "span_id": "s0",
+        "start_barbeat": "bar 3 beat 1",
+        "start_sec": 4.0,
+        "start_tick": 3840
+      },
+      "split": "train",
+      "subtask": {
+        "difficulty": "easy",
+        "edit_mode": "transform",
+        "edit_ops": [
+          "density_reduce"
+        ],
+        "family": "melody_conditioned_texture",
+        "target_role": "accompaniment"
+      },
+      "task_id": "melody_conditioned_texture",
+      "task_label": "Melody-Conditioned Texture",
+      "title": "Accompaniment density reduction with fixed melody",
+      "validation": {
+        "deterministic": {
+          "outside_change_rate": 0.0,
+          "source_accompaniment_notes": 16,
+          "span_iou": 1.0,
+          "target_accompaniment_notes": 8,
+          "target_parse_ok": true,
+          "task_success": true
+        },
+        "llm_filtering": {
+          "required": false,
+          "support_label": null
+        }
+      },
+      "window": {
+        "end_barbeat": "bar 5 beat 3",
+        "end_sec": 9.0,
+        "end_tick": 8640,
+        "start_barbeat": "bar 1 beat 1",
+        "start_sec": 0.0,
+        "start_tick": 0,
+        "window_id": "w0001"
+      }
+    }
+  ],
+  "generated_from": "/Users/dabinkim/Desktop/dabin/SORI-MLLM-Temporal-Grounding",
+  "schema_version": "symbolic_tg_dashboard_v0.1",
+  "tasks": [
+    {
+      "case_count": 1,
+      "description": "Repair local pitch/key errors while preserving timing, rhythm, and non-target roles.",
+      "label": "Pitch / Key",
+      "task_id": "pitch_key_consistency"
+    },
+    {
+      "case_count": 1,
+      "description": "Adjust performance timing or dynamics using validated MIDI proxy metrics.",
+      "label": "Timing / Dynamics",
+      "task_id": "timing_dynamics_control"
+    },
+    {
+      "case_count": 1,
+      "description": "Edit accompaniment texture while preserving the melody-conditioned scaffold.",
+      "label": "Melody-Conditioned Texture",
+      "task_id": "melody_conditioned_texture"
+    }
+  ],
+  "title": "Fine-grained Temporal Grounding for Symbolic Music Generation and Editing"
+}

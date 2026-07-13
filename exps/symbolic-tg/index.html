@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Symbolic Temporal Grounding | Dabin Kim</title>
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="main-header">
+    <div class="shell header-shell">
+      <a href="../../index.html" class="logo">Dabin Kim</a>
+      <nav class="main-nav" aria-label="Primary">
+        <ul>
+          <li><a href="../../publications/">Publications</a></li>
+          <li><a href="../../projects/">Projects</a></li>
+          <li><a href="../../index.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell wide-shell page-shell">
+    <section class="hero">
+      <p class="eyebrow">Experiment Dashboard</p>
+      <h1>Fine-grained Temporal Grounding for Symbolic Music Generation and Editing</h1>
+      <p class="hero-copy">
+        A compact inspection page for Dynamic Performance Edit Mixer examples. Each case shows
+        original and predicted piano rolls, the grounded edit span, MIDI-derived evidence,
+        prompt-family outputs, and the sequential preprocessing path.
+      </p>
+      <div class="hero-metrics" aria-label="Dashboard summary">
+        <div><span>Tasks</span><strong data-summary="tasks">—</strong></div>
+        <div><span>Cases</span><strong data-summary="cases">—</strong></div>
+        <div><span>Prompt Families</span><strong>base_M / base_D / base_MD</strong></div>
+        <div><span>Claim Policy</span><strong>Supported Evidence Only</strong></div>
+      </div>
+    </section>
+
+    <section class="control-panel" aria-label="Task and case controls">
+      <div>
+        <p class="section-kicker">Task Family</p>
+        <div class="task-tabs" data-task-tabs></div>
+      </div>
+      <div class="case-control">
+        <label for="case-select">Case index</label>
+        <div class="case-select-row">
+          <button class="mini-button" type="button" data-case-prev aria-label="Previous case">←</button>
+          <select id="case-select" data-case-select></select>
+          <button class="mini-button" type="button" data-case-next aria-label="Next case">→</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="case-header" aria-live="polite">
+      <div>
+        <p class="eyebrow" data-case-task>—</p>
+        <h2 data-case-title>Loading examples…</h2>
+        <p data-case-description></p>
+      </div>
+      <dl class="case-meta">
+        <div><dt>Split</dt><dd data-case-split>—</dd></div>
+        <div><dt>Source ID</dt><dd data-case-source>—</dd></div>
+        <div><dt>Edit span</dt><dd data-case-span>—</dd></div>
+        <div><dt>Target role</dt><dd data-case-role>—</dd></div>
+      </dl>
+    </section>
+
+    <section class="main-grid">
+      <article class="panel-card piano-card">
+        <div class="card-head">
+          <div>
+            <p class="section-kicker">Original (Top) / Predicted (Bottom)</p>
+            <h3>Piano Roll With Grounded Edit Span</h3>
+          </div>
+          <div class="legend" aria-label="Piano roll color legend">
+            <span><i class="legend-box melody"></i> preserved</span>
+            <span><i class="legend-box source"></i> original edit</span>
+            <span><i class="legend-box target"></i> predicted edit</span>
+            <span><i class="legend-box span"></i> edit span</span>
+          </div>
+        </div>
+        <div class="piano-roll-frame" data-piano-roll></div>
+        <p class="caption" data-piano-caption></p>
+      </article>
+
+      <aside class="side-stack">
+        <article class="panel-card">
+          <p class="section-kicker">Validated Evidence</p>
+          <h3>Symbolic Controls</h3>
+          <div class="evidence-list" data-evidence-list></div>
+        </article>
+
+        <article class="panel-card">
+          <p class="section-kicker">Prompt Rendering</p>
+          <h3>Instruction Families</h3>
+          <div class="prompt-stack" data-prompt-stack></div>
+        </article>
+      </aside>
+    </section>
+
+    <section class="panel-card process-card">
+      <div class="card-head">
+        <div>
+          <p class="section-kicker">Step-by-step Trace</p>
+          <h3>Preprocess Path Before Text Rendering</h3>
+        </div>
+        <p class="process-note">The renderer is allowed to mention only claims whose status is supported.</p>
+      </div>
+      <div class="process-steps" data-process-steps></div>
+    </section>
+
+    <section class="detail-grid">
+      <article class="panel-card">
+        <p class="section-kicker">Validation</p>
+        <h3>Automatic Checks</h3>
+        <table class="compact-table" data-validation-table></table>
+      </article>
+      <article class="panel-card">
+        <p class="section-kicker">Reproducibility</p>
+        <h3>Raw Manifest Snippet</h3>
+        <details>
+          <summary>Open JSON</summary>
+          <pre data-raw-json>{}</pre>
+        </details>
+      </article>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <div class="shell footer-shell">
+      <p class="copyright">&copy; 2026 Dabin Kim. Dynamic Performance Edit Mixer inspection page.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
