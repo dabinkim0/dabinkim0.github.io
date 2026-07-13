@@ -42,6 +42,7 @@ Personal website hosted with GitHub Pages.
 │   │   ├── index.css
 │   │   ├── projects.css
 │   │   ├── publications.css
+│   │   ├── site-shell.css
 │   │   └── typography.css
 │   ├── images/
 │   │   └── profile/
@@ -68,7 +69,8 @@ Personal website hosted with GitHub Pages.
 
 ## Frontend Organization
 
-- Page-specific styles are stored in `assets/css/*.css` and linked from each HTML page.
+- Shared layout, navigation, contact, and footer rules live in `assets/css/site-shell.css`.
+- Page-specific styles are stored in the remaining `assets/css/*.css` files and linked after the shared stylesheet.
 - Page-specific scripts are stored in `assets/js/*.js`.
 - Shared site-wide images such as profile photos are stored in `assets/images/`.
 - Project-page figure assets live under `projects/figs/`; poster assets live under `projects/posters/`.

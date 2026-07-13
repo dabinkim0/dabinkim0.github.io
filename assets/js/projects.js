@@ -30,7 +30,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.append(imageOverlay);
 
     const overlayImage = imageOverlay.querySelector(".image-overlay__image");
+    const overlayCloseButton = imageOverlay.querySelector(".image-overlay__close");
+    const backgroundElements = Array.from(document.body.children).filter((element) => element !== imageOverlay);
     let closeTimer = null;
+    let returnFocusTarget = null;
 
     const openOverlay = (src, alt) => {
         if (closeTimer) {
@@ -38,13 +41,16 @@ document.addEventListener("DOMContentLoaded", () => {
             closeTimer = null;
         }
 
+        returnFocusTarget = document.activeElement instanceof HTMLElement ? document.activeElement : null;
         overlayImage.src = src;
         overlayImage.alt = alt;
         imageOverlay.setAttribute("aria-hidden", "false");
         document.body.classList.add("has-image-overlay");
+        backgroundElements.forEach((element) => element.setAttribute("inert", ""));
 
         window.requestAnimationFrame(() => {
             imageOverlay.classList.add("is-visible");
+            overlayCloseButton.focus({ preventScroll: true });
         });
     };
 
@@ -52,6 +58,12 @@ document.addEventListener("DOMContentLoaded", () => {
         imageOverlay.classList.remove("is-visible");
         document.body.classList.remove("has-image-overlay");
         imageOverlay.setAttribute("aria-hidden", "true");
+        backgroundElements.forEach((element) => element.removeAttribute("inert"));
+
+        if (returnFocusTarget?.isConnected) {
+            returnFocusTarget.focus({ preventScroll: true });
+        }
+        returnFocusTarget = null;
 
         closeTimer = window.setTimeout(() => {
             overlayImage.src = "";
@@ -65,8 +77,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.addEventListener("keydown", (event) => {
-        if (event.key === "Escape" && imageOverlay.classList.contains("is-visible")) {
+        if (!imageOverlay.classList.contains("is-visible")) {
+            return;
+        }
+
+        if (event.key === "Escape") {
             closeOverlay();
+            return;
+        }
+
+        if (event.key === "Tab") {
+            event.preventDefault();
+            overlayCloseButton.focus();
         }
     });
 

@@ -3,11 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DDSP-Based Neural Vehicle Sound Synthesis from Driving Signals</title>
+    <title>DDSP-Based Neural Vehicle Sound Synthesis from Driving Signals | Dabin Kim</title>
+    <meta name="description" content="Supporting webpage and audio examples for DDSP-Based Neural Vehicle Sound Synthesis from Driving Signals at AES Automotive Audio 2026.">
+    <link rel="canonical" href="https://dabinkim0.github.io/publications/ddsp-carsound/">
+    <meta property="og:title" content="DDSP-Based Neural Vehicle Sound Synthesis from Driving Signals">
+    <meta property="og:description" content="Supporting webpage and audio examples for neural vehicle sound synthesis from driving signals.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://dabinkim0.github.io/publications/ddsp-carsound/">
+    <meta property="og:image" content="https://dabinkim0.github.io/publications/ddsp-carsound/figs/fig_framework_overview.png">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&family=Noto+Serif+KR:wght@400;500&family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/site-shell.css">
     <link rel="stylesheet" href="../../assets/css/ddsp-carsound.css">
     <link rel="stylesheet" href="../../assets/css/typography.css">
 </head>
@@ -42,7 +51,7 @@
             </div>
 
             <div id="abstract" class="methodology abstract-card">
-                <h3>Abstract</h3>
+                <h2>Abstract</h2>
                 <p>
                     This paper presents a <strong>DDSP-based neural vehicle sound synthesis framework</strong> conditioned on driving signals collected from the CAN bus of an internal combustion engine (ICE) vehicle, and demonstrates the feasibility of realistic and coherent vehicle sound synthesis within this framework. We investigate three design choices for synthesis configuration: the definition of the fundamental frequency (F0), the configuration of driving signal inputs, and the conditioning representation. Specifically, we compare crank-based and firing-based F0 definitions, multiple driving signal combinations constructed from engine RPM, gear level, accelerator pedal position, vehicle speed, and longitudinal acceleration, and two conditioning representations: direct and encoded conditioning. The framework is evaluated using objective and subjective measures together with qualitative spectrogram observation. The results show that the crank-based F0 provides more accurate synthesis than the firing-based F0 in the present four-cylinder four-stroke vehicle setting. Richer driving signal configurations generally improve synthesis quality, while the contribution of individual signals depends on their redundancy and complementarity. Encoded conditioning yields better objective performance, especially when the available driving signals are limited, whereas direct conditioning achieves the best perceptual results under full driving signal configuration and offers practical advantages in simplicity and efficiency. These findings provide practical guidelines for DDSP-based neural vehicle sound synthesis and highlight the potential of driving-signal-conditioned neural audio synthesis for automotive audio applications such as vehicle sound design and driving simulation.
                 </p>

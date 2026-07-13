@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const candidateFilterTags = [
         ...new Set([
-            ...configuredFilterTags,
+            ...configuredFilterTags.filter((tag) => categoryCounts.has(tag)),
             ...itemData.map(({ category }) => category).filter(Boolean)
         ])
     ];

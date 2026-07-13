@@ -1,141 +1,12 @@
-:root {
-    --bg: #fbfaf7;
-    --panel: rgba(255, 255, 255, 0.82);
-    --text-color: #171717;
-    --secondary-text-color: #706d66;
-    --border-color: #d8d2c8;
-    --border-soft: rgba(216, 210, 200, 0.55);
-    --accent-color: #171717;
-    --surface-color: #f5f1ea;
-    --shadow-color: rgba(23, 23, 23, 0.04);
-}
-
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-    font-size: 12px;
-}
-
-body {
-    margin: 0;
-    font-family: var(--font-sans, "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
-    font-weight: 500;
-    background: #fff;
-    color: var(--text-color);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
 strong,
 b,
 th {
     font-weight: 500 !important;
 }
 
-a {
-    color: inherit;
-}
-
 .shell {
     width: min(1360px, calc(100vw - 48px));
     margin: 0 auto;
-}
-
-.main-header {
-    position: sticky;
-    top: 0;
-    z-index: 40;
-    background: rgba(255, 255, 255, 0.82);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border-soft);
-}
-
-.header-shell {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: space-between;
-    width: min(1180px, calc(100vw - 48px));
-    margin: 0 auto;
-    gap: 12px 24px;
-    padding: clamp(14px, 2vw, 20px) 0;
-}
-
-.logo {
-    text-decoration: none;
-    font-size: 1.22rem;
-    font-weight: 500;
-    letter-spacing: -0.01em;
-}
-
-.main-nav ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-end;
-    gap: 10px clamp(14px, 1.8vw, 24px);
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.main-nav {
-    margin-left: auto;
-    max-width: min(100%, 720px);
-}
-
-.main-nav a {
-    display: inline-block;
-    position: relative;
-    text-decoration: none;
-    color: var(--secondary-text-color);
-    font-size: 1.05rem;
-    letter-spacing: 0.04em;
-    padding-bottom: 2px;
-    transition: color 0.2s ease;
-}
-
-.main-nav a::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    height: 1px;
-    background: currentColor;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-}
-
-.main-nav a.is-active,
-.main-nav a:hover {
-    color: var(--text-color);
-}
-
-.main-nav a.nav-current {
-    color: var(--text-color);
-}
-
-.main-nav a.is-active::after,
-.main-nav a:hover::after,
-.main-nav a.nav-current::after {
-    opacity: 1;
-}
-
-.main-nav a.nav-disabled {
-    color: var(--secondary-text-color);
-    opacity: 0.55;
-    pointer-events: none;
-}
-
-.main-nav a.nav-disabled::after {
-    opacity: 0;
 }
 
 .post-layout {
@@ -329,7 +200,7 @@ h2.section-title.no-divider {
     color: var(--text-color);
 }
 
-.methodology h3 {
+.methodology h2 {
     margin-top: 0;
     margin-bottom: 14px;
     color: var(--text-color);
@@ -347,8 +218,7 @@ h2.section-title.no-divider {
 
 .abstract-copy {
     font-family: var(--font-sans, "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
-    text-align: justify;
-    text-align-last: left;
+    text-align: left;
 }
 
 .demo-section {
@@ -543,19 +413,6 @@ h2.section-title.no-divider {
     letter-spacing: 0.04em;
 }
 
-.main-footer {
-    text-align: center;
-    padding: 0 20px 32px;
-}
-
-.copyright {
-    margin: 0;
-    padding-top: 18px;
-    border-top: 1px solid var(--border-soft);
-    color: var(--secondary-text-color);
-    font-size: 0.95rem;
-}
-
 @media (max-width: 1024px) {
     .post-layout {
         grid-template-columns: 1fr;
@@ -593,25 +450,6 @@ h2.section-title.no-divider {
 @media (max-width: 768px) {
     .shell {
         width: min(100vw - 32px, 1360px);
-    }
-
-    .header-shell {
-        width: min(100vw - 32px, 1180px);
-    }
-
-    .header-shell {
-        align-items: flex-start;
-    }
-
-    .main-nav {
-        margin-left: 0;
-        width: 100%;
-        max-width: none;
-    }
-
-    .main-nav ul {
-        justify-content: flex-start;
-        gap: 10px 16px;
     }
 
     .results {

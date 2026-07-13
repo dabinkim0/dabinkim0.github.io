@@ -4,10 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control | Dabin Kim</title>
+    <meta name="description" content="Supporting webpage and audio examples for AdaTT, accepted to INTERSPEECH 2026.">
+    <link rel="canonical" href="https://dabinkim0.github.io/publications/adatt/">
+    <meta property="og:title" content="AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control">
+    <meta property="og:description" content="Supporting webpage and audio examples for AdaTT at INTERSPEECH 2026.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://dabinkim0.github.io/publications/adatt/">
+    <meta property="og:image" content="https://dabinkim0.github.io/publications/adatt/figs/fig_architecture.png">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../assets/css/site-shell.css">
     <link rel="stylesheet" href="../../assets/css/adatt.css">
     <link rel="stylesheet" href="../../assets/css/typography.css">
     <script src="../../assets/js/mathjax-config.js"></script>
@@ -34,7 +43,7 @@
                 <h1>AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control</h1>
                 <div class="article-meta">
                     <p class="article-authors"><a class="article-author-link" href="https://dabinkim0.github.io/" target="_blank" rel="noopener">Dabin Kim</a><sup>1</sup>, <a class="article-author-link" href="https://jnwnlee.github.io/" target="_blank" rel="noopener">Junwon Lee</a><sup>2</sup>, <a class="article-author-link" href="https://mac.kaist.ac.kr/~juhan/" target="_blank" rel="noopener">Juhan Nam</a><sup>1,2</sup></p>
-                    <p class="article-affiliations"><sup>1</sup> Graduate School of Cultural Technology, KAIST, South Korea</p>
+                    <p class="article-affiliations"><sup>1</sup> Graduate School of Culture Technology, KAIST, South Korea</p>
                     <p class="article-affiliations"><sup>2</sup> Graduate School of AI, KAIST, South Korea</p>
                     <p class="article-supporting">Supporting Webpage for INTERSPEECH 2026.</p>
                     <p class="article-resource-list"><a class="article-resource-link" href="https://arxiv.org/abs/2606.15813" target="_blank" rel="noreferrer">[arXiv]</a></p>
@@ -44,7 +53,7 @@
                 </div>
 
                 <div id="abstract" class="methodology">
-                    <h3>Abstract</h3>
+                    <h2>Abstract</h2>
                     <p class="abstract-copy">
                         This paper addresses timbral ambiguity in instrument timbre transfer under fine-grained structural conditions. We argue this issue stems from instrument-specific expressive details in these conditions, which conflict with the target timbral properties. For example, imposing a violin's pitch-dominant vibrato contours onto a flute, which naturally exhibits loudness-dominant vibrato, impairs timbral fidelity. We propose <strong>AdaTT</strong>, a target-adaptive system that ensures high timbral fidelity across diverse timbre transfer scenarios within the ControlNet scheme. It selectively scales the frame-wise influence of pitch and loudness controls via text prompts to match the target instrument's identity. We also present a semi-automatic data construction pipeline to teach the model which expressive details to transform or preserve. Results show AdaTT achieves superior timbral fidelity and naturalness while retaining score-level content.
                     </p>
