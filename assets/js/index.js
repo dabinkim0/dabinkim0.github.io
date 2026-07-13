@@ -42,6 +42,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const element = target instanceof Element ? target : target?.parentElement;
         return element?.closest(selector) || null;
     };
+    const syncDraggableState = (area) => {
+        const isCollapsed = Boolean(area.closest(".is-collapsed"));
+        const canScroll = !isCollapsed && area.scrollHeight > area.clientHeight + 4;
+        area.classList.toggle("is-draggable", canScroll);
+    };
 
     collapsibleSections.forEach((section) => {
         const toggleButton = section.querySelector(".news-toggle");
@@ -51,7 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         if (scrollArea) {
-            scrollArea.setAttribute("aria-hidden", String(section.classList.contains("is-collapsed")));
+            const isCollapsed = section.classList.contains("is-collapsed");
+            scrollArea.setAttribute("aria-hidden", String(isCollapsed));
+            scrollArea.toggleAttribute("inert", isCollapsed);
         }
 
         const toggleSection = () => {
@@ -59,6 +66,8 @@ document.addEventListener("DOMContentLoaded", () => {
             toggleButton.setAttribute("aria-expanded", String(!isCollapsed));
             if (scrollArea) {
                 scrollArea.setAttribute("aria-hidden", String(isCollapsed));
+                scrollArea.toggleAttribute("inert", isCollapsed);
+                requestAnimationFrame(() => syncDraggableState(scrollArea));
             }
         };
 
@@ -82,11 +91,6 @@ document.addEventListener("DOMContentLoaded", () => {
         let isDragging = false;
         let startY = 0;
         let startScrollTop = 0;
-
-        const syncDraggableState = () => {
-            const canScroll = area.scrollHeight > area.clientHeight + 4;
-            area.classList.toggle("is-draggable", canScroll);
-        };
 
         area.addEventListener("pointerdown", (event) => {
             if (event.pointerType !== "mouse" || event.button !== 0) {
@@ -139,7 +143,13 @@ document.addEventListener("DOMContentLoaded", () => {
             area.classList.remove("is-dragging");
         });
 
-        syncDraggableState();
-        window.addEventListener("resize", syncDraggableState);
+        area.addEventListener("transitionend", (event) => {
+            if (event.propertyName === "max-height") {
+                syncDraggableState(area);
+            }
+        });
+
+        syncDraggableState(area);
+        window.addEventListener("resize", () => syncDraggableState(area));
     });
 });

@@ -47,7 +47,7 @@ th {
     color: var(--secondary-text-color);
     font-size: 1.02rem;
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: color var(--motion-fast) var(--ease-out);
 }
 
 .toc-item a:hover {
@@ -79,8 +79,8 @@ h1 {
     max-width: none;
     font-size: clamp(2.45rem, 3.6vw, 3.7rem);
     line-height: 1;
-    letter-spacing: -0.06em;
-    font-weight: 500;
+    letter-spacing: -0.04em;
+    font-weight: 400;
     text-align: center;
 }
 
@@ -100,7 +100,9 @@ h1 {
     text-decoration-color: transparent;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.16em;
-    transition: color 0.18s ease, text-decoration-color 0.18s ease;
+    transition:
+        color var(--motion-fast) var(--ease-out),
+        text-decoration-color var(--motion-fast) var(--ease-out);
 }
 
 .article-author-link:hover,
@@ -193,7 +195,7 @@ h2.section-title.no-divider {
 .methodology {
     background-color: var(--surface-color);
     border: 1px solid var(--border-soft);
-    border-radius: 10px;
+    border-radius: var(--radius-card);
     padding: 28px;
     margin: 30px 0 20px;
     text-align: left;
@@ -218,13 +220,16 @@ h2.section-title.no-divider {
 
 .abstract-copy {
     font-family: var(--font-sans, "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
+    max-width: 76ch;
+    margin-inline: auto !important;
+    line-height: 1.78 !important;
     text-align: left;
 }
 
 .demo-section {
     background-color: rgba(255, 255, 255, 0.55);
     border: 1px solid var(--border-soft);
-    border-radius: 10px;
+    border-radius: var(--radius-card);
     padding: 28px;
     margin: 28px 0 20px;
     min-width: 0;
@@ -236,7 +241,7 @@ h2.section-title.no-divider {
     border: 1px solid var(--border-soft);
     border-collapse: separate;
     border-spacing: 0;
-    border-radius: 10px;
+    border-radius: var(--radius-inner);
     overflow: hidden;
     background-color: white;
     font-size: 1.04rem;
@@ -289,7 +294,7 @@ h2.section-title.no-divider {
 .sample-card {
     background-color: white;
     border: 1px solid var(--border-soft);
-    border-radius: 10px;
+    border-radius: var(--radius-inner);
     padding: 20px;
     min-width: 0;
 }
@@ -395,7 +400,7 @@ h2.section-title.no-divider {
 .result-card {
     background-color: white;
     border: 1px solid var(--border-soft);
-    border-radius: 6px;
+    border-radius: var(--radius-inner);
     padding: 20px;
     text-align: center;
 }
@@ -424,7 +429,7 @@ h2.section-title.no-divider {
         position: static;
         background-color: rgba(255, 255, 255, 0.6);
         border: 1px solid var(--border-soft);
-        border-radius: 10px;
+        border-radius: var(--radius-card);
         padding: 18px;
     }
 
