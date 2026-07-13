@@ -1,12 +1,24 @@
 :root {
     --font-serif: "Source Serif 4", "Noto Serif KR", Georgia, "Times New Roman", serif;
-    --font-sans: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    --font-sans: "Public Sans", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     --font-mono: "Latin Modern Mono", "SFMono-Regular", SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
 }
 
 body {
     font-family: var(--font-serif);
     font-weight: 400;
+}
+
+h1,
+h2,
+h4,
+.item-list h3,
+.methodology h2,
+.methodology h3,
+.page-summary,
+.project-content h2,
+.sample-card-header h3 {
+    font-optical-sizing: auto;
 }
 
 h1,

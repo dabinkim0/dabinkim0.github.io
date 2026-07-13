@@ -1,5 +1,5 @@
 :root {
-    --chip-active: #3f3d38;
+    --chip-active: var(--control-active);
     --project-grid-gap: 30px clamp(22px, 2.8vw, 34px);
     --project-entry-inner-gap: 14px;
     --project-entry-block-padding: 24px 0 28px;
@@ -68,8 +68,8 @@ body {
     max-width: none;
     font-size: clamp(3.2rem, 4.8vw, 4.8rem);
     line-height: 0.96;
-    letter-spacing: -0.055em;
-    font-weight: 600;
+    letter-spacing: -0.04em;
+    font-weight: 400;
 }
 
 .page-summary {
@@ -103,14 +103,17 @@ body {
     margin: 0;
     padding: 0;
     border: 1px solid var(--rule-soft);
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     background: transparent;
     color: var(--muted);
     font: inherit;
     cursor: pointer;
     position: relative;
     touch-action: manipulation;
-    transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+    transition:
+        background-color var(--motion-fast) var(--ease-out),
+        border-color var(--motion-fast) var(--ease-out),
+        color var(--motion-fast) var(--ease-out);
 }
 
 .view-toggle-button::before {
@@ -130,7 +133,7 @@ body {
 }
 
 .view-toggle-button:focus-visible {
-    outline: 1px solid var(--muted);
+    outline: 2px solid var(--focus-color);
     outline-offset: 3px;
 }
 
@@ -251,7 +254,7 @@ body {
     width: 100%;
     aspect-ratio: 4 / 3;
     margin-bottom: var(--project-figure-title-gap);
-    border-radius: 10px;
+    border-radius: var(--radius-card);
     background: var(--chip-active);
 }
 
@@ -261,13 +264,29 @@ body {
 }
 
 .project-figure {
+    position: relative;
     display: none;
     width: 100%;
     aspect-ratio: 4 / 3;
     margin: 0 0 var(--project-figure-title-gap);
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: var(--radius-card);
     background: var(--chip-active);
+}
+
+.project-figure::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border: 1px solid transparent;
+    border-radius: inherit;
+    pointer-events: none;
+    transition: border-color var(--motion-fast) var(--ease-out);
+}
+
+.project-entry:hover .project-figure::after,
+.project-entry:focus-within .project-figure::after {
+    border-color: var(--interactive-border-hover);
 }
 
 .project-list.is-grid .project-figure,
@@ -314,12 +333,15 @@ body {
     cursor: pointer;
     position: relative;
     touch-action: manipulation;
-    font-size: 0.92rem;
+    font-size: 1rem;
     font-weight: 500;
     line-height: 1.35;
     letter-spacing: 0.01em;
     color: var(--text);
-    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    transition:
+        border-color var(--motion-fast) var(--ease-out),
+        background-color var(--motion-fast) var(--ease-out),
+        color var(--motion-fast) var(--ease-out);
 }
 
 .project-filter-chip::before {
@@ -329,6 +351,9 @@ body {
 }
 
 .project-filter-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
     grid-column: auto;
     margin: 0;
 }
@@ -347,7 +372,7 @@ body {
 
 .format-tag:focus-visible,
 .project-filter-chip:focus-visible {
-    outline: 1px solid var(--muted);
+    outline: 2px solid var(--focus-color);
     outline-offset: 3px;
 }
 
@@ -401,7 +426,9 @@ body {
     text-decoration: none;
     padding-bottom: 1px;
     border-bottom: 1px solid var(--rule);
-    transition: border-color 0.2s ease, color 0.2s ease;
+    transition:
+        border-color var(--motion-fast) var(--ease-out),
+        color var(--motion-fast) var(--ease-out);
 }
 
 .meta-link:hover {
@@ -409,7 +436,7 @@ body {
 }
 
 .meta-link:focus-visible {
-    outline: 1px solid var(--muted);
+    outline: 2px solid var(--focus-color);
     outline-offset: 3px;
 }
 
@@ -424,7 +451,7 @@ body {
     text-decoration-thickness: 1px;
     text-underline-offset: 0.16em;
     text-wrap: pretty;
-    transition: text-decoration-color 0.18s ease;
+    transition: text-decoration-color var(--motion-fast) var(--ease-out);
 }
 
 .project-entry:hover .project-content h2,
@@ -476,14 +503,16 @@ body.has-image-overlay {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.22s ease, visibility 0s linear 0.22s;
+    transition:
+        opacity var(--motion-base) var(--ease-out),
+        visibility 0s linear var(--motion-base);
 }
 
 .image-overlay.is-visible {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transition: opacity 0.22s ease;
+    transition: opacity var(--motion-base) var(--ease-out);
 }
 
 .image-overlay__backdrop {
@@ -492,7 +521,7 @@ body.has-image-overlay {
     background: rgba(22, 24, 20, 0.42);
     backdrop-filter: blur(2px);
     opacity: 0;
-    transition: opacity 0.22s ease;
+    transition: opacity var(--motion-base) var(--ease-out);
 }
 
 .image-overlay__dialog {
@@ -505,12 +534,14 @@ body.has-image-overlay {
     padding: 18px;
     overflow: hidden;
     border: 1px solid rgba(36, 37, 33, 0.1);
-    border-radius: 16px;
+    border-radius: var(--radius-modal);
     background: #fff;
     box-shadow: 0 20px 50px rgba(28, 30, 25, 0.16);
     opacity: 0;
     transform: translateY(8px) scale(0.985);
-    transition: opacity 0.22s ease, transform 0.22s ease;
+    transition:
+        opacity var(--motion-base) var(--ease-out),
+        transform var(--motion-base) var(--ease-out);
 }
 
 .image-overlay.is-visible .image-overlay__backdrop,
@@ -548,7 +579,7 @@ body.has-image-overlay {
 }
 
 .image-overlay__close:focus-visible {
-    outline: 1px solid var(--muted);
+    outline: 2px solid var(--focus-color);
     outline-offset: 2px;
 }
 
@@ -563,7 +594,7 @@ body.has-image-overlay {
     width: 100%;
     height: auto;
     margin: 0 auto;
-    border-radius: 10px;
+    border-radius: var(--radius-card);
 }
 
 @media (prefers-reduced-motion: reduce) {

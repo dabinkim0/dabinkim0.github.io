@@ -1,5 +1,4 @@
 :root {
-    --control-active: #3f3d38;
     --figure-inset: 10px;
     --publication-grid-gap: 30px clamp(22px, 2.8vw, 34px);
     --publication-figure-title-gap: 10px;
@@ -32,8 +31,8 @@ body {
     margin: 0 0 14px;
     font-size: clamp(3.2rem, 4.8vw, 4.8rem);
     line-height: 0.96;
-    letter-spacing: -0.055em;
-    font-weight: 600;
+    letter-spacing: -0.04em;
+    font-weight: 400;
 }
 
 .page-summary {
@@ -67,14 +66,17 @@ body {
     margin: 0;
     padding: 0;
     border: 1px solid var(--rule-soft);
-    border-radius: 8px;
+    border-radius: var(--radius-control);
     background: transparent;
     color: var(--muted);
     font: inherit;
     cursor: pointer;
     position: relative;
     touch-action: manipulation;
-    transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+    transition:
+        background-color var(--motion-fast) var(--ease-out),
+        border-color var(--motion-fast) var(--ease-out),
+        color var(--motion-fast) var(--ease-out);
 }
 
 .view-toggle-button::before {
@@ -90,7 +92,7 @@ body {
 }
 
 .view-toggle-button:focus-visible {
-    outline: 1px solid var(--muted);
+    outline: 2px solid var(--focus-color);
     outline-offset: 3px;
 }
 
@@ -167,14 +169,23 @@ body {
     background: rgba(255, 255, 255, 0.72);
     color: var(--text);
     font: inherit;
-    font-size: 0.92rem;
+    font-size: 1rem;
     line-height: 1.35;
     letter-spacing: 0.01em;
     cursor: pointer;
     position: relative;
     touch-action: manipulation;
     appearance: none;
-    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    transition:
+        border-color var(--motion-fast) var(--ease-out),
+        background-color var(--motion-fast) var(--ease-out),
+        color var(--motion-fast) var(--ease-out);
+}
+
+.publication-filter-chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
 }
 
 .publication-filter-chip::before {
@@ -194,7 +205,7 @@ body {
 }
 
 .publication-filter-chip:focus-visible {
-    outline: 1px solid var(--muted);
+    outline: 2px solid var(--focus-color);
     outline-offset: 3px;
 }
 
@@ -297,7 +308,7 @@ body {
     text-decoration-color: transparent;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.16em;
-    transition: text-decoration-color 0.18s ease;
+    transition: text-decoration-color var(--motion-fast) var(--ease-out);
 }
 
 .item-list li:hover h3 a,
@@ -336,7 +347,9 @@ body {
     text-decoration: none;
     padding-bottom: 2px;
     border-bottom: 1px solid var(--rule);
-    transition: border-color 0.2s ease, color 0.2s ease;
+    transition:
+        border-color var(--motion-fast) var(--ease-out),
+        color var(--motion-fast) var(--ease-out);
 }
 
 .item-list .links a:hover {
@@ -362,16 +375,16 @@ body {
     padding: var(--figure-inset);
     background: #fff;
     border: 1px solid var(--rule-soft);
-    border-radius: 10px;
+    border-radius: var(--radius-card);
     overflow: hidden;
     text-decoration: none;
-    transition: border-color 0.18s ease;
+    transition: border-color var(--motion-fast) var(--ease-out);
 }
 
 .item-list li:hover .publication-figure,
 .item-list li:focus-within .publication-figure,
 .publication-figure:hover {
-    border-color: var(--rule);
+    border-color: var(--interactive-border-hover);
 }
 
 .publication-figure.disabled-link {

@@ -13,6 +13,17 @@
     --accent-color: var(--text);
     --surface-color: #f5f1ea;
     --shadow-color: var(--shadow);
+    --control-active: #3f3d38;
+    --focus-color: #59564f;
+    --interactive-border-hover: rgba(112, 109, 102, 0.32);
+    --radius-control: 8px;
+    --radius-card: 10px;
+    --radius-inner: 6px;
+    --radius-modal: 16px;
+    --motion-fast: 160ms;
+    --motion-base: 240ms;
+    --motion-expand: 320ms;
+    --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 *,
@@ -43,6 +54,11 @@ img {
 
 a {
     color: inherit;
+}
+
+:where(a, button, input, select, textarea):focus-visible {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 3px;
 }
 
 .main-header {
@@ -96,7 +112,7 @@ a {
     font-size: 1.05rem;
     letter-spacing: 0.04em;
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: color var(--motion-fast) var(--ease-out);
 }
 
 .main-nav a::after {
@@ -108,7 +124,7 @@ a {
     height: 1px;
     background: currentColor;
     opacity: 0;
-    transition: opacity 0.2s ease;
+    transition: opacity var(--motion-fast) var(--ease-out);
 }
 
 .main-nav a.is-active,
@@ -136,7 +152,7 @@ a {
 .logo:focus-visible,
 .main-nav a:focus-visible,
 .contact-links a:focus-visible {
-    outline: 1px solid var(--muted);
+    outline: 2px solid var(--focus-color);
     outline-offset: 4px;
 }
 
@@ -158,7 +174,9 @@ a {
     font-weight: 500;
     text-decoration: none;
     white-space: nowrap;
-    transition: border-color 0.2s ease, color 0.2s ease;
+    transition:
+        border-color var(--motion-fast) var(--ease-out),
+        color var(--motion-fast) var(--ease-out);
 }
 
 .contact-links a:hover {
