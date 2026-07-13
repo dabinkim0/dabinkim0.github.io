@@ -177,6 +177,9 @@ def preprocess_steps(row: dict[str, Any], prompts: list[dict[str, Any]]) -> list
             "title": "4. Validate Diff And Controls",
             "body": "Use MIDI-diff evidence to decide which controls are supported and which claims must be omitted.",
             "fields": [
+                {"label": "Control Axis", "value": row.get("control_pair", {}).get("control_axis", "—")},
+                {"label": "Direction", "value": row.get("control_pair", {}).get("direction", "—")},
+                {"label": "Opposite Direction", "value": row.get("control_pair", {}).get("opposite_direction", "—")},
                 {"label": "Changed Roles", "value": ", ".join(row["diff_evidence"].get("changed_roles", []))},
                 {"label": "Controls", "value": ", ".join(control["control_id"] for control in row.get("controls", []))},
                 {"label": "Outside-Change Rate", "value": str(row["diff_evidence"].get("outside_change_rate"))},
@@ -255,6 +258,7 @@ def build_cases(sori_root: Path) -> dict[str, Any]:
                 "window": row["window"],
                 "span": row["temporal"]["spans"][0],
                 "subtask": row["subtask"],
+                "control_pair": row.get("control_pair", {}),
                 "edit_plan": row["edit_plan"],
                 "diff_evidence": row["diff_evidence"],
                 "validation": row["validation"],
