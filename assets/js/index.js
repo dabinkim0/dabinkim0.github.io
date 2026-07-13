@@ -47,28 +47,40 @@ document.addEventListener("DOMContentLoaded", () => {
         const canScroll = !isCollapsed && area.scrollHeight > area.clientHeight + 4;
         area.classList.toggle("is-draggable", canScroll);
     };
+    const setSectionCollapsed = (section, isCollapsed) => {
+        const toggleButton = section.querySelector(".news-toggle");
+        const scrollArea = section.querySelector(".news-scroll-area");
+
+        section.classList.toggle("is-collapsed", isCollapsed);
+        toggleButton?.setAttribute("aria-expanded", String(!isCollapsed));
+
+        if (scrollArea) {
+            scrollArea.setAttribute("aria-hidden", String(isCollapsed));
+            scrollArea.toggleAttribute("inert", isCollapsed);
+            requestAnimationFrame(() => syncDraggableState(scrollArea));
+        }
+    };
 
     collapsibleSections.forEach((section) => {
         const toggleButton = section.querySelector(".news-toggle");
-        const scrollArea = section.querySelector(".news-scroll-area");
         if (!toggleButton) {
             return;
         }
 
-        if (scrollArea) {
-            const isCollapsed = section.classList.contains("is-collapsed");
-            scrollArea.setAttribute("aria-hidden", String(isCollapsed));
-            scrollArea.toggleAttribute("inert", isCollapsed);
-        }
+        setSectionCollapsed(section, section.classList.contains("is-collapsed"));
 
         const toggleSection = () => {
-            const isCollapsed = section.classList.toggle("is-collapsed");
-            toggleButton.setAttribute("aria-expanded", String(!isCollapsed));
-            if (scrollArea) {
-                scrollArea.setAttribute("aria-hidden", String(isCollapsed));
-                scrollArea.toggleAttribute("inert", isCollapsed);
-                requestAnimationFrame(() => syncDraggableState(scrollArea));
+            const shouldCollapse = !section.classList.contains("is-collapsed");
+
+            if (!shouldCollapse) {
+                collapsibleSections.forEach((otherSection) => {
+                    if (otherSection !== section) {
+                        setSectionCollapsed(otherSection, true);
+                    }
+                });
             }
+
+            setSectionCollapsed(section, shouldCollapse);
         };
 
         toggleButton.addEventListener("click", () => {

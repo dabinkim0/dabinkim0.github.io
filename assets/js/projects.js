@@ -1,3 +1,18 @@
+const projectMetadataKeys = new Set(["role", "tools", "year", "link"]);
+document.querySelectorAll(".project-meta").forEach((metadata) => {
+    metadata.querySelectorAll(".meta-label").forEach((label) => {
+        const key = label.textContent.trim().toLowerCase();
+        const value = label.nextElementSibling;
+
+        if (!projectMetadataKeys.has(key) || !value?.classList.contains("meta-value")) {
+            return;
+        }
+
+        label.dataset.metaKey = key;
+        value.dataset.metaKey = key;
+    });
+});
+
 document.addEventListener("DOMContentLoaded", () => {
     const preventImageSaveGesture = (event) => {
         event.preventDefault();

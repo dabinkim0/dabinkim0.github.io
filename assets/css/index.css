@@ -121,6 +121,7 @@
 .document-column {
     display: grid;
     gap: 0;
+    min-width: 0;
 }
 
 .section-block {
@@ -156,6 +157,8 @@
 
 .statement-block .section-body {
     display: block;
+    width: 100%;
+    max-width: 100%;
     min-width: 0;
     overflow: hidden;
     -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 7%, #000 93%, transparent 100%);
@@ -163,20 +166,21 @@
 }
 
 .statement-block {
-    display: grid;
-    grid-template-columns: max-content minmax(0, 1fr);
-    gap: 0 clamp(14px, 2vw, 24px);
-    align-items: center;
-}
-
-.statement-block .section-label {
-    margin: 0;
-    white-space: nowrap;
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    contain: inline-size;
 }
 
 .statement-track {
+    --statement-gap: clamp(88px, 10vw, 144px);
+
     display: flex;
+    column-gap: var(--statement-gap);
     width: max-content;
+    padding-right: var(--statement-gap);
     animation: statement-marquee 36s linear infinite;
     will-change: transform;
 }
@@ -184,7 +188,6 @@
 .statement-text {
     flex: 0 0 auto;
     margin: 0;
-    padding-right: clamp(56px, 7vw, 96px);
     font-size: 1.14rem;
     font-weight: 500;
     font-family: var(--font-serif);
@@ -215,8 +218,19 @@
     --news-panel-collapsed-bg: #f6f2eb;
 
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     gap: 18px;
+    transition: grid-template-columns var(--motion-expand) var(--ease-out);
+}
+
+@media (min-width: 721px) {
+    .news-panel-grid:has(> .education-list:first-child:not(.is-collapsed)):has(> .education-list:last-child.is-collapsed) {
+        grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
+    }
+
+    .news-panel-grid:has(> .education-list:first-child.is-collapsed):has(> .education-list:last-child:not(.is-collapsed)) {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 3fr);
+    }
 }
 
 .education-list {
@@ -344,6 +358,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+    .news-panel-grid,
     .education-list,
     .statement-track,
     .news-toggle-icon,
@@ -359,11 +374,12 @@
 
     .statement-track {
         width: auto;
+        column-gap: 0;
+        padding-right: 0;
         animation: none;
     }
 
     .statement-text {
-        padding-right: 0;
         white-space: normal;
     }
 
@@ -395,61 +411,109 @@
 }
 
 .entry-item--branded {
+    --entry-brand-size: 45px;
+    --entry-item-bottom-space: 14px;
+
     position: relative;
-    min-height: 30px;
-    padding-left: 46px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 8px;
+    row-gap: 2px;
+    min-height: calc(var(--entry-brand-size) + var(--entry-item-bottom-space));
+    padding-left: calc(var(--entry-brand-size) + 12px);
+}
+
+.entry-item--branded:last-child {
+    --entry-item-bottom-space: 0px;
+}
+
+.entry-item--branded .entry-head {
+    display: contents;
+}
+
+.entry-item--branded .entry-title {
+    flex: 0 0 100%;
+    order: 1;
+}
+
+.entry-item--branded .entry-meta,
+.entry-item--branded .entry-detail {
+    margin: 2px 0 0;
+    font-size: 1rem;
+    line-height: 1.55;
+}
+
+.entry-item--branded .entry-meta {
+    order: 2;
+    text-align: left;
+    white-space: normal;
+}
+
+.entry-item--branded .entry-detail {
+    order: 3;
+}
+
+.entry-item--branded .entry-detail::before {
+    content: "\00b7";
+    margin-right: 8px;
 }
 
 .entry-brand-mark {
     position: absolute;
-    top: 2px;
+    top: 0;
     left: 0;
     display: grid;
     place-items: center;
-    width: 34px;
-    height: 28px;
+    width: var(--entry-brand-size);
+    height: var(--entry-brand-size);
     overflow: hidden;
     border: 1px solid var(--rule-soft);
     border-radius: var(--radius-inner);
-    background: rgba(255, 255, 255, 0.7);
-    opacity: 0.62;
+    background: rgba(255, 255, 255, 0.62);
+    opacity: 0.68;
     filter: grayscale(1) saturate(0.18);
-    pointer-events: none;
+    text-decoration: none;
+    pointer-events: auto;
     transition:
         opacity var(--motion-fast) var(--ease-out),
         filter var(--motion-fast) var(--ease-out),
         border-color var(--motion-fast) var(--ease-out);
 }
 
+.entry-brand-mark:focus-visible {
+    outline: 2px solid var(--focus-color);
+    outline-offset: 2px;
+}
+
 .entry-brand-mark img {
     display: block;
     width: auto;
     height: auto;
-    max-width: 20px;
-    max-height: 20px;
+    max-width: 31px;
+    max-height: 31px;
     object-fit: contain;
 }
 
 .entry-brand-mark--wide img {
-    max-width: 28px;
-    max-height: 12px;
+    max-width: 38px;
+    max-height: 18px;
 }
 
 .entry-brand-mark--ksmi {
-    place-items: center start;
+    place-items: center;
 }
 
 .entry-brand-mark--ksmi img {
-    width: auto;
-    height: 9px;
-    max-width: none;
-    max-height: none;
-    margin-left: 4px;
+    width: 38px;
+    height: auto;
+    max-width: 38px;
+    max-height: 18px;
+    margin-left: 0;
 }
 
 .entry-brand-mark--sogang img {
-    width: 16px;
-    height: 16px;
+    width: 24px;
+    height: 24px;
 }
 
 .entry-item--branded:hover .entry-brand-mark,
@@ -726,18 +790,8 @@
     }
 
     .statement-block {
-        display: grid;
-        grid-template-columns: minmax(104px, auto) minmax(0, 1fr);
-        gap: 0 14px;
-        align-items: start;
+        display: block;
         padding-top: 0;
-    }
-
-    .statement-block .section-label {
-        margin: 0;
-        white-space: nowrap;
-        font-size: 1.08rem;
-        line-height: 1.5;
     }
 
     .statement-block .section-body {
@@ -746,39 +800,6 @@
 
     .statement-block .statement-text {
         line-height: 1.5;
-    }
-
-    .entry-head {
-        grid-template-columns: 1fr;
-        gap: 2px;
-    }
-
-    .entry-meta {
-        text-align: left;
-        white-space: normal;
-    }
-
-    .entry-item--news-event {
-        display: grid;
-        gap: 2px;
-    }
-
-    .entry-item--news-event .entry-head {
-        display: contents;
-    }
-
-    .entry-item--news-event .entry-title {
-        order: 1;
-    }
-
-    .entry-item--news-event .entry-detail {
-        order: 2;
-        margin-top: 0;
-    }
-
-    .entry-item--news-event .entry-meta {
-        order: 3;
-        margin-top: 0;
     }
 
     .contact-grid {
