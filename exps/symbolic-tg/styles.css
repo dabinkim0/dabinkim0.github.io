@@ -219,6 +219,11 @@ h3 {
   position: relative;
   padding: 14px 16px;
   text-align: left;
+  transition:
+    background-color 0.22s ease,
+    border-color 0.22s ease,
+    box-shadow 0.22s ease,
+    transform 0.22s ease;
 }
 
 .metric-button {
@@ -231,6 +236,29 @@ h3 {
   color: inherit;
   text-align: left;
   cursor: pointer;
+}
+
+.metric-picker:hover,
+.metric-picker:focus-within {
+  border-color: var(--line);
+  background: linear-gradient(135deg, #ffffff 0%, #f7f1e7 100%);
+  box-shadow: 0 22px 40px rgba(23, 23, 23, 0.09);
+  transform: translateY(-2px);
+}
+
+.metric-picker:hover span,
+.metric-picker:focus-within span {
+  color: var(--ink);
+}
+
+.metric-picker:hover strong,
+.metric-picker:focus-within strong {
+  color: var(--green);
+}
+
+.metric-picker:hover em,
+.metric-picker:focus-within em {
+  color: #5b554d;
 }
 
 .metric-button:hover strong,
@@ -285,6 +313,7 @@ h3 {
   border-radius: 12px;
   background: rgba(255, 255, 255, 0.98);
   box-shadow: 0 18px 36px var(--shadow);
+  animation: menuToneIn 0.18s ease both;
 }
 
 .metric-menu-wide {
@@ -302,6 +331,10 @@ h3 {
   color: var(--ink);
   text-align: left;
   cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease;
 }
 
 .metric-option:hover,
@@ -309,6 +342,21 @@ h3 {
 .metric-option.active {
   background: var(--surface);
   outline: none;
+}
+
+.metric-option:hover,
+.metric-option:focus-visible {
+  background: linear-gradient(135deg, #f5f1ea 0%, #ede2d1 100%);
+  transform: translateX(3px);
+}
+
+.metric-option:hover small,
+.metric-option:focus-visible small {
+  color: #5d554c;
+}
+
+.metric-option.active span {
+  color: var(--green);
 }
 
 .metric-option span {
@@ -356,12 +404,50 @@ select {
   color: var(--muted);
   padding: 8px 13px;
   cursor: pointer;
+  transition:
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
 }
 
 .task-tab.active {
   border-color: var(--ink);
   background: var(--ink);
   color: #fff;
+}
+
+.task-tab:hover,
+.mini-button:hover,
+select:hover,
+.task-tab:focus-visible,
+.mini-button:focus-visible,
+select:focus-visible {
+  border-color: var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: 0 10px 20px rgba(23, 23, 23, 0.055);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.task-tab.active:hover,
+.task-tab.active:focus-visible {
+  border-color: var(--green);
+  background: var(--green);
+  color: #fff;
+}
+
+@keyframes menuToneIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .case-control label {
