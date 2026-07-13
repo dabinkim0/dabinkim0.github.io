@@ -289,7 +289,7 @@ function renderAll() {
 }
 
 async function init() {
-  const response = await fetch("assets/data/cases.json");
+  const response = await fetch("assets/data/cases.json?v=20260713-context5");
   if (!response.ok) throw new Error(`Failed to load cases.json: ${response.status}`);
   state.data = await response.json();
   $("[data-summary='tasks']").textContent = String(state.data.tasks.length);
