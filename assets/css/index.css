@@ -567,8 +567,10 @@
 }
 
 .entry-brand-mark--sogang img {
-    width: 24px;
-    height: 24px;
+    width: 34px;
+    height: auto;
+    max-width: 34px;
+    max-height: 16px;
 }
 
 .entry-item--branded:hover .entry-brand-mark,
