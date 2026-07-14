@@ -220,8 +220,6 @@ h2.section-title.no-divider {
 
 .abstract-copy {
     font-family: var(--font-sans, "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
-    max-width: 76ch;
-    margin-inline: auto !important;
     line-height: 1.78 !important;
     text-align: left;
 }
@@ -257,7 +255,7 @@ h2.section-title.no-divider {
 }
 
 .method-table th {
-    background-color: rgba(245, 241, 234, 0.42);
+    background-color: var(--surface-soft);
     color: var(--text-color);
     font-weight: 500;
 }
@@ -461,14 +459,6 @@ h2.section-title.no-divider {
         grid-template-columns: 1fr;
     }
 
-    h1 {
-        font-size: 2.2rem;
-    }
-
-    h2.section-title {
-        font-size: 1.55rem;
-    }
-
     .demo-section {
         padding: 18px;
     }
@@ -477,7 +467,6 @@ h2.section-title.no-divider {
         display: block;
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
-        font-size: 0.96rem;
     }
 
     .method-table th,
@@ -501,5 +490,15 @@ h2.section-title.no-divider {
 @media (max-width: 560px) {
     .toc-list {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    h2.section-title {
+        font-size: 1.55rem;
     }
 }

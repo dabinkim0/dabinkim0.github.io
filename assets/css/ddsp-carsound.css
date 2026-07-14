@@ -200,13 +200,11 @@ h2.section-title {
 }
 
 .abstract-card {
-    background-color: rgba(245, 241, 234, 0.36);
+    background-color: var(--surface-soft);
 }
 
 .abstract-card p {
     font-family: var(--font-sans, "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
-    max-width: 76ch;
-    margin-inline: auto;
     line-height: 1.78;
     text-align: left;
 }
@@ -559,14 +557,6 @@ code {
         width: min(100vw - 32px, 1320px);
     }
 
-    h1 {
-        font-size: 2.2rem;
-    }
-
-    h2.section-title {
-        font-size: 1.65rem;
-    }
-
     .demo-section {
         padding: 18px;
     }
@@ -611,10 +601,6 @@ code {
         width: 225px;
     }
 
-    .legend-table {
-        font-size: 0.96rem;
-    }
-
     .legend-table th,
     .legend-table td {
         padding: 10px 14px;
@@ -629,5 +615,15 @@ code {
 @media (max-width: 560px) {
     .toc-list {
         grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    h2.section-title {
+        font-size: 1.65rem;
     }
 }

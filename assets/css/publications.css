@@ -24,7 +24,7 @@ body {
 
 .page-intro {
     max-width: none;
-    margin-bottom: 22px;
+    margin-bottom: var(--space-5);
 }
 
 .page-intro h1 {
@@ -38,9 +38,9 @@ body {
 .page-summary {
     margin: 0;
     max-width: none;
-    font-size: 1.32rem;
+    font-size: var(--type-intro);
     color: var(--muted);
-    line-height: 1.75;
+    line-height: var(--leading-body);
 }
 
 .page-summary-row {
@@ -103,7 +103,9 @@ body {
 }
 
 .view-toggle-button:not(.is-active):hover {
-    border-color: var(--rule);
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
+    color: var(--accent-strong);
 }
 
 .view-toggle-icon--list {
@@ -136,28 +138,28 @@ body {
 
 .archive-section {
     border-top: 1px solid var(--rule);
-    padding-top: 24px;
+    padding-top: var(--space-5);
     padding-bottom: clamp(28px, 4vw, 44px);
     flex: 1;
 }
 
 .publication-filter-panel {
     display: grid;
-    gap: 10px;
-    margin: 0 0 18px;
+    gap: var(--space-2);
+    margin: 0 0 var(--space-5);
 }
 
 .publication-filter-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px 10px;
+    gap: var(--space-2) 10px;
 }
 
 .publication-filter-status {
     margin: 0;
     color: var(--muted);
-    font-size: 1.05rem;
-    line-height: 1.6;
+    font-size: var(--type-meta);
+    line-height: var(--leading-meta);
 }
 
 .publication-filter-chip {
@@ -169,7 +171,7 @@ body {
     background: rgba(255, 255, 255, 0.72);
     color: var(--text);
     font: inherit;
-    font-size: 1rem;
+    font-size: var(--type-label);
     line-height: 1.35;
     letter-spacing: 0.01em;
     cursor: pointer;
@@ -194,8 +196,10 @@ body {
     inset: -4px;
 }
 
-.publication-filter-chip:hover {
-    border-color: var(--text);
+.publication-filter-chip:not(.is-active):hover {
+    background: var(--accent-soft);
+    border-color: var(--accent-border);
+    color: var(--accent-strong);
 }
 
 .publication-filter-chip.is-active {
@@ -210,8 +214,8 @@ body {
 }
 
 .section-label {
-    margin: 0 0 18px;
-    font-size: 1.14rem;
+    margin: 0 0 var(--space-4);
+    font-size: var(--type-body);
     font-weight: 500;
     letter-spacing: 0.02em;
     color: var(--text);
@@ -219,14 +223,14 @@ body {
 
 .item-list {
     display: grid;
-    gap: 24px;
+    gap: var(--space-5);
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
 .item-list li {
-    padding-bottom: 24px;
+    padding-bottom: var(--space-5);
     border-bottom: 1px solid var(--rule-soft);
 }
 
@@ -273,15 +277,15 @@ body {
 
 .item-list.is-grid h3,
 .item-list.is-grid-compact h3 {
-    margin-bottom: 8px;
-    font-size: 1.45rem;
-    line-height: 1.55;
+    margin-bottom: var(--space-2);
+    font-size: var(--type-card-title);
+    line-height: 1.45;
     letter-spacing: -0.02em;
 }
 
 .item-list.is-grid .links,
 .item-list.is-grid-compact .links {
-    margin-top: 10px;
+    margin-top: var(--space-3);
 }
 
 .publication-item {
@@ -296,10 +300,10 @@ body {
 }
 
 .item-list h3 {
-    margin: 0 0 8px;
-    font-size: 1.45rem;
+    margin: 0 0 var(--space-2);
+    font-size: var(--type-card-title);
     font-weight: 500;
-    line-height: 1.55;
+    line-height: 1.45;
     letter-spacing: -0.02em;
 }
 
@@ -308,25 +312,38 @@ body {
     text-decoration-color: transparent;
     text-decoration-thickness: 1px;
     text-underline-offset: 0.16em;
-    transition: text-decoration-color var(--motion-fast) var(--ease-out);
+    transition:
+        color var(--motion-fast) var(--ease-out),
+        text-decoration-color var(--motion-fast) var(--ease-out);
 }
 
 .item-list li:hover h3 a,
 .item-list li:focus-within h3 a,
 .item-list h3 a:hover {
-    text-decoration-color: currentColor;
+    text-decoration-color: var(--accent);
+}
+
+.item-list h3 a:not(.disabled-link):hover,
+.item-list h3 a:not(.disabled-link):focus-visible {
+    color: var(--accent-strong);
 }
 
 .item-list h3 a.disabled-link:hover {
     text-decoration-color: currentColor;
 }
 
-.item-list .authors,
+.item-list .authors {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: var(--type-meta);
+    line-height: var(--leading-meta);
+}
+
 .item-list .venue {
-    margin: 4px 0 0;
+    margin: 2px 0 0;
     color: var(--muted);
-    font-size: 1.08rem;
-    line-height: 1.7;
+    font-size: var(--type-meta);
+    line-height: var(--leading-meta);
 }
 
 .item-list .authors .author-self {
@@ -337,13 +354,13 @@ body {
 .item-list .links {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px 16px;
-    margin-top: 14px;
+    gap: var(--space-2) var(--space-4);
+    margin-top: var(--space-3);
 }
 
 .item-list .links a {
     color: var(--text);
-    font-size: 1rem;
+    font-size: var(--type-label);
     text-decoration: none;
     padding-bottom: 2px;
     border-bottom: 1px solid var(--rule);
@@ -353,7 +370,8 @@ body {
 }
 
 .item-list .links a:hover {
-    border-color: var(--text);
+    border-color: var(--accent);
+    color: var(--accent-strong);
 }
 
 .item-list .links a[href="#"],
@@ -460,7 +478,7 @@ body {
     margin-top: auto;
     text-align: center;
     border-top: 1px solid var(--rule);
-    padding-top: 24px;
+    padding-top: var(--space-5);
 }
 
 @media (max-width: 920px) {
@@ -512,7 +530,7 @@ body {
     }
 
     .page-summary {
-        font-size: 1.2rem;
+        font-size: var(--type-body-large);
     }
 
     .page-summary-row {
@@ -532,7 +550,7 @@ body {
     .item-list.is-grid-compact .publication-item {
         grid-template-columns: 1fr;
         align-content: start;
-        padding-bottom: 24px;
+        padding-bottom: var(--space-5);
         border-bottom: 1px solid var(--rule-soft);
     }
 

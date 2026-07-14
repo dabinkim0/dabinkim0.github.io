@@ -29,7 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const overlayDuration = prefersReducedMotion ? 0 : 220;
+    const motionBase = Number.parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue("--motion-base")) || 240;
+    const overlayDuration = prefersReducedMotion ? 0 : motionBase;
     const imageOverlay = document.createElement("div");
     imageOverlay.className = "image-overlay";
     imageOverlay.setAttribute("aria-hidden", "true");
