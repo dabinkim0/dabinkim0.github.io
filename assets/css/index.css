@@ -240,7 +240,8 @@
     gap: 0;
     width: 100%;
     min-width: 0;
-    padding: var(--space-4);
+    padding: 0;
+    overflow: hidden;
     border: 1px solid var(--rule-soft);
     border-radius: var(--radius-card);
     background-color: var(--news-panel-bg);
@@ -251,6 +252,8 @@
 }
 
 .education-list.is-collapsed {
+    height: 56px;
+    min-height: 56px;
     background-color: var(--news-panel-collapsed-bg);
 }
 
@@ -259,16 +262,18 @@
 }
 
 .education-list:not(.is-collapsed) .news-toggle {
-    color: var(--accent-strong);
+    background-color: var(--accent);
+    color: #fff;
 }
 
-.education-list:not(.is-collapsed) .news-toggle-icon {
-    color: var(--accent);
+.education-list:not(.is-collapsed) .news-toggle .news-toggle-icon {
+    color: rgba(255, 255, 255, 0.78);
 }
 
 .education-list.is-collapsed:hover,
 .education-list.is-collapsed:focus-within {
     border-color: var(--interactive-border-hover);
+    background-color: var(--accent-soft);
 }
 
 .news-toggle {
@@ -277,16 +282,18 @@
     justify-content: space-between;
     gap: var(--space-3);
     width: 100%;
-    padding: 0;
+    padding: var(--space-4);
     border: none;
-    background: none;
+    background-color: transparent;
     font-family: inherit;
     font-size: var(--type-body);
     font-weight: 500;
     letter-spacing: 0.02em;
     color: var(--text);
     cursor: pointer;
-    transition: color var(--motion-fast) var(--ease-out);
+    transition:
+        background-color var(--motion-base) var(--ease-out),
+        color var(--motion-fast) var(--ease-out);
 }
 
 .news-toggle > span:first-child {
@@ -308,6 +315,18 @@
     color: var(--accent-strong);
 }
 
+.education-list.is-collapsed .news-toggle {
+    height: 54px;
+    padding-block: 0;
+}
+
+.education-list.is-collapsed .news-toggle > span:first-child {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    white-space: nowrap;
+}
+
 .news-toggle:hover .news-toggle-icon,
 .news-toggle:focus-visible .news-toggle-icon {
     color: var(--accent);
@@ -315,7 +334,11 @@
 
 .news-toggle:focus-visible {
     outline: 2px solid var(--focus-color);
-    outline-offset: 4px;
+    outline-offset: -4px;
+}
+
+.education-list:not(.is-collapsed) .news-toggle:focus-visible {
+    outline-color: rgba(255, 255, 255, 0.92);
 }
 
 .identity-meta a:focus-visible,
@@ -348,7 +371,9 @@
     max-height: 0;
     opacity: 0;
     margin-top: 0;
-    padding-right: 0;
+    padding-top: 0;
+    padding-right: var(--space-4);
+    padding-bottom: 0;
     overflow: hidden;
     transform: translateY(-6px);
     pointer-events: none;
@@ -358,11 +383,11 @@
     height: auto;
     max-height: var(--news-scroll-height);
     opacity: 1;
-    margin-top: var(--space-4);
+    margin-top: 0;
     cursor: auto;
     overflow-y: auto;
     overscroll-behavior: contain;
-    padding-right: var(--space-2);
+    padding: var(--space-4) var(--space-2) var(--space-4) var(--space-4);
     scrollbar-gutter: stable;
     touch-action: pan-y;
     scrollbar-width: thin;
@@ -371,8 +396,9 @@
     transition:
         max-height var(--motion-expand) var(--ease-out),
         opacity var(--motion-fast) var(--ease-out),
-        margin-top var(--motion-expand) var(--ease-out),
+        padding-top var(--motion-expand) var(--ease-out),
         padding-right var(--motion-expand) var(--ease-out),
+        padding-bottom var(--motion-expand) var(--ease-out),
         transform var(--motion-expand) var(--ease-out);
     will-change: max-height, opacity, transform;
 }
