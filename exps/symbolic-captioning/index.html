@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260715-a104">
+  <link rel="stylesheet" href="styles.css?v=20260715-a105">
 </head>
 <body>
   <header class="main-header">
@@ -30,10 +30,10 @@
       <h1>Symbolic Music <span>Captioning</span></h1>
       <p class="hero-copy">A compact review page for metadata-grounded music caption pretraining. Subscription and API tracks share the same numbered protocol and remain separated at execution.</p>
       <div class="hero-metrics" aria-label="Experiment Summary">
-        <article class="hero-metric"><span>Current Release</span><strong>A.1.0</strong><em>Gemini Web Baseline</em></article>
-        <article class="hero-metric"><span>Gemini Web Runs</span><strong data-metric="web-runs">—</strong><em>Recorded Raw Captions</em></article>
-        <article class="hero-metric"><span>Gemini API Runs</span><strong>0</strong><em>Not Executed</em></article>
-        <article class="hero-metric"><span>Filtered Captions</span><strong>0</strong><em>Filter Stage Pending</em></article>
+        <article class="hero-metric"><span>Current Release</span><strong>A.1.1</strong><em>Actual Train Pilot</em></article>
+        <article class="hero-metric"><span>Gemini Web Runs</span><strong data-metric="web-runs">—</strong><em>Actual POP909 Cases</em></article>
+        <article class="hero-metric"><span>Structural Pass</span><strong data-metric="structural-pass">—</strong><em>Schema And Pointers</em></article>
+        <article class="hero-metric"><span>Semantic Preflight</span><strong data-metric="preflight-flags">—</strong><em>Flagged · Filter Pending</em></article>
       </div>
     </section>
 
@@ -182,10 +182,10 @@
       </div>
       <div class="release-grid">
         <article class="release-card active-release">
-          <div class="release-topline"><span class="release-id track-a-bg">A.1.0</span><span class="status-pill complete">Executed</span></div>
+          <div class="release-topline"><span class="release-id track-a-bg">A.1.1</span><span class="status-pill complete">Executed</span></div>
           <p class="section-kicker">Gemini Web · Subscription</p>
-          <h3>Metadata Baseline</h3>
-          <p>Introduces four metadata-only <code>base_M</code> caption runs, including one actual POP909 Train segment.</p>
+          <h3>Actual Train Subset</h3>
+          <p>Runs one deterministic four-bar segment from each of 50 POP909 Train songs with metadata-only <code>base_M</code> prompts.</p>
           <dl class="release-facts">
             <div><dt>Model</dt><dd>Gemini 3.5 Flash (Medium)</dd></div>
             <div><dt>Runs</dt><dd data-release-runs>—</dd></div>
@@ -221,9 +221,9 @@
         <p>Attachments are varied independently while general metadata remains fixed.</p>
       </div>
       <div class="condition-grid">
-        <article class="condition-card executed"><span>01</span><strong>Metadata Only</strong><small>4 Gemini Web Runs</small><em>Executed</em></article>
-        <article class="condition-card prepared"><span>02</span><strong>Metadata + MIDI</strong><small>Prompt And Asset Prepared</small><em>Prepared</em></article>
-        <article class="condition-card pending"><span>03</span><strong>Metadata + Audio</strong><small>Attachment Test Interrupted</small><em>Pending</em></article>
+        <article class="condition-card executed"><span>01</span><strong>Metadata Only</strong><small>50 Gemini Web Runs</small><em>Executed</em></article>
+        <article class="condition-card prepared"><span>02</span><strong>Metadata + MIDI</strong><small>50 Cropped Files Prepared</small><em>Prepared</em></article>
+        <article class="condition-card prepared"><span>03</span><strong>Metadata + Audio</strong><small>50 Rendered Files Prepared</small><em>Prepared</em></article>
         <article class="condition-card pending"><span>04</span><strong>Metadata + MIDI + Audio</strong><small>No Valid Run</small><em>Not Run</em></article>
       </div>
     </section>
@@ -250,7 +250,7 @@
       <div class="case-content" data-case-content>
         <article class="case-summary panel-card">
           <div>
-            <p class="eyebrow" data-case-release>A.1.0 · Loading</p>
+            <p class="eyebrow" data-case-release>A.1.1 · Loading</p>
             <h2 data-case-name>Loading Caption Case…</h2>
             <p class="case-origin" data-case-origin></p>
           </div>
@@ -286,7 +286,7 @@
             </div>
             <div class="caption-output short-output"><span>Short Caption</span><p data-caption-short>—</p></div>
             <div class="caption-output"><span>Detailed Caption</span><p data-caption-detailed>—</p></div>
-            <div class="filter-state"><span>LLM-Based Filtering</span><strong>Pending In A.1.0</strong></div>
+            <div class="filter-state"><span>LLM-Based Filtering</span><strong data-filter-state>Pending In A.1.1</strong></div>
           </article>
         </div>
 
@@ -329,6 +329,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260715-a104"></script>
+  <script src="script.js?v=20260715-a105"></script>
 </body>
 </html>

@@ -346,7 +346,16 @@ h3 {
 .backend-button.active[data-backend="A"] { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); }
 .backend-button.active[data-backend="B"] { border-color: var(--purple); background: #f4f1fa; color: var(--purple); }
 
-.case-picker { display: flex; flex-wrap: wrap; gap: 7px; margin-bottom: 10px; padding: 12px; border: 1px solid var(--line-soft); border-radius: 12px; background: var(--surface); }
+.case-picker { display: grid; grid-template-columns: minmax(280px, 1fr) auto; gap: 14px; align-items: end; margin-bottom: 10px; padding: 14px; border: 1px solid var(--line-soft); border-radius: 12px; background: var(--surface); }
+.case-select-label { display: grid; gap: 5px; color: var(--muted); font-size: 0.76rem; letter-spacing: 0.05em; text-transform: uppercase; }
+.case-select-label strong { color: var(--ink); font-family: var(--font-serif); font-size: 1rem; font-weight: 500; letter-spacing: 0; text-transform: none; }
+.case-select { width: 100%; min-height: 42px; margin-top: 3px; padding: 0 38px 0 12px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: var(--ink); cursor: pointer; font: 0.86rem var(--font-sans); transition: color 0.18s ease, border-color 0.18s ease, background-color 0.18s ease, box-shadow 0.18s ease; }
+.case-select:hover { border-color: var(--blue); background: #f8fbff; color: var(--blue); }
+.case-select:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.case-navigation { display: flex; gap: 7px; }
+.case-nav-button { min-height: 42px; padding: 0 14px; border: 1px solid var(--line); border-radius: 9px; background: #fff; color: var(--muted); cursor: pointer; transition: color 0.18s ease, border-color 0.18s ease, background-color 0.18s ease, transform 0.18s ease; }
+.case-nav-button:hover:not(:disabled) { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); transform: translateY(-1px); }
+.case-nav-button:disabled { cursor: not-allowed; opacity: 0.42; }
 .case-button { min-height: 36px; padding: 0 12px; border-radius: 8px; color: var(--muted); font-size: 0.82rem; }
 .case-button:hover { border-color: #aaa39a; color: var(--ink); transform: translateY(-1px); }
 .case-button.active { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); }
@@ -441,6 +450,8 @@ h3 {
   .metadata-mini-pipeline { grid-template-columns: repeat(4, minmax(165px, 1fr)); overflow-x: auto; }
   .metadata-diagram-arrow { display: none; }
   .case-summary { align-items: flex-start; flex-direction: column; }
+  .case-picker { grid-template-columns: 1fr; align-items: stretch; }
+  .case-navigation { justify-content: flex-end; }
   .case-meta { width: 100%; min-width: 0; }
   .case-meta div:first-child,
   .case-meta div:nth-child(3) { border-left: 0; }

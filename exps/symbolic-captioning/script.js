@@ -8,7 +8,9 @@ const state = {
   caseIndex: 0,
 };
 
-const RELEASE_ID = "A.1.0";
+function releaseId() {
+  return state.data?.release_id || "A.1.1";
+}
 
 function $(selector) {
   return document.querySelector(selector);
@@ -26,7 +28,11 @@ function formatEvidenceValue(value) {
   if (Array.isArray(value)) return value.slice(0, 12).join(", ");
   if (value.value !== undefined) return formatEvidenceValue(value.value);
   if (value.pitch_sequence) return value.pitch_sequence.join("–");
+  if (value.note_count !== undefined && value.overall_direction?.value) return `${value.note_count} Notes · ${formatLabel(value.overall_direction.value)}`;
   if (value.note_count !== undefined) return `${value.note_count} Notes`;
+  if (value.dominant_inter_onset_beat !== undefined) return `Dominant IOI ${value.dominant_inter_onset_beat} Beat`;
+  if (value.note_onsets_per_beat !== undefined) return `${value.total_note_onsets} Onsets · ${value.note_onsets_per_beat} / Beat`;
+  if (value.mean_velocity !== undefined) return `Mean ${value.mean_velocity} · ${formatLabel(value.overall_direction)}`;
   if (value.total_note_onsets !== undefined) return `${value.total_note_onsets} Onsets · ${value.note_onsets_per_second} / Sec`;
   return JSON.stringify(value);
 }
@@ -297,7 +303,7 @@ function metadataStageArtifacts(version, category, stage) {
     return [{kicker: "Observed Corpus Output", title: `Actual Train ${category.label} Metadata`, note: actualLabel, content: actualFamilyView(category)}];
   }
   return [
-    {kicker: "Actual LLM Input", title: "Caption Realization Prompt", note: "Gemini Web · A.1.0", content: caseItem.prompt},
+    {kicker: "Actual LLM Input", title: "Caption Realization Prompt", note: `Gemini Web · ${releaseId()}`, content: caseItem.prompt},
     {kicker: "Actual LLM Output", title: "Recorded Raw Caption", note: `${caseItem.provenance.model} · ${caseItem.provenance.elapsed_sec.toFixed(2)} Sec`, content: {response: caseItem.response, provenance: caseItem.provenance}},
   ];
 }
@@ -389,24 +395,50 @@ function selectMetadataCategory(categoryId, shouldScroll = false) {
 function renderMetrics() {
   const runs = state.data.summary.executed_jobs;
   $("[data-metric='web-runs']").textContent = runs;
+  $("[data-metric='structural-pass']").textContent = `${state.data.summary.structurally_accepted}/${runs}`;
+  $("[data-metric='preflight-flags']").textContent = state.data.summary.semantic_preflight_flagged;
   $("[data-release-runs]").textContent = runs;
 }
 
 function renderCasePicker() {
   const picker = $("[data-case-picker]");
   picker.innerHTML = "";
+  const label = document.createElement("label");
+  label.className = "case-select-label";
+  label.innerHTML = `<span>Case Index</span><strong>Select An Actual Train Example</strong>`;
+  const select = document.createElement("select");
+  select.className = "case-select";
+  select.setAttribute("aria-label", "Case Index");
   state.data.cases.forEach((caseItem, index) => {
+    const option = document.createElement("option");
+    const startBar = caseItem.window?.start_bar || "—";
+    const endBar = (caseItem.window?.end_bar_exclusive || startBar) - 1;
+    option.value = String(index);
+    option.textContent = `IDX ${String(index).padStart(2, "0")} · ${caseItem.source_id.toUpperCase()} · Bars ${startBar}–${endBar}`;
+    option.selected = index === state.caseIndex;
+    select.appendChild(option);
+  });
+  select.addEventListener("change", () => {
+    state.caseIndex = Number(select.value);
+    renderCase();
+  });
+  label.appendChild(select);
+  const navigation = document.createElement("div");
+  navigation.className = "case-navigation";
+  [["Previous", -1], ["Next", 1]].forEach(([text, offset]) => {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = `case-button${index === state.caseIndex ? " active" : ""}`;
-    button.textContent = `IDX ${String(index).padStart(2, "0")} · ${caseItem.family_label}`;
+    button.className = "case-nav-button";
+    button.textContent = text;
+    button.disabled = state.caseIndex + offset < 0 || state.caseIndex + offset >= state.data.cases.length;
     button.addEventListener("click", () => {
-      state.caseIndex = index;
+      state.caseIndex += offset;
       renderCasePicker();
       renderCase();
     });
-    picker.appendChild(button);
+    navigation.appendChild(button);
   });
+  picker.append(label, navigation);
 }
 
 function renderBackend() {
@@ -437,7 +469,7 @@ function originText(caseItem) {
 function renderCase() {
   const caseItem = currentCase();
   if (!caseItem) return;
-  $("[data-case-release]").textContent = `${RELEASE_ID} · ${caseItem.family_label}`;
+  $("[data-case-release]").textContent = `${releaseId()} · ${caseItem.family_label}`;
   $("[data-case-name]").textContent = caseItem.title;
   $("[data-case-origin]").textContent = originText(caseItem);
   $("[data-case-source]").textContent = caseItem.source_id;
@@ -446,6 +478,7 @@ function renderCase() {
   $("[data-caption-detailed]").textContent = caseItem.response.caption_detailed;
   $("[data-latency]").textContent = `${caseItem.provenance.elapsed_sec.toFixed(2)} Sec`;
   $("[data-researcher-note]").textContent = caseItem.researcher_audit;
+  $("[data-filter-state]").textContent = `Pending In ${releaseId()}`;
   renderEvidence(caseItem);
   renderMedia(caseItem);
 }
@@ -505,8 +538,10 @@ function renderMedia(caseItem) {
     midiLink.hidden = true;
   }
 
+  const startBar = caseItem.window?.start_bar || "—";
+  const endBar = (caseItem.window?.end_bar_exclusive || startBar) - 1;
   $("[data-media-note]").textContent = hasMedia
-    ? "POP909 Train bars 10–13. The WAV is a deterministic VST-style render of the cropped MIDI, not original dataset audio."
+    ? `POP909 Train bars ${startBar}–${endBar}. The WAV is a deterministic additive-synthesis render of the cropped MIDI, not original dataset audio.`
     : "This recorded pilot used controlled MIDI-derived metadata without a retained media attachment.";
 
   if (notes.length) requestAnimationFrame(() => drawPianoRoll(canvas, notes, media.duration_sec || 1));
@@ -587,9 +622,9 @@ function midiName(pitch) {
 }
 
 function modalPayload(kind, caseItem) {
-  if (kind === "prompt") return { kicker: `${RELEASE_ID} · Exact Request`, title: "Captioning Prompt", content: caseItem.prompt };
-  if (kind === "evidence") return { kicker: `${RELEASE_ID} · Required Input`, title: "General Metadata", content: JSON.stringify({ supported_evidence: caseItem.supported_evidence, uncertain_or_unknown_evidence: caseItem.blocked_evidence }, null, 2) };
-  return { kicker: `${RELEASE_ID} · Recorded Artifact`, title: "Raw Result JSON", content: JSON.stringify({ response: caseItem.response, provenance: caseItem.provenance, validation: caseItem.validation, artifact_paths: caseItem.artifact_paths }, null, 2) };
+  if (kind === "prompt") return { kicker: `${releaseId()} · Exact Request`, title: "Captioning Prompt", content: caseItem.prompt };
+  if (kind === "evidence") return { kicker: `${releaseId()} · Required Input`, title: "General Metadata", content: JSON.stringify({ supported_evidence: caseItem.supported_evidence, uncertain_or_unknown_evidence: caseItem.blocked_evidence }, null, 2) };
+  return { kicker: `${releaseId()} · Recorded Artifact`, title: "Raw Result JSON", content: JSON.stringify({ response: caseItem.response, provenance: caseItem.provenance, validation: caseItem.validation, artifact_paths: caseItem.artifact_paths }, null, 2) };
 }
 
 function openDialog(kind) {
@@ -638,7 +673,7 @@ async function initialize() {
   try {
     const [summaryResponse, metadataResponse] = await Promise.all([
       fetch("assets/data/summary.json", { cache: "no-store" }),
-      fetch("assets/data/metadata_versions.json?schema=v0.2&ui=a104", { cache: "no-store" }),
+      fetch("assets/data/metadata_versions.json?schema=v0.2&ui=a105", { cache: "no-store" }),
     ]);
     if (!summaryResponse.ok) throw new Error(`Summary HTTP ${summaryResponse.status}`);
     if (!metadataResponse.ok) throw new Error(`Metadata HTTP ${metadataResponse.status}`);

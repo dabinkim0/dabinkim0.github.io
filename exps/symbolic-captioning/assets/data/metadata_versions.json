@@ -7,27 +7,27 @@
     "pilot_supported_evidence": "You are producing an English music caption from supported symbolic evidence. Use only supported fields, omit blocked attributes, and return evidence-linked JSON captions."
   },
   "actual_dataset_example": {
-    "case_id": "real_pop909_001_bar10_14__base_M",
-    "display_name": "POP909 · Train · pop909:001 · Bars 10–13",
+    "case_id": "pop909_train_344_bar64_68_a1_1__base_M",
+    "display_name": "POP909 · Train · pop909:344 · Bars 64–67",
     "family_views": {
       "key": {
         "evidence_key": "local_key_estimate",
-        "fields": ["value", "confidence", "status", "method", "scope", "evidence"],
+        "fields": ["value", "assertion_level", "status", "method", "scope", "diagnostics"],
         "blocked_prefixes": []
       },
       "notes": {
         "evidence_key": "melody_sequence",
-        "fields": ["pitch_sequence", "pitch_class_sequence", "pitch_range", "note_count", "role_source", "confidence", "status"],
-        "blocked_prefixes": ["melody_pitch_contour"]
+        "fields": ["opening_pitch_sequence", "ending_pitch_sequence", "pitch_range", "note_count", "overall_direction", "interval_statistics", "role_source", "status"],
+        "blocked_prefixes": ["melody_shape"]
       },
       "rhythm": {
-        "evidence_key": "melody_sequence",
-        "fields": ["duration_pattern_beat", "inter_onset_pattern_beat", "relative_onsets_beat", "note_count", "role_source", "confidence", "status"],
+        "evidence_key": "rhythm_summary",
+        "fields": ["dominant_inter_onset_beat", "median_inter_onset_beat", "median_duration_beat", "inter_onset_variation_coefficient", "relative_onsets_excerpt", "role_source", "status"],
         "blocked_prefixes": []
       },
       "texture": {
         "evidence_key": "texture_summary",
-        "fields": ["total_note_onsets", "note_onsets_per_second", "track_note_counts", "confidence", "status"],
+        "fields": ["total_note_onsets", "note_onsets_per_beat", "role_note_counts", "active_role_count", "polyphony", "register", "status"],
         "blocked_prefixes": []
       }
     }
@@ -111,7 +111,7 @@
           ],
           "prompt_ref": "pilot_supported_evidence",
           "prompt_label": "Pilot Prompt Excerpt",
-          "prompt_note": "Executed In A.1.0",
+          "prompt_note": "Executed In A.1.1",
           "example_label": "Actual Train Metadata",
           "example_note": "Reload For Stage-Scoped POP909 View",
           "example_metadata": {"source_id": "pop909:001", "split": "train", "compatibility_view": true}
@@ -199,7 +199,7 @@
           ],
           "prompt_ref": "pilot_supported_evidence",
           "prompt_label": "Pilot Prompt Excerpt",
-          "prompt_note": "Executed In A.1.0",
+          "prompt_note": "Executed In A.1.1",
           "example_label": "Actual Train Metadata",
           "example_note": "Reload For Stage-Scoped POP909 View",
           "example_metadata": {"source_id": "pop909:001", "split": "train", "compatibility_view": true}
@@ -277,7 +277,7 @@
           ],
           "prompt_ref": "pilot_supported_evidence",
           "prompt_label": "Pilot Prompt Excerpt",
-          "prompt_note": "Executed In A.1.0",
+          "prompt_note": "Executed In A.1.1",
           "example_label": "Actual Train Metadata",
           "example_note": "Reload For Stage-Scoped POP909 View",
           "example_metadata": {"source_id": "pop909:001", "split": "train", "compatibility_view": true}
@@ -366,7 +366,7 @@
           ],
           "prompt_ref": "pilot_supported_evidence",
           "prompt_label": "Pilot Prompt Excerpt",
-          "prompt_note": "Executed In A.1.0",
+          "prompt_note": "Executed In A.1.1",
           "example_label": "Actual Train Metadata",
           "example_note": "Reload For Stage-Scoped POP909 View",
           "example_metadata": {"source_id": "pop909:001", "split": "train", "compatibility_view": true}
