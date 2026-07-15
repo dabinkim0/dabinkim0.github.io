@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260715-a101">
+  <link rel="stylesheet" href="styles.css?v=20260715-a102">
 </head>
 <body>
   <header class="main-header">
@@ -58,7 +58,12 @@
           <span class="node-index">02</span>
           <span class="node-badge required">Required</span>
           <strong>General Metadata</strong>
-          <small>Key, Notes, Rhythm, Texture</small>
+          <div class="metadata-node-actions" aria-label="Inspect General Metadata Versions">
+            <button type="button" data-metadata-shortcut="key">Key</button>
+            <button type="button" data-metadata-shortcut="notes">Notes</button>
+            <button type="button" data-metadata-shortcut="rhythm">Rhythm</button>
+            <button type="button" data-metadata-shortcut="texture">Texture</button>
+          </div>
         </article>
         <div class="flow-arrow" aria-hidden="true"><span></span></div>
         <article class="pipeline-node request-node">
@@ -105,6 +110,70 @@
         <span><i class="legend-dashed"></i> Optional Attachment</span>
         <span><i class="legend-track track-a"></i> A · Subscription</span>
         <span><i class="legend-track track-b"></i> B · API</span>
+      </div>
+    </section>
+
+    <section id="metadata-development" class="section-block metadata-development" aria-labelledby="metadata-development-title">
+      <div class="section-head outside-head">
+        <div>
+          <p class="section-kicker">Extractor Development</p>
+          <h2 id="metadata-development-title">General Metadata Versions</h2>
+        </div>
+        <p>Choose a metadata family, then inspect its implementation history and current contract.</p>
+      </div>
+
+      <div class="panel-card metadata-explorer">
+        <div class="metadata-explorer-controls">
+          <div>
+            <span class="control-label">Metadata Family</span>
+            <div class="metadata-category-tabs" data-metadata-categories role="tablist" aria-label="General Metadata Family"></div>
+          </div>
+          <div>
+            <span class="control-label">Version History</span>
+            <div class="metadata-version-tabs" data-metadata-versions role="tablist" aria-label="Metadata Version"></div>
+          </div>
+        </div>
+
+        <article class="metadata-version-detail" data-metadata-detail aria-live="polite">
+          <header class="metadata-detail-head">
+            <div>
+              <p class="section-kicker" data-metadata-kicker>Loading Metadata Contract</p>
+              <h3 data-metadata-title>Loading…</h3>
+              <p data-metadata-summary></p>
+            </div>
+            <span class="status-pill" data-metadata-status>—</span>
+          </header>
+
+          <div class="metadata-facts">
+            <div><span>Implementation Stage</span><strong data-metadata-stage>—</strong></div>
+            <div><span>Evidence Scope</span><strong data-metadata-scope>—</strong></div>
+            <div><span>Next Validation Gate</span><strong data-metadata-gate>—</strong></div>
+          </div>
+
+          <div class="metadata-characteristics-wrap">
+            <p class="control-label">Pipeline Characteristics</p>
+            <ul class="metadata-characteristics" data-metadata-characteristics></ul>
+          </div>
+
+          <div class="metadata-mini-pipeline" data-metadata-diagram aria-label="Selected Metadata Pipeline"></div>
+
+          <div class="metadata-artifact-grid">
+            <section class="metadata-code-card">
+              <div class="metadata-code-head">
+                <div><p class="section-kicker">Caption Input</p><h3 data-metadata-prompt-label>Input Prompt</h3></div>
+                <span data-metadata-prompt-note>—</span>
+              </div>
+              <pre data-metadata-prompt></pre>
+            </section>
+            <section class="metadata-code-card">
+              <div class="metadata-code-head">
+                <div><p class="section-kicker">Evidence Artifact</p><h3 data-metadata-example-label>Example Metadata</h3></div>
+                <span data-metadata-example-note>—</span>
+              </div>
+              <pre data-metadata-example></pre>
+            </section>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -265,6 +334,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260715-a101"></script>
+  <script src="script.js?v=20260715-a102"></script>
 </body>
 </html>

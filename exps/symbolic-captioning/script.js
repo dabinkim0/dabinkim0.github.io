@@ -1,5 +1,8 @@
 const state = {
   data: null,
+  metadataData: null,
+  metadataCategory: "key",
+  metadataVersionByCategory: {},
   backend: "A",
   caseIndex: 0,
 };
@@ -29,6 +32,125 @@ function formatEvidenceValue(value) {
 
 function currentCase() {
   return state.data?.cases?.[state.caseIndex] || null;
+}
+
+function currentMetadataCategory() {
+  return state.metadataData?.categories?.find((category) => category.id === state.metadataCategory) || null;
+}
+
+function currentMetadataVersion() {
+  const category = currentMetadataCategory();
+  if (!category) return null;
+  const selectedVersion = state.metadataVersionByCategory[category.id] || category.current_version;
+  return category.versions.find((version) => version.id === selectedVersion) || category.versions[0] || null;
+}
+
+function renderMetadataCategories() {
+  const container = $("[data-metadata-categories]");
+  container.innerHTML = "";
+  document.querySelectorAll("[data-metadata-shortcut]").forEach((button) => {
+    const isActive = button.dataset.metadataShortcut === state.metadataCategory;
+    button.classList.toggle("active", isActive);
+    button.setAttribute("aria-pressed", String(isActive));
+  });
+  state.metadataData.categories.forEach((category) => {
+    const button = document.createElement("button");
+    const isActive = category.id === state.metadataCategory;
+    button.type = "button";
+    button.className = `metadata-category-button${isActive ? " active" : ""}`;
+    button.setAttribute("role", "tab");
+    button.setAttribute("aria-selected", String(isActive));
+    button.innerHTML = `<span>${category.label.slice(0, 1)}</span><strong>${category.label}</strong><small>${category.current_version}</small>`;
+    button.addEventListener("click", () => selectMetadataCategory(category.id));
+    container.appendChild(button);
+  });
+}
+
+function renderMetadataVersions() {
+  const category = currentMetadataCategory();
+  const selectedVersion = currentMetadataVersion();
+  const container = $("[data-metadata-versions]");
+  container.innerHTML = "";
+  category.versions.forEach((version) => {
+    const button = document.createElement("button");
+    const isActive = version.id === selectedVersion.id;
+    button.type = "button";
+    button.className = `metadata-version-button${isActive ? " active" : ""}`;
+    button.setAttribute("role", "tab");
+    button.setAttribute("aria-selected", String(isActive));
+    button.innerHTML = `<strong>${version.id}</strong><span>${version.status}</span>${version.id === category.current_version ? "<em>Current</em>" : ""}`;
+    button.addEventListener("click", () => {
+      state.metadataVersionByCategory[category.id] = version.id;
+      renderMetadataExplorer();
+    });
+    container.appendChild(button);
+  });
+}
+
+function renderMetadataDiagram(version) {
+  const container = $("[data-metadata-diagram]");
+  container.innerHTML = "";
+  version.diagram.forEach((step, index) => {
+    const node = document.createElement("article");
+    node.className = "metadata-diagram-node";
+    node.innerHTML = `<span>${String(index + 1).padStart(2, "0")}</span><strong>${step.title}</strong><small>${step.detail}</small>`;
+    container.appendChild(node);
+    if (index < version.diagram.length - 1) {
+      const arrow = document.createElement("i");
+      arrow.className = "metadata-diagram-arrow";
+      arrow.setAttribute("aria-hidden", "true");
+      container.appendChild(arrow);
+    }
+  });
+}
+
+function renderMetadataDetail() {
+  const category = currentMetadataCategory();
+  const version = currentMetadataVersion();
+  const status = $("[data-metadata-status]");
+  $("[data-metadata-kicker]").textContent = `${version.id} · ${category.label} · ${version.date}`;
+  $("[data-metadata-title]").textContent = version.title;
+  $("[data-metadata-summary]").textContent = version.summary;
+  status.textContent = version.status;
+  status.className = `status-pill ${version.status_tone}`;
+  $("[data-metadata-stage]").textContent = version.stage;
+  $("[data-metadata-scope]").textContent = version.scope;
+  $("[data-metadata-gate]").textContent = version.next_gate;
+
+  const characteristics = $("[data-metadata-characteristics]");
+  characteristics.innerHTML = "";
+  version.characteristics.forEach((text) => {
+    const item = document.createElement("li");
+    item.textContent = text;
+    characteristics.appendChild(item);
+  });
+
+  renderMetadataDiagram(version);
+  $("[data-metadata-prompt-label]").textContent = version.prompt_label;
+  $("[data-metadata-prompt-note]").textContent = version.prompt_note;
+  $("[data-metadata-prompt]").textContent = state.metadataData.prompts[version.prompt_ref];
+  $("[data-metadata-example-label]").textContent = version.example_label;
+  $("[data-metadata-example-note]").textContent = version.example_note;
+  $("[data-metadata-example]").textContent = JSON.stringify(version.example_metadata, null, 2);
+}
+
+function renderMetadataExplorer() {
+  if (!state.metadataData) return;
+  renderMetadataCategories();
+  renderMetadataVersions();
+  renderMetadataDetail();
+}
+
+function selectMetadataCategory(categoryId, shouldScroll = false) {
+  state.metadataCategory = categoryId;
+  const category = currentMetadataCategory();
+  if (!state.metadataVersionByCategory[category.id]) {
+    state.metadataVersionByCategory[category.id] = category.current_version;
+  }
+  renderMetadataExplorer();
+  if (shouldScroll) {
+    $("#metadata-development").scrollIntoView({ behavior: "smooth", block: "start" });
+  }
 }
 
 function renderMetrics() {
@@ -257,6 +379,9 @@ function renderCaveats() {
 }
 
 function bindEvents() {
+  document.querySelectorAll("[data-metadata-shortcut]").forEach((button) => {
+    button.addEventListener("click", () => selectMetadataCategory(button.dataset.metadataShortcut, true));
+  });
   document.querySelectorAll("[data-backend]").forEach((button) => {
     button.addEventListener("click", () => {
       state.backend = button.dataset.backend;
@@ -278,12 +403,18 @@ function bindEvents() {
 
 async function initialize() {
   try {
-    const response = await fetch("assets/data/summary.json", { cache: "no-store" });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    state.data = await response.json();
+    const [summaryResponse, metadataResponse] = await Promise.all([
+      fetch("assets/data/summary.json", { cache: "no-store" }),
+      fetch("assets/data/metadata_versions.json", { cache: "no-store" }),
+    ]);
+    if (!summaryResponse.ok) throw new Error(`Summary HTTP ${summaryResponse.status}`);
+    if (!metadataResponse.ok) throw new Error(`Metadata HTTP ${metadataResponse.status}`);
+    state.data = await summaryResponse.json();
+    state.metadataData = await metadataResponse.json();
     renderMetrics();
     renderCaveats();
     bindEvents();
+    renderMetadataExplorer();
     renderBackend();
   } catch (error) {
     document.body.innerHTML = `<main class="shell page-shell"><section class="caveat-panel"><div><p class="section-kicker">Load Error</p><h2>Experiment Data Unavailable</h2></div><p>${error.message}</p></section></main>`;

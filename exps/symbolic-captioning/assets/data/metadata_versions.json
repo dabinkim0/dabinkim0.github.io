@@ -1,0 +1,371 @@
+{
+  "schema_version": "sori_metadata_version_viewer_v0.1",
+  "updated_on": "2026-07-15",
+  "version_convention": "K/N/R/T.major.minor",
+  "prompts": {
+    "phase_0_projection": "You are producing an English caption for a symbolic-music segment.\n\nEvidence policy:\n- Realize only claims listed under `caption_projection.allowed_claims`.\n- Do not verbalize any item under `caption_projection.blocked_claims`.\n- Match each claim's `assertion_level`; use centered or suggestive wording when required.\n- State an exact sequence or trend only when its evidence value is explicit.\n- Return one raw JSON object with `caption_short`, `caption_detailed`, and short claim-to-evidence links.\n\nInput modalities:\n{{input_modalities}}\n\nCaption projection:\n{{caption_projection}}",
+    "pilot_supported_evidence": "You are producing an English music caption for a symbolic MIDI segment.\n\nEvidence policy:\n- Use only fields under `metadata.supported_evidence` whose status is `supported`.\n- Treat `metadata.uncertain_or_unknown_evidence` as blocked attributes.\n- State a pitch sequence, rhythm, contour, or trend only when explicit symbolic evidence is supplied.\n- Return one raw JSON object with short and detailed captions plus evidence paths.\n\nInput evidence:\n{{metadata}}"
+  },
+  "categories": [
+    {
+      "id": "key",
+      "label": "Key",
+      "current_version": "K.0.1",
+      "versions": [
+        {
+          "id": "K.0.1",
+          "date": "2026-07-15",
+          "status": "Contract Ready",
+          "status_tone": "complete",
+          "stage": "Phase 0 · Contract And Fixtures",
+          "scope": "Piece And Local Key Evidence",
+          "next_gate": "Phase 2 Calibration On POP909 Valid",
+          "title": "Canonical Key Evidence Contract",
+          "summary": "Introduces a versioned evidence envelope, explicit uncertainty states, canonical hashing, and deterministic key-region fixtures. It does not yet claim that a production key extractor has been validated.",
+          "characteristics": [
+            "Separates piece key from local key regions and their temporal scopes.",
+            "Allows assertive, centered, suggestive, or omitted lexical strength through an evidence gate.",
+            "Covers constant key, C-to-G local-key change, and transposition invariance with synthetic fixtures."
+          ],
+          "diagram": [
+            {"title": "Key Fixtures", "detail": "Constant · Local Change · Transposition"},
+            {"title": "Canonical Evidence", "detail": "Value · Scope · Status · Method"},
+            {"title": "Lexical Gate", "detail": "Supported Or Blocked"},
+            {"title": "Caption Projection", "detail": "Centered Key Claim"}
+          ],
+          "prompt_ref": "phase_0_projection",
+          "prompt_label": "Projection Prompt Template",
+          "prompt_note": "Contract Prepared · Not Yet Executed",
+          "example_label": "Canonical Evidence Fragment",
+          "example_note": "Synthetic Fixture · local_key_c_to_g",
+          "example_metadata": {
+            "example_type": "canonical_evidence_fragment",
+            "schema_version": "sori_canonical_metadata_v0.1",
+            "fixture_id": "local_key_c_to_g",
+            "caption_span": {"start_tick": 3840, "end_tick": 7680},
+            "composition_view": {
+              "evidence": [
+                {
+                  "evidence_id": "composition.local_key@caption_span",
+                  "feature_id": "composition.local_key",
+                  "scope_id": "caption_span",
+                  "value": "G major",
+                  "status": "supported",
+                  "confidence": null,
+                  "assertion_level": "centered",
+                  "method": "synthetic_ground_truth",
+                  "evidence_refs": [{"kind": "tick_span", "value": [3840, 7680]}]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "K.0.0",
+          "date": "2026-07-14",
+          "status": "Pilot Baseline",
+          "status_tone": "pending",
+          "stage": "Caption Pilot · Ad Hoc Evidence",
+          "scope": "Single Selected Window",
+          "next_gate": "Replaced By K.0.1 Contract",
+          "title": "Direct Supported-Evidence Key Hint",
+          "summary": "The pilot passed a single rule-derived key estimate directly to Gemini under `supported_evidence`. The estimate was useful for prompt testing but lacked a canonical scope, calibrated confidence policy, and extractor version identity.",
+          "characteristics": [
+            "Uses one local-key label and confidence value per selected window.",
+            "Places the key hint directly in the caption job rather than a reusable canonical record.",
+            "Treats structural acceptance as separate from musical validity."
+          ],
+          "diagram": [
+            {"title": "MIDI Window", "detail": "Selected Segment"},
+            {"title": "Rule Estimate", "detail": "Key And Confidence"},
+            {"title": "Supported Evidence", "detail": "Direct Job Field"},
+            {"title": "Gemini Caption", "detail": "Pilot Output"}
+          ],
+          "prompt_ref": "pilot_supported_evidence",
+          "prompt_label": "Pilot Prompt Excerpt",
+          "prompt_note": "Executed In A.1.0",
+          "example_label": "Pilot Metadata Example",
+          "example_note": "Controlled Pitch / Key Case",
+          "example_metadata": {
+            "supported_evidence": {
+              "local_key": {"value": "D minor", "confidence": 0.957, "status": "supported"}
+            },
+            "uncertain_or_unknown_evidence": []
+          }
+        }
+      ]
+    },
+    {
+      "id": "notes",
+      "label": "Notes",
+      "current_version": "N.0.1",
+      "versions": [
+        {
+          "id": "N.0.1",
+          "date": "2026-07-15",
+          "status": "Contract Ready",
+          "status_tone": "complete",
+          "stage": "Phase 0 · Contract And Fixtures",
+          "scope": "Exact Note Sequences And References",
+          "next_gate": "Phase 1 Normalized Note Table",
+          "title": "Traceable Note Evidence Contract",
+          "summary": "Defines note-level evidence as an exact value tied to scope and evidence pointers, with deterministic transposition-pair fixtures. Normalized note IDs and production role assignment remain Phase 1 and Phase 2 work.",
+          "characteristics": [
+            "Keeps MIDI pitch values and display pitch names as explicit evidence rather than inferred prose.",
+            "Associates sequence claims with note IDs or a declared tick span.",
+            "Tests rhythm-preserving +2-semitone transposition with byte-stable fixture pairs."
+          ],
+          "diagram": [
+            {"title": "Note Fixtures", "detail": "Exact Pitch And Onset Lists"},
+            {"title": "Evidence Pointer", "detail": "Note IDs Or Tick Span"},
+            {"title": "Sequence Gate", "detail": "Exact Values Only"},
+            {"title": "Caption Projection", "detail": "Verifiable Note Claim"}
+          ],
+          "prompt_ref": "phase_0_projection",
+          "prompt_label": "Projection Prompt Template",
+          "prompt_note": "Contract Prepared · Not Yet Executed",
+          "example_label": "Canonical Evidence Fragment",
+          "example_note": "Synthetic Fixture · transposition_source_c_major",
+          "example_metadata": {
+            "example_type": "canonical_evidence_fragment",
+            "schema_version": "sori_canonical_metadata_v0.1",
+            "fixture_id": "transposition_source_c_major",
+            "composition_view": {
+              "evidence": [
+                {
+                  "evidence_id": "composition.note_sequence@caption_span",
+                  "feature_id": "composition.note_sequence",
+                  "scope_id": "caption_span",
+                  "value": {
+                    "pitch_sequence": ["C4", "D4", "E4", "F4", "G4", "F4", "E4", "D4"],
+                    "midi_pitches": [60, 62, 64, 65, 67, 65, 64, 62],
+                    "note_count": 8
+                  },
+                  "status": "supported",
+                  "confidence": null,
+                  "assertion_level": "assertive",
+                  "method": "synthetic_ground_truth",
+                  "evidence_refs": [{"kind": "tick_span", "value": [0, 3840]}]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "N.0.0",
+          "date": "2026-07-14",
+          "status": "Pilot Baseline",
+          "status_tone": "pending",
+          "stage": "Caption Pilot · Ad Hoc Evidence",
+          "scope": "Selected Melody Window",
+          "next_gate": "Replaced By N.0.1 Contract",
+          "title": "Direct Melody Sequence Hint",
+          "summary": "The pilot supplied pitch names, pitch range, and note count directly inside a melody-sequence object. It enabled exact-sequence captions but did not yet guarantee stable note identity across extractors.",
+          "characteristics": [
+            "Exposes exact pitch names when available.",
+            "Stores note count and pitch range beside the sequence.",
+            "Relies on pilot-specific melody selection and provenance."
+          ],
+          "diagram": [
+            {"title": "Selected Melody", "detail": "Pilot Role Track"},
+            {"title": "Pitch Sequence", "detail": "Names And Range"},
+            {"title": "Supported Evidence", "detail": "Direct Job Field"},
+            {"title": "Gemini Caption", "detail": "Pilot Output"}
+          ],
+          "prompt_ref": "pilot_supported_evidence",
+          "prompt_label": "Pilot Prompt Excerpt",
+          "prompt_note": "Executed In A.1.0",
+          "example_label": "Pilot Metadata Example",
+          "example_note": "Controlled Melody Case",
+          "example_metadata": {
+            "supported_evidence": {
+              "melody_sequence": {
+                "pitch_sequence": ["A4", "G4", "F4", "E4"],
+                "pitch_range": {"lowest": "E4", "highest": "A4"},
+                "note_count": 4,
+                "status": "supported"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "rhythm",
+      "label": "Rhythm",
+      "current_version": "R.0.1",
+      "versions": [
+        {
+          "id": "R.0.1",
+          "date": "2026-07-15",
+          "status": "Contract Ready",
+          "status_tone": "complete",
+          "stage": "Phase 0 · Contract And Fixtures",
+          "scope": "Tempo, Meter, Onset, And Duration Evidence",
+          "next_gate": "Phase 1 Tick/Beat/Bar/Second Tests",
+          "title": "Temporal Backbone Contract",
+          "summary": "Defines full tempo, meter, key-signature, control-event, and bar-map containers instead of reducing time to one scalar BPM. Fixtures cover tempo and meter changes, pickup annotation, sustain, and exact onset sequences.",
+          "characteristics": [
+            "Preserves event maps required to translate bar/beat spans into seconds.",
+            "Keeps notated note duration separate from pedal-extended sounding duration.",
+            "Marks pickup as explicit fixture or dataset evidence because raw MIDI does not uniquely encode an anacrusis."
+          ],
+          "diagram": [
+            {"title": "Temporal Fixtures", "detail": "Tempo · Meter · Pickup · Pedal"},
+            {"title": "Temporal Map", "detail": "Tick · Beat · Bar · Second"},
+            {"title": "Rhythm Evidence", "detail": "Onset And Duration"},
+            {"title": "Caption Projection", "detail": "Scoped Rhythm Claim"}
+          ],
+          "prompt_ref": "phase_0_projection",
+          "prompt_label": "Projection Prompt Template",
+          "prompt_note": "Contract Prepared · Not Yet Executed",
+          "example_label": "Temporal Contract Fragment",
+          "example_note": "Synthetic Fixture · tempo_change_120_to_90",
+          "example_metadata": {
+            "example_type": "canonical_temporal_fragment",
+            "schema_version": "sori_canonical_metadata_v0.1",
+            "fixture_id": "tempo_change_120_to_90",
+            "temporal_map": {
+              "ticks_per_quarter": 480,
+              "tempo_events": [
+                {"tick": 0, "tempo_us_per_quarter": 500000, "bpm": 120.0},
+                {"tick": 3840, "tempo_us_per_quarter": 666667, "bpm": 90.0}
+              ],
+              "time_signature_events": [{"tick": 0, "numerator": 4, "denominator": 4}]
+            },
+            "caption_span": {"start_tick": 0, "end_tick": 7680}
+          }
+        },
+        {
+          "id": "R.0.0",
+          "date": "2026-07-14",
+          "status": "Pilot Baseline",
+          "status_tone": "pending",
+          "stage": "Caption Pilot · Ad Hoc Evidence",
+          "scope": "Selected Symbolic Window",
+          "next_gate": "Replaced By R.0.1 Contract",
+          "title": "Direct Duration And Onset Arrays",
+          "summary": "The pilot inserted duration and inter-onset arrays directly into the caption job. It demonstrated that explicit rhythm can ground prose, but it did not preserve tempo or meter changes as first-class maps.",
+          "characteristics": [
+            "Provides beat-normalized durations and inter-onset intervals.",
+            "Supports explicit rhythm descriptions only when arrays are present.",
+            "Does not yet define production bar boundaries or pickup behavior."
+          ],
+          "diagram": [
+            {"title": "MIDI Window", "detail": "Selected Segment"},
+            {"title": "Rule Arrays", "detail": "IOI And Duration"},
+            {"title": "Supported Evidence", "detail": "Direct Job Field"},
+            {"title": "Gemini Caption", "detail": "Pilot Output"}
+          ],
+          "prompt_ref": "pilot_supported_evidence",
+          "prompt_label": "Pilot Prompt Excerpt",
+          "prompt_note": "Executed In A.1.0",
+          "example_label": "Pilot Metadata Example",
+          "example_note": "Controlled Timing Case",
+          "example_metadata": {
+            "supported_evidence": {
+              "rhythm_pattern": {
+                "duration_pattern_beat": [1.0, 0.5, 0.5, 1.0],
+                "inter_onset_pattern_beat": [1.0, 0.5, 0.5],
+                "status": "supported"
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "texture",
+      "label": "Texture",
+      "current_version": "T.0.1",
+      "versions": [
+        {
+          "id": "T.0.1",
+          "date": "2026-07-15",
+          "status": "Contract Ready",
+          "status_tone": "complete",
+          "stage": "Phase 0 · Contract And Fixtures",
+          "scope": "Bar-Wise Density, Polyphony, And Velocity",
+          "next_gate": "Phase 2 POP909 Feature Extraction",
+          "title": "Scoped Texture Trend Contract",
+          "summary": "Defines texture observations as scoped, evidence-linked values and adds a fixture whose onset density, maximum polyphony, and velocity increase independently by bar. The production extractor and threshold calibration remain pending.",
+          "characteristics": [
+            "Separates onset density, simultaneous polyphony, and velocity instead of collapsing them into one adjective.",
+            "Stores raw bar-wise trajectories before rendering increasing, sparser, or steadier language.",
+            "Blocks a verbal trend when direction is ambiguous or unsupported."
+          ],
+          "diagram": [
+            {"title": "Texture Fixture", "detail": "Bar-Wise Note Events"},
+            {"title": "Raw Trajectories", "detail": "Density · Polyphony · Velocity"},
+            {"title": "Direction Gate", "detail": "Supported Or Ambiguous"},
+            {"title": "Caption Projection", "detail": "Verifiable Trend Claim"}
+          ],
+          "prompt_ref": "phase_0_projection",
+          "prompt_label": "Projection Prompt Template",
+          "prompt_note": "Contract Prepared · Not Yet Executed",
+          "example_label": "Canonical Evidence Fragment",
+          "example_note": "Synthetic Fixture · texture_dynamic_trend",
+          "example_metadata": {
+            "example_type": "canonical_evidence_fragment",
+            "schema_version": "sori_canonical_metadata_v0.1",
+            "fixture_id": "texture_dynamic_trend",
+            "composition_view": {
+              "evidence": [
+                {
+                  "evidence_id": "composition.texture_trajectory@caption_span",
+                  "feature_id": "composition.texture_trajectory",
+                  "scope_id": "caption_span",
+                  "value": {
+                    "bar_onset_counts": [1, 2, 3, 4],
+                    "bar_max_polyphony": [1, 2, 3, 4],
+                    "bar_mean_velocity": [40.0, 55.0, 70.0, 85.0],
+                    "direction": "increasing"
+                  },
+                  "status": "supported",
+                  "confidence": null,
+                  "assertion_level": "assertive",
+                  "method": "synthetic_ground_truth",
+                  "evidence_refs": [{"kind": "bar_indices", "value": [0, 1, 2, 3]}]
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "T.0.0",
+          "date": "2026-07-14",
+          "status": "Pilot Baseline",
+          "status_tone": "pending",
+          "stage": "Caption Pilot · Ad Hoc Evidence",
+          "scope": "Selected Accompaniment Window",
+          "next_gate": "Replaced By T.0.1 Contract",
+          "title": "Direct Accompaniment Statistics",
+          "summary": "The pilot supplied accompaniment note count, density, and polyphony as direct metadata hints. It was sufficient for a captioning smoke test but did not yet preserve bar-wise trajectories or calibrated trend uncertainty.",
+          "characteristics": [
+            "Uses aggregate accompaniment counts and density.",
+            "Can state sparse or dense texture only from supplied values.",
+            "Does not yet separate local trend evidence from whole-window averages."
+          ],
+          "diagram": [
+            {"title": "Role Window", "detail": "Melody And Accompaniment"},
+            {"title": "Aggregate Stats", "detail": "Count · Density · Polyphony"},
+            {"title": "Supported Evidence", "detail": "Direct Job Field"},
+            {"title": "Gemini Caption", "detail": "Pilot Output"}
+          ],
+          "prompt_ref": "pilot_supported_evidence",
+          "prompt_label": "Pilot Prompt Excerpt",
+          "prompt_note": "Executed In A.1.0",
+          "example_label": "Pilot Metadata Example",
+          "example_note": "Controlled Texture Case",
+          "example_metadata": {
+            "supported_evidence": {
+              "accompaniment_note_count": {"value": 18, "status": "supported"},
+              "accompaniment_density": {"value": 2.25, "unit": "onsets_per_second", "status": "supported"},
+              "mean_polyphony": {"value": 2.1, "status": "supported"}
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
