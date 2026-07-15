@@ -214,6 +214,9 @@
 
 .news-panel-grid {
     --news-scroll-height: 20rem;
+    --news-panel-header-height: 54px;
+    --news-panel-collapsed-height: calc(var(--news-panel-header-height) + 2px);
+    --news-panel-open-height: calc(var(--news-panel-collapsed-height) + var(--news-scroll-height));
     --news-panel-bg: var(--surface-raised);
     --news-panel-collapsed-bg: var(--surface-color);
 
@@ -221,10 +224,20 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     align-items: start;
     gap: 18px;
-    transition: grid-template-columns var(--motion-expand) var(--ease-out);
+    transition:
+        grid-template-columns var(--motion-expand) var(--ease-out),
+        min-height var(--motion-expand) var(--ease-out);
 }
 
 @media (min-width: 721px) {
+    .news-panel-grid {
+        min-height: var(--news-panel-collapsed-height);
+    }
+
+    .news-panel-grid:has(> .education-list:not(.is-collapsed)) {
+        min-height: var(--news-panel-open-height);
+    }
+
     .news-panel-grid:has(> .education-list:first-child:not(.is-collapsed)):has(> .education-list:last-child.is-collapsed) {
         grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
     }
@@ -252,8 +265,7 @@
 }
 
 .education-list.is-collapsed {
-    height: 56px;
-    min-height: 56px;
+    min-height: var(--news-panel-collapsed-height);
     background-color: var(--news-panel-collapsed-bg);
 }
 
@@ -282,7 +294,8 @@
     justify-content: space-between;
     gap: var(--space-3);
     width: 100%;
-    padding: var(--space-4);
+    height: var(--news-panel-header-height);
+    padding: 0 var(--space-4);
     border: none;
     background-color: transparent;
     font-family: inherit;
@@ -313,11 +326,6 @@
 .education-list.is-collapsed .news-toggle:hover,
 .education-list.is-collapsed .news-toggle:focus-visible {
     color: var(--accent-strong);
-}
-
-.education-list.is-collapsed .news-toggle {
-    height: 54px;
-    padding-block: 0;
 }
 
 .education-list.is-collapsed .news-toggle > span:first-child {
@@ -368,7 +376,7 @@
 }
 
 .education-list.is-collapsed .news-scroll-area {
-    max-height: 0;
+    height: 0;
     opacity: 0;
     margin-top: 0;
     padding-top: 0;
@@ -380,8 +388,7 @@
 }
 
 .news-scroll-area {
-    height: auto;
-    max-height: var(--news-scroll-height);
+    height: var(--news-scroll-height);
     opacity: 1;
     margin-top: 0;
     cursor: auto;
@@ -394,13 +401,13 @@
     scrollbar-color: var(--rule) transparent;
     transform: translateY(0);
     transition:
-        max-height var(--motion-expand) var(--ease-out),
+        height var(--motion-expand) var(--ease-out),
         opacity var(--motion-fast) var(--ease-out),
         padding-top var(--motion-expand) var(--ease-out),
         padding-right var(--motion-expand) var(--ease-out),
         padding-bottom var(--motion-expand) var(--ease-out),
         transform var(--motion-expand) var(--ease-out);
-    will-change: max-height, opacity, transform;
+    will-change: height, opacity, transform;
 }
 
 .news-scroll-area.is-draggable {
