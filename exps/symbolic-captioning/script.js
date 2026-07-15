@@ -3,6 +3,7 @@ const state = {
   metadataData: null,
   metadataCategory: "key",
   metadataVersionByCategory: {},
+  metadataStageByVersion: {},
   backend: "A",
   caseIndex: 0,
 };
@@ -45,6 +46,18 @@ function currentMetadataVersion() {
   return category.versions.find((version) => version.id === selectedVersion) || category.versions[0] || null;
 }
 
+function currentMetadataStage() {
+  const version = currentMetadataVersion();
+  if (!version) return null;
+  const selectedStage = state.metadataStageByVersion[version.id] || version.default_stage;
+  return version.diagram.find((stage) => stage.id === selectedStage) || version.diagram[0] || null;
+}
+
+function actualDatasetCase() {
+  const caseId = state.metadataData?.actual_dataset_example?.case_id;
+  return state.data?.cases?.find((caseItem) => caseItem.case_id === caseId) || null;
+}
+
 function renderMetadataCategories() {
   const container = $("[data-metadata-categories]");
   container.innerHTML = "";
@@ -78,7 +91,12 @@ function renderMetadataVersions() {
     button.className = `metadata-version-button${isActive ? " active" : ""}`;
     button.setAttribute("role", "tab");
     button.setAttribute("aria-selected", String(isActive));
-    button.innerHTML = `<strong>${version.id}</strong><span>${version.status}</span>${version.id === category.current_version ? "<em>Current</em>" : ""}`;
+    const marker = version.id === category.current_version
+      ? '<em class="current">Current</em>'
+      : version.diagram.some((stage) => stage.artifact_kind === "actual_metadata")
+        ? '<em class="observed">Train Data</em>'
+        : "";
+    button.innerHTML = `<strong>${version.id}</strong><span>${version.status}</span>${marker}`;
     button.addEventListener("click", () => {
       state.metadataVersionByCategory[category.id] = version.id;
       renderMetadataExplorer();
@@ -88,12 +106,21 @@ function renderMetadataVersions() {
 }
 
 function renderMetadataDiagram(version) {
+  const selectedStage = currentMetadataStage();
   const container = $("[data-metadata-diagram]");
   container.innerHTML = "";
   version.diagram.forEach((step, index) => {
-    const node = document.createElement("article");
-    node.className = "metadata-diagram-node";
+    const node = document.createElement("button");
+    const isActive = step.id === selectedStage.id;
+    node.type = "button";
+    node.className = `metadata-diagram-node${isActive ? " active" : ""}`;
+    node.setAttribute("role", "tab");
+    node.setAttribute("aria-selected", String(isActive));
     node.innerHTML = `<span>${String(index + 1).padStart(2, "0")}</span><strong>${step.title}</strong><small>${step.detail}</small>`;
+    node.addEventListener("click", () => {
+      state.metadataStageByVersion[version.id] = step.id;
+      renderMetadataDetail();
+    });
     container.appendChild(node);
     if (index < version.diagram.length - 1) {
       const arrow = document.createElement("i");
@@ -102,6 +129,217 @@ function renderMetadataDiagram(version) {
       container.appendChild(arrow);
     }
   });
+}
+
+const METADATA_STAGE_SUMMARIES = {
+  synthetic_fixture: "This stage contains only deterministic synthetic MIDI coverage and expected facts used to test later extraction. It is not corpus metadata and does not involve an LLM.",
+  canonical_example: "This stage shows the schema-aligned canonical record expected from the selected fixture. It contains metadata evidence only; no caption prompt or Gemini output belongs here.",
+  evidence_gate: "This stage applies status and lexical-strength policy to canonical evidence. The operation is deterministic and decides which claims may enter a projection.",
+  projection_contract: "This stage produces a compact structured CaptionProjection for a downstream caption model. It is structured data, not the natural-language prompt sent to Gemini.",
+  actual_source: "This stage shows only the observed POP909 Train source window and input provenance used by the executed pilot extractor.",
+  actual_extractor: "This stage shows only the rule or dataset-annotation evidence source used to derive the selected metadata family.",
+  actual_metadata: "This stage shows the family-specific metadata actually extracted from POP909 Train. Fields from other metadata families and caption-model outputs are excluded.",
+  actual_caption: "This downstream stage alone shows the actual caption-realization prompt and Gemini response recorded for the same Train segment. The prompt consumes the combined General Metadata, so family isolation ends at this boundary.",
+};
+
+function pickFields(value, fields) {
+  if (!value || !fields) return value;
+  return Object.fromEntries(fields.filter((field) => Object.hasOwn(value, field)).map((field) => [field, value[field]]));
+}
+
+function actualFamilyView(category) {
+  const caseItem = actualDatasetCase();
+  const viewConfig = state.metadataData.actual_dataset_example.family_views[category.id];
+  if (!caseItem || !viewConfig) return null;
+  const evidence = caseItem.supported_evidence?.[viewConfig.evidence_key];
+  const blocked = (caseItem.blocked_evidence || []).filter((item) =>
+    viewConfig.blocked_prefixes.some((prefix) => item.startsWith(prefix))
+  );
+  return {
+    artifact_type: "actual_train_extractor_output",
+    provenance: {
+      case_id: caseItem.case_id,
+      source_id: caseItem.source_id,
+      dataset: "POP909",
+      split: caseItem.split,
+      source_kind: caseItem.source_kind,
+      window: caseItem.window,
+      evidence_sha256: caseItem.provenance.evidence_sha256,
+    },
+    family: category.id,
+    supported_evidence: {
+      [viewConfig.evidence_key]: pickFields(evidence, viewConfig.fields),
+    },
+    uncertain_or_unknown_evidence: blocked,
+  };
+}
+
+function canonicalEvidence(version) {
+  return version.example_metadata?.composition_view?.evidence?.[0] || null;
+}
+
+function syntheticFixtureArtifact(version, category) {
+  const evidence = canonicalEvidence(version);
+  return {
+    artifact_type: "synthetic_fixture_expectation",
+    source_type: "deterministic_synthetic_midi",
+    fixture_id: version.example_metadata.fixture_id,
+    metadata_family: category.id,
+    validation_target: version.diagram[0].detail,
+    expected_scope: version.example_metadata.caption_span || null,
+    expected_value: evidence?.value || version.example_metadata.temporal_map,
+    corpus_split: null,
+  };
+}
+
+function evidenceGateArtifact(version, category) {
+  const evidence = canonicalEvidence(version);
+  return {
+    artifact_type: "deterministic_evidence_gate",
+    metadata_family: category.id,
+    selected_feature: evidence?.feature_id || "temporal.temporal_map",
+    status_policy: [
+      {status: "supported", caption_eligible: true, lexical_strength: ["assertive", "centered", "suggestive"]},
+      {status: "ambiguous", caption_eligible: false, lexical_strength: ["omit"]},
+      {status: "insufficient_evidence", caption_eligible: false, lexical_strength: ["omit"]},
+      {status: "conflict", caption_eligible: false, lexical_strength: ["omit"]},
+      {status: "extractor_failed", caption_eligible: false, lexical_strength: ["omit"]}
+    ],
+    llm_involved: false,
+  };
+}
+
+function projectionArtifact(version, category) {
+  const evidence = canonicalEvidence(version);
+  const featureId = evidence?.feature_id || "temporal.temporal_map";
+  const value = evidence?.value || version.example_metadata.temporal_map;
+  return {
+    projection_version: "sori_caption_projection_v0.1",
+    profile: "caption_pretraining",
+    source_metadata: `synthetic:${version.example_metadata.fixture_id}`,
+    input_modalities: ["midi"],
+    allowed_claims: [
+      {
+        claim_id: `claim.${category.id}`,
+        feature_id: featureId,
+        value,
+        assertion_level: evidence?.assertion_level || "assertive",
+        evidence_ids: [evidence?.evidence_id || "temporal_map@caption_span"],
+      },
+    ],
+    blocked_claims: [],
+    downstream_stage: "caption_realization_prompt_assembly",
+  };
+}
+
+function actualSourceArtifact(caseItem) {
+  return {
+    artifact_type: "actual_corpus_source_window",
+    source_id: caseItem.source_id,
+    dataset: "POP909",
+    split: caseItem.split,
+    source_kind: caseItem.source_kind,
+    input_modalities: caseItem.input_modalities,
+    window: caseItem.window,
+    retained_media: {
+      midi: caseItem.media?.midi || null,
+      vst_rendered_audio: caseItem.media?.audio || null,
+    },
+  };
+}
+
+function actualExtractorArtifact(category, caseItem) {
+  const viewConfig = state.metadataData.actual_dataset_example.family_views[category.id];
+  const evidence = caseItem.supported_evidence[viewConfig.evidence_key];
+  const fallbackMethods = {
+    notes: "POP909 MELODY track annotation and exact note-event serialization",
+    rhythm: "POP909 MELODY track note-on and duration normalization in beats",
+    texture: "MIDI note-on aggregation by POP909 role track",
+  };
+  return {
+    artifact_type: "executed_pilot_extractor_stage",
+    metadata_family: category.id,
+    evidence_key: viewConfig.evidence_key,
+    method: evidence.method || fallbackMethods[category.id],
+    role_source: evidence.role_source || null,
+    scope: evidence.scope || "selected_segment",
+    confidence: evidence.confidence,
+    status: evidence.status,
+    canonical_v0_1_output: false,
+  };
+}
+
+function metadataStageArtifacts(version, category, stage) {
+  const caseItem = actualDatasetCase();
+  const actualLabel = state.metadataData.actual_dataset_example.display_name;
+  if (stage.artifact_kind === "synthetic_fixture") {
+    return [{kicker: "Synthetic Test Input", title: "Fixture Expectation", note: "Not Train Or Test Data", content: syntheticFixtureArtifact(version, category)}];
+  }
+  if (stage.artifact_kind === "canonical_example") {
+    return [{kicker: "Canonical Metadata", title: version.example_label, note: version.example_note, content: version.example_metadata}];
+  }
+  if (stage.artifact_kind === "evidence_gate") {
+    return [{kicker: "Deterministic Policy", title: "Evidence Eligibility Rules", note: "No LLM Involved", content: evidenceGateArtifact(version, category)}];
+  }
+  if (stage.artifact_kind === "projection_contract") {
+    return [{kicker: "Structured Downstream Input", title: "CaptionProjection Example", note: "Not A Gemini Prompt", content: projectionArtifact(version, category)}];
+  }
+  if (!caseItem) {
+    return [{kicker: "Missing Artifact", title: "Actual Dataset Case Unavailable", note: "Viewer Data Error", content: {case_id: state.metadataData.actual_dataset_example.case_id}}];
+  }
+  if (stage.artifact_kind === "actual_source") {
+    return [{kicker: "Observed Corpus Input", title: "Actual Train Source Window", note: actualLabel, content: actualSourceArtifact(caseItem)}];
+  }
+  if (stage.artifact_kind === "actual_extractor") {
+    return [{kicker: "Executed Extraction", title: `${category.label} Evidence Source`, note: actualLabel, content: actualExtractorArtifact(category, caseItem)}];
+  }
+  if (stage.artifact_kind === "actual_metadata") {
+    return [{kicker: "Observed Corpus Output", title: `Actual Train ${category.label} Metadata`, note: actualLabel, content: actualFamilyView(category)}];
+  }
+  return [
+    {kicker: "Actual LLM Input", title: "Caption Realization Prompt", note: "Gemini Web · A.1.0", content: caseItem.prompt},
+    {kicker: "Actual LLM Output", title: "Recorded Raw Caption", note: `${caseItem.provenance.model} · ${caseItem.provenance.elapsed_sec.toFixed(2)} Sec`, content: {response: caseItem.response, provenance: caseItem.provenance}},
+  ];
+}
+
+function renderMetadataArtifacts(artifacts) {
+  const container = $("[data-metadata-stage-artifacts]");
+  container.innerHTML = "";
+  container.classList.toggle("single", artifacts.length === 1);
+  artifacts.forEach((artifact) => {
+    const card = document.createElement("section");
+    card.className = "metadata-code-card";
+    const head = document.createElement("div");
+    head.className = "metadata-code-head";
+    const titleWrap = document.createElement("div");
+    const kicker = document.createElement("p");
+    kicker.className = "section-kicker";
+    kicker.textContent = artifact.kicker;
+    const title = document.createElement("h3");
+    title.textContent = artifact.title;
+    const note = document.createElement("span");
+    note.textContent = artifact.note;
+    const content = document.createElement("pre");
+    content.textContent = typeof artifact.content === "string" ? artifact.content : JSON.stringify(artifact.content, null, 2);
+    titleWrap.append(kicker, title);
+    head.append(titleWrap, note);
+    card.append(head, content);
+    container.appendChild(card);
+  });
+}
+
+function renderMetadataStage(version, category) {
+  const stage = currentMetadataStage();
+  const stageIndex = version.diagram.findIndex((item) => item.id === stage.id) + 1;
+  const isActual = stage.artifact_kind.startsWith("actual_");
+  const isContract = ["evidence_gate", "projection_contract"].includes(stage.artifact_kind);
+  const source = $("[data-metadata-stage-source]");
+  $("[data-metadata-stage-kicker]").textContent = `${version.id} · Pipeline Stage ${String(stageIndex).padStart(2, "0")}`;
+  $("[data-metadata-stage-title]").textContent = stage.title;
+  $("[data-metadata-stage-summary]").textContent = METADATA_STAGE_SUMMARIES[stage.artifact_kind];
+  source.textContent = isActual ? "Actual POP909 Train" : isContract ? "Contract Only" : "Synthetic Phase 0";
+  source.className = `stage-source-badge ${isActual ? "actual" : isContract ? "contract" : "synthetic"}`;
+  renderMetadataArtifacts(metadataStageArtifacts(version, category, stage));
 }
 
 function renderMetadataDetail() {
@@ -126,12 +364,7 @@ function renderMetadataDetail() {
   });
 
   renderMetadataDiagram(version);
-  $("[data-metadata-prompt-label]").textContent = version.prompt_label;
-  $("[data-metadata-prompt-note]").textContent = version.prompt_note;
-  $("[data-metadata-prompt]").textContent = state.metadataData.prompts[version.prompt_ref];
-  $("[data-metadata-example-label]").textContent = version.example_label;
-  $("[data-metadata-example-note]").textContent = version.example_note;
-  $("[data-metadata-example]").textContent = JSON.stringify(version.example_metadata, null, 2);
+  renderMetadataStage(version, category);
 }
 
 function renderMetadataExplorer() {
