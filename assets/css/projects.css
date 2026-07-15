@@ -505,12 +505,18 @@ body {
     text-decoration-thickness: 1px;
     text-underline-offset: 0.16em;
     text-wrap: pretty;
-    transition: text-decoration-color var(--motion-fast) var(--ease-out);
+    transition:
+        color var(--motion-fast) var(--ease-out),
+        text-decoration-color var(--motion-fast) var(--ease-out);
 }
 
 .project-entry:hover .project-content h2,
 .project-entry:focus-within .project-content h2 {
     text-decoration-color: var(--accent);
+}
+
+.project-content h2:hover {
+    color: var(--accent-strong);
 }
 
 .project-summary,
