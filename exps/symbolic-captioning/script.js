@@ -638,7 +638,7 @@ async function initialize() {
   try {
     const [summaryResponse, metadataResponse] = await Promise.all([
       fetch("assets/data/summary.json", { cache: "no-store" }),
-      fetch("assets/data/metadata_versions.json", { cache: "no-store" }),
+      fetch("assets/data/metadata_versions.json?schema=v0.2&ui=a104", { cache: "no-store" }),
     ]);
     if (!summaryResponse.ok) throw new Error(`Summary HTTP ${summaryResponse.status}`);
     if (!metadataResponse.ok) throw new Error(`Metadata HTTP ${metadataResponse.status}`);

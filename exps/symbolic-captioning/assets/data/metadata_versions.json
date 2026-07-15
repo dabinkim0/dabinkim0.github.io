@@ -2,6 +2,10 @@
   "schema_version": "sori_metadata_version_viewer_v0.2",
   "updated_on": "2026-07-15",
   "version_convention": "K/N/R/T.major.minor",
+  "prompts": {
+    "phase_0_projection": "Compatibility view only. In the current UI, Phase 0 exposes structured CaptionProjection data and does not expose a Gemini prompt inside the metadata stages.",
+    "pilot_supported_evidence": "You are producing an English music caption from supported symbolic evidence. Use only supported fields, omit blocked attributes, and return evidence-linked JSON captions."
+  },
   "actual_dataset_example": {
     "case_id": "real_pop909_001_bar10_14__base_M",
     "display_name": "POP909 · Train · pop909:001 · Bars 10–13",
@@ -56,6 +60,9 @@
             {"id": "gate", "artifact_kind": "evidence_gate", "title": "Lexical Gate", "detail": "Supported Or Blocked"},
             {"id": "projection", "artifact_kind": "projection_contract", "title": "Caption Projection", "detail": "Structured Key Claim"}
           ],
+          "prompt_ref": "phase_0_projection",
+          "prompt_label": "Compatibility Notice",
+          "prompt_note": "Reload For Stage-Scoped UI",
           "example_label": "Canonical Evidence Fragment",
           "example_note": "Synthetic Fixture · local_key_c_to_g",
           "example_metadata": {
@@ -101,7 +108,13 @@
             {"id": "extractor", "artifact_kind": "actual_extractor", "title": "Rule Estimate", "detail": "Key And Confidence"},
             {"id": "metadata", "artifact_kind": "actual_metadata", "title": "Supported Evidence", "detail": "Actual Train Metadata"},
             {"id": "realization", "artifact_kind": "actual_caption", "title": "Caption Realization", "detail": "Prompt And Gemini Output"}
-          ]
+          ],
+          "prompt_ref": "pilot_supported_evidence",
+          "prompt_label": "Pilot Prompt Excerpt",
+          "prompt_note": "Executed In A.1.0",
+          "example_label": "Actual Train Metadata",
+          "example_note": "Reload For Stage-Scoped POP909 View",
+          "example_metadata": {"source_id": "pop909:001", "split": "train", "compatibility_view": true}
         }
       ]
     },
@@ -132,6 +145,9 @@
             {"id": "gate", "artifact_kind": "evidence_gate", "title": "Sequence Gate", "detail": "Exact Values Only"},
             {"id": "projection", "artifact_kind": "projection_contract", "title": "Caption Projection", "detail": "Structured Note Claim"}
           ],
+          "prompt_ref": "phase_0_projection",
+          "prompt_label": "Compatibility Notice",
+          "prompt_note": "Reload For Stage-Scoped UI",
           "example_label": "Canonical Evidence Fragment",
           "example_note": "Synthetic Fixture · transposition_source_c_major",
           "example_metadata": {
@@ -180,7 +196,13 @@
             {"id": "extractor", "artifact_kind": "actual_extractor", "title": "Pitch Sequence", "detail": "Names And Range"},
             {"id": "metadata", "artifact_kind": "actual_metadata", "title": "Supported Evidence", "detail": "Actual Train Metadata"},
             {"id": "realization", "artifact_kind": "actual_caption", "title": "Caption Realization", "detail": "Prompt And Gemini Output"}
-          ]
+          ],
+          "prompt_ref": "pilot_supported_evidence",
+          "prompt_label": "Pilot Prompt Excerpt",
+          "prompt_note": "Executed In A.1.0",
+          "example_label": "Actual Train Metadata",
+          "example_note": "Reload For Stage-Scoped POP909 View",
+          "example_metadata": {"source_id": "pop909:001", "split": "train", "compatibility_view": true}
         }
       ]
     },
@@ -211,6 +233,9 @@
             {"id": "gate", "artifact_kind": "evidence_gate", "title": "Rhythm Evidence", "detail": "Onset And Duration"},
             {"id": "projection", "artifact_kind": "projection_contract", "title": "Caption Projection", "detail": "Structured Rhythm Claim"}
           ],
+          "prompt_ref": "phase_0_projection",
+          "prompt_label": "Compatibility Notice",
+          "prompt_note": "Reload For Stage-Scoped UI",
           "example_label": "Temporal Contract Fragment",
           "example_note": "Synthetic Fixture · tempo_change_120_to_90",
           "example_metadata": {
@@ -249,7 +274,13 @@
             {"id": "extractor", "artifact_kind": "actual_extractor", "title": "Rule Arrays", "detail": "IOI And Duration"},
             {"id": "metadata", "artifact_kind": "actual_metadata", "title": "Supported Evidence", "detail": "Actual Train Metadata"},
             {"id": "realization", "artifact_kind": "actual_caption", "title": "Caption Realization", "detail": "Prompt And Gemini Output"}
-          ]
+          ],
+          "prompt_ref": "pilot_supported_evidence",
+          "prompt_label": "Pilot Prompt Excerpt",
+          "prompt_note": "Executed In A.1.0",
+          "example_label": "Actual Train Metadata",
+          "example_note": "Reload For Stage-Scoped POP909 View",
+          "example_metadata": {"source_id": "pop909:001", "split": "train", "compatibility_view": true}
         }
       ]
     },
@@ -280,6 +311,9 @@
             {"id": "gate", "artifact_kind": "evidence_gate", "title": "Direction Gate", "detail": "Supported Or Ambiguous"},
             {"id": "projection", "artifact_kind": "projection_contract", "title": "Caption Projection", "detail": "Structured Trend Claim"}
           ],
+          "prompt_ref": "phase_0_projection",
+          "prompt_label": "Compatibility Notice",
+          "prompt_note": "Reload For Stage-Scoped UI",
           "example_label": "Canonical Evidence Fragment",
           "example_note": "Synthetic Fixture · texture_dynamic_trend",
           "example_metadata": {
@@ -329,7 +363,13 @@
             {"id": "extractor", "artifact_kind": "actual_extractor", "title": "Aggregate Stats", "detail": "Count · Density · Track Totals"},
             {"id": "metadata", "artifact_kind": "actual_metadata", "title": "Supported Evidence", "detail": "Actual Train Metadata"},
             {"id": "realization", "artifact_kind": "actual_caption", "title": "Caption Realization", "detail": "Prompt And Gemini Output"}
-          ]
+          ],
+          "prompt_ref": "pilot_supported_evidence",
+          "prompt_label": "Pilot Prompt Excerpt",
+          "prompt_note": "Executed In A.1.0",
+          "example_label": "Actual Train Metadata",
+          "example_note": "Reload For Stage-Scoped POP909 View",
+          "example_metadata": {"source_id": "pop909:001", "split": "train", "compatibility_view": true}
         }
       ]
     }
