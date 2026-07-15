@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Symbolic Music Captioning | Dabin Kim</title>
+  <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=20260715-a101">
+</head>
+<body>
+  <header class="main-header">
+    <div class="shell header-shell">
+      <a href="../../index.html" class="logo">Dabin Kim</a>
+      <nav class="main-nav" aria-label="Primary">
+        <ul>
+          <li><a href="../../publications/">Publications</a></li>
+          <li><a href="../../projects/">Projects</a></li>
+          <li><a href="../../index.html">About</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main class="shell wide-shell page-shell">
+    <section class="hero">
+      <p class="eyebrow">Experiment Dashboard</p>
+      <h1>Symbolic Music <span>Captioning</span></h1>
+      <p class="hero-copy">A compact review page for metadata-grounded music caption pretraining. Subscription and API tracks share the same numbered protocol and remain separated at execution.</p>
+      <div class="hero-metrics" aria-label="Experiment Summary">
+        <article class="hero-metric"><span>Current Release</span><strong>A.1.0</strong><em>Gemini Web Baseline</em></article>
+        <article class="hero-metric"><span>Gemini Web Runs</span><strong data-metric="web-runs">—</strong><em>Recorded Raw Captions</em></article>
+        <article class="hero-metric"><span>Gemini API Runs</span><strong>0</strong><em>Not Executed</em></article>
+        <article class="hero-metric"><span>Filtered Captions</span><strong>0</strong><em>Filter Stage Pending</em></article>
+      </div>
+    </section>
+
+    <section class="panel-card pipeline-section" aria-labelledby="pipeline-title">
+      <div class="section-head">
+        <div>
+          <p class="section-kicker">Captioning System</p>
+          <h2 id="pipeline-title">Music Caption Pretraining Pipeline</h2>
+        </div>
+        <p>General metadata is always included. MIDI and VST-rendered audio are optional Gemini attachments.</p>
+      </div>
+
+      <div class="pipeline-map" aria-label="Music Captioning Pipeline">
+        <article class="pipeline-node source-node">
+          <span class="node-index">01</span>
+          <i class="node-icon note-icon" aria-hidden="true">♪</i>
+          <strong>MIDI Segment</strong>
+          <small>Train Split Window</small>
+        </article>
+        <div class="flow-arrow" aria-hidden="true"><span></span></div>
+        <article class="pipeline-node required-node">
+          <span class="node-index">02</span>
+          <span class="node-badge required">Required</span>
+          <strong>General Metadata</strong>
+          <small>Key, Notes, Rhythm, Texture</small>
+        </article>
+        <div class="flow-arrow" aria-hidden="true"><span></span></div>
+        <article class="pipeline-node request-node">
+          <span class="node-index">03</span>
+          <span class="node-badge required">Required</span>
+          <strong>Captioning Text Prompt</strong>
+          <small>General Metadata Included</small>
+          <div class="optional-inputs" aria-label="Optional Attachments">
+            <span>Optional MIDI File</span>
+            <span>Optional VST-Rendered Audio</span>
+          </div>
+        </article>
+        <div class="flow-arrow" aria-hidden="true"><span></span></div>
+        <article class="pipeline-node backend-node">
+          <span class="node-index">04</span>
+          <strong>Gemini</strong>
+          <div class="backend-options">
+            <span><b>A</b> Gemini Web</span>
+            <span><b>B</b> Gemini API</span>
+          </div>
+        </article>
+        <div class="flow-arrow" aria-hidden="true"><span></span></div>
+        <article class="pipeline-node output-node">
+          <span class="node-index">05</span>
+          <strong>Raw Caption</strong>
+          <small>Structured Response</small>
+        </article>
+        <div class="flow-arrow" aria-hidden="true"><span></span></div>
+        <article class="pipeline-node filter-node">
+          <span class="node-index">06</span>
+          <strong>LLM-Based Caption Filtering</strong>
+          <small>Evidence-Aware Claim Selection</small>
+        </article>
+        <div class="flow-arrow" aria-hidden="true"><span></span></div>
+        <article class="pipeline-node candidate-node">
+          <span class="node-index">07</span>
+          <i class="node-icon check-icon" aria-hidden="true">✓</i>
+          <strong>Caption Dataset Candidate</strong>
+          <small>After Filtering</small>
+        </article>
+      </div>
+      <div class="pipeline-legend">
+        <span><i class="legend-solid"></i> Required Input</span>
+        <span><i class="legend-dashed"></i> Optional Attachment</span>
+        <span><i class="legend-track track-a"></i> A · Subscription</span>
+        <span><i class="legend-track track-b"></i> B · API</span>
+      </div>
+    </section>
+
+    <section class="section-block" aria-labelledby="release-title">
+      <div class="section-head outside-head">
+        <div>
+          <p class="section-kicker">Version Tracking</p>
+          <h2 id="release-title">Backend Releases</h2>
+        </div>
+        <p>The numeric protocol is shared; the prefix identifies the execution backend.</p>
+      </div>
+      <div class="release-grid">
+        <article class="release-card active-release">
+          <div class="release-topline"><span class="release-id track-a-bg">A.1.0</span><span class="status-pill complete">Executed</span></div>
+          <p class="section-kicker">Gemini Web · Subscription</p>
+          <h3>Metadata Baseline</h3>
+          <p>Introduces four metadata-only <code>base_M</code> caption runs, including one actual POP909 Train segment.</p>
+          <dl class="release-facts">
+            <div><dt>Model</dt><dd>Gemini 3.5 Flash (Medium)</dd></div>
+            <div><dt>Runs</dt><dd data-release-runs>—</dd></div>
+            <div><dt>Filter</dt><dd>Not Run</dd></div>
+          </dl>
+        </article>
+        <article class="release-card planned-release">
+          <div class="release-topline"><span class="release-id track-b-bg">B.1.0</span><span class="status-pill pending">Not Run</span></div>
+          <p class="section-kicker">Gemini API</p>
+          <h3>Protocol-Matched Baseline</h3>
+          <p>Reserves the same prompt, metadata, model settings, and output contract for direct backend comparison.</p>
+          <dl class="release-facts">
+            <div><dt>Model</dt><dd>To Be Fixed</dd></div>
+            <div><dt>Runs</dt><dd>0</dd></div>
+            <div><dt>Cost</dt><dd>Not Available</dd></div>
+          </dl>
+        </article>
+      </div>
+      <div class="version-rule">
+        <span><b>A / B</b> Backend Track</span>
+        <span><b>1</b> Protocol Version</span>
+        <span><b>0</b> Prompt Or Filtering Revision</span>
+        <span><b>Run ID</b> Repeated Execution</span>
+      </div>
+    </section>
+
+    <section class="section-block" aria-labelledby="condition-title">
+      <div class="section-head outside-head">
+        <div>
+          <p class="section-kicker">Input Coverage</p>
+          <h2 id="condition-title">Captioning Conditions</h2>
+        </div>
+        <p>Attachments are varied independently while general metadata remains fixed.</p>
+      </div>
+      <div class="condition-grid">
+        <article class="condition-card executed"><span>01</span><strong>Metadata Only</strong><small>4 Gemini Web Runs</small><em>Executed</em></article>
+        <article class="condition-card prepared"><span>02</span><strong>Metadata + MIDI</strong><small>Prompt And Asset Prepared</small><em>Prepared</em></article>
+        <article class="condition-card pending"><span>03</span><strong>Metadata + Audio</strong><small>Attachment Test Interrupted</small><em>Pending</em></article>
+        <article class="condition-card pending"><span>04</span><strong>Metadata + MIDI + Audio</strong><small>No Valid Run</small><em>Not Run</em></article>
+      </div>
+    </section>
+
+    <section class="section-block" aria-labelledby="case-title">
+      <div class="section-head outside-head">
+        <div>
+          <p class="section-kicker">Result Inspection</p>
+          <h2 id="case-title">Case Explorer</h2>
+        </div>
+        <div class="backend-switch" role="group" aria-label="Backend Track">
+          <button class="backend-button active" type="button" data-backend="A">A · Gemini Web</button>
+          <button class="backend-button" type="button" data-backend="B">B · Gemini API</button>
+        </div>
+      </div>
+
+      <div class="case-picker" data-case-picker aria-label="Case Selection"></div>
+      <div class="empty-backend" data-empty-backend hidden>
+        <p class="section-kicker">B.1.0 · Gemini API</p>
+        <h3>No Executed Cases</h3>
+        <p>The API track remains visible but empty until a protocol-matched run is recorded.</p>
+      </div>
+
+      <div class="case-content" data-case-content>
+        <article class="case-summary panel-card">
+          <div>
+            <p class="eyebrow" data-case-release>A.1.0 · Loading</p>
+            <h2 data-case-name>Loading Caption Case…</h2>
+            <p class="case-origin" data-case-origin></p>
+          </div>
+          <dl class="case-meta">
+            <div><dt>Source</dt><dd data-case-source>—</dd></div>
+            <div><dt>Split</dt><dd data-case-split>—</dd></div>
+            <div><dt>Condition</dt><dd>Metadata Only</dd></div>
+            <div><dt>Filter</dt><dd>Not Run</dd></div>
+          </dl>
+        </article>
+
+        <div class="case-main-grid">
+          <article class="panel-card media-card">
+            <div class="card-head">
+              <div><p class="section-kicker">Source Segment</p><h3 data-media-title>Piano Roll</h3></div>
+              <span class="status-pill" data-media-status>—</span>
+            </div>
+            <div class="piano-roll-frame">
+              <canvas data-piano-roll></canvas>
+              <p class="roll-empty" data-roll-empty hidden>Evidence-only pilot; no source MIDI was attached to the recorded job.</p>
+            </div>
+            <div class="media-controls">
+              <audio data-audio controls preload="metadata"></audio>
+              <a class="asset-button" data-midi-link href="#" download hidden>Open MIDI</a>
+            </div>
+            <p class="media-note" data-media-note></p>
+          </article>
+
+          <article class="panel-card caption-card">
+            <div class="card-head">
+              <div><p class="section-kicker">Gemini Output</p><h3>Raw Caption</h3></div>
+              <span class="latency-badge" data-latency>—</span>
+            </div>
+            <div class="caption-output short-output"><span>Short Caption</span><p data-caption-short>—</p></div>
+            <div class="caption-output"><span>Detailed Caption</span><p data-caption-detailed>—</p></div>
+            <div class="filter-state"><span>LLM-Based Filtering</span><strong>Pending In A.1.0</strong></div>
+          </article>
+        </div>
+
+        <div class="case-detail-grid">
+          <article class="panel-card evidence-card">
+            <div class="card-head"><div><p class="section-kicker">Required Input</p><h3>General Metadata</h3></div></div>
+            <dl class="evidence-list" data-evidence-list></dl>
+            <div class="uncertain-box"><span>Uncertain Or Unknown</span><div data-uncertain-list></div></div>
+          </article>
+          <article class="panel-card audit-card">
+            <div class="card-head"><div><p class="section-kicker">Interpretation</p><h3>Researcher Note</h3></div></div>
+            <p data-researcher-note>—</p>
+            <div class="case-actions">
+              <button type="button" data-open-modal="prompt">View Prompt</button>
+              <button type="button" data-open-modal="evidence">View Evidence</button>
+              <button type="button" data-open-modal="raw">View Raw JSON</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="caveat-panel" aria-labelledby="limitations-title">
+      <div><p class="section-kicker">Interpretation Boundary</p><h2 id="limitations-title">Current Limitations</h2></div>
+      <ul data-caveat-list></ul>
+    </section>
+  </main>
+
+  <dialog class="detail-dialog" data-detail-dialog>
+    <div class="dialog-head">
+      <div><p class="section-kicker" data-dialog-kicker>Case Detail</p><h2 data-dialog-title>Prompt</h2></div>
+      <button class="dialog-close" type="button" data-dialog-close aria-label="Close">×</button>
+    </div>
+    <pre data-dialog-content></pre>
+  </dialog>
+
+  <footer class="main-footer">
+    <div class="shell footer-shell">
+      <p>&copy; 2026 Dabin Kim. Symbolic Music Captioning Experiment Dashboard.</p>
+    </div>
+  </footer>
+
+  <script src="script.js?v=20260715-a101"></script>
+</body>
+</html>

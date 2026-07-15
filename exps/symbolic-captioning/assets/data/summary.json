@@ -1,0 +1,1199 @@
+{
+  "schema_version": "sori_caption_pipeline_viewer_v0.1",
+  "generated_at_utc": "2026-07-15T05:38:18.134114+00:00",
+  "last_observed_utc": "2026-07-14T12:03:17.777186+00:00",
+  "refresh_interval_sec": 30,
+  "summary": {
+    "executed_jobs": 4,
+    "structurally_accepted": 4,
+    "mean_latency_sec": 11.642,
+    "actual_train_examples": 1,
+    "publication_gate": "Pending semantic validation"
+  },
+  "pipeline_stages": [
+    {
+      "name": "Evidence Extraction",
+      "status": "complete",
+      "detail": "Rule-derived supported and blocked evidence"
+    },
+    {
+      "name": "Job Manifest",
+      "status": "complete",
+      "detail": "base_M schema and prompt contract"
+    },
+    {
+      "name": "Gemini Realization",
+      "status": "complete",
+      "detail": "Four subscription-pilot requests"
+    },
+    {
+      "name": "Structural Validation",
+      "status": "complete",
+      "detail": "JSON, required fields, and evidence pointers"
+    },
+    {
+      "name": "Semantic Entailment",
+      "status": "pending",
+      "detail": "Claim-level support and ambiguity filtering"
+    },
+    {
+      "name": "Direct Media Comparison",
+      "status": "prepared",
+      "detail": "MIDI-only, audio-only, and joint prompts prepared; not executed"
+    }
+  ],
+  "condition_matrix": [
+    {
+      "condition": "base_M",
+      "input": "Structured MIDI metadata",
+      "status": "executed",
+      "result": "4 cases"
+    },
+    {
+      "condition": "MIDI File",
+      "input": "Raw cropped MIDI",
+      "status": "pending",
+      "result": "No valid response"
+    },
+    {
+      "condition": "Audio File",
+      "input": "Rendered WAV",
+      "status": "pending",
+      "result": "Attached test interrupted"
+    },
+    {
+      "condition": "MIDI + Audio",
+      "input": "Joint media",
+      "status": "pending",
+      "result": "Not executed"
+    },
+    {
+      "condition": "base_D / base_MD",
+      "input": "Diff and control evidence",
+      "status": "out_of_scope",
+      "result": "Editing SFT phase"
+    }
+  ],
+  "caveats": [
+    "The four accepted cases passed structural validation, not publication-grade semantic validation.",
+    "Three cases use controlled mock evidence; one uses an actual POP909 caption-train segment.",
+    "The POP909 source is verified in the planned caption split, but overlap with the unresolved SORI LM manifest remains unaudited.",
+    "The included WAV is synthesized from MIDI and must not be treated as original dataset audio."
+  ],
+  "cases": [
+    {
+      "case_id": "real_pop909_001_bar10_14__base_M",
+      "title": "POP909 Train Segment Caption",
+      "family": "melody_conditioned_texture",
+      "family_label": "Melody-Conditioned Texture",
+      "source_kind": "Actual Train Split",
+      "source_id": "pop909:001",
+      "split": "train",
+      "prompt_family": "base_M",
+      "training_stage": "caption_pretrain",
+      "input_modalities": [
+        "midi"
+      ],
+      "input_representation": "structured_metadata",
+      "window": {
+        "bars": 4,
+        "duration_sec": 5.33332,
+        "end_bar_exclusive": 14,
+        "end_barbeat": "bar 14 beat 1",
+        "end_sec": 17.33329,
+        "end_tick": 12480,
+        "start_bar": 10,
+        "start_barbeat": "bar 10 beat 1",
+        "start_sec": 11.99997,
+        "start_tick": 8640
+      },
+      "supported_evidence": {
+        "local_key_estimate": {
+          "confidence": 0.96,
+          "evidence": {
+            "profile_correlation": 0.921
+          },
+          "method": "Krumhansl-Schmuckler pitch-class profile correlation",
+          "scope": "selected_segment",
+          "status": "supported",
+          "value": "F# major"
+        },
+        "melody_sequence": {
+          "confidence": 1.0,
+          "duration_pattern_beat": [
+            0.144,
+            0.094,
+            0.102,
+            0.125,
+            0.165,
+            0.308,
+            0.36,
+            1.481,
+            0.342,
+            0.287,
+            0.279,
+            1.154
+          ],
+          "inter_onset_pattern_beat": [
+            0.25,
+            0.25,
+            0.25,
+            0.25,
+            0.5,
+            0.5,
+            0.5,
+            2.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "note_count": 12,
+          "pitch_class_sequence": [
+            "C#",
+            "D#",
+            "F#",
+            "G#",
+            "A#",
+            "F#",
+            "D#",
+            "G#",
+            "G#",
+            "F",
+            "C#",
+            "F#"
+          ],
+          "pitch_range": {
+            "highest": "A#4",
+            "lowest": "C#4"
+          },
+          "pitch_sequence": [
+            "C#4",
+            "D#4",
+            "F#4",
+            "G#4",
+            "A#4",
+            "F#4",
+            "D#4",
+            "G#4",
+            "G#4",
+            "F4",
+            "C#4",
+            "F#4"
+          ],
+          "relative_onsets_beat": [
+            1.083,
+            1.333,
+            1.583,
+            1.833,
+            2.083,
+            2.583,
+            3.083,
+            3.583,
+            6.083,
+            6.583,
+            7.083,
+            7.583
+          ],
+          "role_source": "POP909_MELODY_track",
+          "status": "supported"
+        },
+        "texture_summary": {
+          "confidence": 1.0,
+          "note_onsets_per_second": 9.563,
+          "status": "supported",
+          "total_note_onsets": 51,
+          "track_note_counts": {
+            "BRIDGE": 6,
+            "MELODY": 12,
+            "PIANO": 33
+          }
+        }
+      },
+      "blocked_evidence": [
+        "melody_pitch_contour:uncertain"
+      ],
+      "prompt": "You are producing an English music caption for a music segment.\n\nThis is a generation-caption task. Describe only the current musical state represented by the supplied evidence.\n\nEvidence policy:\n- Use only fields under `metadata.supported_evidence` whose status is `supported`.\n- Treat `metadata.uncertain_or_unknown_evidence` as blocked attributes.\n- Do not infer genre, emotion, timbre, performer identity, performance quality, or acoustic properties.\n- A pitch sequence may be stated only when the exact sequence is supplied.\n- A rhythm or contour may be stated only when its explicit symbolic evidence is supplied.\n- Do not provide hidden chain-of-thought. `evidence_trace` must contain only short, externally verifiable claim-to-field links.\n\nReturn exactly one raw JSON object and no Markdown. It must match this contract:\n{\n  \"schema_version\": \"sori_music_caption_response_v0.1\",\n  \"job_id\": \"caption_29d9df6a9fc7\",\n  \"caption_short\": \"<one concise sentence>\",\n  \"caption_detailed\": \"<one or two evidence-grounded sentences>\",\n  \"evidence_trace\": [\n    {\n      \"claim\": \"<short verifiable claim>\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/local_key_estimate\"\n      ],\n      \"certainty\": \"supported\"\n    }\n  ],\n  \"uncertain_attributes\": [],\n  \"unsupported_claims\": []\n}\n\nReplace angle-bracketed placeholder strings with content. Keep `schema_version`, `job_id`, field names, and `certainty` exactly as shown. Every evidence path must identify a field actually used for its claim.\n\nJob ID:\ncaption_29d9df6a9fc7\n\nInput evidence:\n{\n  \"input_modalities\": [\n    \"midi\"\n  ],\n  \"metadata\": {\n    \"input_representation\": \"structured_metadata\",\n    \"observation_scope\": \"target_midi_current_state\",\n    \"source_provenance\": {\n      \"canonical_piece_id\": \"pop909:001\",\n      \"dataset\": \"POP909\",\n      \"registry_split\": \"train\",\n      \"relative_midi_path\": \"POP909/001/001.mid\"\n    },\n    \"supported_evidence\": {\n      \"local_key_estimate\": {\n        \"confidence\": 0.96,\n        \"evidence\": {\n          \"profile_correlation\": 0.921\n        },\n        \"method\": \"Krumhansl-Schmuckler pitch-class profile correlation\",\n        \"scope\": \"selected_segment\",\n        \"status\": \"supported\",\n        \"value\": \"F# major\"\n      },\n      \"melody_sequence\": {\n        \"confidence\": 1.0,\n        \"duration_pattern_beat\": [\n          0.144,\n          0.094,\n          0.102,\n          0.125,\n          0.165,\n          0.308,\n          0.36,\n          1.481,\n          0.342,\n          0.287,\n          0.279,\n          1.154\n        ],\n        \"inter_onset_pattern_beat\": [\n          0.25,\n          0.25,\n          0.25,\n          0.25,\n          0.5,\n          0.5,\n          0.5,\n          2.5,\n          0.5,\n          0.5,\n          0.5\n        ],\n        \"note_count\": 12,\n        \"pitch_class_sequence\": [\n          \"C#\",\n          \"D#\",\n          \"F#\",\n          \"G#\",\n          \"A#\",\n          \"F#\",\n          \"D#\",\n          \"G#\",\n          \"G#\",\n          \"F\",\n          \"C#\",\n          \"F#\"\n        ],\n        \"pitch_range\": {\n          \"highest\": \"A#4\",\n          \"lowest\": \"C#4\"\n        },\n        \"pitch_sequence\": [\n          \"C#4\",\n          \"D#4\",\n          \"F#4\",\n          \"G#4\",\n          \"A#4\",\n          \"F#4\",\n          \"D#4\",\n          \"G#4\",\n          \"G#4\",\n          \"F4\",\n          \"C#4\",\n          \"F#4\"\n        ],\n        \"relative_onsets_beat\": [\n          1.083,\n          1.333,\n          1.583,\n          1.833,\n          2.083,\n          2.583,\n          3.083,\n          3.583,\n          6.083,\n          6.583,\n          7.083,\n          7.583\n        ],\n        \"role_source\": \"POP909_MELODY_track\",\n        \"status\": \"supported\"\n      },\n      \"texture_summary\": {\n        \"confidence\": 1.0,\n        \"note_onsets_per_second\": 9.563,\n        \"status\": \"supported\",\n        \"total_note_onsets\": 51,\n        \"track_note_counts\": {\n          \"BRIDGE\": 6,\n          \"MELODY\": 12,\n          \"PIANO\": 33\n        }\n      }\n    },\n    \"uncertain_or_unknown_evidence\": [\n      \"melody_pitch_contour:uncertain\"\n    ],\n    \"window\": {\n      \"bars\": 4,\n      \"duration_sec\": 5.33332,\n      \"end_bar_exclusive\": 14,\n      \"end_barbeat\": \"bar 14 beat 1\",\n      \"end_sec\": 17.33329,\n      \"end_tick\": 12480,\n      \"start_bar\": 10,\n      \"start_barbeat\": \"bar 10 beat 1\",\n      \"start_sec\": 11.99997,\n      \"start_tick\": 8640\n    }\n  }\n}\n",
+      "raw_response": "{\n  \"schema_version\": \"sori_music_caption_response_v0.1\",\n  \"job_id\": \"caption_29d9df6a9fc7\",\n  \"caption_short\": \"A MIDI segment in F# major featuring a 12-note melody with pitches ranging from C#4 to A#4 and 51 total note onsets.\",\n  \"caption_detailed\": \"The segment has a local key estimate of F# major. Its melody has 12 notes spanning from C#4 to A#4 with the pitch sequence C#4, D#4, F#4, G#4, A#4, F#4, D#4, G#4, G#4, F4, C#4, F#4, and the texture has 51 note onsets (9.563 per second) across the MELODY, BRIDGE, and PIANO tracks.\",\n  \"evidence_trace\": [\n    {\n      \"claim\": \"The segment has a local key estimate of F# major.\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/local_key_estimate/value\"\n      ],\n      \"certainty\": \"supported\"\n    },\n    {\n      \"claim\": \"The melody has 12 notes and ranges from C#4 to A#4.\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/melody_sequence/note_count\",\n        \"/metadata/supported_evidence/melody_sequence/pitch_range\"\n      ],\n      \"certainty\": \"supported\"\n    },\n    {\n      \"claim\": \"The melody consists of the pitch sequence C#4, D#4, F#4, G#4, A#4, F#4, D#4, G#4, G#4, F4, C#4, F#4.\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/melody_sequence/pitch_sequence\"\n      ],\n      \"certainty\": \"supported\"\n    },\n    {\n      \"claim\": \"The texture contains 51 note onsets at a rate of 9.563 per second across MELODY, BRIDGE, and PIANO tracks.\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/texture_summary/total_note_onsets\",\n        \"/metadata/supported_evidence/texture_summary/note_onsets_per_second\",\n        \"/metadata/supported_evidence/texture_summary/track_note_counts\"\n      ],\n      \"certainty\": \"supported\"\n    }\n  ],\n  \"uncertain_attributes\": [\n    \"melody_pitch_contour\"\n  ],\n  \"unsupported_claims\": []\n}\n",
+      "response": {
+        "caption_detailed": "The segment has a local key estimate of F# major. Its melody has 12 notes spanning from C#4 to A#4 with the pitch sequence C#4, D#4, F#4, G#4, A#4, F#4, D#4, G#4, G#4, F4, C#4, F#4, and the texture has 51 note onsets (9.563 per second) across the MELODY, BRIDGE, and PIANO tracks.",
+        "caption_short": "A MIDI segment in F# major featuring a 12-note melody with pitches ranging from C#4 to A#4 and 51 total note onsets.",
+        "evidence_trace": [
+          {
+            "certainty": "supported",
+            "claim": "The segment has a local key estimate of F# major.",
+            "evidence_paths": [
+              "/metadata/supported_evidence/local_key_estimate/value"
+            ]
+          },
+          {
+            "certainty": "supported",
+            "claim": "The melody has 12 notes and ranges from C#4 to A#4.",
+            "evidence_paths": [
+              "/metadata/supported_evidence/melody_sequence/note_count",
+              "/metadata/supported_evidence/melody_sequence/pitch_range"
+            ]
+          },
+          {
+            "certainty": "supported",
+            "claim": "The melody consists of the pitch sequence C#4, D#4, F#4, G#4, A#4, F#4, D#4, G#4, G#4, F4, C#4, F#4.",
+            "evidence_paths": [
+              "/metadata/supported_evidence/melody_sequence/pitch_sequence"
+            ]
+          },
+          {
+            "certainty": "supported",
+            "claim": "The texture contains 51 note onsets at a rate of 9.563 per second across MELODY, BRIDGE, and PIANO tracks.",
+            "evidence_paths": [
+              "/metadata/supported_evidence/texture_summary/total_note_onsets",
+              "/metadata/supported_evidence/texture_summary/note_onsets_per_second",
+              "/metadata/supported_evidence/texture_summary/track_note_counts"
+            ]
+          }
+        ],
+        "job_id": "caption_29d9df6a9fc7",
+        "schema_version": "sori_music_caption_response_v0.1",
+        "uncertain_attributes": [
+          "melody_pitch_contour"
+        ],
+        "unsupported_claims": []
+      },
+      "validation": {
+        "accepted": true,
+        "errors": [],
+        "unsupported_claim_count": 0,
+        "evidence_trace_count": 4,
+        "scope": "structural_and_pointer_validation"
+      },
+      "provenance": {
+        "cli_release": "1.1.2",
+        "command_flags": [
+          "--model",
+          "Gemini 3.5 Flash (Medium)",
+          "--mode",
+          "plan",
+          "--sandbox",
+          "--print-timeout",
+          "180s"
+        ],
+        "elapsed_sec": 14.904,
+        "evidence_sha256": "cded5f44a887c4c8cddd789d9aeab35653156f0b175f74386d6e12ea8fcd4fb1",
+        "model": "Gemini 3.5 Flash (Medium)",
+        "prompt_sha256": "c77964b4261789ed7cb40a7d8b2a9f6e5f7690f03c675c5328ea1aba7b5f68d8",
+        "provider": "antigravity_cli_subscription_pilot",
+        "returncode": 0,
+        "timestamp_utc": "2026-07-14T12:03:17.777186+00:00"
+      },
+      "researcher_audit": "The output is evidence-faithful but database-like. Content selection and local-key scope preservation remain open gates.",
+      "artifact_paths": {
+        "job": "main/metadata/runs/real_train_pop909_001_20260714/jobs.jsonl",
+        "prompt": "main/metadata/runs/real_train_pop909_001_20260714/execution/prompts/real_pop909_001_bar10_14__base_M.txt",
+        "response": "main/metadata/runs/real_train_pop909_001_20260714/execution/parsed/real_pop909_001_bar10_14__base_M.json",
+        "record": "main/metadata/runs/real_train_pop909_001_20260714/execution/records/real_pop909_001_bar10_14__base_M.json"
+      },
+      "media": {
+        "midi": "assets/media/pop909_001_bars_10_13.mid",
+        "audio": "assets/media/pop909_001_bars_10_13.wav",
+        "duration_sec": 5.33332,
+        "notes": [
+          {
+            "start_sec": 0.055555,
+            "duration_sec": 0.879164,
+            "pitch": 42,
+            "velocity": 87,
+            "track": "PIANO",
+            "role": "left_hand"
+          },
+          {
+            "start_sec": 0.055555,
+            "duration_sec": 0.54861,
+            "pitch": 54,
+            "velocity": 52,
+            "track": "PIANO",
+            "role": "left_hand"
+          },
+          {
+            "start_sec": 0.055555,
+            "duration_sec": 0.38611,
+            "pitch": 58,
+            "velocity": 78,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 0.055555,
+            "duration_sec": 0.374999,
+            "pitch": 61,
+            "velocity": 73,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 0.055555,
+            "duration_sec": 0.452777,
+            "pitch": 66,
+            "velocity": 92,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 0.388888,
+            "duration_sec": 0.468054,
+            "pitch": 49,
+            "velocity": 46,
+            "track": "PIANO",
+            "role": "left_hand"
+          },
+          {
+            "start_sec": 0.72222,
+            "duration_sec": 0.240277,
+            "pitch": 54,
+            "velocity": 84,
+            "track": "PIANO",
+            "role": "left_hand"
+          },
+          {
+            "start_sec": 0.72222,
+            "duration_sec": 0.230555,
+            "pitch": 58,
+            "velocity": 94,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 0.72222,
+            "duration_sec": 0.095833,
+            "pitch": 61,
+            "velocity": 115,
+            "track": "MELODY",
+            "role": "melody"
+          },
+          {
+            "start_sec": 0.72222,
+            "duration_sec": 0.279166,
+            "pitch": 61,
+            "velocity": 89,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 0.888887,
+            "duration_sec": 0.0625,
+            "pitch": 63,
+            "velocity": 109,
+            "track": "MELODY",
+            "role": "melody"
+          },
+          {
+            "start_sec": 1.055553,
+            "duration_sec": 0.068055,
+            "pitch": 66,
+            "velocity": 118,
+            "track": "MELODY",
+            "role": "melody"
+          },
+          {
+            "start_sec": 1.222219,
+            "duration_sec": 0.083333,
+            "pitch": 68,
+            "velocity": 112,
+            "track": "MELODY",
+            "role": "melody"
+          },
+          {
+            "start_sec": 1.388885,
+            "duration_sec": 0.763887,
+            "pitch": 47,
+            "velocity": 109,
+            "track": "PIANO",
+            "role": "left_hand"
+          },
+          {
+            "start_sec": 1.388885,
+            "duration_sec": 0.356944,
+            "pitch": 59,
+            "velocity": 90,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 1.388885,
+            "duration_sec": 0.437499,
+            "pitch": 63,
+            "velocity": 92,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 1.388885,
+            "duration_sec": 0.109722,
+            "pitch": 70,
+            "velocity": 112,
+            "track": "MELODY",
+            "role": "melody"
+          },
+          {
+            "start_sec": 1.555552,
+            "duration_sec": 0.095833,
+            "pitch": 78,
+            "velocity": 97,
+            "track": "BRIDGE",
+            "role": "melody"
+          },
+          {
+            "start_sec": 1.722218,
+            "duration_sec": 0.465277,
+            "pitch": 54,
+            "velocity": 76,
+            "track": "PIANO",
+            "role": "left_hand"
+          },
+          {
+            "start_sec": 1.722218,
+            "duration_sec": 0.205555,
+            "pitch": 66,
+            "velocity": 112,
+            "track": "MELODY",
+            "role": "melody"
+          },
+          {
+            "start_sec": 1.722218,
+            "duration_sec": 0.093055,
+            "pitch": 80,
+            "velocity": 108,
+            "track": "BRIDGE",
+            "role": "melody"
+          },
+          {
+            "start_sec": 1.888884,
+            "duration_sec": 0.281944,
+            "pitch": 59,
+            "velocity": 109,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 1.888884,
+            "duration_sec": 0.134722,
+            "pitch": 82,
+            "velocity": 114,
+            "track": "BRIDGE",
+            "role": "melody"
+          },
+          {
+            "start_sec": 2.05555,
+            "duration_sec": 0.240277,
+            "pitch": 63,
+            "velocity": 118,
+            "track": "MELODY",
+            "role": "melody"
+          },
+          {
+            "start_sec": 2.05555,
+            "duration_sec": 0.212499,
+            "pitch": 66,
+            "velocity": 102,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 2.388883,
+            "duration_sec": 0.761109,
+            "pitch": 61,
+            "velocity": 84,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 2.388883,
+            "duration_sec": 0.716665,
+            "pitch": 65,
+            "velocity": 105,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 2.388883,
+            "duration_sec": 0.987498,
+            "pitch": 68,
+            "velocity": 115,
+            "track": "MELODY",
+            "role": "melody"
+          },
+          {
+            "start_sec": 2.722215,
+            "duration_sec": 0.791665,
+            "pitch": 49,
+            "velocity": 111,
+            "track": "PIANO",
+            "role": "left_hand"
+          },
+          {
+            "start_sec": 3.055548,
+            "duration_sec": 0.401388,
+            "pitch": 56,
+            "velocity": 97,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 3.055548,
+            "duration_sec": 0.095833,
+            "pitch": 80,
+            "velocity": 114,
+            "track": "BRIDGE",
+            "role": "melody"
+          },
+          {
+            "start_sec": 3.222214,
+            "duration_sec": 0.079166,
+            "pitch": 82,
+            "velocity": 108,
+            "track": "BRIDGE",
+            "role": "melody"
+          },
+          {
+            "start_sec": 3.38888,
+            "duration_sec": 0.154166,
+            "pitch": 61,
+            "velocity": 111,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 3.38888,
+            "duration_sec": 0.226388,
+            "pitch": 65,
+            "velocity": 111,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 3.38888,
+            "duration_sec": 0.376388,
+            "pitch": 68,
+            "velocity": 111,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 3.38888,
+            "duration_sec": 0.227777,
+            "pitch": 80,
+            "velocity": 120,
+            "track": "BRIDGE",
+            "role": "melody"
+          },
+          {
+            "start_sec": 3.722213,
+            "duration_sec": 0.1,
+            "pitch": 61,
+            "velocity": 97,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 4.055545,
+            "duration_sec": 0.895831,
+            "pitch": 46,
+            "velocity": 102,
+            "track": "PIANO",
+            "role": "left_hand"
+          },
+          {
+            "start_sec": 4.055545,
+            "duration_sec": 0.315277,
+            "pitch": 58,
+            "velocity": 111,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 4.055545,
+            "duration_sec": 0.33611,
+            "pitch": 61,
+            "velocity": 111,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 4.055545,
+            "duration_sec": 0.227777,
+            "pitch": 68,
+            "velocity": 112,
+            "track": "MELODY",
+            "role": "melody"
+          },
+          {
+            "start_sec": 4.388878,
+            "duration_sec": 0.49861,
+            "pitch": 53,
+            "velocity": 80,
+            "track": "PIANO",
+            "role": "left_hand"
+          },
+          {
+            "start_sec": 4.388878,
+            "duration_sec": 0.191666,
+            "pitch": 65,
+            "velocity": 115,
+            "track": "MELODY",
+            "role": "melody"
+          },
+          {
+            "start_sec": 4.555544,
+            "duration_sec": 0.113889,
+            "pitch": 58,
+            "velocity": 102,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 4.72221,
+            "duration_sec": 0.144444,
+            "pitch": 58,
+            "velocity": 111,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 4.72221,
+            "duration_sec": 0.1,
+            "pitch": 61,
+            "velocity": 105,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 4.72221,
+            "duration_sec": 0.186111,
+            "pitch": 61,
+            "velocity": 115,
+            "track": "MELODY",
+            "role": "melody"
+          },
+          {
+            "start_sec": 4.72221,
+            "duration_sec": 0.159722,
+            "pitch": 65,
+            "velocity": 111,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 5.055543,
+            "duration_sec": 0.277777,
+            "pitch": 58,
+            "velocity": 111,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 5.055543,
+            "duration_sec": 0.277777,
+            "pitch": 63,
+            "velocity": 108,
+            "track": "PIANO",
+            "role": "accompaniment"
+          },
+          {
+            "start_sec": 5.055543,
+            "duration_sec": 0.277777,
+            "pitch": 66,
+            "velocity": 118,
+            "track": "MELODY",
+            "role": "melody"
+          }
+        ],
+        "render_note": "Deterministic additive-synthesis render from the cropped MIDI; not original POP909 audio."
+      }
+    },
+    {
+      "case_id": "pilot_pitch_key_0001__base_M",
+      "title": "Pitch And Key Evidence Realization",
+      "family": "pitch_key_consistency",
+      "family_label": "Pitch / Key",
+      "source_kind": "Mock Evidence",
+      "source_id": "pilot:maestro:piece_0001",
+      "split": "train",
+      "prompt_family": "base_M",
+      "training_stage": "caption_pretrain",
+      "input_modalities": [
+        "midi"
+      ],
+      "input_representation": "structured_metadata",
+      "window": {
+        "end_barbeat": "bar 5 beat 4",
+        "end_sec": 9.5,
+        "end_tick": 9120,
+        "start_barbeat": "bar 1 beat 1",
+        "start_sec": 0.0,
+        "start_tick": 0,
+        "window_id": "w0001"
+      },
+      "supported_evidence": {
+        "local_key": {
+          "confidence": 0.957,
+          "evidence": {
+            "profile_correlation": 0.915
+          },
+          "status": "supported",
+          "value": "D minor"
+        },
+        "melody_sequence": {
+          "confidence": 0.95,
+          "duration_pattern_beat": [
+            1.0,
+            0.5,
+            0.5,
+            1.0
+          ],
+          "events": [
+            {
+              "duration_beat": 1.0,
+              "onset_beat": 0.0,
+              "pitch": "A4",
+              "velocity": 72
+            },
+            {
+              "duration_beat": 0.5,
+              "onset_beat": 1.0,
+              "pitch": "G4",
+              "velocity": 70
+            },
+            {
+              "duration_beat": 0.5,
+              "onset_beat": 1.5,
+              "pitch": "F4",
+              "velocity": 68
+            },
+            {
+              "duration_beat": 1.0,
+              "onset_beat": 2.0,
+              "pitch": "E4",
+              "velocity": 69
+            }
+          ],
+          "pitch_class_sequence": [
+            "A",
+            "G",
+            "F",
+            "E"
+          ],
+          "pitch_contour": {
+            "confidence": 0.95,
+            "evidence": {
+              "negative_interval_ratio": 1.0,
+              "pitch_slope_semitones_per_note": -1.667,
+              "positive_interval_ratio": 0.0,
+              "stepwise_ratio": 1.0
+            },
+            "status": "supported",
+            "value": "descending_stepwise"
+          },
+          "pitch_sequence": [
+            "A4",
+            "G4",
+            "F4",
+            "E4"
+          ],
+          "relative_onsets_beat": [
+            0.0,
+            1.0,
+            1.5,
+            2.0
+          ],
+          "rhythm_pattern": "quarter-eighth-eighth-quarter",
+          "status": "supported"
+        }
+      },
+      "blocked_evidence": [],
+      "prompt": "You are producing an English music caption for a symbolic MIDI segment.\n\nThis is a generation-caption task, not an editing task. Describe only the current musical state represented by the supplied target-MIDI metadata. Never infer or mention a source MIDI, an edit, a repair, a before/after comparison, or a requested control direction.\n\nEvidence policy:\n- Use only fields under `metadata.supported_evidence` whose status is `supported`.\n- Treat `metadata.uncertain_or_unknown_evidence` as blocked attributes.\n- Do not infer genre, emotion, timbre, performer identity, performance quality, or acoustic properties.\n- A pitch sequence may be stated only when the exact sequence is supplied.\n- A rhythm or contour may be stated only when its explicit symbolic evidence is supplied.\n- Do not provide hidden chain-of-thought. `evidence_trace` must contain only short, externally verifiable claim-to-field links.\n\nReturn exactly one raw JSON object and no Markdown. It must match this contract:\n{\n  \"schema_version\": \"sori_music_caption_response_v0.1\",\n  \"job_id\": \"caption_842e5b968dee\",\n  \"caption_short\": \"<one concise sentence>\",\n  \"caption_detailed\": \"<one or two evidence-grounded sentences>\",\n  \"evidence_trace\": [\n    {\n      \"claim\": \"<short verifiable claim>\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/local_key\"\n      ],\n      \"certainty\": \"supported\"\n    }\n  ],\n  \"uncertain_attributes\": [],\n  \"unsupported_claims\": []\n}\n\nReplace angle-bracketed placeholder strings with content. Keep `schema_version`, `job_id`, field names, and `certainty` exactly as shown. Every evidence path must identify a field actually used for its claim.\n\nJob ID:\ncaption_842e5b968dee\n\nInput evidence:\n{\n  \"input_modality\": \"midi_metadata\",\n  \"metadata\": {\n    \"observation_scope\": \"target_midi_current_state\",\n    \"supported_evidence\": {\n      \"local_key\": {\n        \"confidence\": 0.957,\n        \"evidence\": {\n          \"profile_correlation\": 0.915\n        },\n        \"status\": \"supported\",\n        \"value\": \"D minor\"\n      },\n      \"melody_sequence\": {\n        \"confidence\": 0.95,\n        \"duration_pattern_beat\": [\n          1.0,\n          0.5,\n          0.5,\n          1.0\n        ],\n        \"events\": [\n          {\n            \"duration_beat\": 1.0,\n            \"onset_beat\": 0.0,\n            \"pitch\": \"A4\",\n            \"velocity\": 72\n          },\n          {\n            \"duration_beat\": 0.5,\n            \"onset_beat\": 1.0,\n            \"pitch\": \"G4\",\n            \"velocity\": 70\n          },\n          {\n            \"duration_beat\": 0.5,\n            \"onset_beat\": 1.5,\n            \"pitch\": \"F4\",\n            \"velocity\": 68\n          },\n          {\n            \"duration_beat\": 1.0,\n            \"onset_beat\": 2.0,\n            \"pitch\": \"E4\",\n            \"velocity\": 69\n          }\n        ],\n        \"pitch_class_sequence\": [\n          \"A\",\n          \"G\",\n          \"F\",\n          \"E\"\n        ],\n        \"pitch_contour\": {\n          \"confidence\": 0.95,\n          \"evidence\": {\n            \"negative_interval_ratio\": 1.0,\n            \"pitch_slope_semitones_per_note\": -1.667,\n            \"positive_interval_ratio\": 0.0,\n            \"stepwise_ratio\": 1.0\n          },\n          \"status\": \"supported\",\n          \"value\": \"descending_stepwise\"\n        },\n        \"pitch_sequence\": [\n          \"A4\",\n          \"G4\",\n          \"F4\",\n          \"E4\"\n        ],\n        \"relative_onsets_beat\": [\n          0.0,\n          1.0,\n          1.5,\n          2.0\n        ],\n        \"rhythm_pattern\": \"quarter-eighth-eighth-quarter\",\n        \"status\": \"supported\"\n      }\n    },\n    \"uncertain_or_unknown_evidence\": [],\n    \"window\": {\n      \"end_barbeat\": \"bar 5 beat 4\",\n      \"end_sec\": 9.5,\n      \"end_tick\": 9120,\n      \"start_barbeat\": \"bar 1 beat 1\",\n      \"start_sec\": 0.0,\n      \"start_tick\": 0,\n      \"window_id\": \"w0001\"\n    }\n  }\n}\n",
+      "raw_response": "{\n  \"schema_version\": \"sori_music_caption_response_v0.1\",\n  \"job_id\": \"caption_842e5b968dee\",\n  \"caption_short\": \"A melody in D minor plays a descending stepwise sequence of A4, G4, F4, and E4.\",\n  \"caption_detailed\": \"The segment features a melody in the key of D minor. The melody plays the descending stepwise pitch sequence A4, G4, F4, and E4 with a quarter-eighth-eighth-quarter rhythmic pattern.\",\n  \"evidence_trace\": [\n    {\n      \"claim\": \"The music is in the key of D minor.\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/local_key\"\n      ],\n      \"certainty\": \"supported\"\n    },\n    {\n      \"claim\": \"The melody plays the pitch sequence A4, G4, F4, and E4.\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/melody_sequence/pitch_sequence\"\n      ],\n      \"certainty\": \"supported\"\n    },\n    {\n      \"claim\": \"The melody has a descending stepwise pitch contour.\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/melody_sequence/pitch_contour\"\n      ],\n      \"certainty\": \"supported\"\n    },\n    {\n      \"claim\": \"The melody uses a quarter-eighth-eighth-quarter rhythmic pattern.\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/melody_sequence/rhythm_pattern\"\n      ],\n      \"certainty\": \"supported\"\n    }\n  ],\n  \"uncertain_attributes\": [],\n  \"unsupported_claims\": []\n}\n",
+      "response": {
+        "caption_detailed": "The segment features a melody in the key of D minor. The melody plays the descending stepwise pitch sequence A4, G4, F4, and E4 with a quarter-eighth-eighth-quarter rhythmic pattern.",
+        "caption_short": "A melody in D minor plays a descending stepwise sequence of A4, G4, F4, and E4.",
+        "evidence_trace": [
+          {
+            "certainty": "supported",
+            "claim": "The music is in the key of D minor.",
+            "evidence_paths": [
+              "/metadata/supported_evidence/local_key"
+            ]
+          },
+          {
+            "certainty": "supported",
+            "claim": "The melody plays the pitch sequence A4, G4, F4, and E4.",
+            "evidence_paths": [
+              "/metadata/supported_evidence/melody_sequence/pitch_sequence"
+            ]
+          },
+          {
+            "certainty": "supported",
+            "claim": "The melody has a descending stepwise pitch contour.",
+            "evidence_paths": [
+              "/metadata/supported_evidence/melody_sequence/pitch_contour"
+            ]
+          },
+          {
+            "certainty": "supported",
+            "claim": "The melody uses a quarter-eighth-eighth-quarter rhythmic pattern.",
+            "evidence_paths": [
+              "/metadata/supported_evidence/melody_sequence/rhythm_pattern"
+            ]
+          }
+        ],
+        "job_id": "caption_842e5b968dee",
+        "schema_version": "sori_music_caption_response_v0.1",
+        "uncertain_attributes": [],
+        "unsupported_claims": []
+      },
+      "validation": {
+        "accepted": true,
+        "errors": [],
+        "unsupported_claim_count": 0,
+        "evidence_trace_count": 4,
+        "scope": "structural_and_pointer_validation"
+      },
+      "provenance": {
+        "cli_release": "1.1.2",
+        "command_flags": [
+          "--model",
+          "Gemini 3.5 Flash (Medium)",
+          "--mode",
+          "plan",
+          "--sandbox",
+          "--print-timeout",
+          "180s"
+        ],
+        "elapsed_sec": 10.904,
+        "evidence_sha256": "4acf392159d58144ab09bdcc5e6d51fd05832a8a388af6f05364910b8624388b",
+        "model": "Gemini 3.5 Flash (Medium)",
+        "prompt_sha256": "d1c34176969404f145a7240479f2c6686c39e57e0f66e47167f18b4642a9c06c",
+        "provider": "antigravity_cli_subscription_pilot",
+        "returncode": 0,
+        "timestamp_utc": "2026-07-14T10:58:12.493641+00:00"
+      },
+      "researcher_audit": "The phrase ‘in D minor’ broadens a local-key estimate. Prefer wording that preserves local scope.",
+      "artifact_paths": {
+        "job": "main/metadata/examples/pilot_llm_caption_jobs.jsonl",
+        "prompt": "main/metadata/runs/agy_caption_pilot_actual_20260714/prompts/pilot_pitch_key_0001__base_M.txt",
+        "response": "main/metadata/runs/agy_caption_pilot_actual_20260714/parsed/pilot_pitch_key_0001__base_M.json",
+        "record": "main/metadata/runs/agy_caption_pilot_actual_20260714/records/pilot_pitch_key_0001__base_M.json"
+      },
+      "media": null
+    },
+    {
+      "case_id": "pilot_timing_0001__base_M",
+      "title": "Timing Evidence Realization",
+      "family": "timing_dynamics_control",
+      "family_label": "Timing / Dynamics",
+      "source_kind": "Mock Evidence",
+      "source_id": "pilot:maestro:piece_0002",
+      "split": "train",
+      "prompt_family": "base_M",
+      "training_stage": "caption_pretrain",
+      "input_modalities": [
+        "midi"
+      ],
+      "input_representation": "structured_metadata",
+      "window": {
+        "end_barbeat": "bar 7 beat 4",
+        "end_sec": 13.5,
+        "end_tick": 12960,
+        "start_barbeat": "bar 1 beat 1",
+        "start_sec": 0.0,
+        "start_tick": 0,
+        "window_id": "w0001"
+      },
+      "supported_evidence": {
+        "grid": {
+          "confidence": 0.96,
+          "status": "supported",
+          "value": "eighth_note"
+        },
+        "left_hand_onset_deviation_ms": {
+          "confidence": 0.94,
+          "status": "supported",
+          "value": 0.0
+        },
+        "left_hand_pattern": {
+          "confidence": 0.89,
+          "duration_pattern_beat": [
+            0.5,
+            0.5,
+            0.5,
+            0.5,
+            0.5
+          ],
+          "relative_onsets_beat": [
+            0.0,
+            1.0,
+            2.0,
+            3.0,
+            4.0
+          ],
+          "status": "supported"
+        }
+      },
+      "blocked_evidence": [
+        "velocity_contour:unknown"
+      ],
+      "prompt": "You are producing an English music caption for a symbolic MIDI segment.\n\nThis is a generation-caption task, not an editing task. Describe only the current musical state represented by the supplied target-MIDI metadata. Never infer or mention a source MIDI, an edit, a repair, a before/after comparison, or a requested control direction.\n\nEvidence policy:\n- Use only fields under `metadata.supported_evidence` whose status is `supported`.\n- Treat `metadata.uncertain_or_unknown_evidence` as blocked attributes.\n- Do not infer genre, emotion, timbre, performer identity, performance quality, or acoustic properties.\n- A pitch sequence may be stated only when the exact sequence is supplied.\n- A rhythm or contour may be stated only when its explicit symbolic evidence is supplied.\n- Do not provide hidden chain-of-thought. `evidence_trace` must contain only short, externally verifiable claim-to-field links.\n\nReturn exactly one raw JSON object and no Markdown. It must match this contract:\n{\n  \"schema_version\": \"sori_music_caption_response_v0.1\",\n  \"job_id\": \"caption_3c5610b4e836\",\n  \"caption_short\": \"<one concise sentence>\",\n  \"caption_detailed\": \"<one or two evidence-grounded sentences>\",\n  \"evidence_trace\": [\n    {\n      \"claim\": \"<short verifiable claim>\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/grid\"\n      ],\n      \"certainty\": \"supported\"\n    }\n  ],\n  \"uncertain_attributes\": [],\n  \"unsupported_claims\": []\n}\n\nReplace angle-bracketed placeholder strings with content. Keep `schema_version`, `job_id`, field names, and `certainty` exactly as shown. Every evidence path must identify a field actually used for its claim.\n\nJob ID:\ncaption_3c5610b4e836\n\nInput evidence:\n{\n  \"input_modality\": \"midi_metadata\",\n  \"metadata\": {\n    \"observation_scope\": \"target_midi_current_state\",\n    \"supported_evidence\": {\n      \"grid\": {\n        \"confidence\": 0.96,\n        \"status\": \"supported\",\n        \"value\": \"eighth_note\"\n      },\n      \"left_hand_onset_deviation_ms\": {\n        \"confidence\": 0.94,\n        \"status\": \"supported\",\n        \"value\": 0.0\n      },\n      \"left_hand_pattern\": {\n        \"confidence\": 0.89,\n        \"duration_pattern_beat\": [\n          0.5,\n          0.5,\n          0.5,\n          0.5,\n          0.5\n        ],\n        \"relative_onsets_beat\": [\n          0.0,\n          1.0,\n          2.0,\n          3.0,\n          4.0\n        ],\n        \"status\": \"supported\"\n      }\n    },\n    \"uncertain_or_unknown_evidence\": [\n      \"velocity_contour:unknown\"\n    ],\n    \"window\": {\n      \"end_barbeat\": \"bar 7 beat 4\",\n      \"end_sec\": 13.5,\n      \"end_tick\": 12960,\n      \"start_barbeat\": \"bar 1 beat 1\",\n      \"start_sec\": 0.0,\n      \"start_tick\": 0,\n      \"window_id\": \"w0001\"\n    }\n  }\n}\n",
+      "raw_response": "{\n  \"schema_version\": \"sori_music_caption_response_v0.1\",\n  \"job_id\": \"caption_3c5610b4e836\",\n  \"caption_short\": \"This MIDI segment features precisely timed left-hand notes played at regular beat intervals on an eighth-note grid.\",\n  \"caption_detailed\": \"The left hand plays a recurring pattern with notes sounding at each beat with a duration of 0.5 beats and zero onset deviation. The overall timing of the segment is aligned to an eighth-note grid.\",\n  \"evidence_trace\": [\n    {\n      \"claim\": \"The overall timing is aligned to an eighth-note grid.\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/grid\"\n      ],\n      \"certainty\": \"supported\"\n    },\n    {\n      \"claim\": \"The left hand plays notes at beats 0.0, 1.0, 2.0, 3.0, and 4.0 with duration of 0.5 beats.\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/left_hand_pattern\"\n      ],\n      \"certainty\": \"supported\"\n    },\n    {\n      \"claim\": \"The left-hand notes are played with zero onset deviation.\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/left_hand_onset_deviation_ms\"\n      ],\n      \"certainty\": \"supported\"\n    }\n  ],\n  \"uncertain_attributes\": [\n    \"velocity_contour\"\n  ],\n  \"unsupported_claims\": []\n}\n",
+      "response": {
+        "caption_detailed": "The left hand plays a recurring pattern with notes sounding at each beat with a duration of 0.5 beats and zero onset deviation. The overall timing of the segment is aligned to an eighth-note grid.",
+        "caption_short": "This MIDI segment features precisely timed left-hand notes played at regular beat intervals on an eighth-note grid.",
+        "evidence_trace": [
+          {
+            "certainty": "supported",
+            "claim": "The overall timing is aligned to an eighth-note grid.",
+            "evidence_paths": [
+              "/metadata/supported_evidence/grid"
+            ]
+          },
+          {
+            "certainty": "supported",
+            "claim": "The left hand plays notes at beats 0.0, 1.0, 2.0, 3.0, and 4.0 with duration of 0.5 beats.",
+            "evidence_paths": [
+              "/metadata/supported_evidence/left_hand_pattern"
+            ]
+          },
+          {
+            "certainty": "supported",
+            "claim": "The left-hand notes are played with zero onset deviation.",
+            "evidence_paths": [
+              "/metadata/supported_evidence/left_hand_onset_deviation_ms"
+            ]
+          }
+        ],
+        "job_id": "caption_3c5610b4e836",
+        "schema_version": "sori_music_caption_response_v0.1",
+        "uncertain_attributes": [
+          "velocity_contour"
+        ],
+        "unsupported_claims": []
+      },
+      "validation": {
+        "accepted": true,
+        "errors": [],
+        "unsupported_claim_count": 0,
+        "evidence_trace_count": 3,
+        "scope": "structural_and_pointer_validation"
+      },
+      "provenance": {
+        "cli_release": "1.1.2",
+        "command_flags": [
+          "--model",
+          "Gemini 3.5 Flash (Medium)",
+          "--mode",
+          "plan",
+          "--sandbox",
+          "--print-timeout",
+          "180s"
+        ],
+        "elapsed_sec": 10.885,
+        "evidence_sha256": "fd4ecc0de17efe72bfcc1e2f2b0f7023d29cb4527926c6c46568802917e65479",
+        "model": "Gemini 3.5 Flash (Medium)",
+        "prompt_sha256": "7a1b73fba03f103b5f6c1e3a0d29ce13de9ce08beaf4d9b3931d14ffcea099b9",
+        "provider": "antigravity_cli_subscription_pilot",
+        "returncode": 0,
+        "timestamp_utc": "2026-07-14T10:58:40.517624+00:00"
+      },
+      "researcher_audit": "‘Precisely timed’ is plausible from zero onset deviation, but needs an explicit lexical or entailment rule.",
+      "artifact_paths": {
+        "job": "main/metadata/examples/pilot_llm_caption_jobs.jsonl",
+        "prompt": "main/metadata/runs/agy_caption_pilot_actual_20260714/prompts/pilot_timing_0001__base_M.txt",
+        "response": "main/metadata/runs/agy_caption_pilot_actual_20260714/parsed/pilot_timing_0001__base_M.json",
+        "record": "main/metadata/runs/agy_caption_pilot_actual_20260714/records/pilot_timing_0001__base_M.json"
+      },
+      "media": null
+    },
+    {
+      "case_id": "pilot_texture_0001__base_M",
+      "title": "Melody-Conditioned Texture Realization",
+      "family": "melody_conditioned_texture",
+      "family_label": "Melody-Conditioned Texture",
+      "source_kind": "Mock Evidence",
+      "source_id": "pilot:pop909:song_0001",
+      "split": "train",
+      "prompt_family": "base_M",
+      "training_stage": "caption_pretrain",
+      "input_modalities": [
+        "midi"
+      ],
+      "input_representation": "structured_metadata",
+      "window": {
+        "end_barbeat": "bar 7 beat 3",
+        "end_sec": 13.0,
+        "end_tick": 12480,
+        "start_barbeat": "bar 1 beat 1",
+        "start_sec": 0.0,
+        "start_tick": 0,
+        "window_id": "w0001"
+      },
+      "supported_evidence": {
+        "accompaniment_note_count": {
+          "confidence": 1.0,
+          "status": "supported",
+          "value": 8
+        },
+        "local_key": {
+          "confidence": 0.933,
+          "evidence": {
+            "profile_correlation": 0.866
+          },
+          "status": "supported",
+          "value": "G major"
+        },
+        "melody_sequence": {
+          "confidence": 0.883,
+          "duration_pattern_beat": [
+            1.0,
+            1.0,
+            0.5,
+            0.5
+          ],
+          "events": [
+            {
+              "duration_beat": 1.0,
+              "onset_beat": 0.0,
+              "pitch": "B4",
+              "velocity": 76
+            },
+            {
+              "duration_beat": 1.0,
+              "onset_beat": 1.0,
+              "pitch": "D5",
+              "velocity": 75
+            },
+            {
+              "duration_beat": 0.5,
+              "onset_beat": 2.0,
+              "pitch": "E5",
+              "velocity": 78
+            },
+            {
+              "duration_beat": 0.5,
+              "onset_beat": 2.5,
+              "pitch": "D5",
+              "velocity": 74
+            }
+          ],
+          "pitch_class_sequence": [
+            "B",
+            "D",
+            "E",
+            "D"
+          ],
+          "pitch_contour": {
+            "confidence": 0.883,
+            "evidence": {
+              "negative_interval_ratio": 0.333,
+              "pitch_slope_semitones_per_note": 1.0,
+              "positive_interval_ratio": 0.667,
+              "stepwise_ratio": 0.667
+            },
+            "status": "supported",
+            "value": "arch"
+          },
+          "pitch_sequence": [
+            "B4",
+            "D5",
+            "E5",
+            "D5"
+          ],
+          "relative_onsets_beat": [
+            0.0,
+            1.0,
+            2.0,
+            2.5
+          ],
+          "rhythm_pattern": "quarter-quarter-eighth-eighth",
+          "status": "supported"
+        }
+      },
+      "blocked_evidence": [],
+      "prompt": "You are producing an English music caption for a symbolic MIDI segment.\n\nThis is a generation-caption task, not an editing task. Describe only the current musical state represented by the supplied target-MIDI metadata. Never infer or mention a source MIDI, an edit, a repair, a before/after comparison, or a requested control direction.\n\nEvidence policy:\n- Use only fields under `metadata.supported_evidence` whose status is `supported`.\n- Treat `metadata.uncertain_or_unknown_evidence` as blocked attributes.\n- Do not infer genre, emotion, timbre, performer identity, performance quality, or acoustic properties.\n- A pitch sequence may be stated only when the exact sequence is supplied.\n- A rhythm or contour may be stated only when its explicit symbolic evidence is supplied.\n- Do not provide hidden chain-of-thought. `evidence_trace` must contain only short, externally verifiable claim-to-field links.\n\nReturn exactly one raw JSON object and no Markdown. It must match this contract:\n{\n  \"schema_version\": \"sori_music_caption_response_v0.1\",\n  \"job_id\": \"caption_3f1cb9594fc3\",\n  \"caption_short\": \"<one concise sentence>\",\n  \"caption_detailed\": \"<one or two evidence-grounded sentences>\",\n  \"evidence_trace\": [\n    {\n      \"claim\": \"<short verifiable claim>\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/accompaniment_note_count\"\n      ],\n      \"certainty\": \"supported\"\n    }\n  ],\n  \"uncertain_attributes\": [],\n  \"unsupported_claims\": []\n}\n\nReplace angle-bracketed placeholder strings with content. Keep `schema_version`, `job_id`, field names, and `certainty` exactly as shown. Every evidence path must identify a field actually used for its claim.\n\nJob ID:\ncaption_3f1cb9594fc3\n\nInput evidence:\n{\n  \"input_modality\": \"midi_metadata\",\n  \"metadata\": {\n    \"observation_scope\": \"target_midi_current_state\",\n    \"supported_evidence\": {\n      \"accompaniment_note_count\": {\n        \"confidence\": 1.0,\n        \"status\": \"supported\",\n        \"value\": 8\n      },\n      \"local_key\": {\n        \"confidence\": 0.933,\n        \"evidence\": {\n          \"profile_correlation\": 0.866\n        },\n        \"status\": \"supported\",\n        \"value\": \"G major\"\n      },\n      \"melody_sequence\": {\n        \"confidence\": 0.883,\n        \"duration_pattern_beat\": [\n          1.0,\n          1.0,\n          0.5,\n          0.5\n        ],\n        \"events\": [\n          {\n            \"duration_beat\": 1.0,\n            \"onset_beat\": 0.0,\n            \"pitch\": \"B4\",\n            \"velocity\": 76\n          },\n          {\n            \"duration_beat\": 1.0,\n            \"onset_beat\": 1.0,\n            \"pitch\": \"D5\",\n            \"velocity\": 75\n          },\n          {\n            \"duration_beat\": 0.5,\n            \"onset_beat\": 2.0,\n            \"pitch\": \"E5\",\n            \"velocity\": 78\n          },\n          {\n            \"duration_beat\": 0.5,\n            \"onset_beat\": 2.5,\n            \"pitch\": \"D5\",\n            \"velocity\": 74\n          }\n        ],\n        \"pitch_class_sequence\": [\n          \"B\",\n          \"D\",\n          \"E\",\n          \"D\"\n        ],\n        \"pitch_contour\": {\n          \"confidence\": 0.883,\n          \"evidence\": {\n            \"negative_interval_ratio\": 0.333,\n            \"pitch_slope_semitones_per_note\": 1.0,\n            \"positive_interval_ratio\": 0.667,\n            \"stepwise_ratio\": 0.667\n          },\n          \"status\": \"supported\",\n          \"value\": \"arch\"\n        },\n        \"pitch_sequence\": [\n          \"B4\",\n          \"D5\",\n          \"E5\",\n          \"D5\"\n        ],\n        \"relative_onsets_beat\": [\n          0.0,\n          1.0,\n          2.0,\n          2.5\n        ],\n        \"rhythm_pattern\": \"quarter-quarter-eighth-eighth\",\n        \"status\": \"supported\"\n      }\n    },\n    \"uncertain_or_unknown_evidence\": [],\n    \"window\": {\n      \"end_barbeat\": \"bar 7 beat 3\",\n      \"end_sec\": 13.0,\n      \"end_tick\": 12480,\n      \"start_barbeat\": \"bar 1 beat 1\",\n      \"start_sec\": 0.0,\n      \"start_tick\": 0,\n      \"window_id\": \"w0001\"\n    }\n  }\n}\n",
+      "raw_response": "{\n  \"schema_version\": \"sori_music_caption_response_v0.1\",\n  \"job_id\": \"caption_3f1cb9594fc3\",\n  \"caption_short\": \"A melody in G major plays the pitch sequence B4-D5-E5-D5 over an eight-note accompaniment.\",\n  \"caption_detailed\": \"The melody is in G major, featuring the pitch sequence B4-D5-E5-D5 in a quarter-quarter-eighth-eighth rhythm that forms an arch contour. The accompaniment consists of eight notes.\",\n  \"evidence_trace\": [\n    {\n      \"claim\": \"The local key is G major.\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/local_key\"\n      ],\n      \"certainty\": \"supported\"\n    },\n    {\n      \"claim\": \"The melody plays the pitch sequence B4-D5-E5-D5.\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/melody_sequence/pitch_sequence\"\n      ],\n      \"certainty\": \"supported\"\n    },\n    {\n      \"claim\": \"The melody follows a quarter-quarter-eighth-eighth rhythm.\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/melody_sequence/rhythm_pattern\"\n      ],\n      \"certainty\": \"supported\"\n    },\n    {\n      \"claim\": \"The melody has an arch contour.\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/melody_sequence/pitch_contour\"\n      ],\n      \"certainty\": \"supported\"\n    },\n    {\n      \"claim\": \"The accompaniment contains eight notes.\",\n      \"evidence_paths\": [\n        \"/metadata/supported_evidence/accompaniment_note_count\"\n      ],\n      \"certainty\": \"supported\"\n    }\n  ],\n  \"uncertain_attributes\": [],\n  \"unsupported_claims\": []\n}\n",
+      "response": {
+        "caption_detailed": "The melody is in G major, featuring the pitch sequence B4-D5-E5-D5 in a quarter-quarter-eighth-eighth rhythm that forms an arch contour. The accompaniment consists of eight notes.",
+        "caption_short": "A melody in G major plays the pitch sequence B4-D5-E5-D5 over an eight-note accompaniment.",
+        "evidence_trace": [
+          {
+            "certainty": "supported",
+            "claim": "The local key is G major.",
+            "evidence_paths": [
+              "/metadata/supported_evidence/local_key"
+            ]
+          },
+          {
+            "certainty": "supported",
+            "claim": "The melody plays the pitch sequence B4-D5-E5-D5.",
+            "evidence_paths": [
+              "/metadata/supported_evidence/melody_sequence/pitch_sequence"
+            ]
+          },
+          {
+            "certainty": "supported",
+            "claim": "The melody follows a quarter-quarter-eighth-eighth rhythm.",
+            "evidence_paths": [
+              "/metadata/supported_evidence/melody_sequence/rhythm_pattern"
+            ]
+          },
+          {
+            "certainty": "supported",
+            "claim": "The melody has an arch contour.",
+            "evidence_paths": [
+              "/metadata/supported_evidence/melody_sequence/pitch_contour"
+            ]
+          },
+          {
+            "certainty": "supported",
+            "claim": "The accompaniment contains eight notes.",
+            "evidence_paths": [
+              "/metadata/supported_evidence/accompaniment_note_count"
+            ]
+          }
+        ],
+        "job_id": "caption_3f1cb9594fc3",
+        "schema_version": "sori_music_caption_response_v0.1",
+        "uncertain_attributes": [],
+        "unsupported_claims": []
+      },
+      "validation": {
+        "accepted": true,
+        "errors": [],
+        "unsupported_claim_count": 0,
+        "evidence_trace_count": 5,
+        "scope": "structural_and_pointer_validation"
+      },
+      "provenance": {
+        "cli_release": "1.1.2",
+        "command_flags": [
+          "--model",
+          "Gemini 3.5 Flash (Medium)",
+          "--mode",
+          "plan",
+          "--sandbox",
+          "--print-timeout",
+          "180s"
+        ],
+        "elapsed_sec": 9.874,
+        "evidence_sha256": "4c5711dc6fee23f00126fad36d72f5f60982dff96521819933ccd086b7e1c9b1",
+        "model": "Gemini 3.5 Flash (Medium)",
+        "prompt_sha256": "1d379ac72bcfddec55924cd8303274a4adeb7f1398da152d233aac19637c846f",
+        "provider": "antigravity_cli_subscription_pilot",
+        "returncode": 0,
+        "timestamp_utc": "2026-07-14T10:58:50.562312+00:00"
+      },
+      "researcher_audit": "‘Eight-note accompaniment’ is ambiguous between note count and note value. Prefer ‘an accompaniment containing eight notes.’",
+      "artifact_paths": {
+        "job": "main/metadata/examples/pilot_llm_caption_jobs.jsonl",
+        "prompt": "main/metadata/runs/agy_caption_pilot_actual_20260714/prompts/pilot_texture_0001__base_M.txt",
+        "response": "main/metadata/runs/agy_caption_pilot_actual_20260714/parsed/pilot_texture_0001__base_M.json",
+        "record": "main/metadata/runs/agy_caption_pilot_actual_20260714/records/pilot_texture_0001__base_M.json"
+      },
+      "media": null
+    }
+  ]
+}
