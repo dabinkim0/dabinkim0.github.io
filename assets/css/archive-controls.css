@@ -25,7 +25,9 @@
         transition:
             background-color var(--motion-fast) var(--ease-out),
             border-color var(--motion-fast) var(--ease-out),
-            color var(--motion-fast) var(--ease-out);
+            color var(--motion-fast) var(--ease-out),
+            box-shadow var(--motion-fast) var(--ease-out),
+            transform var(--motion-fast) var(--ease-out);
     }
 
     .view-toggle-button::before {
@@ -38,12 +40,8 @@
         border-color: var(--control-active);
         background: var(--control-active);
         color: #fff;
-    }
-
-    .view-toggle-button:not(.is-active):hover {
-        border-color: var(--accent-border);
-        background: var(--accent-soft);
-        color: var(--accent-strong);
+        box-shadow: none;
+        transform: none;
     }
 
     .view-toggle-button:focus-visible {
@@ -126,7 +124,9 @@
         transition:
             border-color var(--motion-fast) var(--ease-out),
             background-color var(--motion-fast) var(--ease-out),
-            color var(--motion-fast) var(--ease-out);
+            color var(--motion-fast) var(--ease-out),
+            box-shadow var(--motion-fast) var(--ease-out),
+            transform var(--motion-fast) var(--ease-out);
     }
 
     .archive-filter-chip::before {
@@ -135,21 +135,42 @@
         inset: -4px;
     }
 
-    .archive-filter-chip:not(.is-active):hover {
-        border-color: var(--accent-border);
-        background: var(--accent-soft);
-        color: var(--accent-strong);
-    }
-
     .archive-filter-chip.is-active {
         border-color: var(--control-active);
         background: var(--control-active);
         color: #fff;
+        box-shadow: none;
+        transform: none;
     }
 
     .archive-filter-chip:focus-visible {
         outline: 2px solid var(--focus-color);
         outline-offset: 3px;
+    }
+
+    .view-toggle-button:active:not(.is-active):not(:disabled),
+    .archive-filter-chip:active:not(.is-active):not(:disabled) {
+        box-shadow: none;
+        transform: translateY(0) scale(0.985);
+    }
+
+    .view-toggle-button:disabled,
+    .archive-filter-chip:disabled {
+        cursor: not-allowed;
+        opacity: 0.48;
+        box-shadow: none;
+        transform: none;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+        .view-toggle-button:not(.is-active):not(:disabled):hover,
+        .archive-filter-chip:not(.is-active):not(:disabled):hover {
+            border-color: var(--accent-border);
+            background: var(--accent-soft);
+            color: var(--accent-strong);
+            box-shadow: 0 4px 12px rgba(23, 23, 23, 0.05);
+            transform: translateY(-1px);
+        }
     }
 }
 
@@ -158,6 +179,7 @@
         .view-toggle-button,
         .archive-filter-chip {
             transition: none;
+            transform: none;
         }
     }
 }

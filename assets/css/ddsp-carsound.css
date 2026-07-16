@@ -322,14 +322,40 @@ h2.section-title {
     color: var(--secondary-text-color);
     text-decoration: none;
     font-size: 0.88rem;
+    touch-action: manipulation;
     transition:
+        background-color var(--motion-fast) var(--ease-out),
         border-color var(--motion-fast) var(--ease-out),
-        color var(--motion-fast) var(--ease-out);
+        color var(--motion-fast) var(--ease-out),
+        box-shadow var(--motion-fast) var(--ease-out),
+        transform var(--motion-fast) var(--ease-out);
 }
 
-.sample-chip:hover {
-    border-color: var(--text-color);
-    color: var(--text-color);
+.sample-chip:active:not([aria-disabled="true"]) {
+    box-shadow: none;
+    transform: translateY(0) scale(0.985);
+}
+
+.sample-chip[aria-disabled="true"] {
+    opacity: 0.48;
+    pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .sample-chip:hover:not([aria-disabled="true"]) {
+        border-color: var(--accent-border);
+        background: var(--accent-soft);
+        color: var(--accent-strong);
+        box-shadow: 0 4px 12px rgba(23, 23, 23, 0.05);
+        transform: translateY(-1px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sample-chip {
+        transition: none;
+        transform: none;
+    }
 }
 
 .demo-section {
