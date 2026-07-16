@@ -376,10 +376,14 @@ function selectMetadataCategory(categoryId, shouldScroll = false) {
 
 function renderMetrics() {
   const runs = state.data.summary.executed_jobs;
-  $("[data-metric='web-runs']").textContent = runs;
-  $("[data-metric='structural-pass']").textContent = `${state.data.summary.structurally_accepted}/${runs}`;
-  $("[data-metric='preflight-flags']").textContent = state.data.summary.semantic_preflight_flagged;
-  $("[data-release-runs]").textContent = runs;
+  const webRuns = $("[data-metric='web-runs']");
+  const structuralPass = $("[data-metric='structural-pass']");
+  const preflightFlags = $("[data-metric='preflight-flags']");
+  const releaseRuns = $("[data-release-runs]");
+  if (webRuns) webRuns.textContent = runs;
+  if (structuralPass) structuralPass.textContent = `${state.data.summary.structurally_accepted}/${runs}`;
+  if (preflightFlags) preflightFlags.textContent = state.data.summary.semantic_preflight_flagged;
+  if (releaseRuns) releaseRuns.textContent = runs;
 }
 
 function renderScopePicker() {

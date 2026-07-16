@@ -6,9 +6,58 @@
     sample: null,
     sampleIndex: 0,
     scale: "all",
-    view: "overview",
+    stage: "canonical",
+    view: "global",
     requestToken: 0,
   };
+
+  const pipelineStages = [
+    {
+      id: "source",
+      index: "01",
+      version: "Registry",
+      title: "Source",
+      status: "supported",
+      statusLabel: "Available",
+      description: "Registered POP909 MIDI provenance and the deterministically selected audit span.",
+    },
+    {
+      id: "canonical",
+      index: "02",
+      version: "M.0.3",
+      title: "Canonical Evidence",
+      status: "supported",
+      statusLabel: "Available",
+      description: "Current rule-based audit evidence with unavailable fields kept explicit. This artifact is not sent directly to Gemini.",
+    },
+    {
+      id: "llm_input",
+      index: "03",
+      version: "P.0.1",
+      title: "Exact LLM Input",
+      status: "not_generated",
+      statusLabel: "Not Generated",
+      description: "Compact projection, assembled text prompt, and optional attachment manifest.",
+    },
+    {
+      id: "raw_output",
+      index: "04",
+      version: "A / B",
+      title: "Raw LLM Output",
+      status: "not_generated",
+      statusLabel: "Not Executed",
+      description: "The verbatim Gemini response linked to one immutable request record.",
+    },
+    {
+      id: "final_caption",
+      index: "05",
+      version: "F.0.1",
+      title: "Filtered Final Caption",
+      status: "not_generated",
+      statusLabel: "Not Generated",
+      description: "Evidence-filtered caption candidate retained for dataset review.",
+    },
+  ];
 
   function get(selector) {
     return document.querySelector(selector);
@@ -17,7 +66,13 @@
   function formatLabel(value) {
     return String(value || "—")
       .replaceAll("_", " ")
-      .replace(/w/g, function (letter) { return letter.toUpperCase(); });
+      .replace(/\b\w/g, function (letter) { return letter.toUpperCase(); });
+  }
+
+  function currentStage() {
+    return pipelineStages.find(function (stage) {
+      return stage.id === denseState.stage;
+    }) || pipelineStages[1];
   }
 
   function statusClass(status) {
@@ -171,6 +226,55 @@
     picker.append(scaleWrap, sampleRow);
   }
 
+  function renderStages() {
+    const container = get("[data-dense-stages]");
+    if (!container) return;
+    container.innerHTML = "";
+    pipelineStages.forEach(function (stage) {
+      const button = document.createElement("button");
+      const index = document.createElement("span");
+      const body = document.createElement("span");
+      const title = document.createElement("strong");
+      const version = document.createElement("small");
+      const status = document.createElement("em");
+      const active = denseState.stage === stage.id;
+      button.type = "button";
+      button.className =
+        "dense-stage-button " + statusClass(stage.status) + (active ? " active" : "");
+      button.setAttribute("aria-pressed", String(active));
+      index.className = "dense-stage-index";
+      index.textContent = stage.index;
+      title.textContent = stage.title;
+      version.textContent = stage.version;
+      status.textContent = stage.statusLabel;
+      body.append(title, version);
+      button.append(index, body, status);
+      button.addEventListener("click", function () {
+        denseState.stage = stage.id;
+        if (stage.id === "canonical") denseState.view = "global";
+        renderStages();
+        renderStageSummary();
+        renderTabs();
+        renderContent();
+      });
+      container.appendChild(button);
+    });
+  }
+
+  function renderStageSummary() {
+    const stage = currentStage();
+    const kicker = get("[data-dense-stage-kicker]");
+    const title = get("[data-dense-stage-title]");
+    const description = get("[data-dense-stage-description]");
+    const status = get("[data-dense-stage-status]");
+    if (!kicker || !title || !description || !status) return;
+    kicker.textContent = "Stage " + stage.index + " · " + stage.version;
+    title.textContent = stage.title;
+    description.textContent = stage.description;
+    status.className = "dense-status " + statusClass(stage.status);
+    status.textContent = stage.statusLabel;
+  }
+
   function appendJsonCard(container, kicker, title, status, content, note) {
     const card = document.createElement("article");
     card.className = "dense-data-card";
@@ -264,56 +368,6 @@
     container.appendChild(card);
   }
 
-  function renderStatusOverview(container, sample) {
-    const statusGrid = document.createElement("div");
-    statusGrid.className = "dense-sample-status-grid";
-    Object.entries(sample.feature_status).forEach(function (entry) {
-      const featureId = entry[0];
-      const feature = entry[1];
-      const row = document.createElement("article");
-      const heading = document.createElement("div");
-      const title = document.createElement("strong");
-      const code = document.createElement("code");
-      title.textContent = formatLabel(featureId.split(".").slice(-1)[0]);
-      code.textContent = featureId;
-      heading.append(title, code);
-      const badges = document.createElement("div");
-      badges.append(
-        statusBadge(formatLabel(feature.implementation_status), feature.implementation_status),
-        statusBadge(formatLabel(feature.evidence_status), feature.evidence_status)
-      );
-      const method = document.createElement("p");
-      method.textContent = feature.reason
-        ? feature.method + " · " + formatLabel(feature.reason)
-        : feature.method;
-      row.append(heading, badges, method);
-      statusGrid.appendChild(row);
-    });
-    container.appendChild(statusGrid);
-    appendJsonCard(
-      container,
-      "Observed Scope",
-      "Global And Local Scope Contract",
-      "supported",
-      { scopes: sample.scopes, selection: sample.selection }
-    );
-    appendJsonCard(
-      container,
-      "Source Provenance",
-      "Actual POP909 Train Input",
-      "supported",
-      sample.source
-    );
-    appendJsonCard(
-      container,
-      "Explicit Boundary",
-      "Not Implemented In This Release",
-      "not_implemented",
-      sample.not_implemented,
-      "Unavailable fields are not populated with illustrative or LLM-generated values."
-    );
-  }
-
   function renderGlobal(container, sample) {
     const globalMetadata = sample.metadata.global;
     appendJsonCard(
@@ -327,7 +381,51 @@
       },
       "Global evidence summarizes the whole piece and does not duplicate its full note table."
     );
-    const catalog = globalMetadata.track_catalog;
+    appendJsonCard(
+      container,
+      "Whole-Piece Aggregate",
+      "Global Notes And Texture",
+      "supported",
+      { notes: globalMetadata.notes, texture: globalMetadata.texture }
+    );
+    appendJsonCard(
+      container,
+      "Dataset Annotation",
+      "Global Tonality And Harmony",
+      globalMetadata.tonality_harmony.piece_key_annotation.status,
+      globalMetadata.tonality_harmony,
+      "The key remains an audio-derived POP909 annotation, not a MIDI-only estimate."
+    );
+  }
+
+  function renderSource(container, sample) {
+    appendJsonCard(
+      container,
+      "Registered Artifact",
+      "Actual POP909 Train Source",
+      "supported",
+      sample.source,
+      "The registry record identifies the source MIDI and immutable file hashes; it is not an LLM request."
+    );
+    appendJsonCard(
+      container,
+      "Audit Selection",
+      "Global Context And Local Span",
+      "supported",
+      { scopes: sample.scopes, selection: sample.selection },
+      "The local span is selected for extractor auditing and is explicitly marked as ineligible for training export."
+    );
+    appendJsonCard(
+      container,
+      "Parser Contract",
+      "MIDI Interpretation Contract",
+      sample.quality.status,
+      sample.midi_contract
+    );
+  }
+
+  function renderTrackRoles(container, sample) {
+    const catalog = sample.metadata.global.track_catalog;
     appendEventSequenceCard(
       container,
       "Normalized Identity",
@@ -357,25 +455,33 @@
       null,
       "Track identity, MIDI instrument, functional role, and role confidence remain separate fields."
     );
-    appendJsonCard(
-      container,
-      "Whole-Piece Aggregate",
-      "Global Notes And Texture",
-      "supported",
-      { notes: globalMetadata.notes, texture: globalMetadata.texture }
-    );
-    appendJsonCard(
-      container,
-      "Dataset Annotation",
-      "Global Tonality And Harmony",
-      globalMetadata.tonality_harmony.piece_key_annotation.status,
-      globalMetadata.tonality_harmony,
-      "The key remains an audio-derived POP909 annotation, not a MIDI-only estimate."
-    );
   }
 
-  function renderNotes(container, sample) {
+  function renderLocal(container, sample) {
     const localMetadata = sample.metadata.local;
+    appendJsonCard(
+      container,
+      "Selected Span",
+      "Local Aggregate Evidence",
+      localMetadata.status,
+      {
+        scope: sample.scopes.local,
+        active_track_ids: localMetadata.notes.active_track_ids,
+        active_functional_roles: localMetadata.notes.active_functional_roles,
+        onset_event_count: localMetadata.notes.onset_event_count,
+        pitch_class_histogram_duration_weighted:
+          localMetadata.notes.pitch_class_histogram_duration_weighted,
+        texture: {
+          onsets_per_beat: localMetadata.texture.onsets_per_beat,
+          span_polyphony: localMetadata.texture.span_polyphony,
+          functional_role_onset_counts: localMetadata.texture.functional_role_onset_counts,
+        },
+        dynamics: localMetadata.dynamics,
+        tonality_harmony: localMetadata.tonality_harmony,
+        relation_to_global: localMetadata.relation_to_global,
+      },
+      "This view summarizes the selected span. Full event objects remain available under Raw JSON."
+    );
     Object.entries(localMetadata.notes.functional_role_summaries).forEach(function (entry) {
       const statistics = Object.assign({}, entry[1]);
       const sequence = statistics.event_sequence;
@@ -389,138 +495,6 @@
         "Each row binds pitch, relative onset, duration, and velocity to one MIDI event."
       );
     });
-    appendJsonCard(
-      container,
-      "Exact Event Layer",
-      localMetadata.notes.events.length + " Onset Events",
-      "supported",
-      localMetadata.notes.events,
-      "Events reference stable track IDs; instrument and functional-role semantics resolve through the global track catalog."
-    );
-  }
-
-  function renderRhythm(container, sample) {
-    const localMetadata = sample.metadata.local;
-    Object.entries(localMetadata.rhythm.functional_role_statistics).forEach(function (entry) {
-      const sequence = localMetadata.notes.functional_role_summaries[entry[0]].event_sequence;
-      appendEventSequenceCard(
-        container,
-        "Beat-Normalized Event Tuples",
-        entry[0],
-        sequence,
-        entry[1],
-        "Rhythm statistics reference the same compact event sequence; no parallel arrays are duplicated."
-      );
-    });
-  }
-
-  function makeSparkline(label, values, color) {
-    const numeric = values.filter(function (value) { return Number.isFinite(value); });
-    const card = document.createElement("article");
-    const title = document.createElement("span");
-    title.textContent = label;
-    card.appendChild(title);
-    if (!numeric.length) {
-      const unavailable = document.createElement("strong");
-      unavailable.textContent = "Unavailable";
-      card.appendChild(unavailable);
-      return card;
-    }
-    const minimum = Math.min.apply(null, numeric);
-    const maximum = Math.max.apply(null, numeric);
-    const range = Math.max(1e-9, maximum - minimum);
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("viewBox", "0 0 100 42");
-    svg.setAttribute("preserveAspectRatio", "none");
-    svg.setAttribute("aria-hidden", "true");
-    const polyline = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
-    const points = numeric.map(function (value, index) {
-      const x = numeric.length === 1 ? 50 : index / (numeric.length - 1) * 100;
-      const y = 36 - (value - minimum) / range * 30;
-      return x.toFixed(2) + "," + y.toFixed(2);
-    }).join(" ");
-    polyline.setAttribute("points", points);
-    polyline.setAttribute("fill", "none");
-    polyline.setAttribute("stroke", color);
-    polyline.setAttribute("stroke-width", "2");
-    polyline.setAttribute("vector-effect", "non-scaling-stroke");
-    svg.appendChild(polyline);
-    const rangeText = document.createElement("small");
-    rangeText.textContent = minimum.toFixed(2) + "–" + maximum.toFixed(2);
-    card.append(svg, rangeText);
-    return card;
-  }
-
-  function renderTexture(container, sample) {
-    const localMetadata = sample.metadata.local;
-    const trajectory = localMetadata.texture.bar_trajectory;
-    const charts = document.createElement("div");
-    charts.className = "dense-trajectory-charts";
-    charts.append(
-      makeSparkline(
-        "Onsets Per Beat",
-        trajectory.map(function (bar) { return bar.onsets_per_beat; }),
-        "#3769a8"
-      ),
-      makeSparkline(
-        "Mean Polyphony",
-        trajectory.map(function (bar) { return bar.polyphony.duration_weighted_mean; }),
-        "#7b5aa6"
-      ),
-      makeSparkline(
-        "Median Velocity",
-        trajectory.map(function (bar) {
-          return bar.velocity_summary ? bar.velocity_summary.median : null;
-        }),
-        "#c79536"
-      )
-    );
-    container.appendChild(charts);
-
-    const tableWrap = document.createElement("div");
-    tableWrap.className = "dense-table-wrap";
-    const table = document.createElement("table");
-    const header = document.createElement("thead");
-    header.innerHTML =
-      "<tr><th>Bar</th><th>Seconds</th><th>Onsets / Beat</th>" +
-      "<th>Mean Polyphony</th><th>Max Polyphony</th>" +
-      "<th>Median Velocity</th><th>CC64</th></tr>";
-    const body = document.createElement("tbody");
-    trajectory.forEach(function (bar) {
-      const row = document.createElement("tr");
-      const values = [
-        bar.bar_index,
-        bar.start_sec.toFixed(2) + "–" + bar.end_sec.toFixed(2),
-        bar.onsets_per_beat,
-        bar.polyphony.duration_weighted_mean,
-        bar.polyphony.maximum,
-        bar.velocity_summary ? bar.velocity_summary.median : "Unknown",
-        bar.pedal_cc64.occupancy_ratio === null
-          ? "Unknown"
-          : bar.pedal_cc64.occupancy_ratio,
-      ];
-      values.forEach(function (value) {
-        const cell = document.createElement("td");
-        cell.textContent = String(value);
-        row.appendChild(cell);
-      });
-      body.appendChild(row);
-    });
-    table.append(header, body);
-    tableWrap.appendChild(table);
-    container.appendChild(tableWrap);
-    appendJsonCard(
-      container,
-      "Deterministic Aggregate",
-      "Span Texture Summary",
-      "supported",
-      {
-        span_polyphony: localMetadata.texture.span_polyphony,
-        onsets_per_beat: localMetadata.texture.onsets_per_beat,
-        functional_role_onset_counts: localMetadata.texture.functional_role_onset_counts,
-        relation_to_global: localMetadata.relation_to_global,
-      }
-    );
   }
 
   function renderTiming(container, sample) {
@@ -551,6 +525,55 @@
     );
   }
 
+  function renderUnavailableStage(container, stage) {
+    const messages = {
+      llm_input: {
+        text: "This sample has M.0.3 canonical evidence, but no P.0.1 compact projection, assembled Gemini prompt, attachment manifest, or request hash.",
+        prerequisites: [
+          "Define and validate the compact projection schema.",
+          "Assemble the exact text prompt and optional attachment manifest.",
+          "Freeze an immutable request record before execution.",
+        ],
+      },
+      raw_output: {
+        text: "No Gemini request has been executed for this M.0.3 sample, so there is no linked verbatim response.",
+        prerequisites: [
+          "Generate the P.0.1 exact LLM input.",
+          "Execute either Gemini Web (A) or Gemini API (B).",
+          "Store the raw response with its request hash and backend version.",
+        ],
+      },
+      final_caption: {
+        text: "No raw response exists for this sample, and evidence-aware caption filtering has not been run.",
+        prerequisites: [
+          "Record a raw Gemini output linked to the exact request.",
+          "Apply LLM-based claim filtering against canonical evidence.",
+          "Retain accepted, rejected, and uncertain claims for audit.",
+        ],
+      },
+    };
+    const content = messages[stage.id];
+    const card = document.createElement("article");
+    const label = document.createElement("p");
+    const title = document.createElement("h4");
+    const text = document.createElement("p");
+    const rule = document.createElement("strong");
+    const list = document.createElement("ol");
+    card.className = "dense-empty-stage";
+    label.className = "section-kicker";
+    label.textContent = stage.version + " · Explicit Pipeline Boundary";
+    title.textContent = stage.statusLabel;
+    text.textContent = content.text;
+    rule.textContent = "Required Before This Stage Can Contain Data";
+    content.prerequisites.forEach(function (prerequisite) {
+      const item = document.createElement("li");
+      item.textContent = prerequisite;
+      list.appendChild(item);
+    });
+    card.append(label, title, text, rule, list);
+    container.appendChild(card);
+  }
+
   function renderContent() {
     const container = get("[data-dense-content]");
     container.innerHTML = "";
@@ -562,48 +585,14 @@
       container.appendChild(loading);
       return;
     }
-    if (denseState.view === "overview") renderStatusOverview(container, sample);
-    else if (denseState.view === "global") renderGlobal(container, sample);
-    else if (denseState.view === "notes") renderNotes(container, sample);
-    else if (denseState.view === "rhythm") renderRhythm(container, sample);
-    else if (denseState.view === "texture") renderTexture(container, sample);
+    if (denseState.stage === "source") renderSource(container, sample);
+    else if (denseState.stage !== "canonical") {
+      renderUnavailableStage(container, currentStage());
+    } else if (denseState.view === "global") renderGlobal(container, sample);
+    else if (denseState.view === "local") renderLocal(container, sample);
+    else if (denseState.view === "roles") renderTrackRoles(container, sample);
     else if (denseState.view === "timing") renderTiming(container, sample);
-    else if (denseState.view === "tonality") {
-      const localMetadata = sample.metadata.local;
-      appendJsonCard(
-        container,
-        "Dataset Annotation",
-        "Local Key",
-        localMetadata.tonality_harmony.local_key_annotation.status,
-        localMetadata.tonality_harmony.local_key_annotation,
-        "This key annotation is audio-derived, not a MIDI-only rule estimate."
-      );
-      appendJsonCard(
-        container,
-        "Dataset Annotation",
-        "Chord Timeline",
-        localMetadata.tonality_harmony.chord_timeline.status,
-        localMetadata.tonality_harmony.chord_timeline
-      );
-    } else if (denseState.view === "performance") {
-      const localMetadata = sample.metadata.local;
-      appendJsonCard(
-        container,
-        "Direct MIDI Evidence",
-        "Velocity",
-        localMetadata.dynamics.status,
-        localMetadata.dynamics,
-        "MIDI velocity is not converted into acoustic loudness wording."
-      );
-      appendJsonCard(
-        container,
-        "Conditional MIDI Evidence",
-        "Sustain Pedal CC64",
-        localMetadata.performance.pedal_cc64.status,
-        localMetadata.performance.pedal_cc64,
-        "Missing CC64 is insufficient evidence, not evidence that no pedal was used."
-      );
-    } else {
+    else {
       appendJsonCard(
         container,
         "Complete Artifact",
@@ -617,15 +606,13 @@
   function renderTabs() {
     const tabs = get("[data-dense-tabs]");
     tabs.innerHTML = "";
+    tabs.hidden = denseState.stage !== "canonical";
+    if (tabs.hidden) return;
     const views = [
-      ["overview", "Overview"],
       ["global", "Global"],
-      ["notes", "Local Notes And Roles"],
-      ["rhythm", "Rhythm"],
-      ["texture", "Texture"],
-      ["tonality", "Tonality And Harmony"],
-      ["timing", "Timing Contract"],
-      ["performance", "Performance"],
+      ["local", "Local"],
+      ["roles", "Track / Role"],
+      ["timing", "Timing"],
       ["raw", "Raw JSON"],
     ];
     views.forEach(function (viewSpec) {
@@ -685,6 +672,8 @@
       if (requestToken !== denseState.requestToken) return;
       denseState.sample = sample;
       renderSampleSummary();
+      renderStages();
+      renderStageSummary();
       renderTabs();
       renderContent();
     } catch (error) {
@@ -710,6 +699,8 @@
       renderMetrics();
       renderFeatureMatrix();
       renderPicker();
+      renderStages();
+      renderStageSummary();
       renderTabs();
       loadSample();
     } catch (error) {
