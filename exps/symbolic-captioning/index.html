@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260717-m003">
+  <link rel="stylesheet" href="styles.css?v=20260717-stage-inspector">
 </head>
 <body>
   <header class="main-header">
@@ -28,22 +28,22 @@
     <section class="hero">
       <p class="eyebrow">Experiment Dashboard</p>
       <h1>Symbolic Music <span>Captioning</span></h1>
-      <p class="hero-copy">A compact review page for metadata-grounded music caption pretraining. Subscription and API tracks share the same numbered protocol and remain separated at execution.</p>
+      <p class="hero-copy">A sample-centered review of the metadata-grounded caption pipeline. The current M.0.3 release stops at canonical evidence; no compact LLM request or caption has been generated for these samples.</p>
       <div class="hero-metrics" aria-label="Experiment Summary">
-        <article class="hero-metric"><span>Current Release</span><strong>A.1.2</strong><em>Caption Scope Pilot</em></article>
-        <article class="hero-metric"><span>Gemini Web Runs</span><strong data-metric="web-runs">—</strong><em>Scope-Matched Cases</em></article>
-        <article class="hero-metric"><span>Structural Pass</span><strong data-metric="structural-pass">—</strong><em>Schema And Pointers</em></article>
-        <article class="hero-metric"><span>Semantic Preflight</span><strong data-metric="preflight-flags">—</strong><em>Flagged · Filter Pending</em></article>
+        <article class="hero-metric"><span>Current Release</span><strong>M.0.3</strong><em>Canonical Evidence</em></article>
+        <article class="hero-metric"><span>Actual Samples</span><strong>30</strong><em>POP909 Train Audit</em></article>
+        <article class="hero-metric"><span>Exact LLM Requests</span><strong>0</strong><em>P.0.1 Not Generated</em></article>
+        <article class="hero-metric"><span>Final Captions</span><strong>0</strong><em>Filtering Not Started</em></article>
       </div>
     </section>
 
     <section class="panel-card pipeline-section" aria-labelledby="pipeline-title">
       <div class="section-head">
         <div>
-          <p class="section-kicker">Captioning System</p>
+          <p class="section-kicker">Target Architecture</p>
           <h2 id="pipeline-title">Music Caption Pretraining Pipeline</h2>
         </div>
-        <p>General metadata is always included. MIDI and VST-rendered audio are optional Gemini attachments.</p>
+        <p>This diagram shows the intended end-to-end system. Current M.0.3 samples stop after canonical evidence.</p>
       </div>
 
       <div class="pipeline-map" aria-label="Music Captioning Pipeline">
@@ -57,20 +57,15 @@
         <article class="pipeline-node required-node">
           <span class="node-index">02</span>
           <span class="node-badge required">Required</span>
-          <strong>General Metadata</strong>
-          <div class="metadata-node-actions" aria-label="Inspect General Metadata Versions">
-            <button type="button" data-metadata-shortcut="key">Key</button>
-            <button type="button" data-metadata-shortcut="notes">Notes</button>
-            <button type="button" data-metadata-shortcut="rhythm">Rhythm</button>
-            <button type="button" data-metadata-shortcut="texture">Texture</button>
-          </div>
+          <strong>Canonical Evidence</strong>
+          <small>M.0.3 · Current Endpoint</small>
         </article>
         <div class="flow-arrow" aria-hidden="true"><span></span></div>
         <article class="pipeline-node request-node">
           <span class="node-index">03</span>
           <span class="node-badge required">Required</span>
-          <strong>Captioning Text Prompt</strong>
-          <small>General Metadata Included</small>
+          <strong>Compact Projection + Prompt</strong>
+          <small>P.0.1 · Not Generated</small>
           <div class="optional-inputs" aria-label="Optional Attachments">
             <span>Optional MIDI File</span>
             <span>Optional VST-Rendered Audio</span>
@@ -113,72 +108,13 @@
       </div>
     </section>
 
-    <section id="metadata-development" class="section-block metadata-development" aria-labelledby="metadata-development-title">
-      <div class="section-head outside-head">
-        <div>
-          <p class="section-kicker">Extractor Development</p>
-          <h2 id="metadata-development-title">General Metadata Versions</h2>
-        </div>
-        <p>Choose a family, version, and pipeline stage. Only artifacts produced or consumed at that stage are shown.</p>
-      </div>
-
-      <div class="panel-card metadata-explorer">
-        <div class="metadata-explorer-controls">
-          <div>
-            <span class="control-label">Metadata Family</span>
-            <div class="metadata-category-tabs" data-metadata-categories role="tablist" aria-label="General Metadata Family"></div>
-          </div>
-          <div>
-            <span class="control-label">Version History</span>
-            <div class="metadata-version-tabs" data-metadata-versions role="tablist" aria-label="Metadata Version"></div>
-          </div>
-        </div>
-
-        <article class="metadata-version-detail" data-metadata-detail aria-live="polite">
-          <header class="metadata-detail-head">
-            <div>
-              <p class="section-kicker" data-metadata-kicker>Loading Metadata Contract</p>
-              <h3 data-metadata-title>Loading…</h3>
-              <p data-metadata-summary></p>
-            </div>
-            <span class="status-pill" data-metadata-status>—</span>
-          </header>
-
-          <div class="metadata-facts">
-            <div><span>Implementation Stage</span><strong data-metadata-stage>—</strong></div>
-            <div><span>Evidence Scope</span><strong data-metadata-scope>—</strong></div>
-            <div><span>Next Validation Gate</span><strong data-metadata-gate>—</strong></div>
-          </div>
-
-          <div class="metadata-characteristics-wrap">
-            <p class="control-label">Pipeline Characteristics</p>
-            <ul class="metadata-characteristics" data-metadata-characteristics></ul>
-          </div>
-
-          <div class="metadata-mini-pipeline" data-metadata-diagram role="tablist" aria-label="Selected Metadata Pipeline Stage"></div>
-
-          <section class="metadata-stage-panel">
-            <header class="metadata-stage-head">
-              <div>
-                <p class="section-kicker" data-metadata-stage-kicker>Selected Pipeline Stage</p>
-                <h3 data-metadata-stage-title>Loading Stage…</h3>
-                <p data-metadata-stage-summary></p>
-              </div>
-              <span class="stage-source-badge" data-metadata-stage-source>—</span>
-            </header>
-            <div class="metadata-artifact-grid" data-metadata-stage-artifacts></div>
-          </section>
-        </article>
-      </div>
-    </section>
-
     <section id="dense-metadata-audit" class="section-block dense-audit" aria-labelledby="dense-audit-title">
       <div class="section-head outside-head">
         <div>
-          <p class="section-kicker">Actual Train Metadata Audit</p>
-          <h2 id="dense-audit-title">Dense MIDI Evidence Pilot</h2>
+          <p class="section-kicker">Current M.0.3 Workflow</p>
+          <h2 id="dense-audit-title">Sample Pipeline Inspector</h2>
         </div>
-        <p>Thirty actual POP909 Train pieces expose whole-piece global context and linked local detail. Track identity, instrument, functional role, and timing interpretation remain explicit.</p>
+        <p>Select one actual sample, then inspect exactly how far it has progressed. Canonical JSON is never presented as an LLM request.</p>
       </div>
 
       <div class="dense-audit-metrics" aria-label="Dense Metadata Pilot Summary">
@@ -188,18 +124,21 @@
         <article><span>Not Implemented</span><strong data-dense-missing-count>—</strong><em>No Demo Value Fabricated</em></article>
       </div>
 
-      <article class="panel-card feature-status-panel">
-        <div class="card-head dense-card-head">
-          <div><p class="section-kicker">Implementation Boundary</p><h3>Feature Status Matrix</h3></div>
-          <div class="dense-status-legend" aria-label="Implementation Status Legend">
-            <span class="dense-status implemented">Implemented</span>
-            <span class="dense-status partial">Partial</span>
-            <span class="dense-status not-implemented">Not Implemented</span>
+      <details class="dense-feature-disclosure">
+        <summary><span><b>Extractor Coverage</b><small>12 implemented, 2 partial, and 7 unavailable feature paths.</small></span><em>Inspect Matrix</em></summary>
+        <article class="panel-card feature-status-panel">
+          <div class="card-head dense-card-head">
+            <div><p class="section-kicker">Implementation Boundary</p><h3>Feature Status Matrix</h3></div>
+            <div class="dense-status-legend" aria-label="Implementation Status Legend">
+              <span class="dense-status implemented">Implemented</span>
+              <span class="dense-status partial">Partial</span>
+              <span class="dense-status not-implemented">Not Implemented</span>
+            </div>
           </div>
-        </div>
-        <p class="dense-status-note">Implemented does not guarantee that every MIDI contains the evidence. For example, the CC64 extractor is implemented, while a source without encoded pedal events remains insufficient evidence.</p>
-        <div class="feature-status-grid" data-dense-feature-matrix></div>
-      </article>
+          <p class="dense-status-note">Implemented does not guarantee that every MIDI contains the evidence. Per-sample evidence status remains separate.</p>
+          <div class="feature-status-grid" data-dense-feature-matrix></div>
+        </article>
+      </details>
 
       <article class="panel-card dense-sample-panel">
         <div class="dense-sample-controls" data-dense-picker></div>
@@ -218,13 +157,102 @@
             <div><dt>Note Events</dt><dd data-dense-note-count>—</dd></div>
           </dl>
         </div>
-        <div class="dense-view-tabs" data-dense-tabs role="tablist" aria-label="Dense Metadata View"></div>
-        <div class="dense-view-content" data-dense-content aria-live="polite">
-          <p class="dense-loading">Loading actual extractor output…</p>
+        <div class="dense-lineage" aria-label="Artifact Version Lineage">
+          <span class="available"><b>M.0.3</b> Canonical Evidence</span>
+          <i>→</i>
+          <span><b>P.0.1</b> Not Generated</span>
+          <i>→</i>
+          <span><b>A / B</b> Not Executed</span>
+          <i>→</i>
+          <span><b>F.0.1</b> Not Generated</span>
+        </div>
+        <div id="sample-stage-inspector" class="dense-stage-layout">
+          <aside class="dense-stage-rail" data-dense-stages aria-label="Sample Pipeline Stage"></aside>
+          <section class="dense-stage-workspace">
+            <header class="dense-stage-summary" data-dense-stage-summary>
+              <div><p class="section-kicker" data-dense-stage-kicker>Current Stage</p><h3 data-dense-stage-title>Canonical Evidence</h3><p data-dense-stage-description></p></div>
+              <span class="dense-status" data-dense-stage-status>—</span>
+            </header>
+            <div class="dense-view-tabs" data-dense-tabs role="tablist" aria-label="Canonical Evidence View"></div>
+            <div class="dense-view-content" data-dense-content aria-live="polite">
+              <p class="dense-loading">Loading actual extractor output…</p>
+            </div>
+          </section>
         </div>
       </article>
     </section>
 
+    <details class="archive-disclosure metadata-archive">
+      <summary>
+        <span><b>Legacy Extractor Development</b><small>K.0.x family-isolated experiments; not the current M.0.3 sample input.</small></span>
+        <em>Open Archive</em>
+      </summary>
+      <section id="metadata-development" class="section-block metadata-development archive-content" aria-labelledby="metadata-development-title">
+        <div class="section-head outside-head">
+          <div>
+            <p class="section-kicker">Legacy K.0.x Archive</p>
+            <h2 id="metadata-development-title">General Metadata Versions</h2>
+          </div>
+          <p>Choose a family, version, and pipeline stage. Only artifacts produced or consumed at that stage are shown.</p>
+        </div>
+
+        <div class="panel-card metadata-explorer">
+          <div class="metadata-explorer-controls">
+            <div>
+              <span class="control-label">Metadata Family</span>
+              <div class="metadata-category-tabs" data-metadata-categories role="tablist" aria-label="General Metadata Family"></div>
+            </div>
+            <div>
+              <span class="control-label">Version History</span>
+              <div class="metadata-version-tabs" data-metadata-versions role="tablist" aria-label="Metadata Version"></div>
+            </div>
+          </div>
+
+          <article class="metadata-version-detail" data-metadata-detail aria-live="polite">
+            <header class="metadata-detail-head">
+              <div>
+                <p class="section-kicker" data-metadata-kicker>Loading Metadata Contract</p>
+                <h3 data-metadata-title>Loading…</h3>
+                <p data-metadata-summary></p>
+              </div>
+              <span class="status-pill" data-metadata-status>—</span>
+            </header>
+
+            <div class="metadata-facts">
+              <div><span>Implementation Stage</span><strong data-metadata-stage>—</strong></div>
+              <div><span>Evidence Scope</span><strong data-metadata-scope>—</strong></div>
+              <div><span>Next Validation Gate</span><strong data-metadata-gate>—</strong></div>
+            </div>
+
+            <div class="metadata-characteristics-wrap">
+              <p class="control-label">Pipeline Characteristics</p>
+              <ul class="metadata-characteristics" data-metadata-characteristics></ul>
+            </div>
+
+            <div class="metadata-mini-pipeline" data-metadata-diagram role="tablist" aria-label="Selected Metadata Pipeline Stage"></div>
+
+            <section class="metadata-stage-panel">
+              <header class="metadata-stage-head">
+                <div>
+                  <p class="section-kicker" data-metadata-stage-kicker>Selected Pipeline Stage</p>
+                  <h3 data-metadata-stage-title>Loading Stage…</h3>
+                  <p data-metadata-stage-summary></p>
+                </div>
+                <span class="stage-source-badge" data-metadata-stage-source>—</span>
+              </header>
+              <div class="metadata-artifact-grid" data-metadata-stage-artifacts></div>
+            </section>
+          </article>
+        </div>
+      </section>
+    </details>
+
+    <details class="archive-disclosure run-archive">
+      <summary>
+        <span><b>Legacy Executed Runs</b><small>A.1.x and K.0.1 prompts below are preserved historical runs and are not linked to current M.0.3 samples.</small></span>
+        <em>Open Archive</em>
+      </summary>
+      <div class="archive-content">
     <section class="section-block" aria-labelledby="release-title">
       <div class="section-head outside-head">
         <div>
@@ -380,6 +408,8 @@
       <div><p class="section-kicker">Interpretation Boundary</p><h2 id="limitations-title">Current Limitations</h2></div>
       <ul data-caveat-list></ul>
     </section>
+      </div>
+    </details>
   </main>
 
   <dialog class="detail-dialog" data-detail-dialog>
@@ -396,7 +426,7 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260717-m003"></script>
-  <script src="dense-metadata.js?v=20260717-m003"></script>
+  <script src="script.js?v=20260717-stage-inspector"></script>
+  <script src="dense-metadata.js?v=20260717-stage-inspector"></script>
 </body>
 </html>
