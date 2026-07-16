@@ -45,6 +45,7 @@ select,
 .case-card h3,
 .entry-title,
 .format-tag,
+.identity-kicker,
 .identity-meta,
 .identity-links,
 .item-list,
@@ -69,10 +70,6 @@ select,
 .toc-item a,
 .view-toggle-button {
     font-family: var(--font-sans);
-}
-
-.identity-kicker {
-    font-family: var(--font-serif);
 }
 
 .news-toggle {
