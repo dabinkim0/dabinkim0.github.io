@@ -92,7 +92,8 @@
         margin-bottom: var(--space-1);
     }
 
-    .project-list:is([data-view="grid"], [data-view="grid-compact"]) .project-meta > .meta-label {
+    .project-list:is([data-view="grid"], [data-view="grid-compact"]) .project-meta > .meta-label,
+    .project-list:is([data-view="grid"], [data-view="grid-compact"]) .project-meta > .meta-value[data-meta-key="year"] {
         position: absolute;
         width: 1px;
         height: 1px;
@@ -104,18 +105,8 @@
         border: 0;
     }
 
-    .project-list:is([data-view="grid"], [data-view="grid-compact"]) .project-meta > [data-meta-key="role"] {
+    .project-list:is([data-view="grid"], [data-view="grid-compact"]) .project-meta > .meta-value[data-meta-key="role"] {
         order: 1;
-    }
-
-    .project-list:is([data-view="grid"], [data-view="grid-compact"]) .project-meta > [data-meta-key="year"] {
-        order: 2;
-    }
-
-    .project-list:is([data-view="grid"], [data-view="grid-compact"]) .project-meta > .meta-value[data-meta-key="year"]::before {
-        content: "\00b7";
-        margin-right: 8px;
-        color: var(--muted);
     }
 
     .project-list:is([data-view="grid"], [data-view="grid-compact"]) .project-meta > .meta-value[data-meta-key="tools"],
@@ -154,6 +145,12 @@
         transition: color var(--motion-fast) var(--ease-out);
     }
 
+    .meta-role__year {
+        display: none;
+        font-weight: 400;
+        font-variant-numeric: tabular-nums;
+    }
+
     .format-tag:hover,
     .format-tag.is-active {
         color: var(--muted);
@@ -166,6 +163,10 @@
 
     .project-list:is([data-view="grid"], [data-view="grid-compact"]) .format-tag {
         margin-bottom: 6px;
+    }
+
+    .project-list:is([data-view="grid"], [data-view="grid-compact"]) .meta-role__year {
+        display: inline;
     }
 
     .meta-label,
@@ -409,7 +410,8 @@
             margin-bottom: 2px;
         }
 
-        .project-meta > .meta-label {
+        .project-meta > .meta-label,
+        .project-meta > .meta-value[data-meta-key="year"] {
             position: absolute;
             width: 1px;
             height: 1px;
@@ -421,18 +423,12 @@
             border: 0;
         }
 
-        .project-meta > [data-meta-key="role"] {
+        .project-meta > .meta-value[data-meta-key="role"] {
             order: 1;
         }
 
-        .project-meta > [data-meta-key="year"] {
-            order: 2;
-        }
-
-        .project-meta > .meta-value[data-meta-key="year"]::before {
-            content: "\00b7";
-            margin-right: 8px;
-            color: var(--muted);
+        .project-meta .meta-role__year {
+            display: inline;
         }
 
         .project-meta > .meta-value[data-meta-key="tools"],

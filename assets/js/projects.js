@@ -1,5 +1,7 @@
 const projectMetadataKeys = new Set(["role", "tools", "year", "link"]);
 document.querySelectorAll(".project-meta").forEach((metadata) => {
+    const metadataPairs = new Map();
+
     metadata.querySelectorAll(".meta-label").forEach((label) => {
         const key = label.textContent.trim().toLowerCase();
         const value = label.nextElementSibling;
@@ -10,7 +12,21 @@ document.querySelectorAll(".project-meta").forEach((metadata) => {
 
         label.dataset.metaKey = key;
         value.dataset.metaKey = key;
+        metadataPairs.set(key, { label, value });
     });
+
+    const yearPair = metadataPairs.get("year");
+    const rolePair = metadataPairs.get("role");
+
+    if (yearPair && rolePair) {
+        metadata.insertBefore(yearPair.label, rolePair.label);
+        metadata.insertBefore(yearPair.value, rolePair.label);
+        const yearPrefix = document.createElement("span");
+        yearPrefix.className = "meta-role__year";
+        yearPrefix.setAttribute("aria-hidden", "true");
+        yearPrefix.textContent = `${yearPair.value.textContent.trim()} | `;
+        rolePair.value.prepend(yearPrefix);
+    }
 });
 
 document.addEventListener("DOMContentLoaded", () => {

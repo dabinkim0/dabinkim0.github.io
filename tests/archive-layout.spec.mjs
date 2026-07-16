@@ -90,6 +90,25 @@ for (const archive of archives) {
                         expect(difference.width).toBeLessThan(1);
                         expect(difference.height).toBeLessThan(1);
                     });
+
+                    const firstMeta = card.locator(archive.meta);
+                    const yearPrefix = firstMeta.locator(".meta-role__year");
+                    const yearLabel = firstMeta.locator('.meta-label[data-meta-key="year"]');
+                    const yearValue = firstMeta.locator('.meta-value[data-meta-key="year"]');
+                    const roleLabel = firstMeta.locator('.meta-label[data-meta-key="role"]');
+                    const usesCompactMeta = view !== "list" || width <= 720;
+
+                    if (usesCompactMeta) {
+                        await expect(yearPrefix).toBeVisible();
+                        await expect(yearPrefix).toContainText("2023 | ");
+                        await expect(firstMeta.locator('.meta-value[data-meta-key="role"]')).toContainText("2023 | Music Director");
+                        await expect(yearValue).toHaveCSS("position", "absolute");
+                    } else {
+                        await expect(yearPrefix).toBeHidden();
+                        const yearBox = await yearLabel.boundingBox();
+                        const roleBox = await roleLabel.boundingBox();
+                        expect(yearBox.y).toBeLessThan(roleBox.y);
+                    }
                 }
 
                 if (width <= 720) {
