@@ -1,0 +1,529 @@
+{
+  "allowed_claims": [
+    {
+      "assertion_level": "assertive",
+      "claim_id": "claim.global.duration",
+      "evidence_ids": [
+        "scopes.global.duration_sec"
+      ],
+      "feature_id": "structure.global_local_hierarchy",
+      "lexical_forms": [
+        "approximately 5 minutes and 1 seconds long"
+      ],
+      "scope_id": "global",
+      "value": {
+        "duration_sec": 301.170918
+      }
+    },
+    {
+      "assertion_level": "assertive",
+      "claim_id": "claim.global.tempo_numeric",
+      "evidence_ids": [
+        "metadata.global.temporal_summary.tempo"
+      ],
+      "feature_id": "temporal.coordinate_map",
+      "lexical_forms": [
+        "uses a variable MIDI tempo between 67.5 and 68 quarter-note BPM"
+      ],
+      "scope_id": "global",
+      "value": {
+        "profile": "variable",
+        "status": "supported",
+        "unit": "quarter_note_bpm",
+        "value_bpm": {
+          "maximum": 68.0,
+          "median": 67.875,
+          "minimum": 67.5
+        }
+      }
+    },
+    {
+      "assertion_level": "assertive",
+      "claim_id": "claim.global.functional_roles",
+      "evidence_ids": [
+        "metadata.global.track_catalog"
+      ],
+      "feature_id": "roles.normalized_track_catalog",
+      "lexical_forms": [
+        "contains accompaniment, main melody, and secondary melody"
+      ],
+      "scope_id": "global",
+      "value": [
+        "accompaniment",
+        "main_melody",
+        "secondary_melody"
+      ]
+    },
+    {
+      "assertion_level": "assertive",
+      "claim_id": "claim.global.pitch_range",
+      "evidence_ids": [
+        "metadata.global.notes.pitch.range"
+      ],
+      "feature_id": "notes.event_table",
+      "lexical_forms": [
+        "spans F2 to G#6"
+      ],
+      "scope_id": "global",
+      "value": {
+        "highest_note": "G#6",
+        "lowest_note": "F2",
+        "maximum_midi": 92,
+        "minimum_midi": 41
+      }
+    },
+    {
+      "assertion_level": "centered",
+      "claim_id": "claim.global.tonal_center",
+      "confidence": null,
+      "evidence_ids": [
+        "metadata.global.tonality_harmony.piece_key_annotation"
+      ],
+      "feature_id": "tonality.dataset_key",
+      "lexical_forms": [
+        "is centered around F minor"
+      ],
+      "scope_id": "global",
+      "value": {
+        "assertion_level": "centered",
+        "calibrated_confidence": "unknown",
+        "evidence_modality": "dataset_audio_annotation",
+        "regions": [
+          {
+            "end_sec": 302.532386,
+            "start_sec": 1.578957,
+            "value": "F minor"
+          }
+        ],
+        "status": "supported",
+        "value": "F minor"
+      }
+    },
+    {
+      "assertion_level": "assertive",
+      "claim_id": "claim.global.frequent_chords",
+      "evidence_ids": [
+        "metadata.global.tonality_harmony.chord_summary.top_chords_by_duration"
+      ],
+      "feature_id": "harmony.dataset_chords",
+      "lexical_forms": [
+        "frequently uses F minor, C minor, F major, and B-flat minor"
+      ],
+      "scope_id": "global",
+      "value": [
+        {
+          "display": "F minor",
+          "duration_ratio": 0.381212
+        },
+        {
+          "display": "C minor",
+          "duration_ratio": 0.158413
+        },
+        {
+          "display": "F major",
+          "duration_ratio": 0.131893
+        },
+        {
+          "display": "B-flat minor",
+          "duration_ratio": 0.105589
+        }
+      ]
+    },
+    {
+      "assertion_level": "assertive",
+      "claim_id": "claim.local.active_roles",
+      "evidence_ids": [
+        "metadata.local.notes.active_functional_roles"
+      ],
+      "feature_id": "roles.normalized_track_catalog",
+      "lexical_forms": [
+        "between 166.44 and 180.55 seconds, accompaniment, main melody, and secondary melody are active"
+      ],
+      "scope_id": "local",
+      "value": {
+        "roles": [
+          "accompaniment",
+          "main_melody",
+          "secondary_melody"
+        ],
+        "span_sec": [
+          166.436505,
+          180.554121
+        ]
+      }
+    },
+    {
+      "assertion_level": "centered",
+      "claim_id": "claim.local.tonal_center",
+      "confidence": null,
+      "evidence_ids": [
+        "metadata.local.tonality_harmony.local_key_annotation"
+      ],
+      "feature_id": "tonality.dataset_key",
+      "lexical_forms": [
+        "from 166.44 to 180.55 seconds, the passage is centered around F minor"
+      ],
+      "scope_id": "local",
+      "value": {
+        "span_sec": [
+          166.436505,
+          180.554121
+        ],
+        "tonal_center": {
+          "assertion_level": "centered",
+          "calibrated_confidence": "unknown",
+          "evidence_modality": "dataset_audio_annotation",
+          "regions": [
+            {
+              "end_sec": 180.554121,
+              "start_sec": 166.436505,
+              "value": "F minor"
+            }
+          ],
+          "status": "supported",
+          "value": "F minor"
+        }
+      }
+    }
+  ],
+  "blocked_claims": [
+    {
+      "evidence_ids": [
+        "metadata.global.temporal_summary.tempo"
+      ],
+      "feature_id": "temporal.lexical_speed",
+      "reason": "meter_aware_tempo_language_not_valid_calibrated",
+      "scope_id": "global",
+      "status": "ambiguous"
+    },
+    {
+      "evidence_ids": [
+        "metadata.global.temporal_summary.meter",
+        "metadata.global.temporal_summary.meter_beat_alignment"
+      ],
+      "feature_id": "temporal.meter_caption",
+      "reason": "MIDI meter and POP909 dataset-beat alignment is not validated",
+      "scope_id": "global",
+      "status": "ambiguous"
+    },
+    {
+      "evidence_ids": [
+        "metadata.global.temporal_summary.annotated_beat_grid"
+      ],
+      "feature_id": "temporal.meter_beat_equivalence",
+      "reason": "POP909 beat unit is not validated against the MIDI meter denominator",
+      "scope_id": "global",
+      "status": "ambiguous"
+    },
+    {
+      "evidence_ids": [
+        "metadata.global.texture.density",
+        "metadata.local.texture.density"
+      ],
+      "feature_id": "texture.lexical_density",
+      "reason": "density_threshold_not_valid_calibrated",
+      "scope_id": "global_and_local",
+      "status": "ambiguous"
+    },
+    {
+      "evidence_ids": [
+        "metadata.global.notes.velocity",
+        "metadata.local.notes.velocity"
+      ],
+      "feature_id": "dynamics.acoustic_loudness",
+      "reason": "MIDI note-on velocity is not acoustic loudness",
+      "scope_id": "global_and_local",
+      "status": "insufficient_evidence"
+    },
+    {
+      "evidence_ids": [
+        "metadata.local.performance.timing_interpretation"
+      ],
+      "feature_id": "rhythm.quantized_note_values",
+      "reason": "validated quantization gate not implemented",
+      "scope_id": "local",
+      "status": "insufficient_evidence"
+    },
+    {
+      "evidence_ids": [
+        "metadata.local.performance.timing_interpretation"
+      ],
+      "feature_id": "performance.microtiming",
+      "reason": "no aligned score or validated inferred grid",
+      "scope_id": "local",
+      "status": "insufficient_evidence"
+    },
+    {
+      "evidence_ids": [
+        "metadata.global.tonality_harmony.chord_summary",
+        "metadata.local.tonality_harmony.chord_timeline"
+      ],
+      "feature_id": "harmony.lexical_complexity",
+      "reason": "harmonic complexity threshold not valid calibrated",
+      "scope_id": "global_and_local",
+      "status": "ambiguous"
+    }
+  ],
+  "caption_scope": {
+    "global_sec": [
+      1.361468,
+      302.532386
+    ],
+    "local_sec": [
+      166.436505,
+      180.554121
+    ],
+    "scope_id": "global_with_local_window"
+  },
+  "claim_budget": 10,
+  "compact_metadata": {
+    "global": {
+      "bar_count": 86,
+      "duration_sec": 301.170918,
+      "notes_and_texture": {
+        "density": {
+          "denominator_unit": "POP909 dataset-annotated beat",
+          "note_on_event_count": 2136,
+          "note_on_events_per_annotated_beat": 6.26393,
+          "unique_onset_group_count": 2082,
+          "unique_onset_groups_per_annotated_beat": 6.105572
+        },
+        "median_pitch_midi": 65.0,
+        "pitch_range": {
+          "highest_note": "G#6",
+          "lowest_note": "F2",
+          "maximum_midi": 92,
+          "minimum_midi": 41
+        },
+        "polyphony": {
+          "duration_weighted_mean": 4.4727,
+          "duration_weighted_p95": 7.0,
+          "maximum": 11,
+          "measurement": "simultaneously sounding MIDI notes",
+          "silence_ratio": 0.00804,
+          "status": "supported"
+        },
+        "velocity": {
+          "lexical_dynamics": "unknown",
+          "median": 86.0
+        }
+      },
+      "temporal": {
+        "annotated_beat_unit": "POP909 dataset-annotated beat",
+        "meter": {
+          "event_count": 1,
+          "primary_signature": {
+            "denominator": 4,
+            "display": "1/4",
+            "numerator": 1
+          },
+          "profile": "constant",
+          "status": "supported"
+        },
+        "meter_beat_alignment": {
+          "caption_meter_assertion": "blocked",
+          "dataset_beat_source": "POP909 beat_midi annotation",
+          "midi_meter_source": "MIDI time_signature event",
+          "modal_annotated_beats_per_bar": 4,
+          "primary_midi_signature": {
+            "denominator": 4,
+            "display": "1/4",
+            "numerator": 1
+          },
+          "reason": "dataset_beat_unit_not_validated_against_midi_meter_denominator",
+          "status": "ambiguous"
+        },
+        "tempo": {
+          "lexical_speed": "unknown",
+          "profile": "variable",
+          "status": "supported",
+          "unit": "quarter_note_bpm",
+          "value_bpm": {
+            "maximum": 68.0,
+            "median": 67.875,
+            "minimum": 67.5
+          }
+        }
+      },
+      "tonality_and_harmony": {
+        "harmony": {
+          "annotation_coverage_ratio": 1.0,
+          "chord_changes_per_minute": 23.508246,
+          "harmonic_occupancy_ratio": 1.0,
+          "lexical_complexity": "unknown",
+          "no_chord_duration_ratio": 0.0,
+          "status": "supported",
+          "top_chords_by_duration": [
+            {
+              "display": "F minor",
+              "duration_ratio_of_harmonic_occupancy": 0.381212
+            },
+            {
+              "display": "C minor",
+              "duration_ratio_of_harmonic_occupancy": 0.158413
+            },
+            {
+              "display": "F major",
+              "duration_ratio_of_harmonic_occupancy": 0.131893
+            },
+            {
+              "display": "B-flat minor",
+              "duration_ratio_of_harmonic_occupancy": 0.105589
+            }
+          ]
+        },
+        "tonal_center": {
+          "assertion_level": "centered",
+          "calibrated_confidence": "unknown",
+          "evidence_modality": "dataset_audio_annotation",
+          "regions": [
+            {
+              "end_sec": 302.532386,
+              "start_sec": 1.578957,
+              "value": "F minor"
+            }
+          ],
+          "status": "supported",
+          "value": "F minor"
+        }
+      },
+      "tracks_and_roles": {
+        "functional_roles": [
+          "accompaniment",
+          "main_melody",
+          "secondary_melody"
+        ],
+        "instruments": [
+          "Acoustic Grand Piano"
+        ],
+        "role_note_on_counts": {
+          "accompaniment": 1236,
+          "main_melody": 429,
+          "secondary_melody": 471
+        },
+        "track_count": 3
+      }
+    },
+    "local_window": {
+      "active_functional_roles": [
+        "accompaniment",
+        "main_melody",
+        "secondary_melody"
+      ],
+      "bar_count": 4,
+      "bar_range": [
+        49,
+        53
+      ],
+      "density": {
+        "denominator_unit": "POP909 dataset-annotated beat",
+        "note_on_event_count": 70,
+        "note_on_events_per_annotated_beat": 4.375,
+        "unique_onset_group_count": 68,
+        "unique_onset_groups_per_annotated_beat": 4.25
+      },
+      "harmony": {
+        "annotation_coverage_ratio": 1.0,
+        "chord_changes_per_minute": 21.250047,
+        "harmonic_occupancy_ratio": 1.0,
+        "lexical_complexity": "unknown",
+        "no_chord_duration_ratio": 0.0,
+        "status": "supported",
+        "top_chords_by_duration": [
+          {
+            "display": "C minor",
+            "duration_ratio_of_harmonic_occupancy": 0.25
+          },
+          {
+            "display": "F major",
+            "duration_ratio_of_harmonic_occupancy": 0.25
+          },
+          {
+            "display": "F minor",
+            "duration_ratio_of_harmonic_occupancy": 0.25
+          },
+          {
+            "display": "B-flat minor",
+            "duration_ratio_of_harmonic_occupancy": 0.125
+          }
+        ]
+      },
+      "polyphony": {
+        "duration_weighted_mean": 4.1141,
+        "duration_weighted_p95": 7.0,
+        "maximum": 9,
+        "measurement": "simultaneously sounding MIDI notes",
+        "silence_ratio": 0.011068,
+        "status": "supported"
+      },
+      "role_pitch_ranges": {
+        "accompaniment": {
+          "highest": "G#4",
+          "lowest": "F2",
+          "maximum_midi": 68,
+          "minimum_midi": 41,
+          "semitones": 27
+        },
+        "main_melody": {
+          "highest": "D#6",
+          "lowest": "C5",
+          "maximum_midi": 87,
+          "minimum_midi": 72,
+          "semitones": 15
+        },
+        "secondary_melody": {
+          "highest": "D#6",
+          "lowest": "D#5",
+          "maximum_midi": 87,
+          "minimum_midi": 75,
+          "semitones": 12
+        }
+      },
+      "span_sec": [
+        166.436505,
+        180.554121
+      ],
+      "tonal_center": {
+        "assertion_level": "centered",
+        "calibrated_confidence": "unknown",
+        "evidence_modality": "dataset_audio_annotation",
+        "regions": [
+          {
+            "end_sec": 180.554121,
+            "start_sec": 166.436505,
+            "value": "F minor"
+          }
+        ],
+        "status": "supported",
+        "value": "F minor"
+      },
+      "velocity": {
+        "lexical_dynamics": "unknown",
+        "median": 84.0
+      }
+    }
+  },
+  "downstream_request": {
+    "required_next_artifacts": [
+      "text_prompt",
+      "optional_attachment_manifest",
+      "immutable_request_hash"
+    ],
+    "status": "not_assembled"
+  },
+  "evidence_modalities": [
+    {
+      "modality": "midi",
+      "role": "primary_symbolic_evidence"
+    },
+    {
+      "modality": "dataset_audio_annotation",
+      "role": "key_annotation_only"
+    }
+  ],
+  "metadata_id": "sha256:e93594530eaccb9218e6b08170885dd3277207011e0106d4c0ca00d4a5d14a43",
+  "profile": "caption_pretraining",
+  "projection_id": "sha256:8a5b08a6d658857a678ca910eb1ecae247d41cdcca8ce680ade2f8a24a207567",
+  "projection_version": "sori_dense_caption_projection_v0.1",
+  "sample_id": "pop909_train_675_bar49_53_4bar"
+}
