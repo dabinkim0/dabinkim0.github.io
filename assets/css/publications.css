@@ -549,9 +549,18 @@ body {
     .item-list.is-grid .publication-item,
     .item-list.is-grid-compact .publication-item {
         grid-template-columns: 1fr;
+        gap: var(--publication-figure-title-gap);
         align-content: start;
         padding-bottom: var(--space-5);
         border-bottom: 1px solid var(--rule-soft);
+    }
+
+    .item-list:is(.is-list, .is-grid, .is-grid-compact) .publication-figure {
+        order: 1;
+    }
+
+    .item-list:is(.is-list, .is-grid, .is-grid-compact) .publication-copy {
+        order: 2;
     }
 
     .item-list .publication-item:last-child {

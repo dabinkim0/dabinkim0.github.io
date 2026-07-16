@@ -376,6 +376,8 @@
 }
 
 .education-list.is-collapsed .news-scroll-area {
+    --news-content-reveal-delay: 0ms;
+
     height: 0;
     opacity: 0;
     margin-top: 0;
@@ -388,6 +390,8 @@
 }
 
 .news-scroll-area {
+    --news-content-reveal-delay: var(--motion-fast);
+
     height: var(--news-scroll-height);
     opacity: 1;
     margin-top: 0;
@@ -402,7 +406,7 @@
     transform: translateY(0);
     transition:
         height var(--motion-expand) var(--ease-out),
-        opacity var(--motion-fast) var(--ease-out),
+        opacity var(--motion-fast) var(--ease-out) var(--news-content-reveal-delay),
         padding-top var(--motion-expand) var(--ease-out),
         padding-right var(--motion-expand) var(--ease-out),
         padding-bottom var(--motion-expand) var(--ease-out),
