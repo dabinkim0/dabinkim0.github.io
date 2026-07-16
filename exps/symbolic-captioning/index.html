@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260715-a105">
+  <link rel="stylesheet" href="styles.css?v=20260716-a112">
 </head>
 <body>
   <header class="main-header">
@@ -30,8 +30,8 @@
       <h1>Symbolic Music <span>Captioning</span></h1>
       <p class="hero-copy">A compact review page for metadata-grounded music caption pretraining. Subscription and API tracks share the same numbered protocol and remain separated at execution.</p>
       <div class="hero-metrics" aria-label="Experiment Summary">
-        <article class="hero-metric"><span>Current Release</span><strong>A.1.1</strong><em>Actual Train Pilot</em></article>
-        <article class="hero-metric"><span>Gemini Web Runs</span><strong data-metric="web-runs">—</strong><em>Actual POP909 Cases</em></article>
+        <article class="hero-metric"><span>Current Release</span><strong>A.1.2</strong><em>Caption Scope Pilot</em></article>
+        <article class="hero-metric"><span>Gemini Web Runs</span><strong data-metric="web-runs">—</strong><em>Scope-Matched Cases</em></article>
         <article class="hero-metric"><span>Structural Pass</span><strong data-metric="structural-pass">—</strong><em>Schema And Pointers</em></article>
         <article class="hero-metric"><span>Semantic Preflight</span><strong data-metric="preflight-flags">—</strong><em>Flagged · Filter Pending</em></article>
       </div>
@@ -50,8 +50,8 @@
         <article class="pipeline-node source-node">
           <span class="node-index">01</span>
           <i class="node-icon note-icon" aria-hidden="true">♪</i>
-          <strong>MIDI Segment</strong>
-          <small>Train Split Window</small>
+          <strong>MIDI Piece</strong>
+          <small>Whole Piece By Default</small>
         </article>
         <div class="flow-arrow" aria-hidden="true"><span></span></div>
         <article class="pipeline-node required-node">
@@ -182,14 +182,25 @@
       </div>
       <div class="release-grid">
         <article class="release-card active-release">
-          <div class="release-topline"><span class="release-id track-a-bg">A.1.1</span><span class="status-pill complete">Executed</span></div>
+          <div class="release-topline"><span class="release-id track-a-bg">A.1.2</span><span class="status-pill complete">Executed</span></div>
           <p class="section-kicker">Gemini Web · Subscription</p>
-          <h3>Actual Train Subset</h3>
-          <p>Runs one deterministic four-bar segment from each of 50 POP909 Train songs with metadata-only <code>base_M</code> prompts.</p>
+          <h3>Caption Scope Contract</h3>
+          <p>Compares whole-piece, full-context region, and legacy-crop captions on the same POP909 Train piece.</p>
           <dl class="release-facts">
             <div><dt>Model</dt><dd>Gemini 3.5 Flash (Medium)</dd></div>
             <div><dt>Runs</dt><dd data-release-runs>—</dd></div>
             <div><dt>Filter</dt><dd>Not Run</dd></div>
+          </dl>
+        </article>
+        <article class="release-card historical-release">
+          <div class="release-topline"><span class="release-id track-a-muted">A.1.1</span><span class="status-pill complete">Preserved</span></div>
+          <p class="section-kicker">Gemini Web · Subscription</p>
+          <h3>Fixed-Window Baseline</h3>
+          <p>Executed metadata-only captions for one deterministic four-bar crop from each of 50 POP909 Train songs.</p>
+          <dl class="release-facts">
+            <div><dt>Model</dt><dd>Gemini 3.5 Flash (Medium)</dd></div>
+            <div><dt>Runs</dt><dd>50</dd></div>
+            <div><dt>Role</dt><dd>Legacy Ablation</dd></div>
           </dl>
         </article>
         <article class="release-card planned-release">
@@ -221,9 +232,9 @@
         <p>Attachments are varied independently while general metadata remains fixed.</p>
       </div>
       <div class="condition-grid">
-        <article class="condition-card executed"><span>01</span><strong>Metadata Only</strong><small>50 Gemini Web Runs</small><em>Executed</em></article>
-        <article class="condition-card prepared"><span>02</span><strong>Metadata + MIDI</strong><small>50 Cropped Files Prepared</small><em>Prepared</em></article>
-        <article class="condition-card prepared"><span>03</span><strong>Metadata + Audio</strong><small>50 Rendered Files Prepared</small><em>Prepared</em></article>
+        <article class="condition-card executed"><span>01</span><strong>Metadata Only</strong><small>3 Scope-Matched Runs</small><em>Executed</em></article>
+        <article class="condition-card prepared"><span>02</span><strong>Metadata + MIDI</strong><small>Whole Or Cropped Asset By Scope</small><em>Prepared</em></article>
+        <article class="condition-card prepared"><span>03</span><strong>Metadata + Audio</strong><small>Legacy Crop Render Only</small><em>Partial</em></article>
         <article class="condition-card pending"><span>04</span><strong>Metadata + MIDI + Audio</strong><small>No Valid Run</small><em>Not Run</em></article>
       </div>
     </section>
@@ -240,6 +251,7 @@
         </div>
       </div>
 
+      <div class="scope-picker" data-scope-picker role="tablist" aria-label="Caption Scope"></div>
       <div class="case-picker" data-case-picker aria-label="Case Selection"></div>
       <div class="empty-backend" data-empty-backend hidden>
         <p class="section-kicker">B.1.0 · Gemini API</p>
@@ -250,22 +262,24 @@
       <div class="case-content" data-case-content>
         <article class="case-summary panel-card">
           <div>
-            <p class="eyebrow" data-case-release>A.1.1 · Loading</p>
+            <p class="eyebrow" data-case-release>A.1.2 · Loading</p>
             <h2 data-case-name>Loading Caption Case…</h2>
             <p class="case-origin" data-case-origin></p>
           </div>
           <dl class="case-meta">
             <div><dt>Source</dt><dd data-case-source>—</dd></div>
             <div><dt>Split</dt><dd data-case-split>—</dd></div>
-            <div><dt>Condition</dt><dd>Metadata Only</dd></div>
-            <div><dt>Filter</dt><dd>Not Run</dd></div>
+            <div><dt>Caption Scope</dt><dd data-case-scope>—</dd></div>
+            <div><dt>Asset Scope</dt><dd data-case-asset-scope>—</dd></div>
+            <div><dt>Gemini Input</dt><dd data-case-gemini-input>—</dd></div>
+            <div><dt>Training Use</dt><dd data-case-training-use>—</dd></div>
           </dl>
         </article>
 
         <div class="case-main-grid">
           <article class="panel-card media-card">
             <div class="card-head">
-              <div><p class="section-kicker">Source Segment</p><h3 data-media-title>Piano Roll</h3></div>
+              <div><p class="section-kicker">Source Input</p><h3 data-media-title>Piano Roll</h3></div>
               <span class="status-pill" data-media-status>—</span>
             </div>
             <div class="piano-roll-frame">
@@ -286,7 +300,7 @@
             </div>
             <div class="caption-output short-output"><span>Short Caption</span><p data-caption-short>—</p></div>
             <div class="caption-output"><span>Detailed Caption</span><p data-caption-detailed>—</p></div>
-            <div class="filter-state"><span>LLM-Based Filtering</span><strong data-filter-state>Pending In A.1.1</strong></div>
+            <div class="filter-state"><span>LLM-Based Filtering</span><strong data-filter-state>Pending In A.1.2</strong></div>
           </article>
         </div>
 
@@ -329,6 +343,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260715-a105"></script>
+  <script src="script.js?v=20260716-a114"></script>
 </body>
 </html>

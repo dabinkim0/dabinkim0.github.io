@@ -1,17 +1,17 @@
 {
   "schema_version": "sori_metadata_version_viewer_v0.2",
-  "updated_on": "2026-07-15",
+  "updated_on": "2026-07-16",
   "version_convention": "K/N/R/T.major.minor",
   "prompts": {
     "phase_0_projection": "Compatibility view only. In the current UI, Phase 0 exposes structured CaptionProjection data and does not expose a Gemini prompt inside the metadata stages.",
     "pilot_supported_evidence": "You are producing an English music caption from supported symbolic evidence. Use only supported fields, omit blocked attributes, and return evidence-linked JSON captions."
   },
   "actual_dataset_example": {
-    "case_id": "pop909_train_344_bar64_68_a1_1__base_M",
-    "display_name": "POP909 · Train · pop909:344 · Bars 64–67",
+    "case_id": "pop909_train_344_a1_2_region_full_context__base_M",
+    "display_name": "POP909 · Train · pop909:344 · Full Piece With Bars 64–67 Targeted",
     "family_views": {
       "key": {
-        "evidence_key": "local_key_estimate",
+        "evidence_key": "local_tonal_center_estimate",
         "fields": ["value", "assertion_level", "status", "method", "scope", "diagnostics"],
         "blocked_prefixes": []
       },

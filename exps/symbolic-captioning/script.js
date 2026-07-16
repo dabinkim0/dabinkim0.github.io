@@ -5,11 +5,12 @@ const state = {
   metadataVersionByCategory: {},
   metadataStageByVersion: {},
   backend: "A",
+  scopeType: "whole_piece",
   caseIndex: 0,
 };
 
 function releaseId() {
-  return state.data?.release_id || "A.1.1";
+  return state.data?.release_id || "A.1.2";
 }
 
 function $(selector) {
@@ -32,13 +33,18 @@ function formatEvidenceValue(value) {
   if (value.note_count !== undefined) return `${value.note_count} Notes`;
   if (value.dominant_inter_onset_beat !== undefined) return `Dominant IOI ${value.dominant_inter_onset_beat} Beat`;
   if (value.note_onsets_per_beat !== undefined) return `${value.total_note_onsets} Onsets · ${value.note_onsets_per_beat} / Beat`;
-  if (value.mean_velocity !== undefined) return `Mean ${value.mean_velocity} · ${formatLabel(value.overall_direction)}`;
-  if (value.total_note_onsets !== undefined) return `${value.total_note_onsets} Onsets · ${value.note_onsets_per_second} / Sec`;
+  if (value.mean_velocity !== undefined) return value.overall_direction ? `Mean ${value.mean_velocity} · ${formatLabel(value.overall_direction)}` : `Mean Velocity ${value.mean_velocity}`;
+  if (value.bar_count_from_downbeats !== undefined) return `${value.bar_count_from_downbeats} Bars · ${value.duration_sec} Sec`;
+  if (value.total_note_onsets !== undefined) return `${value.total_note_onsets} Onsets`;
   return JSON.stringify(value);
 }
 
+function scopedCases() {
+  return (state.data?.cases || []).filter((caseItem) => caseItem.scope_type === state.scopeType);
+}
+
 function currentCase() {
-  return state.data?.cases?.[state.caseIndex] || null;
+  return scopedCases()[state.caseIndex] || null;
 }
 
 function currentMetadataCategory() {
@@ -400,6 +406,36 @@ function renderMetrics() {
   $("[data-release-runs]").textContent = runs;
 }
 
+function renderScopePicker() {
+  const picker = $("[data-scope-picker]");
+  picker.innerHTML = "";
+  const options = [
+    ["whole_piece", "Whole Piece", "Training Default"],
+    ["region_in_full_context", "Region In Full Context", "Selector Pending"],
+    ["cropped_region_legacy", "Cropped Region Legacy", "Ablation Only"],
+  ];
+  options.forEach(([scopeType, label, note]) => {
+    const button = document.createElement("button");
+    const active = scopeType === state.scopeType;
+    button.type = "button";
+    button.className = `scope-button${active ? " active" : ""}`;
+    button.setAttribute("role", "tab");
+    button.setAttribute("aria-selected", String(active));
+    button.innerHTML = `<strong>${label}</strong><small>${note}</small>`;
+    button.addEventListener("click", () => {
+      state.scopeType = scopeType;
+      state.caseIndex = 0;
+      const url = new URL(window.location.href);
+      url.searchParams.set("scope", scopeType);
+      window.history.replaceState({}, "", url);
+      renderScopePicker();
+      renderCasePicker();
+      renderCase();
+    });
+    picker.appendChild(button);
+  });
+}
+
 function renderCasePicker() {
   const picker = $("[data-case-picker]");
   picker.innerHTML = "";
@@ -409,12 +445,14 @@ function renderCasePicker() {
   const select = document.createElement("select");
   select.className = "case-select";
   select.setAttribute("aria-label", "Case Index");
-  state.data.cases.forEach((caseItem, index) => {
+  const cases = scopedCases();
+  cases.forEach((caseItem, index) => {
     const option = document.createElement("option");
-    const startBar = caseItem.window?.start_bar || "—";
-    const endBar = (caseItem.window?.end_bar_exclusive || startBar) - 1;
     option.value = String(index);
-    option.textContent = `IDX ${String(index).padStart(2, "0")} · ${caseItem.source_id.toUpperCase()} · Bars ${startBar}–${endBar}`;
+    const target = caseItem.scope_type === "whole_piece"
+      ? "Entire Piece"
+      : `Bars ${caseItem.window.start_bar}–${caseItem.window.end_bar_exclusive - 1}`;
+    option.textContent = `IDX ${String(index).padStart(2, "0")} · ${caseItem.source_id.toUpperCase()} · ${target}`;
     option.selected = index === state.caseIndex;
     select.appendChild(option);
   });
@@ -430,7 +468,7 @@ function renderCasePicker() {
     button.type = "button";
     button.className = "case-nav-button";
     button.textContent = text;
-    button.disabled = state.caseIndex + offset < 0 || state.caseIndex + offset >= state.data.cases.length;
+    button.disabled = state.caseIndex + offset < 0 || state.caseIndex + offset >= cases.length;
     button.addEventListener("click", () => {
       state.caseIndex += offset;
       renderCasePicker();
@@ -450,6 +488,7 @@ function renderBackend() {
   $("[data-case-content]").hidden = !isWeb;
   $("[data-empty-backend]").hidden = isWeb;
   if (isWeb) {
+    renderScopePicker();
     renderCasePicker();
     renderCase();
   }
@@ -457,23 +496,27 @@ function renderBackend() {
 
 function originText(caseItem) {
   const window = caseItem.window || {};
-  const segment = window.start_bar
-    ? `bars ${window.start_bar}–${Math.max(window.start_bar, (window.end_bar_exclusive || window.start_bar + 1) - 1)}`
-    : "a controlled evidence window";
+  const segment = caseItem.scope_type === "whole_piece"
+    ? "the entire MIDI piece"
+    : `bars ${window.start_bar}–${Math.max(window.start_bar, (window.end_bar_exclusive || window.start_bar + 1) - 1)}`;
   const provenance = caseItem.source_kind === "Actual Train Split"
     ? `${caseItem.source_id.toUpperCase()}, ${segment}`
     : `${caseItem.source_kind}, ${segment}`;
-  return `${provenance}; rule-extracted general metadata rendered by ${caseItem.provenance.model} through the Gemini Web subscription track.`;
+  return `${provenance}; ${caseItem.scope_label} metadata rendered by ${caseItem.provenance.model} through Gemini Web.`;
 }
 
 function renderCase() {
   const caseItem = currentCase();
   if (!caseItem) return;
-  $("[data-case-release]").textContent = `${releaseId()} · ${caseItem.family_label}`;
+  $("[data-case-release]").textContent = `${caseItem.release_id || releaseId()} · ${caseItem.scope_label}`;
   $("[data-case-name]").textContent = caseItem.title;
   $("[data-case-origin]").textContent = originText(caseItem);
   $("[data-case-source]").textContent = caseItem.source_id;
   $("[data-case-split]").textContent = formatLabel(caseItem.split);
+  $("[data-case-scope]").textContent = caseItem.scope_label;
+  $("[data-case-asset-scope]").textContent = formatLabel(caseItem.scope_contract.input_asset_scope);
+  $("[data-case-gemini-input]").textContent = caseItem.input_modalities.length ? caseItem.input_modalities.map(formatLabel).join(" + ") : "Metadata Only";
+  $("[data-case-training-use]").textContent = caseItem.scope_contract.training_eligible ? "Training Default" : "Diagnostic Only";
   $("[data-caption-short]").textContent = caseItem.response.caption_short;
   $("[data-caption-detailed]").textContent = caseItem.response.caption_detailed;
   $("[data-latency]").textContent = `${caseItem.provenance.elapsed_sec.toFixed(2)} Sec`;
@@ -520,13 +563,20 @@ function renderMedia(caseItem) {
 
   empty.hidden = notes.length > 0;
   canvas.hidden = notes.length === 0;
-  status.textContent = hasMedia ? "Actual Train Segment" : "Evidence Only";
+  const scopeLabels = {
+    whole_piece: "Whole MIDI Piece",
+    region_in_full_context: "Full Piece · Target Region",
+    cropped_region_legacy: "Cropped Region",
+  };
+  status.textContent = hasMedia ? scopeLabels[caseItem.scope_type] : "Evidence Only";
   status.className = `status-pill${hasMedia ? " complete" : ""}`;
-  $("[data-media-title]").textContent = hasMedia ? "Piano Roll And VST Render" : "Evidence-Only Case";
+  $("[data-media-title]").textContent = media.audio ? "Piano Roll And Render" : "Piano Roll";
 
   if (media.audio) {
+    audio.hidden = false;
     audio.src = media.audio;
   } else {
+    audio.hidden = true;
     audio.removeAttribute("src");
     audio.load();
   }
@@ -538,16 +588,18 @@ function renderMedia(caseItem) {
     midiLink.hidden = true;
   }
 
-  const startBar = caseItem.window?.start_bar || "—";
-  const endBar = (caseItem.window?.end_bar_exclusive || startBar) - 1;
+  const span = media.caption_span_asset_sec || [0, media.duration_sec || 0];
+  const spanText = caseItem.scope_type === "whole_piece"
+    ? "The entire piece is the caption target."
+    : `The highlighted target spans ${span[0].toFixed(2)}–${span[1].toFixed(2)} seconds in this asset.`;
   $("[data-media-note]").textContent = hasMedia
-    ? `POP909 Train bars ${startBar}–${endBar}. The WAV is a deterministic additive-synthesis render of the cropped MIDI, not original dataset audio.`
+    ? `${spanText} ${media.render_note}`
     : "This recorded pilot used controlled MIDI-derived metadata without a retained media attachment.";
 
-  if (notes.length) requestAnimationFrame(() => drawPianoRoll(canvas, notes, media.duration_sec || 1));
+  if (notes.length) requestAnimationFrame(() => drawPianoRoll(canvas, notes, media.duration_sec || 1, span));
 }
 
-function drawPianoRoll(canvas, notes, duration) {
+function drawPianoRoll(canvas, notes, duration, captionSpan = null) {
   const rect = canvas.getBoundingClientRect();
   const scale = window.devicePixelRatio || 1;
   canvas.width = Math.max(1, Math.floor(rect.width * scale));
@@ -574,7 +626,7 @@ function drawPianoRoll(canvas, notes, duration) {
   context.lineWidth = 1;
   context.strokeRect(margin.left, margin.top, plotWidth, plotHeight);
 
-  const tickStep = duration > 8 ? 2 : 1;
+  const tickStep = duration > 180 ? 30 : duration > 60 ? 10 : duration > 20 ? 5 : duration > 8 ? 2 : 1;
   context.font = '10px "Public Sans", sans-serif';
   context.fillStyle = "#706d66";
   context.textAlign = "center";
@@ -586,6 +638,16 @@ function drawPianoRoll(canvas, notes, duration) {
     context.lineTo(xx, margin.top + plotHeight);
     context.stroke();
     context.fillText(`${time.toFixed(0)}s`, xx, height - 10);
+  }
+
+  if (captionSpan && (captionSpan[0] > 0 || captionSpan[1] < duration)) {
+    const start = x(Math.max(0, captionSpan[0]));
+    const end = x(Math.min(duration, captionSpan[1]));
+    context.fillStyle = "rgba(55, 105, 168, 0.12)";
+    context.fillRect(start, margin.top, Math.max(1, end - start), plotHeight);
+    context.strokeStyle = "rgba(55, 105, 168, 0.8)";
+    context.lineWidth = 1.5;
+    context.strokeRect(start, margin.top, Math.max(1, end - start), plotHeight);
   }
 
   for (let pitch = Math.ceil(minPitch / 12) * 12; pitch <= maxPitch; pitch += 12) {
@@ -665,7 +727,7 @@ function bindEvents() {
   });
   window.addEventListener("resize", () => {
     const caseItem = currentCase();
-    if (state.backend === "A" && caseItem?.media?.notes?.length) drawPianoRoll($("[data-piano-roll]"), caseItem.media.notes, caseItem.media.duration_sec || 1);
+    if (state.backend === "A" && caseItem?.media?.notes?.length) drawPianoRoll($("[data-piano-roll]"), caseItem.media.notes, caseItem.media.duration_sec || 1, caseItem.media.caption_span_asset_sec);
   });
 }
 
@@ -673,12 +735,15 @@ async function initialize() {
   try {
     const [summaryResponse, metadataResponse] = await Promise.all([
       fetch("assets/data/summary.json", { cache: "no-store" }),
-      fetch("assets/data/metadata_versions.json?schema=v0.2&ui=a105", { cache: "no-store" }),
+      fetch("assets/data/metadata_versions.json?schema=v0.2&ui=a112", { cache: "no-store" }),
     ]);
     if (!summaryResponse.ok) throw new Error(`Summary HTTP ${summaryResponse.status}`);
     if (!metadataResponse.ok) throw new Error(`Metadata HTTP ${metadataResponse.status}`);
     state.data = await summaryResponse.json();
     state.metadataData = await metadataResponse.json();
+    const requestedScope = new URLSearchParams(window.location.search).get("scope");
+    const availableScopes = new Set(state.data.cases.map((caseItem) => caseItem.scope_type));
+    if (availableScopes.has(requestedScope)) state.scopeType = requestedScope;
     renderMetrics();
     renderCaveats();
     bindEvents();
