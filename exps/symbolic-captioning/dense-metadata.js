@@ -197,6 +197,73 @@
     container.appendChild(card);
   }
 
+  function appendEventSequenceCard(container, kicker, title, sequence, statistics, note) {
+    const card = document.createElement("article");
+    card.className = "dense-event-sequence-card";
+    const header = document.createElement("header");
+    const heading = document.createElement("div");
+    const kickerNode = document.createElement("p");
+    const titleNode = document.createElement("h4");
+    kickerNode.className = "section-kicker";
+    kickerNode.textContent = kicker;
+    titleNode.textContent = title;
+    heading.append(kickerNode, titleNode);
+    header.append(heading, statusBadge(formatLabel(sequence.status), sequence.status));
+    card.appendChild(header);
+
+    const noteNode = document.createElement("p");
+    noteNode.className = "dense-data-note";
+    noteNode.textContent = note;
+    card.appendChild(noteNode);
+
+    const schema = document.createElement("div");
+    schema.className = "dense-event-schema";
+    const signature = document.createElement("code");
+    signature.textContent = "Tuple = (" + sequence.event_fields.join(", ") + ")";
+    const count = document.createElement("span");
+    count.textContent = sequence.event_count + " Events";
+    schema.append(signature, count);
+    card.appendChild(schema);
+
+    const tableWrap = document.createElement("div");
+    tableWrap.className = "dense-event-table-wrap";
+    const table = document.createElement("table");
+    const tableHead = document.createElement("thead");
+    const headRow = document.createElement("tr");
+    sequence.event_fields.forEach(function (field) {
+      const cell = document.createElement("th");
+      cell.scope = "col";
+      cell.textContent = field.replaceAll("_", " ");
+      headRow.appendChild(cell);
+    });
+    tableHead.appendChild(headRow);
+    const tableBody = document.createElement("tbody");
+    sequence.events.forEach(function (event) {
+      const row = document.createElement("tr");
+      event.forEach(function (value) {
+        const cell = document.createElement("td");
+        cell.textContent = value === null ? "Unknown" : String(value);
+        row.appendChild(cell);
+      });
+      tableBody.appendChild(row);
+    });
+    table.append(tableHead, tableBody);
+    tableWrap.appendChild(table);
+    card.appendChild(tableWrap);
+
+    if (statistics) {
+      const details = document.createElement("details");
+      details.className = "dense-event-statistics";
+      const summary = document.createElement("summary");
+      const pre = document.createElement("pre");
+      summary.textContent = "View Role Statistics";
+      pre.textContent = JSON.stringify(statistics, null, 2);
+      details.append(summary, pre);
+      card.appendChild(details);
+    }
+    container.appendChild(card);
+  }
+
   function renderStatusOverview(container, sample) {
     const statusGrid = document.createElement("div");
     statusGrid.className = "dense-sample-status-grid";
@@ -249,12 +316,16 @@
 
   function renderNotes(container, sample) {
     Object.entries(sample.metadata.notes.role_summaries).forEach(function (entry) {
-      appendJsonCard(
+      const statistics = Object.assign({}, entry[1]);
+      const sequence = statistics.event_sequence;
+      delete statistics.event_sequence;
+      appendEventSequenceCard(
         container,
-        "Role-Aware Note Evidence",
+        "Role-Aware Event Tuples",
         entry[0],
-        entry[1].status,
-        entry[1]
+        sequence,
+        statistics,
+        "Each row binds pitch, relative onset, duration, and velocity to one MIDI event."
       );
     });
     appendJsonCard(
@@ -268,13 +339,15 @@
   }
 
   function renderRhythm(container, sample) {
-    Object.entries(sample.metadata.rhythm.role_sequences).forEach(function (entry) {
-      appendJsonCard(
+    Object.entries(sample.metadata.rhythm.role_statistics).forEach(function (entry) {
+      const sequence = sample.metadata.notes.role_summaries[entry[0]].event_sequence;
+      appendEventSequenceCard(
         container,
-        "Exact Beat-Normalized Sequence",
+        "Beat-Normalized Event Tuples",
         entry[0],
-        "supported",
-        entry[1]
+        sequence,
+        entry[1],
+        "Rhythm statistics reference the same compact event sequence; no parallel arrays are duplicated."
       );
     });
   }
@@ -528,7 +601,7 @@
     if (!container) return;
     try {
       const response = await fetch(
-        "assets/data/dense-metadata/index.json?release=m001",
+        "assets/data/dense-metadata/index.json?release=m002",
         { cache: "no-store" }
       );
       if (!response.ok) throw new Error("Dense Metadata HTTP " + response.status);

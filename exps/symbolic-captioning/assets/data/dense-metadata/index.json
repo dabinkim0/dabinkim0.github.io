@@ -14,6 +14,9 @@
     "melody.contour_label": {
       "ambiguous": 30
     },
+    "notes.compact_event_sequence": {
+      "supported": 30
+    },
     "notes.event_table": {
       "supported": 30
     },
@@ -50,6 +53,14 @@
       "label": "Role-Aware Note Event Table",
       "output": "Pitch, onset, duration, velocity, track, and channel",
       "validation_tier": "direct_midi"
+    },
+    {
+      "availability": "when_role_notes_exist",
+      "feature_id": "notes.compact_event_sequence",
+      "implementation_status": "implemented",
+      "label": "Compact Role Event Sequence",
+      "output": "Explicit event fields followed by pitch, onset, duration, and velocity tuples",
+      "validation_tier": "direct_midi_projection"
     },
     {
       "availability": "when_role_notes_exist",
@@ -173,14 +184,14 @@
     }
   ],
   "implementation_status_counts": {
-    "implemented": 8,
+    "implemented": 9,
     "not_implemented": 7,
     "partial": 2
   },
   "purpose": "extractor_audit_only",
   "rejected_source_count": 0,
   "rejected_sources": [],
-  "release_id": "M.0.1",
+  "release_id": "M.0.2",
   "sample_count": 30,
   "samples": [
     {
@@ -196,15 +207,15 @@
       "evidence_status_counts": {
         "ambiguous": 2,
         "insufficient_evidence": 1,
-        "supported": 7
+        "supported": 8
       },
       "file": "samples/pop909_train_350_bar6_8_2bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 43,
-      "record_sha256": "sha256:e3126f3980d9da49f0bab3808329c91018b200af77864885cbb25f0f83ee5fc6",
+      "record_sha256": "sha256:b792c11785a2b4cd68fa3fb46de1f800144be31c647130f64078cea0b5752bea",
       "sample_id": "pop909_train_350_bar6_8_2bar",
       "scale_bars": 2,
       "source_id": "pop909:350",
@@ -227,15 +238,15 @@
       "canonical_piece_id": "pop909:675",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_675_bar49_53_4bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 70,
-      "record_sha256": "sha256:05b09ec7db0e7512dd59673e09a216a707d4fccfba2d598f4131da5acde83635",
+      "record_sha256": "sha256:2b871f0e856b0c3d56642103c4120458200ec4bed49e5be842a6d9a432c718b7",
       "sample_id": "pop909_train_675_bar49_53_4bar",
       "scale_bars": 4,
       "source_id": "pop909:675",
@@ -257,15 +268,15 @@
       "canonical_piece_id": "pop909:244",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_244_bar52_60_8bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 207,
-      "record_sha256": "sha256:2c0dbfef904008d3fc6a31fd5e0d78c880c5b6034e209120365a6d3dcf3a92dd",
+      "record_sha256": "sha256:a11c2a6bbfdeaee469205b3279db679e8b091700c926e814c72a9347d9389bbc",
       "sample_id": "pop909_train_244_bar52_60_8bar",
       "scale_bars": 8,
       "source_id": "pop909:244",
@@ -288,15 +299,15 @@
       "canonical_piece_id": "pop909:115",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_115_bar14_30_16bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 329,
-      "record_sha256": "sha256:77e1a947b14c12e5b61b19470c87c4e15f493f1eb4c3c01d99d07ce108c3795e",
+      "record_sha256": "sha256:3422239f8ad10d66ddf336b7070427f0b3475c8572d772405e4e204525e298b7",
       "sample_id": "pop909_train_115_bar14_30_16bar",
       "scale_bars": 16,
       "source_id": "pop909:115",
@@ -319,15 +330,15 @@
       "canonical_piece_id": "pop909:167",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_167_bar44_76_32bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 853,
-      "record_sha256": "sha256:fd2eec28576792e825c80cd15f9e92a5e28c4164f39607958214a1df4830aaf0",
+      "record_sha256": "sha256:3d7ff52640ae3c28661a5a4c6682a5e8ab1097a993a2412a7d5900c541775ca0",
       "sample_id": "pop909_train_167_bar44_76_32bar",
       "scale_bars": 32,
       "source_id": "pop909:167",
@@ -350,15 +361,15 @@
       "canonical_piece_id": "pop909:364",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_364_bar6_8_2bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 40,
-      "record_sha256": "sha256:c5b09a7f6135fae09df71c4cffc5104c8e0338f10a769ec79bc064b5e748f6c9",
+      "record_sha256": "sha256:3f7f0c6b81160e97ec85601d563ea9b625384620cae20e3041b5485bedb80d58",
       "sample_id": "pop909_train_364_bar6_8_2bar",
       "scale_bars": 2,
       "source_id": "pop909:364",
@@ -380,15 +391,15 @@
       "canonical_piece_id": "pop909:287",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_287_bar69_73_4bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 94,
-      "record_sha256": "sha256:d712e68c46bf1d21e175b0363050c2628742e65acc98286d06c6303ef7563ab9",
+      "record_sha256": "sha256:289128ff81a94688fff0401c3cb31417485ae43119331fee813e867a5ad230a1",
       "sample_id": "pop909_train_287_bar69_73_4bar",
       "scale_bars": 4,
       "source_id": "pop909:287",
@@ -411,15 +422,15 @@
       "canonical_piece_id": "pop909:884",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_884_bar8_16_8bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 110,
-      "record_sha256": "sha256:386144a6f4ca5c702dfd930ca2e85b732fdcffbf9b91e174d15fba7ed073921c",
+      "record_sha256": "sha256:60c6b6793afee4ab4fd4941214d42d55c6908c7d6074c477dfd00329dc223d22",
       "sample_id": "pop909_train_884_bar8_16_8bar",
       "scale_bars": 8,
       "source_id": "pop909:884",
@@ -442,15 +453,15 @@
       "canonical_piece_id": "pop909:850",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_850_bar58_74_16bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 353,
-      "record_sha256": "sha256:a1bb090009aaff650a1a2bca06d38bc4987cb211cf973fea86a473ecb0af9352",
+      "record_sha256": "sha256:a43e4b12d66d56d3d858380515471aac787d515a0a13fd0e0d19a1c5f44fff2d",
       "sample_id": "pop909_train_850_bar58_74_16bar",
       "scale_bars": 16,
       "source_id": "pop909:850",
@@ -473,15 +484,15 @@
       "canonical_piece_id": "pop909:120",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_120_bar18_50_32bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 1004,
-      "record_sha256": "sha256:394fb11ddb4f7b781c06d06e567563b0bbdb062bdfc49539482102e4a6bee0fa",
+      "record_sha256": "sha256:fac152655d41365493ad92bbf56d3a9ea4b8f4b8b7dacc1ac240a5064a448b19",
       "sample_id": "pop909_train_120_bar18_50_32bar",
       "scale_bars": 32,
       "source_id": "pop909:120",
@@ -503,15 +514,15 @@
       "canonical_piece_id": "pop909:318",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_318_bar41_43_2bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 48,
-      "record_sha256": "sha256:9ed3211c9061419b85eb638d6272b809c83e8ec06e97a0bfcd2a3e6e72eb0271",
+      "record_sha256": "sha256:df716dbacbc46525420c2fa888df5621f3be70390b31e6c1e88af20209c29ecf",
       "sample_id": "pop909_train_318_bar41_43_2bar",
       "scale_bars": 2,
       "source_id": "pop909:318",
@@ -534,15 +545,15 @@
       "canonical_piece_id": "pop909:660",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_660_bar85_89_4bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 71,
-      "record_sha256": "sha256:13108c54b6072583ada9a32d9aeb18f40164b3bd9cd0c6bbf976eb8a8b4c2ae4",
+      "record_sha256": "sha256:a0b30ced02ddb06d77d9974f9ff7d11d2ae53f2ae0f4b3eebbaeea3455207415",
       "sample_id": "pop909_train_660_bar85_89_4bar",
       "scale_bars": 4,
       "source_id": "pop909:660",
@@ -566,15 +577,15 @@
       "evidence_status_counts": {
         "ambiguous": 2,
         "insufficient_evidence": 1,
-        "supported": 7
+        "supported": 8
       },
       "file": "samples/pop909_train_334_bar16_24_8bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 222,
-      "record_sha256": "sha256:3304b8238feb17ff17d5927d0019e49dbc38e28b89671d3ab805e31b81a8c1bf",
+      "record_sha256": "sha256:6a1e1e516da4ae1c1ed29afdbfb4c91f4ea02f0f9d3ef9e2b4eb446dbe9d2263",
       "sample_id": "pop909_train_334_bar16_24_8bar",
       "scale_bars": 8,
       "source_id": "pop909:334",
@@ -597,15 +608,15 @@
       "canonical_piece_id": "pop909:667",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_667_bar59_75_16bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 233,
-      "record_sha256": "sha256:f1e97a3b2450a79bb3b480cc1b0bb365516ad7b7c56dd4365e155f3cb0ba00cd",
+      "record_sha256": "sha256:d0448d75ff6aad4e110433ec73d69a63766bc2ff767ed6ed854f3039e451616f",
       "sample_id": "pop909_train_667_bar59_75_16bar",
       "scale_bars": 16,
       "source_id": "pop909:667",
@@ -628,15 +639,15 @@
       "canonical_piece_id": "pop909:039",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_039_bar44_76_32bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 557,
-      "record_sha256": "sha256:7cde7d7eae9e58dee46ae9f179fa91001a60ccf43d16f32105eaef63a0b053ea",
+      "record_sha256": "sha256:14934a2d9ff27c769ecb088e039485929fce67319170c51a4e3249b28a9f0945",
       "sample_id": "pop909_train_039_bar44_76_32bar",
       "scale_bars": 32,
       "source_id": "pop909:039",
@@ -660,15 +671,15 @@
       "evidence_status_counts": {
         "ambiguous": 2,
         "insufficient_evidence": 1,
-        "supported": 7
+        "supported": 8
       },
       "file": "samples/pop909_train_307_bar36_38_2bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 42,
-      "record_sha256": "sha256:487b8df757e86abe6f1bf300f318cc0d5ef505d1bb0a4ebaa7bd4246f32452fa",
+      "record_sha256": "sha256:a860f12b7e12908933dcca8ac586403e0fdbe360153fa1044ac4c43b23f5906c",
       "sample_id": "pop909_train_307_bar36_38_2bar",
       "scale_bars": 2,
       "source_id": "pop909:307",
@@ -691,15 +702,15 @@
       "canonical_piece_id": "pop909:258",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_258_bar89_93_4bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 88,
-      "record_sha256": "sha256:cd4af259c525c988aed9f19e51f45f02c4a53a4e4e7e950a83ad5f183fac1a71",
+      "record_sha256": "sha256:4350c8905ac74995b6a74dd03262926eb0409daf78bd0786a7a08cbaf757553a",
       "sample_id": "pop909_train_258_bar89_93_4bar",
       "scale_bars": 4,
       "source_id": "pop909:258",
@@ -722,15 +733,15 @@
       "canonical_piece_id": "pop909:709",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_709_bar26_34_8bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 197,
-      "record_sha256": "sha256:7ab194a74f0d58f36e7fe129d407c4ce1fd6304d6e0e4246496c2e543501276e",
+      "record_sha256": "sha256:caed52e1c7f6f4094a2829ad6990e0f2a72c6a763c83557da3e6495b9202e912",
       "sample_id": "pop909_train_709_bar26_34_8bar",
       "scale_bars": 8,
       "source_id": "pop909:709",
@@ -753,15 +764,15 @@
       "canonical_piece_id": "pop909:715",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_715_bar24_40_16bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 307,
-      "record_sha256": "sha256:67b5e25d0487a99a32bfb7cff7e1cf81a48668d22777e127dd9b34a444d1a415",
+      "record_sha256": "sha256:656c8dc4c2b2aea039d2b465d3e3517d471e122f7d410a29fc5894fea9e5e12f",
       "sample_id": "pop909_train_715_bar24_40_16bar",
       "scale_bars": 16,
       "source_id": "pop909:715",
@@ -784,15 +795,15 @@
       "canonical_piece_id": "pop909:703",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_703_bar19_51_32bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 798,
-      "record_sha256": "sha256:d0fc32e18c537c3892898a5a5b507176f0ee8234f109b32a732f8c8f0f860d93",
+      "record_sha256": "sha256:9ba6277cf2443643a965590f2516b9f88213599c692fade997ec955cf23c910e",
       "sample_id": "pop909_train_703_bar19_51_32bar",
       "scale_bars": 32,
       "source_id": "pop909:703",
@@ -815,15 +826,15 @@
       "canonical_piece_id": "pop909:172",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_172_bar17_19_2bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 40,
-      "record_sha256": "sha256:26d3492d3fd64f6a7f9767fc28edb6f024c8496fde896e9a7f3ede9a6bc0b5df",
+      "record_sha256": "sha256:5d51d68c4869d077974439e172a07b42eaee17d86643bcdae1166713dc7ce8b7",
       "sample_id": "pop909_train_172_bar17_19_2bar",
       "scale_bars": 2,
       "source_id": "pop909:172",
@@ -846,15 +857,15 @@
       "canonical_piece_id": "pop909:441",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_441_bar49_53_4bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 83,
-      "record_sha256": "sha256:99887aeaf156e82bda8b0cb4204da52b9feea2f413f16afe1256b20d480286bc",
+      "record_sha256": "sha256:c5c8683355c0bd78e7a6995f4352bcf45e44821cdc7da288316958f83cd00cc9",
       "sample_id": "pop909_train_441_bar49_53_4bar",
       "scale_bars": 4,
       "source_id": "pop909:441",
@@ -877,15 +888,15 @@
       "canonical_piece_id": "pop909:814",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_814_bar32_40_8bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 203,
-      "record_sha256": "sha256:aa9d8cdc9385bd6b2a37fbbf95cfe7879a5a8748b5e66689b0c5e01aed30e02c",
+      "record_sha256": "sha256:c06749fc47bf822a39303d833fc170716272667e01009d84a5d23f90ef47fc89",
       "sample_id": "pop909_train_814_bar32_40_8bar",
       "scale_bars": 8,
       "source_id": "pop909:814",
@@ -908,15 +919,15 @@
       "canonical_piece_id": "pop909:170",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_170_bar23_39_16bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 596,
-      "record_sha256": "sha256:b6f682a00a331d0a664ebfba417503f886abb2395501192b2323d0409136c461",
+      "record_sha256": "sha256:ed52c6dd9f84f206cd71a7ae1205bffb34d47524323def8b3fd8ce59904f79c1",
       "sample_id": "pop909_train_170_bar23_39_16bar",
       "scale_bars": 16,
       "source_id": "pop909:170",
@@ -939,15 +950,15 @@
       "canonical_piece_id": "pop909:328",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_328_bar8_40_32bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 710,
-      "record_sha256": "sha256:7ee5bb03d42ce4099baaff915e36a80458a4f9ef8a7f03fb12c84a22865f14f8",
+      "record_sha256": "sha256:5d18c236377e9261ee5087cdbf390c019011ab1eaab7cce4a01c42a8649d27fe",
       "sample_id": "pop909_train_328_bar8_40_32bar",
       "scale_bars": 32,
       "source_id": "pop909:328",
@@ -970,15 +981,15 @@
       "canonical_piece_id": "pop909:101",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_101_bar17_19_2bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 44,
-      "record_sha256": "sha256:02e38390bf63ef2100e5b382a63bb740dd30d986faef394c11bef50560033bce",
+      "record_sha256": "sha256:eb2059577148322bcd7cc1e186274f4680bd6268b3bc19ed7ef7174b495d809e",
       "sample_id": "pop909_train_101_bar17_19_2bar",
       "scale_bars": 2,
       "source_id": "pop909:101",
@@ -1001,15 +1012,15 @@
       "canonical_piece_id": "pop909:227",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_227_bar25_29_4bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 75,
-      "record_sha256": "sha256:9687a8aca2990e9e391a92957072467d10c30fd49dfc0b021d4b5df23d01b156",
+      "record_sha256": "sha256:fb72aba79822a759d77d12d2bac3a8ee92f91f473ef86ea9b398e6a48340baec",
       "sample_id": "pop909_train_227_bar25_29_4bar",
       "scale_bars": 4,
       "source_id": "pop909:227",
@@ -1032,15 +1043,15 @@
       "canonical_piece_id": "pop909:009",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_009_bar71_79_8bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 111,
-      "record_sha256": "sha256:51599c3117365b09db0c57da6af8b327cc693000218d55ac58cffc8dff893651",
+      "record_sha256": "sha256:17c8c844cafda56c561a7c030ffe422f98a049980084a22c034bd94599d1bf01",
       "sample_id": "pop909_train_009_bar71_79_8bar",
       "scale_bars": 8,
       "source_id": "pop909:009",
@@ -1063,15 +1074,15 @@
       "canonical_piece_id": "pop909:690",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_690_bar84_100_16bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 262,
-      "record_sha256": "sha256:07c5e361f12aa49eebe14d3fa4bb36ee9991a8e479d81352c896c82cde5ea6ab",
+      "record_sha256": "sha256:4dd08d2433587f1857253633e936e31f2126b2b7adac8c17f634d251a71305aa",
       "sample_id": "pop909_train_690_bar84_100_16bar",
       "scale_bars": 16,
       "source_id": "pop909:690",
@@ -1094,15 +1105,15 @@
       "canonical_piece_id": "pop909:210",
       "evidence_status_counts": {
         "ambiguous": 2,
-        "supported": 8
+        "supported": 9
       },
       "file": "samples/pop909_train_210_bar69_101_32bar.json",
       "implementation_status_counts": {
-        "implemented": 8,
+        "implemented": 9,
         "partial": 2
       },
       "note_event_count": 562,
-      "record_sha256": "sha256:7fa4b625eec51a9ddcd6bf48f91c062b7a364a78217b5b67c759bcac758ed3ea",
+      "record_sha256": "sha256:0c6cd61db25deb7e431499fb9e588d51a7a5a343a0955ec0ca18682c13fffd67",
       "sample_id": "pop909_train_210_bar69_101_32bar",
       "scale_bars": 32,
       "source_id": "pop909:210",
@@ -1120,7 +1131,7 @@
     "16": 6,
     "32": 6
   },
-  "schema_version": "sori_dense_metadata_demo_index_v0.1",
+  "schema_version": "sori_dense_metadata_demo_index_v0.2",
   "selection_seed": "sori-pop909-dense-metadata-v0.1-20260716",
   "split": "train",
   "structurally_valid_count": 30,
