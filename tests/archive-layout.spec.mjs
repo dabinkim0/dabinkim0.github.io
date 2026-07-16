@@ -73,6 +73,25 @@ for (const archive of archives) {
                 ));
                 expect(hasHorizontalOverflow).toBe(false);
 
+                if (archive.name === "projects") {
+                    const mediaFit = await list.locator(archive.card).evaluateAll((cards) => cards
+                        .filter((element) => !element.hidden)
+                        .map((element) => {
+                            const media = element.querySelector(".archive-card__media");
+                            const image = media?.querySelector("img");
+                            const mediaBox = media?.getBoundingClientRect();
+                            const imageBox = image?.getBoundingClientRect();
+                            return {
+                                width: Math.abs((mediaBox?.width ?? 0) - (imageBox?.width ?? 0)),
+                                height: Math.abs((mediaBox?.height ?? 0) - (imageBox?.height ?? 0))
+                            };
+                        }));
+                    mediaFit.forEach((difference) => {
+                        expect(difference.width).toBeLessThan(1);
+                        expect(difference.height).toBeLessThan(1);
+                    });
+                }
+
                 if (width <= 720) {
                     const mediaBox = await card.locator(archive.media).boundingBox();
                     const copyBox = await card.locator(archive.copy).boundingBox();

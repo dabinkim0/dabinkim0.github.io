@@ -21,6 +21,17 @@ Do not add `order` to move whole card regions. Desktop layouts may reposition re
 
 CSS cascade layers are ordered as `tokens`, `base`, `components`, `pages`, `responsive`, and `utilities`. Add shared behavior to the appropriate common layer rather than increasing selector specificity in a page stylesheet.
 
+## Interaction rules
+
+- Apply lift motion only to controls that change view or filter state, not to archive cards, profile content, institution marks, navigation, or home accordions.
+- On fine pointers, inactive controls may use `translateY(-1px)`, the shared petrol tint, and a restrained shadow. Active controls stay fixed with a solid petrol fill.
+- Pressed controls return to their resting position. Touch interfaces receive the pressed state without a persistent hover treatment.
+- Content links use color, underline, or border feedback without translation. Archive figures keep border-only feedback.
+- Disabled and reduced-motion states never translate. Do not add persistent `will-change` declarations.
+- Add future demo tabs, sample controls, and modal actions to this contract rather than creating page-specific motion values.
+
+Global element defaults belong in `@layer base`. This is especially important for replaced elements such as `img`, because unlayered defaults otherwise override page-level media sizing rules.
+
 ## Regression checks
 
 Run `npm run test:ui` before merging UI work. The archive suite covers `390`, `720`, `920`, and `1180px` in all three views. The home suite covers the closed, Recent News, and Background accordion states.
