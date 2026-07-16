@@ -479,6 +479,7 @@
     position: relative;
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
     column-gap: 8px;
     row-gap: 2px;
     min-height: calc(var(--entry-brand-size) + var(--entry-item-bottom-space));
