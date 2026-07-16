@@ -1,0 +1,1128 @@
+{
+  "dataset": "POP909",
+  "dataset_revision": "d83e6edba6872a704f5d3b8b32f5cb540088dae6",
+  "evidence_coverage": {
+    "dynamics.direction_label": {
+      "ambiguous": 30
+    },
+    "dynamics.midi_velocity": {
+      "supported": 30
+    },
+    "harmony.dataset_chords": {
+      "supported": 30
+    },
+    "melody.contour_label": {
+      "ambiguous": 30
+    },
+    "notes.event_table": {
+      "supported": 30
+    },
+    "performance.pedal_cc64": {
+      "insufficient_evidence": 3,
+      "supported": 27
+    },
+    "rhythm.numeric_sequences": {
+      "supported": 30
+    },
+    "temporal.coordinate_map": {
+      "supported": 30
+    },
+    "texture.bar_trajectory": {
+      "supported": 30
+    },
+    "tonality.dataset_key": {
+      "supported": 30
+    }
+  },
+  "feature_catalog": [
+    {
+      "availability": "all_cached_sources",
+      "feature_id": "temporal.coordinate_map",
+      "implementation_status": "implemented",
+      "label": "Bar, Beat, Tick, And Seconds",
+      "output": "Exact span coordinates and per-bar boundaries",
+      "validation_tier": "direct_midi_and_dataset_annotation"
+    },
+    {
+      "availability": "all_cached_sources",
+      "feature_id": "notes.event_table",
+      "implementation_status": "implemented",
+      "label": "Role-Aware Note Event Table",
+      "output": "Pitch, onset, duration, velocity, track, and channel",
+      "validation_tier": "direct_midi"
+    },
+    {
+      "availability": "when_role_notes_exist",
+      "feature_id": "rhythm.numeric_sequences",
+      "implementation_status": "implemented",
+      "label": "Exact Rhythm Sequences",
+      "output": "Relative onsets, IOIs, and durations in quarter-note beats",
+      "validation_tier": "direct_midi"
+    },
+    {
+      "availability": "all_cached_sources",
+      "feature_id": "texture.bar_trajectory",
+      "implementation_status": "implemented",
+      "label": "Bar-Wise Texture Trajectory",
+      "output": "Density, polyphony, register, and role activity per bar",
+      "validation_tier": "deterministic_derived"
+    },
+    {
+      "availability": "when_note_onsets_exist",
+      "feature_id": "dynamics.midi_velocity",
+      "implementation_status": "implemented",
+      "label": "MIDI Velocity Statistics",
+      "output": "Role and bar velocity distributions without acoustic-loudness claims",
+      "validation_tier": "direct_midi"
+    },
+    {
+      "availability": "when_cc64_is_encoded",
+      "feature_id": "performance.pedal_cc64",
+      "implementation_status": "implemented",
+      "label": "Sustain-Pedal CC64",
+      "output": "CC64 events and span/bar occupancy; absence is not interpreted as no pedal",
+      "validation_tier": "direct_midi"
+    },
+    {
+      "availability": "when_key_audio_overlap_is_dominant",
+      "feature_id": "tonality.dataset_key",
+      "implementation_status": "implemented",
+      "label": "Local Key Annotation",
+      "output": "Centered-around lexical claim with annotation provenance",
+      "validation_tier": "audio_derived_dataset_annotation"
+    },
+    {
+      "availability": "when_chord_midi_annotation_is_present",
+      "feature_id": "harmony.dataset_chords",
+      "implementation_status": "implemented",
+      "label": "Chord Timeline",
+      "output": "Clipped chord labels and exact annotation-time spans",
+      "validation_tier": "dataset_annotation"
+    },
+    {
+      "availability": "pop909_melody_track_only",
+      "feature_id": "melody.contour_label",
+      "implementation_status": "partial",
+      "label": "Melody Direction Label",
+      "output": "Raw slope and net interval are supported; lexical direction is blocked",
+      "validation_tier": "heuristic_unvalidated"
+    },
+    {
+      "availability": "when_note_onsets_exist",
+      "feature_id": "dynamics.direction_label",
+      "implementation_status": "partial",
+      "label": "Velocity Direction Label",
+      "output": "Raw bar trajectory is supported; increasing/decreasing wording is blocked",
+      "validation_tier": "heuristic_unvalidated"
+    },
+    {
+      "availability": "requires_quantization_gate",
+      "feature_id": "rhythm.quantized_note_values",
+      "implementation_status": "not_implemented",
+      "label": "Quantized Note-Value Names",
+      "output": "Not exported",
+      "validation_tier": "none"
+    },
+    {
+      "availability": "requires_meter_aware_validated_extractors",
+      "feature_id": "rhythm.syncopation_swing_tuplets",
+      "implementation_status": "not_implemented",
+      "label": "Syncopation, Swing, And Tuplets",
+      "output": "Not exported",
+      "validation_tier": "none"
+    },
+    {
+      "availability": "requires_motif_contract",
+      "feature_id": "structure.motif_repetition",
+      "implementation_status": "not_implemented",
+      "label": "Motif And Repetition Semantics",
+      "output": "Not exported",
+      "validation_tier": "none"
+    },
+    {
+      "availability": "requires_voice_assignment",
+      "feature_id": "texture.voice_leading",
+      "implementation_status": "not_implemented",
+      "label": "Voice Leading And Voice Crossing",
+      "output": "Not exported",
+      "validation_tier": "none"
+    },
+    {
+      "availability": "requires_score_or_grid_reference",
+      "feature_id": "performance.articulation_microtiming",
+      "implementation_status": "not_implemented",
+      "label": "Articulation And Microtiming Semantics",
+      "output": "Not exported",
+      "validation_tier": "none"
+    },
+    {
+      "availability": "requires_external_annotation",
+      "feature_id": "structure.functional_form",
+      "implementation_status": "not_implemented",
+      "label": "Functional Form Labels",
+      "output": "No verse, chorus, or arbitrary A/B/C labels",
+      "validation_tier": "none"
+    },
+    {
+      "availability": "requires_audio_teacher_and_filtering",
+      "feature_id": "audio.expressive_character",
+      "implementation_status": "not_implemented",
+      "label": "Acoustic Expressive Character",
+      "output": "Not part of canonical MIDI evidence",
+      "validation_tier": "none"
+    }
+  ],
+  "implementation_status_counts": {
+    "implemented": 8,
+    "not_implemented": 7,
+    "partial": 2
+  },
+  "purpose": "extractor_audit_only",
+  "rejected_source_count": 0,
+  "rejected_sources": [],
+  "release_id": "M.0.1",
+  "sample_count": 30,
+  "samples": [
+    {
+      "active_tracks": [
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        6,
+        8
+      ],
+      "canonical_piece_id": "pop909:350",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "insufficient_evidence": 1,
+        "supported": 7
+      },
+      "file": "samples/pop909_train_350_bar6_8_2bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 43,
+      "record_sha256": "sha256:e3126f3980d9da49f0bab3808329c91018b200af77864885cbb25f0f83ee5fc6",
+      "sample_id": "pop909_train_350_bar6_8_2bar",
+      "scale_bars": 2,
+      "source_id": "pop909:350",
+      "span_sec": [
+        21.337144,
+        28.956192
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        49,
+        53
+      ],
+      "canonical_piece_id": "pop909:675",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_675_bar49_53_4bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 70,
+      "record_sha256": "sha256:05b09ec7db0e7512dd59673e09a216a707d4fccfba2d598f4131da5acde83635",
+      "sample_id": "pop909_train_675_bar49_53_4bar",
+      "scale_bars": 4,
+      "source_id": "pop909:675",
+      "span_sec": [
+        166.436505,
+        180.554121
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        52,
+        60
+      ],
+      "canonical_piece_id": "pop909:244",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_244_bar52_60_8bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 207,
+      "record_sha256": "sha256:2c0dbfef904008d3fc6a31fd5e0d78c880c5b6034e209120365a6d3dcf3a92dd",
+      "sample_id": "pop909_train_244_bar52_60_8bar",
+      "scale_bars": 8,
+      "source_id": "pop909:244",
+      "span_sec": [
+        197.099656,
+        227.995136
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        14,
+        30
+      ],
+      "canonical_piece_id": "pop909:115",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_115_bar14_30_16bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 329,
+      "record_sha256": "sha256:77e1a947b14c12e5b61b19470c87c4e15f493f1eb4c3c01d99d07ce108c3795e",
+      "sample_id": "pop909_train_115_bar14_30_16bar",
+      "scale_bars": 16,
+      "source_id": "pop909:115",
+      "span_sec": [
+        39.75,
+        87.75
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        44,
+        76
+      ],
+      "canonical_piece_id": "pop909:167",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_167_bar44_76_32bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 853,
+      "record_sha256": "sha256:fd2eec28576792e825c80cd15f9e92a5e28c4164f39607958214a1df4830aaf0",
+      "sample_id": "pop909_train_167_bar44_76_32bar",
+      "scale_bars": 32,
+      "source_id": "pop909:167",
+      "span_sec": [
+        132.688838,
+        227.819839
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        6,
+        8
+      ],
+      "canonical_piece_id": "pop909:364",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_364_bar6_8_2bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 40,
+      "record_sha256": "sha256:c5b09a7f6135fae09df71c4cffc5104c8e0338f10a769ec79bc064b5e748f6c9",
+      "sample_id": "pop909_train_364_bar6_8_2bar",
+      "scale_bars": 2,
+      "source_id": "pop909:364",
+      "span_sec": [
+        20.822444,
+        28.627324
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        69,
+        73
+      ],
+      "canonical_piece_id": "pop909:287",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_287_bar69_73_4bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 94,
+      "record_sha256": "sha256:d712e68c46bf1d21e175b0363050c2628742e65acc98286d06c6303ef7563ab9",
+      "sample_id": "pop909_train_287_bar69_73_4bar",
+      "scale_bars": 4,
+      "source_id": "pop909:287",
+      "span_sec": [
+        238.436188,
+        252.349212
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        8,
+        16
+      ],
+      "canonical_piece_id": "pop909:884",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_884_bar8_16_8bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 110,
+      "record_sha256": "sha256:386144a6f4ca5c702dfd930ca2e85b732fdcffbf9b91e174d15fba7ed073921c",
+      "sample_id": "pop909_train_884_bar8_16_8bar",
+      "scale_bars": 8,
+      "source_id": "pop909:884",
+      "span_sec": [
+        25.743218,
+        51.689138
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        58,
+        74
+      ],
+      "canonical_piece_id": "pop909:850",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_850_bar58_74_16bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 353,
+      "record_sha256": "sha256:a1bb090009aaff650a1a2bca06d38bc4987cb211cf973fea86a473ecb0af9352",
+      "sample_id": "pop909_train_850_bar58_74_16bar",
+      "scale_bars": 16,
+      "source_id": "pop909:850",
+      "span_sec": [
+        174.065375,
+        226.719806
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        18,
+        50
+      ],
+      "canonical_piece_id": "pop909:120",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_120_bar18_50_32bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 1004,
+      "record_sha256": "sha256:394fb11ddb4f7b781c06d06e567563b0bbdb062bdfc49539482102e4a6bee0fa",
+      "sample_id": "pop909_train_120_bar18_50_32bar",
+      "scale_bars": 32,
+      "source_id": "pop909:120",
+      "span_sec": [
+        67.741837,
+        189.646477
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        41,
+        43
+      ],
+      "canonical_piece_id": "pop909:318",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_318_bar41_43_2bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 48,
+      "record_sha256": "sha256:9ed3211c9061419b85eb638d6272b809c83e8ec06e97a0bfcd2a3e6e72eb0271",
+      "sample_id": "pop909_train_318_bar41_43_2bar",
+      "scale_bars": 2,
+      "source_id": "pop909:318",
+      "span_sec": [
+        145.585898,
+        152.858602
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        85,
+        89
+      ],
+      "canonical_piece_id": "pop909:660",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_660_bar85_89_4bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 71,
+      "record_sha256": "sha256:13108c54b6072583ada9a32d9aeb18f40164b3bd9cd0c6bbf976eb8a8b4c2ae4",
+      "sample_id": "pop909_train_660_bar85_89_4bar",
+      "scale_bars": 4,
+      "source_id": "pop909:660",
+      "span_sec": [
+        181.920099,
+        190.491507
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        16,
+        24
+      ],
+      "canonical_piece_id": "pop909:334",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "insufficient_evidence": 1,
+        "supported": 7
+      },
+      "file": "samples/pop909_train_334_bar16_24_8bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 222,
+      "record_sha256": "sha256:3304b8238feb17ff17d5927d0019e49dbc38e28b89671d3ab805e31b81a8c1bf",
+      "sample_id": "pop909_train_334_bar16_24_8bar",
+      "scale_bars": 8,
+      "source_id": "pop909:334",
+      "span_sec": [
+        62.151049,
+        93.626409
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        59,
+        75
+      ],
+      "canonical_piece_id": "pop909:667",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_667_bar59_75_16bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 233,
+      "record_sha256": "sha256:f1e97a3b2450a79bb3b480cc1b0bb365516ad7b7c56dd4365e155f3cb0ba00cd",
+      "sample_id": "pop909_train_667_bar59_75_16bar",
+      "scale_bars": 16,
+      "source_id": "pop909:667",
+      "span_sec": [
+        132.226386,
+        167.553447
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        44,
+        76
+      ],
+      "canonical_piece_id": "pop909:039",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_039_bar44_76_32bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 557,
+      "record_sha256": "sha256:7cde7d7eae9e58dee46ae9f179fa91001a60ccf43d16f32105eaef63a0b053ea",
+      "sample_id": "pop909_train_039_bar44_76_32bar",
+      "scale_bars": 32,
+      "source_id": "pop909:039",
+      "span_sec": [
+        139.860221,
+        237.048769
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        36,
+        38
+      ],
+      "canonical_piece_id": "pop909:307",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "insufficient_evidence": 1,
+        "supported": 7
+      },
+      "file": "samples/pop909_train_307_bar36_38_2bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 42,
+      "record_sha256": "sha256:487b8df757e86abe6f1bf300f318cc0d5ef505d1bb0a4ebaa7bd4246f32452fa",
+      "sample_id": "pop909_train_307_bar36_38_2bar",
+      "scale_bars": 2,
+      "source_id": "pop909:307",
+      "span_sec": [
+        123.215128,
+        130.562044
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        89,
+        93
+      ],
+      "canonical_piece_id": "pop909:258",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_258_bar89_93_4bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 88,
+      "record_sha256": "sha256:cd4af259c525c988aed9f19e51f45f02c4a53a4e4e7e950a83ad5f183fac1a71",
+      "sample_id": "pop909_train_258_bar89_93_4bar",
+      "scale_bars": 4,
+      "source_id": "pop909:258",
+      "span_sec": [
+        196.380006,
+        205.26887
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        26,
+        34
+      ],
+      "canonical_piece_id": "pop909:709",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_709_bar26_34_8bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 197,
+      "record_sha256": "sha256:7ab194a74f0d58f36e7fe129d407c4ce1fd6304d6e0e4246496c2e543501276e",
+      "sample_id": "pop909_train_709_bar26_34_8bar",
+      "scale_bars": 8,
+      "source_id": "pop909:709",
+      "span_sec": [
+        74.234501,
+        97.649093
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        24,
+        40
+      ],
+      "canonical_piece_id": "pop909:715",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_715_bar24_40_16bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 307,
+      "record_sha256": "sha256:67b5e25d0487a99a32bfb7cff7e1cf81a48668d22777e127dd9b34a444d1a415",
+      "sample_id": "pop909_train_715_bar24_40_16bar",
+      "scale_bars": 16,
+      "source_id": "pop909:715",
+      "span_sec": [
+        61.998174,
+        102.4329
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        19,
+        51
+      ],
+      "canonical_piece_id": "pop909:703",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_703_bar19_51_32bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 798,
+      "record_sha256": "sha256:d0fc32e18c537c3892898a5a5b507176f0ee8234f109b32a732f8c8f0f860d93",
+      "sample_id": "pop909_train_703_bar19_51_32bar",
+      "scale_bars": 32,
+      "source_id": "pop909:703",
+      "span_sec": [
+        68.329097,
+        188.329107
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        17,
+        19
+      ],
+      "canonical_piece_id": "pop909:172",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_172_bar17_19_2bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 40,
+      "record_sha256": "sha256:26d3492d3fd64f6a7f9767fc28edb6f024c8496fde896e9a7f3ede9a6bc0b5df",
+      "sample_id": "pop909_train_172_bar17_19_2bar",
+      "scale_bars": 2,
+      "source_id": "pop909:172",
+      "span_sec": [
+        61.469814,
+        68.737038
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        49,
+        53
+      ],
+      "canonical_piece_id": "pop909:441",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_441_bar49_53_4bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 83,
+      "record_sha256": "sha256:99887aeaf156e82bda8b0cb4204da52b9feea2f413f16afe1256b20d480286bc",
+      "sample_id": "pop909_train_441_bar49_53_4bar",
+      "scale_bars": 4,
+      "source_id": "pop909:441",
+      "span_sec": [
+        161.762468,
+        175.003844
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        32,
+        40
+      ],
+      "canonical_piece_id": "pop909:814",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_814_bar32_40_8bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 203,
+      "record_sha256": "sha256:aa9d8cdc9385bd6b2a37fbbf95cfe7879a5a8748b5e66689b0c5e01aed30e02c",
+      "sample_id": "pop909_train_814_bar32_40_8bar",
+      "scale_bars": 8,
+      "source_id": "pop909:814",
+      "span_sec": [
+        62.425,
+        77.425
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        23,
+        39
+      ],
+      "canonical_piece_id": "pop909:170",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_170_bar23_39_16bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 596,
+      "record_sha256": "sha256:b6f682a00a331d0a664ebfba417503f886abb2395501192b2323d0409136c461",
+      "sample_id": "pop909_train_170_bar23_39_16bar",
+      "scale_bars": 16,
+      "source_id": "pop909:170",
+      "span_sec": [
+        60.681802,
+        104.318154
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        8,
+        40
+      ],
+      "canonical_piece_id": "pop909:328",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_328_bar8_40_32bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 710,
+      "record_sha256": "sha256:7ee5bb03d42ce4099baaff915e36a80458a4f9ef8a7f03fb12c84a22865f14f8",
+      "sample_id": "pop909_train_328_bar8_40_32bar",
+      "scale_bars": 32,
+      "source_id": "pop909:328",
+      "span_sec": [
+        28.407972,
+        156.407844
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        17,
+        19
+      ],
+      "canonical_piece_id": "pop909:101",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_101_bar17_19_2bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 44,
+      "record_sha256": "sha256:02e38390bf63ef2100e5b382a63bb740dd30d986faef394c11bef50560033bce",
+      "sample_id": "pop909_train_101_bar17_19_2bar",
+      "scale_bars": 2,
+      "source_id": "pop909:101",
+      "span_sec": [
+        61.976571,
+        69.470715
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        25,
+        29
+      ],
+      "canonical_piece_id": "pop909:227",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_227_bar25_29_4bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 75,
+      "record_sha256": "sha256:9687a8aca2990e9e391a92957072467d10c30fd49dfc0b021d4b5df23d01b156",
+      "sample_id": "pop909_train_227_bar25_29_4bar",
+      "scale_bars": 4,
+      "source_id": "pop909:227",
+      "span_sec": [
+        87.580477,
+        101.859603
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        71,
+        79
+      ],
+      "canonical_piece_id": "pop909:009",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_009_bar71_79_8bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 111,
+      "record_sha256": "sha256:51599c3117365b09db0c57da6af8b327cc693000218d55ac58cffc8dff893651",
+      "sample_id": "pop909_train_009_bar71_79_8bar",
+      "scale_bars": 8,
+      "source_id": "pop909:009",
+      "span_sec": [
+        122.921284,
+        136.834276
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        84,
+        100
+      ],
+      "canonical_piece_id": "pop909:690",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_690_bar84_100_16bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 262,
+      "record_sha256": "sha256:07c5e361f12aa49eebe14d3fa4bb36ee9991a8e479d81352c896c82cde5ea6ab",
+      "sample_id": "pop909_train_690_bar84_100_16bar",
+      "scale_bars": 16,
+      "source_id": "pop909:690",
+      "span_sec": [
+        164.393029,
+        195.908846
+      ],
+      "split": "train"
+    },
+    {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "bar_range": [
+        69,
+        101
+      ],
+      "canonical_piece_id": "pop909:210",
+      "evidence_status_counts": {
+        "ambiguous": 2,
+        "supported": 8
+      },
+      "file": "samples/pop909_train_210_bar69_101_32bar.json",
+      "implementation_status_counts": {
+        "implemented": 8,
+        "partial": 2
+      },
+      "note_event_count": 562,
+      "record_sha256": "sha256:7fa4b625eec51a9ddcd6bf48f91c062b7a364a78217b5b67c759bcac758ed3ea",
+      "sample_id": "pop909_train_210_bar69_101_32bar",
+      "scale_bars": 32,
+      "source_id": "pop909:210",
+      "span_sec": [
+        142.411142,
+        208.763166
+      ],
+      "split": "train"
+    }
+  ],
+  "scale_distribution": {
+    "2": 6,
+    "4": 6,
+    "8": 6,
+    "16": 6,
+    "32": 6
+  },
+  "schema_version": "sori_dense_metadata_demo_index_v0.1",
+  "selection_seed": "sori-pop909-dense-metadata-v0.1-20260716",
+  "split": "train",
+  "structurally_valid_count": 30,
+  "training_eligible": false
+}

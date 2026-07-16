@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260716-a112">
+  <link rel="stylesheet" href="styles.css?v=20260716-m001">
 </head>
 <body>
   <header class="main-header">
@@ -170,6 +170,59 @@
           </section>
         </article>
       </div>
+    </section>
+
+    <section id="dense-metadata-audit" class="section-block dense-audit" aria-labelledby="dense-audit-title">
+      <div class="section-head outside-head">
+        <div>
+          <p class="section-kicker">Actual Train Metadata Audit</p>
+          <h2 id="dense-audit-title">Dense MIDI Evidence Pilot</h2>
+        </div>
+        <p>Thirty actual POP909 Train pieces are sampled across 2, 4, 8, 16, and 32 bars. Implementation status describes the extractor; evidence status describes the selected sample.</p>
+      </div>
+
+      <div class="dense-audit-metrics" aria-label="Dense Metadata Pilot Summary">
+        <article><span>Actual Samples</span><strong data-dense-sample-count>—</strong><em>POP909 Train · Audit Only</em></article>
+        <article><span>Implemented</span><strong data-dense-implemented-count>—</strong><em>Extractor Paths Available</em></article>
+        <article><span>Partial</span><strong data-dense-partial-count>—</strong><em>Raw Evidence Only</em></article>
+        <article><span>Not Implemented</span><strong data-dense-missing-count>—</strong><em>No Demo Value Fabricated</em></article>
+      </div>
+
+      <article class="panel-card feature-status-panel">
+        <div class="card-head dense-card-head">
+          <div><p class="section-kicker">Implementation Boundary</p><h3>Feature Status Matrix</h3></div>
+          <div class="dense-status-legend" aria-label="Implementation Status Legend">
+            <span class="dense-status implemented">Implemented</span>
+            <span class="dense-status partial">Partial</span>
+            <span class="dense-status not-implemented">Not Implemented</span>
+          </div>
+        </div>
+        <p class="dense-status-note">Implemented does not guarantee that every MIDI contains the evidence. For example, the CC64 extractor is implemented, while a source without encoded pedal events remains insufficient evidence.</p>
+        <div class="feature-status-grid" data-dense-feature-matrix></div>
+      </article>
+
+      <article class="panel-card dense-sample-panel">
+        <div class="dense-sample-controls" data-dense-picker></div>
+        <div class="dense-sample-summary" data-dense-sample-summary>
+          <div>
+            <p class="eyebrow" data-dense-release>M.0.1 · Loading</p>
+            <h3 data-dense-sample-title>Loading Actual Metadata…</h3>
+            <p data-dense-sample-origin></p>
+          </div>
+          <dl class="dense-sample-facts">
+            <div><dt>Source</dt><dd data-dense-source>—</dd></div>
+            <div><dt>Split</dt><dd data-dense-split>—</dd></div>
+            <div><dt>Scale</dt><dd data-dense-scale>—</dd></div>
+            <div><dt>Seconds</dt><dd data-dense-seconds>—</dd></div>
+            <div><dt>Bars</dt><dd data-dense-bars>—</dd></div>
+            <div><dt>Note Events</dt><dd data-dense-note-count>—</dd></div>
+          </dl>
+        </div>
+        <div class="dense-view-tabs" data-dense-tabs role="tablist" aria-label="Dense Metadata View"></div>
+        <div class="dense-view-content" data-dense-content aria-live="polite">
+          <p class="dense-loading">Loading actual extractor output…</p>
+        </div>
+      </article>
     </section>
 
     <section class="section-block" aria-labelledby="release-title">
@@ -343,6 +396,7 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260716-a114"></script>
+  <script src="script.js?v=20260716-m001"></script>
+  <script src="dense-metadata.js?v=20260716-m001"></script>
 </body>
 </html>

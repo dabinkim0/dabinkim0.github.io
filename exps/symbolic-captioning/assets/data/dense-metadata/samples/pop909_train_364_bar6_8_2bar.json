@@ -1,0 +1,1647 @@
+{
+  "feature_status": {
+    "dynamics.direction_label": {
+      "evidence_status": "ambiguous",
+      "implementation_status": "partial",
+      "method": "raw bar-median slope available; lexical threshold uncalibrated",
+      "reason": "velocity_direction_threshold_not_valid_calibrated"
+    },
+    "dynamics.midi_velocity": {
+      "evidence_status": "supported",
+      "implementation_status": "implemented",
+      "method": "direct MIDI note-on velocity",
+      "reason": null
+    },
+    "harmony.dataset_chords": {
+      "evidence_status": "supported",
+      "implementation_status": "implemented",
+      "method": "POP909 chord_midi annotation",
+      "reason": null
+    },
+    "melody.contour_label": {
+      "evidence_status": "ambiguous",
+      "implementation_status": "partial",
+      "method": "raw slope available; lexical threshold uncalibrated",
+      "reason": "direction_threshold_not_valid_calibrated"
+    },
+    "notes.event_table": {
+      "evidence_status": "supported",
+      "implementation_status": "implemented",
+      "method": "direct MIDI note-on/off pairing",
+      "reason": null
+    },
+    "performance.pedal_cc64": {
+      "evidence_status": "supported",
+      "implementation_status": "implemented",
+      "method": "direct MIDI CC64 events",
+      "reason": null
+    },
+    "rhythm.numeric_sequences": {
+      "evidence_status": "supported",
+      "implementation_status": "implemented",
+      "method": "exact tick differences normalized by TPQ",
+      "reason": null
+    },
+    "temporal.coordinate_map": {
+      "evidence_status": "supported",
+      "implementation_status": "implemented",
+      "method": "POP909 beat_midi downbeat annotation",
+      "reason": null
+    },
+    "texture.bar_trajectory": {
+      "evidence_status": "supported",
+      "implementation_status": "implemented",
+      "method": "bar-wise deterministic aggregation",
+      "reason": null
+    },
+    "tonality.dataset_key": {
+      "evidence_status": "supported",
+      "implementation_status": "implemented",
+      "method": "POP909 key_audio annotation",
+      "reason": null
+    }
+  },
+  "metadata": {
+    "dynamics": {
+      "bar_median_velocity_sequence": [
+        92.0,
+        89.0
+      ],
+      "lexical_direction": {
+        "reason": "velocity_direction_threshold_not_valid_calibrated",
+        "status": "ambiguous"
+      },
+      "measurement": "MIDI note-on velocity",
+      "raw_bar_median_slope": -3.0,
+      "span_velocity_summary": {
+        "count": 40,
+        "maximum": 127.0,
+        "mean": 86.925,
+        "median": 89.0,
+        "minimum": 49.0,
+        "p25": 72.0,
+        "p75": 97.0
+      },
+      "status": "supported"
+    },
+    "notes": {
+      "active_tracks": [
+        "BRIDGE",
+        "MELODY",
+        "PIANO"
+      ],
+      "events": [
+        {
+          "channel": 0,
+          "duration_beat": 0.229167,
+          "end_sec": 21.137485,
+          "end_tick": 10235,
+          "event_id": "note_000127",
+          "pitch_midi": 60,
+          "pitch_name": "C4",
+          "relative_onset_beat": 0.09375,
+          "relative_onset_sec": 0.091463,
+          "start_sec": 20.913908,
+          "start_tick": 10125,
+          "track": "MELODY",
+          "velocity": 95
+        },
+        {
+          "channel": 2,
+          "duration_beat": 0.316667,
+          "end_sec": 21.222851,
+          "end_tick": 10277,
+          "event_id": "note_000128",
+          "pitch_midi": 55,
+          "pitch_name": "G3",
+          "relative_onset_beat": 0.09375,
+          "relative_onset_sec": 0.091463,
+          "start_sec": 20.913908,
+          "start_tick": 10125,
+          "track": "PIANO",
+          "velocity": 62
+        },
+        {
+          "channel": 0,
+          "duration_beat": 0.34375,
+          "end_sec": 21.493176,
+          "end_tick": 10410,
+          "event_id": "note_000129",
+          "pitch_midi": 67,
+          "pitch_name": "G4",
+          "relative_onset_beat": 0.34375,
+          "relative_onset_sec": 0.335366,
+          "start_sec": 21.15781,
+          "start_tick": 10245,
+          "track": "MELODY",
+          "velocity": 102
+        },
+        {
+          "channel": 2,
+          "duration_beat": 1.916667,
+          "end_sec": 23.027729,
+          "end_tick": 11165,
+          "event_id": "note_000130",
+          "pitch_midi": 38,
+          "pitch_name": "D2",
+          "relative_onset_beat": 0.34375,
+          "relative_onset_sec": 0.335366,
+          "start_sec": 21.15781,
+          "start_tick": 10245,
+          "track": "PIANO",
+          "velocity": 69
+        },
+        {
+          "channel": 0,
+          "duration_beat": 0.147917,
+          "end_sec": 21.789924,
+          "end_tick": 10556,
+          "event_id": "note_000131",
+          "pitch_midi": 67,
+          "pitch_name": "G4",
+          "relative_onset_beat": 0.84375,
+          "relative_onset_sec": 0.823171,
+          "start_sec": 21.645615,
+          "start_tick": 10485,
+          "track": "MELODY",
+          "velocity": 100
+        },
+        {
+          "channel": 2,
+          "duration_beat": 1.510417,
+          "end_sec": 23.119193,
+          "end_tick": 11210,
+          "event_id": "note_000132",
+          "pitch_midi": 45,
+          "pitch_name": "A2",
+          "relative_onset_beat": 0.84375,
+          "relative_onset_sec": 0.823171,
+          "start_sec": 21.645615,
+          "start_tick": 10485,
+          "track": "PIANO",
+          "velocity": 49
+        },
+        {
+          "channel": 0,
+          "duration_beat": 0.322917,
+          "end_sec": 22.204558,
+          "end_tick": 10760,
+          "event_id": "note_000133",
+          "pitch_midi": 67,
+          "pitch_name": "G4",
+          "relative_onset_beat": 1.09375,
+          "relative_onset_sec": 1.067073,
+          "start_sec": 21.889518,
+          "start_tick": 10605,
+          "track": "MELODY",
+          "velocity": 127
+        },
+        {
+          "channel": 2,
+          "duration_beat": 0.3625,
+          "end_sec": 22.487079,
+          "end_tick": 10899,
+          "event_id": "note_000134",
+          "pitch_midi": 50,
+          "pitch_name": "D3",
+          "relative_onset_beat": 1.34375,
+          "relative_onset_sec": 1.310976,
+          "start_sec": 22.13342,
+          "start_tick": 10725,
+          "track": "PIANO",
+          "velocity": 85
+        },
+        {
+          "channel": 0,
+          "duration_beat": 0.38125,
+          "end_sec": 22.749274,
+          "end_tick": 11028,
+          "event_id": "note_000135",
+          "pitch_midi": 67,
+          "pitch_name": "G4",
+          "relative_onset_beat": 1.59375,
+          "relative_onset_sec": 1.554878,
+          "start_sec": 22.377323,
+          "start_tick": 10845,
+          "track": "MELODY",
+          "velocity": 92
+        },
+        {
+          "channel": 0,
+          "duration_beat": 0.864583,
+          "end_sec": 23.464721,
+          "end_tick": 11380,
+          "event_id": "note_000136",
+          "pitch_midi": 66,
+          "pitch_name": "F#4",
+          "relative_onset_beat": 1.84375,
+          "relative_onset_sec": 1.798781,
+          "start_sec": 22.621225,
+          "start_tick": 10965,
+          "track": "MELODY",
+          "velocity": 99
+        },
+        {
+          "channel": 2,
+          "duration_beat": 0.647917,
+          "end_sec": 23.253339,
+          "end_tick": 11276,
+          "event_id": "note_000137",
+          "pitch_midi": 57,
+          "pitch_name": "A3",
+          "relative_onset_beat": 1.84375,
+          "relative_onset_sec": 1.798781,
+          "start_sec": 22.621225,
+          "start_tick": 10965,
+          "track": "PIANO",
+          "velocity": 79
+        },
+        {
+          "channel": 2,
+          "duration_beat": 1.364583,
+          "end_sec": 24.440331,
+          "end_tick": 11860,
+          "event_id": "note_000138",
+          "pitch_midi": 42,
+          "pitch_name": "F#2",
+          "relative_onset_beat": 2.34375,
+          "relative_onset_sec": 2.286586,
+          "start_sec": 23.10903,
+          "start_tick": 11205,
+          "track": "PIANO",
+          "velocity": 65
+        },
+        {
+          "channel": 2,
+          "duration_beat": 0.891667,
+          "end_sec": 23.978949,
+          "end_tick": 11633,
+          "event_id": "note_000139",
+          "pitch_midi": 62,
+          "pitch_name": "D4",
+          "relative_onset_beat": 2.34375,
+          "relative_onset_sec": 2.286586,
+          "start_sec": 23.10903,
+          "start_tick": 11205,
+          "track": "PIANO",
+          "velocity": 64
+        },
+        {
+          "channel": 2,
+          "duration_beat": 0.8625,
+          "end_sec": 23.950494,
+          "end_tick": 11619,
+          "event_id": "note_000140",
+          "pitch_midi": 66,
+          "pitch_name": "F#4",
+          "relative_onset_beat": 2.34375,
+          "relative_onset_sec": 2.286586,
+          "start_sec": 23.10903,
+          "start_tick": 11205,
+          "track": "PIANO",
+          "velocity": 92
+        },
+        {
+          "channel": 0,
+          "duration_beat": 0.25625,
+          "end_sec": 23.846835,
+          "end_tick": 11568,
+          "event_id": "note_000141",
+          "pitch_midi": 62,
+          "pitch_name": "D4",
+          "relative_onset_beat": 2.84375,
+          "relative_onset_sec": 2.774391,
+          "start_sec": 23.596835,
+          "start_tick": 11445,
+          "track": "MELODY",
+          "velocity": 112
+        },
+        {
+          "channel": 0,
+          "duration_beat": 0.25,
+          "end_sec": 24.328543,
+          "end_tick": 11805,
+          "event_id": "note_000142",
+          "pitch_midi": 62,
+          "pitch_name": "D4",
+          "relative_onset_beat": 3.34375,
+          "relative_onset_sec": 3.262196,
+          "start_sec": 24.08464,
+          "start_tick": 11685,
+          "track": "MELODY",
+          "velocity": 112
+        },
+        {
+          "channel": 2,
+          "duration_beat": 1.072917,
+          "end_sec": 25.131388,
+          "end_tick": 12200,
+          "event_id": "note_000143",
+          "pitch_midi": 62,
+          "pitch_name": "D4",
+          "relative_onset_beat": 3.34375,
+          "relative_onset_sec": 3.262196,
+          "start_sec": 24.08464,
+          "start_tick": 11685,
+          "track": "PIANO",
+          "velocity": 85
+        },
+        {
+          "channel": 2,
+          "duration_beat": 1.09375,
+          "end_sec": 25.151714,
+          "end_tick": 12210,
+          "event_id": "note_000144",
+          "pitch_midi": 66,
+          "pitch_name": "F#4",
+          "relative_onset_beat": 3.34375,
+          "relative_onset_sec": 3.262196,
+          "start_sec": 24.08464,
+          "start_tick": 11685,
+          "track": "PIANO",
+          "velocity": 117
+        },
+        {
+          "channel": 0,
+          "duration_beat": 0.2375,
+          "end_sec": 24.56025,
+          "end_tick": 11919,
+          "event_id": "note_000145",
+          "pitch_midi": 60,
+          "pitch_name": "C4",
+          "relative_onset_beat": 3.59375,
+          "relative_onset_sec": 3.506098,
+          "start_sec": 24.328543,
+          "start_tick": 11805,
+          "track": "MELODY",
+          "velocity": 92
+        },
+        {
+          "channel": 0,
+          "duration_beat": 0.235417,
+          "end_sec": 24.80212,
+          "end_tick": 12038,
+          "event_id": "note_000146",
+          "pitch_midi": 57,
+          "pitch_name": "A3",
+          "relative_onset_beat": 3.84375,
+          "relative_onset_sec": 3.750001,
+          "start_sec": 24.572445,
+          "start_tick": 11925,
+          "track": "MELODY",
+          "velocity": 85
+        },
+        {
+          "channel": 2,
+          "duration_beat": 0.7,
+          "end_sec": 25.255372,
+          "end_tick": 12261,
+          "event_id": "note_000147",
+          "pitch_midi": 57,
+          "pitch_name": "A3",
+          "relative_onset_beat": 3.84375,
+          "relative_onset_sec": 3.750001,
+          "start_sec": 24.572445,
+          "start_tick": 11925,
+          "track": "PIANO",
+          "velocity": 77
+        },
+        {
+          "channel": 0,
+          "duration_beat": 0.6625,
+          "end_sec": 25.462689,
+          "end_tick": 12363,
+          "event_id": "note_000148",
+          "pitch_midi": 60,
+          "pitch_name": "C4",
+          "relative_onset_beat": 4.09375,
+          "relative_onset_sec": 3.993903,
+          "start_sec": 24.816348,
+          "start_tick": 12045,
+          "track": "MELODY",
+          "velocity": 93
+        },
+        {
+          "channel": 2,
+          "duration_beat": 1.595833,
+          "end_sec": 26.617161,
+          "end_tick": 12931,
+          "event_id": "note_000149",
+          "pitch_midi": 43,
+          "pitch_name": "G2",
+          "relative_onset_beat": 4.34375,
+          "relative_onset_sec": 4.237806,
+          "start_sec": 25.06025,
+          "start_tick": 12165,
+          "track": "PIANO",
+          "velocity": 72
+        },
+        {
+          "channel": 0,
+          "duration_beat": 1.314583,
+          "end_sec": 26.830576,
+          "end_tick": 13036,
+          "event_id": "note_000150",
+          "pitch_midi": 58,
+          "pitch_name": "A#3",
+          "relative_onset_beat": 4.84375,
+          "relative_onset_sec": 4.725611,
+          "start_sec": 25.548055,
+          "start_tick": 12405,
+          "track": "MELODY",
+          "velocity": 112
+        },
+        {
+          "channel": 2,
+          "duration_beat": 0.9875,
+          "end_sec": 26.51147,
+          "end_tick": 12879,
+          "event_id": "note_000151",
+          "pitch_midi": 50,
+          "pitch_name": "D3",
+          "relative_onset_beat": 4.84375,
+          "relative_onset_sec": 4.725611,
+          "start_sec": 25.548055,
+          "start_tick": 12405,
+          "track": "PIANO",
+          "velocity": 56
+        },
+        {
+          "channel": 2,
+          "duration_beat": 0.725,
+          "end_sec": 26.743177,
+          "end_tick": 12993,
+          "event_id": "note_000152",
+          "pitch_midi": 62,
+          "pitch_name": "D4",
+          "relative_onset_beat": 5.34375,
+          "relative_onset_sec": 5.213416,
+          "start_sec": 26.03586,
+          "start_tick": 12645,
+          "track": "PIANO",
+          "velocity": 97
+        },
+        {
+          "channel": 1,
+          "duration_beat": 0.247917,
+          "end_sec": 26.521633,
+          "end_tick": 12884,
+          "event_id": "note_000153",
+          "pitch_midi": 62,
+          "pitch_name": "D4",
+          "relative_onset_beat": 5.59375,
+          "relative_onset_sec": 5.457318,
+          "start_sec": 26.279763,
+          "start_tick": 12765,
+          "track": "BRIDGE",
+          "velocity": 89
+        },
+        {
+          "channel": 1,
+          "duration_beat": 0.347917,
+          "end_sec": 26.863096,
+          "end_tick": 13052,
+          "event_id": "note_000154",
+          "pitch_midi": 67,
+          "pitch_name": "G4",
+          "relative_onset_beat": 5.84375,
+          "relative_onset_sec": 5.701221,
+          "start_sec": 26.523665,
+          "start_tick": 12885,
+          "track": "BRIDGE",
+          "velocity": 96
+        },
+        {
+          "channel": 2,
+          "duration_beat": 0.29375,
+          "end_sec": 26.810251,
+          "end_tick": 13026,
+          "event_id": "note_000155",
+          "pitch_midi": 58,
+          "pitch_name": "A#3",
+          "relative_onset_beat": 5.84375,
+          "relative_onset_sec": 5.701221,
+          "start_sec": 26.523665,
+          "start_tick": 12885,
+          "track": "PIANO",
+          "velocity": 89
+        },
+        {
+          "channel": 1,
+          "duration_beat": 0.285417,
+          "end_sec": 27.046023,
+          "end_tick": 13142,
+          "event_id": "note_000156",
+          "pitch_midi": 74,
+          "pitch_name": "D5",
+          "relative_onset_beat": 6.09375,
+          "relative_onset_sec": 5.945123,
+          "start_sec": 26.767568,
+          "start_tick": 13005,
+          "track": "BRIDGE",
+          "velocity": 97
+        },
+        {
+          "channel": 1,
+          "duration_beat": 1.597917,
+          "end_sec": 28.570414,
+          "end_tick": 13892,
+          "event_id": "note_000157",
+          "pitch_midi": 62,
+          "pitch_name": "D4",
+          "relative_onset_beat": 6.34375,
+          "relative_onset_sec": 6.189026,
+          "start_sec": 27.01147,
+          "start_tick": 13125,
+          "track": "BRIDGE",
+          "velocity": 77
+        },
+        {
+          "channel": 1,
+          "duration_beat": 1.172917,
+          "end_sec": 28.155779,
+          "end_tick": 13688,
+          "event_id": "note_000158",
+          "pitch_midi": 66,
+          "pitch_name": "F#4",
+          "relative_onset_beat": 6.34375,
+          "relative_onset_sec": 6.189026,
+          "start_sec": 27.01147,
+          "start_tick": 13125,
+          "track": "BRIDGE",
+          "velocity": 96
+        },
+        {
+          "channel": 2,
+          "duration_beat": 1.508333,
+          "end_sec": 28.483015,
+          "end_tick": 13849,
+          "event_id": "note_000159",
+          "pitch_midi": 42,
+          "pitch_name": "F#2",
+          "relative_onset_beat": 6.34375,
+          "relative_onset_sec": 6.189026,
+          "start_sec": 27.01147,
+          "start_tick": 13125,
+          "track": "PIANO",
+          "velocity": 69
+        },
+        {
+          "channel": 2,
+          "duration_beat": 0.5125,
+          "end_sec": 27.51147,
+          "end_tick": 13371,
+          "event_id": "note_000160",
+          "pitch_midi": 54,
+          "pitch_name": "F#3",
+          "relative_onset_beat": 6.34375,
+          "relative_onset_sec": 6.189026,
+          "start_sec": 27.01147,
+          "start_tick": 13125,
+          "track": "PIANO",
+          "velocity": 69
+        },
+        {
+          "channel": 2,
+          "duration_beat": 0.977083,
+          "end_sec": 27.964722,
+          "end_tick": 13594,
+          "event_id": "note_000161",
+          "pitch_midi": 57,
+          "pitch_name": "A3",
+          "relative_onset_beat": 6.34375,
+          "relative_onset_sec": 6.189026,
+          "start_sec": 27.01147,
+          "start_tick": 13125,
+          "track": "PIANO",
+          "velocity": 73
+        },
+        {
+          "channel": 2,
+          "duration_beat": 1.879167,
+          "end_sec": 28.844804,
+          "end_tick": 14027,
+          "event_id": "note_000162",
+          "pitch_midi": 60,
+          "pitch_name": "C4",
+          "relative_onset_beat": 6.34375,
+          "relative_onset_sec": 6.189026,
+          "start_sec": 27.01147,
+          "start_tick": 13125,
+          "track": "PIANO",
+          "velocity": 81
+        },
+        {
+          "channel": 0,
+          "duration_beat": 0.345833,
+          "end_sec": 28.324479,
+          "end_tick": 13771,
+          "event_id": "note_000163",
+          "pitch_midi": 58,
+          "pitch_name": "A#3",
+          "relative_onset_beat": 7.34375,
+          "relative_onset_sec": 7.164636,
+          "start_sec": 27.98708,
+          "start_tick": 13605,
+          "track": "MELODY",
+          "velocity": 117
+        },
+        {
+          "channel": 2,
+          "duration_beat": 0.61875,
+          "end_sec": 28.590739,
+          "end_tick": 13902,
+          "event_id": "note_000164",
+          "pitch_midi": 54,
+          "pitch_name": "F#3",
+          "relative_onset_beat": 7.34375,
+          "relative_onset_sec": 7.164636,
+          "start_sec": 27.98708,
+          "start_tick": 13605,
+          "track": "PIANO",
+          "velocity": 72
+        },
+        {
+          "channel": 0,
+          "duration_beat": 0.325,
+          "end_sec": 28.791958,
+          "end_tick": 14001,
+          "event_id": "note_000165",
+          "pitch_midi": 60,
+          "pitch_name": "C4",
+          "relative_onset_beat": 7.84375,
+          "relative_onset_sec": 7.652441,
+          "start_sec": 28.474885,
+          "start_tick": 13845,
+          "track": "MELODY",
+          "velocity": 96
+        },
+        {
+          "channel": 2,
+          "duration_beat": 0.514583,
+          "end_sec": 28.976918,
+          "end_tick": 14092,
+          "event_id": "note_000166",
+          "pitch_midi": 57,
+          "pitch_name": "A3",
+          "relative_onset_beat": 7.84375,
+          "relative_onset_sec": 7.652441,
+          "start_sec": 28.474885,
+          "start_tick": 13845,
+          "track": "PIANO",
+          "velocity": 66
+        }
+      ],
+      "onset_event_count": 40,
+      "pitch_class_histogram_duration_weighted": [
+        0.111405,
+        0.0,
+        0.287216,
+        0.0,
+        0.0,
+        0.0,
+        0.267303,
+        0.115513,
+        0.0,
+        0.153252,
+        0.065311,
+        0.0
+      ],
+      "role_summaries": {
+        "BRIDGE": {
+          "contour_lexical_projection": {
+            "candidate_value": "ascending",
+            "reason": "direction_threshold_not_valid_calibrated",
+            "status": "ambiguous"
+          },
+          "contour_raw_evidence": {
+            "net_interval_semitones": 4,
+            "pitch_slope_semitones_per_note": 0.3,
+            "status": "supported"
+          },
+          "duration_beat_summary": {
+            "count": 5,
+            "maximum": 1.5979,
+            "mean": 0.7304,
+            "median": 0.3479,
+            "minimum": 0.2479,
+            "p25": 0.2854,
+            "p75": 1.1729
+          },
+          "duration_beats": [
+            0.247917,
+            0.347917,
+            0.285417,
+            1.597917,
+            1.172917
+          ],
+          "inter_onset_beat_summary": {
+            "count": 4,
+            "maximum": 0.25,
+            "mean": 0.1875,
+            "median": 0.25,
+            "minimum": 0.0,
+            "p25": 0.1875,
+            "p75": 0.25
+          },
+          "interval_statistics": {
+            "largest_leap_semitones": 12,
+            "leap_count": 3,
+            "repeat_count": 0,
+            "skip_count": 1,
+            "step_count": 0,
+            "stepwise_ratio": 0.0
+          },
+          "note_count": 5,
+          "pitch_range": {
+            "highest": "D5",
+            "lowest": "D4",
+            "semitones": 12
+          },
+          "pitch_sequence": [
+            "D4",
+            "G4",
+            "D5",
+            "D4",
+            "F#4"
+          ],
+          "pitch_summary_midi": {
+            "count": 5,
+            "maximum": 74.0,
+            "mean": 66.2,
+            "median": 66.0,
+            "minimum": 62.0,
+            "p25": 62.0,
+            "p75": 67.0
+          },
+          "relative_onset_beats": [
+            5.59375,
+            5.84375,
+            6.09375,
+            6.34375,
+            6.34375
+          ],
+          "status": "supported",
+          "velocities": [
+            89,
+            96,
+            97,
+            77,
+            96
+          ],
+          "velocity_summary": {
+            "count": 5,
+            "maximum": 97.0,
+            "mean": 91.0,
+            "median": 96.0,
+            "minimum": 77.0,
+            "p25": 89.0,
+            "p75": 96.0
+          }
+        },
+        "MELODY": {
+          "contour_lexical_projection": {
+            "candidate_value": "undulating",
+            "reason": "direction_threshold_not_valid_calibrated",
+            "status": "ambiguous"
+          },
+          "contour_raw_evidence": {
+            "net_interval_semitones": 0,
+            "pitch_slope_semitones_per_note": -0.652747,
+            "status": "supported"
+          },
+          "duration_beat_summary": {
+            "count": 14,
+            "maximum": 1.3146,
+            "mean": 0.4226,
+            "median": 0.324,
+            "minimum": 0.1479,
+            "p25": 0.2406,
+            "p75": 0.3724
+          },
+          "duration_beats": [
+            0.229167,
+            0.34375,
+            0.147917,
+            0.322917,
+            0.38125,
+            0.864583,
+            0.25625,
+            0.25,
+            0.2375,
+            0.235417,
+            0.6625,
+            1.314583,
+            0.345833,
+            0.325
+          ],
+          "inter_onset_beat_summary": {
+            "count": 13,
+            "maximum": 2.5,
+            "mean": 0.5962,
+            "median": 0.5,
+            "minimum": 0.25,
+            "p25": 0.25,
+            "p75": 0.5
+          },
+          "interval_statistics": {
+            "largest_leap_semitones": 7,
+            "leap_count": 1,
+            "repeat_count": 5,
+            "skip_count": 3,
+            "step_count": 4,
+            "stepwise_ratio": 0.5
+          },
+          "note_count": 14,
+          "pitch_range": {
+            "highest": "G4",
+            "lowest": "A3",
+            "semitones": 10
+          },
+          "pitch_sequence": [
+            "C4",
+            "G4",
+            "G4",
+            "G4",
+            "G4",
+            "F#4",
+            "D4",
+            "D4",
+            "C4",
+            "A3",
+            "C4",
+            "A#3",
+            "A#3",
+            "C4"
+          ],
+          "pitch_summary_midi": {
+            "count": 14,
+            "maximum": 67.0,
+            "mean": 62.2143,
+            "median": 61.0,
+            "minimum": 57.0,
+            "p25": 60.0,
+            "p75": 66.75
+          },
+          "relative_onset_beats": [
+            0.09375,
+            0.34375,
+            0.84375,
+            1.09375,
+            1.59375,
+            1.84375,
+            2.84375,
+            3.34375,
+            3.59375,
+            3.84375,
+            4.09375,
+            4.84375,
+            7.34375,
+            7.84375
+          ],
+          "status": "supported",
+          "velocities": [
+            95,
+            102,
+            100,
+            127,
+            92,
+            99,
+            112,
+            112,
+            92,
+            85,
+            93,
+            112,
+            117,
+            96
+          ],
+          "velocity_summary": {
+            "count": 14,
+            "maximum": 127.0,
+            "mean": 102.429,
+            "median": 99.5,
+            "minimum": 85.0,
+            "p25": 93.5,
+            "p75": 112.0
+          }
+        },
+        "PIANO": {
+          "contour_lexical_projection": {
+            "candidate_value": "ascending",
+            "reason": "direction_threshold_not_valid_calibrated",
+            "status": "ambiguous"
+          },
+          "contour_raw_evidence": {
+            "net_interval_semitones": 2,
+            "pitch_slope_semitones_per_note": 0.311688,
+            "status": "supported"
+          },
+          "duration_beat_summary": {
+            "count": 21,
+            "maximum": 1.9167,
+            "mean": 0.9691,
+            "median": 0.8917,
+            "minimum": 0.2938,
+            "p25": 0.6188,
+            "p75": 1.3646
+          },
+          "duration_beats": [
+            0.316667,
+            1.916667,
+            1.510417,
+            0.3625,
+            0.647917,
+            1.364583,
+            0.891667,
+            0.8625,
+            1.072917,
+            1.09375,
+            0.7,
+            1.595833,
+            0.9875,
+            0.725,
+            0.29375,
+            1.508333,
+            0.5125,
+            0.977083,
+            1.879167,
+            0.61875,
+            0.514583
+          ],
+          "inter_onset_beat_summary": {
+            "count": 20,
+            "maximum": 1.0,
+            "mean": 0.3875,
+            "median": 0.5,
+            "minimum": 0.0,
+            "p25": 0.0,
+            "p75": 0.5
+          },
+          "interval_statistics": {
+            "largest_leap_semitones": 20,
+            "leap_count": 13,
+            "repeat_count": 0,
+            "skip_count": 7,
+            "step_count": 0,
+            "stepwise_ratio": 0.0
+          },
+          "note_count": 21,
+          "pitch_range": {
+            "highest": "F#4",
+            "lowest": "D2",
+            "semitones": 28
+          },
+          "pitch_sequence": [
+            "G3",
+            "D2",
+            "A2",
+            "D3",
+            "A3",
+            "F#2",
+            "D4",
+            "F#4",
+            "D4",
+            "F#4",
+            "A3",
+            "G2",
+            "D3",
+            "D4",
+            "A#3",
+            "F#2",
+            "F#3",
+            "A3",
+            "C4",
+            "F#3",
+            "A3"
+          ],
+          "pitch_summary_midi": {
+            "count": 21,
+            "maximum": 66.0,
+            "mean": 54.1429,
+            "median": 57.0,
+            "minimum": 38.0,
+            "p25": 50.0,
+            "p75": 60.0
+          },
+          "relative_onset_beats": [
+            0.09375,
+            0.34375,
+            0.84375,
+            1.34375,
+            1.84375,
+            2.34375,
+            2.34375,
+            2.34375,
+            3.34375,
+            3.34375,
+            3.84375,
+            4.34375,
+            4.84375,
+            5.34375,
+            5.84375,
+            6.34375,
+            6.34375,
+            6.34375,
+            6.34375,
+            7.34375,
+            7.84375
+          ],
+          "status": "supported",
+          "velocities": [
+            62,
+            69,
+            49,
+            85,
+            79,
+            65,
+            64,
+            92,
+            85,
+            117,
+            77,
+            72,
+            56,
+            97,
+            89,
+            69,
+            69,
+            73,
+            81,
+            72,
+            66
+          ],
+          "velocity_summary": {
+            "count": 21,
+            "maximum": 117.0,
+            "mean": 75.619,
+            "median": 72.0,
+            "minimum": 49.0,
+            "p25": 66.0,
+            "p75": 85.0
+          }
+        }
+      },
+      "sounding_at_span_start_count": 4,
+      "status": "supported"
+    },
+    "performance": {
+      "pedal_cc64": {
+        "event_count_in_span": 8,
+        "events": [
+          {
+            "channel": 2,
+            "control": 64,
+            "tick": 10165,
+            "track": "PIANO",
+            "track_index": 3,
+            "value": 0
+          },
+          {
+            "channel": 2,
+            "control": 64,
+            "tick": 10276,
+            "track": "PIANO",
+            "track_index": 3,
+            "value": 127
+          },
+          {
+            "channel": 2,
+            "control": 64,
+            "tick": 11155,
+            "track": "PIANO",
+            "track_index": 3,
+            "value": 0
+          },
+          {
+            "channel": 2,
+            "control": 64,
+            "tick": 11242,
+            "track": "PIANO",
+            "track_index": 3,
+            "value": 127
+          },
+          {
+            "channel": 2,
+            "control": 64,
+            "tick": 12072,
+            "track": "PIANO",
+            "track_index": 3,
+            "value": 0
+          },
+          {
+            "channel": 2,
+            "control": 64,
+            "tick": 12187,
+            "track": "PIANO",
+            "track_index": 3,
+            "value": 127
+          },
+          {
+            "channel": 2,
+            "control": 64,
+            "tick": 13077,
+            "track": "PIANO",
+            "track_index": 3,
+            "value": 0
+          },
+          {
+            "channel": 2,
+            "control": 64,
+            "tick": 13172,
+            "track": "PIANO",
+            "track_index": 3,
+            "value": 127
+          }
+        ],
+        "method": "direct_midi_cc64_threshold_64_v0.1",
+        "occupancy_ratio": 0.89375,
+        "status": "supported"
+      }
+    },
+    "rhythm": {
+      "role_sequences": {
+        "BRIDGE": {
+          "duration_beat_summary": {
+            "count": 5,
+            "maximum": 1.5979,
+            "mean": 0.7304,
+            "median": 0.3479,
+            "minimum": 0.2479,
+            "p25": 0.2854,
+            "p75": 1.1729
+          },
+          "duration_beats": [
+            0.247917,
+            0.347917,
+            0.285417,
+            1.597917,
+            1.172917
+          ],
+          "inter_onset_beat_summary": {
+            "count": 4,
+            "maximum": 0.25,
+            "mean": 0.1875,
+            "median": 0.25,
+            "minimum": 0.0,
+            "p25": 0.1875,
+            "p75": 0.25
+          },
+          "relative_onset_beats": [
+            5.59375,
+            5.84375,
+            6.09375,
+            6.34375,
+            6.34375
+          ]
+        },
+        "MELODY": {
+          "duration_beat_summary": {
+            "count": 14,
+            "maximum": 1.3146,
+            "mean": 0.4226,
+            "median": 0.324,
+            "minimum": 0.1479,
+            "p25": 0.2406,
+            "p75": 0.3724
+          },
+          "duration_beats": [
+            0.229167,
+            0.34375,
+            0.147917,
+            0.322917,
+            0.38125,
+            0.864583,
+            0.25625,
+            0.25,
+            0.2375,
+            0.235417,
+            0.6625,
+            1.314583,
+            0.345833,
+            0.325
+          ],
+          "inter_onset_beat_summary": {
+            "count": 13,
+            "maximum": 2.5,
+            "mean": 0.5962,
+            "median": 0.5,
+            "minimum": 0.25,
+            "p25": 0.25,
+            "p75": 0.5
+          },
+          "relative_onset_beats": [
+            0.09375,
+            0.34375,
+            0.84375,
+            1.09375,
+            1.59375,
+            1.84375,
+            2.84375,
+            3.34375,
+            3.59375,
+            3.84375,
+            4.09375,
+            4.84375,
+            7.34375,
+            7.84375
+          ]
+        },
+        "PIANO": {
+          "duration_beat_summary": {
+            "count": 21,
+            "maximum": 1.9167,
+            "mean": 0.9691,
+            "median": 0.8917,
+            "minimum": 0.2938,
+            "p25": 0.6188,
+            "p75": 1.3646
+          },
+          "duration_beats": [
+            0.316667,
+            1.916667,
+            1.510417,
+            0.3625,
+            0.647917,
+            1.364583,
+            0.891667,
+            0.8625,
+            1.072917,
+            1.09375,
+            0.7,
+            1.595833,
+            0.9875,
+            0.725,
+            0.29375,
+            1.508333,
+            0.5125,
+            0.977083,
+            1.879167,
+            0.61875,
+            0.514583
+          ],
+          "inter_onset_beat_summary": {
+            "count": 20,
+            "maximum": 1.0,
+            "mean": 0.3875,
+            "median": 0.5,
+            "minimum": 0.0,
+            "p25": 0.0,
+            "p75": 0.5
+          },
+          "relative_onset_beats": [
+            0.09375,
+            0.34375,
+            0.84375,
+            1.34375,
+            1.84375,
+            2.34375,
+            2.34375,
+            2.34375,
+            3.34375,
+            3.34375,
+            3.84375,
+            4.34375,
+            4.84375,
+            5.34375,
+            5.84375,
+            6.34375,
+            6.34375,
+            6.34375,
+            6.34375,
+            7.34375,
+            7.84375
+          ]
+        }
+      },
+      "status": "supported",
+      "unit": "quarter_note_beat"
+    },
+    "texture": {
+      "bar_trajectory": [
+        {
+          "bar_index": 6,
+          "beats": 4,
+          "end_sec": 24.724884,
+          "end_tick": 12000,
+          "onset_count": 21,
+          "onsets_per_beat": 5.25,
+          "pedal_cc64": {
+            "event_count_in_span": 4,
+            "events": [
+              {
+                "channel": 2,
+                "control": 64,
+                "tick": 10165,
+                "track": "PIANO",
+                "track_index": 3,
+                "value": 0
+              },
+              {
+                "channel": 2,
+                "control": 64,
+                "tick": 10276,
+                "track": "PIANO",
+                "track_index": 3,
+                "value": 127
+              },
+              {
+                "channel": 2,
+                "control": 64,
+                "tick": 11155,
+                "track": "PIANO",
+                "track_index": 3,
+                "value": 0
+              },
+              {
+                "channel": 2,
+                "control": 64,
+                "tick": 11242,
+                "track": "PIANO",
+                "track_index": 3,
+                "value": 127
+              }
+            ],
+            "method": "direct_midi_cc64_threshold_64_v0.1",
+            "occupancy_ratio": 0.896875,
+            "status": "supported"
+          },
+          "pitch_summary_midi": {
+            "count": 21,
+            "maximum": 67.0,
+            "mean": 58.8095,
+            "median": 62.0,
+            "minimum": 38.0,
+            "p25": 57.0,
+            "p75": 66.0
+          },
+          "polyphony": {
+            "duration_weighted_mean": 3.5594,
+            "maximum": 6
+          },
+          "role_onset_counts": {
+            "MELODY": 10,
+            "PIANO": 11
+          },
+          "start_sec": 20.822444,
+          "start_tick": 10080,
+          "velocity_summary": {
+            "count": 21,
+            "maximum": 127.0,
+            "mean": 88.571,
+            "median": 92.0,
+            "minimum": 49.0,
+            "p25": 77.0,
+            "p75": 100.0
+          }
+        },
+        {
+          "bar_index": 7,
+          "beats": 4,
+          "end_sec": 28.627324,
+          "end_tick": 13920,
+          "onset_count": 19,
+          "onsets_per_beat": 4.75,
+          "pedal_cc64": {
+            "event_count_in_span": 4,
+            "events": [
+              {
+                "channel": 2,
+                "control": 64,
+                "tick": 12072,
+                "track": "PIANO",
+                "track_index": 3,
+                "value": 0
+              },
+              {
+                "channel": 2,
+                "control": 64,
+                "tick": 12187,
+                "track": "PIANO",
+                "track_index": 3,
+                "value": 127
+              },
+              {
+                "channel": 2,
+                "control": 64,
+                "tick": 13077,
+                "track": "PIANO",
+                "track_index": 3,
+                "value": 0
+              },
+              {
+                "channel": 2,
+                "control": 64,
+                "tick": 13172,
+                "track": "PIANO",
+                "track_index": 3,
+                "value": 127
+              }
+            ],
+            "method": "direct_midi_cc64_threshold_64_v0.1",
+            "occupancy_ratio": 0.890625,
+            "status": "supported"
+          },
+          "pitch_summary_midi": {
+            "count": 19,
+            "maximum": 74.0,
+            "mean": 58.1053,
+            "median": 58.0,
+            "minimum": 42.0,
+            "p25": 55.5,
+            "p75": 62.0
+          },
+          "polyphony": {
+            "duration_weighted_mean": 4.1599,
+            "maximum": 7
+          },
+          "role_onset_counts": {
+            "BRIDGE": 5,
+            "MELODY": 4,
+            "PIANO": 10
+          },
+          "start_sec": 24.724884,
+          "start_tick": 12000,
+          "velocity_summary": {
+            "count": 19,
+            "maximum": 117.0,
+            "mean": 85.105,
+            "median": 89.0,
+            "minimum": 56.0,
+            "p25": 72.0,
+            "p75": 96.0
+          }
+        }
+      ],
+      "role_onset_counts": {
+        "BRIDGE": 5,
+        "MELODY": 14,
+        "PIANO": 21
+      },
+      "span_polyphony": {
+        "duration_weighted_mean": 3.8596,
+        "maximum": 7
+      },
+      "status": "supported"
+    },
+    "tonality_harmony": {
+      "chord_timeline": {
+        "annotation_origin": "dataset_annotation",
+        "coverage_ratio": 1.0,
+        "label_counts": {
+          "D:maj": 1,
+          "F#:dim": 1,
+          "G:min": 1
+        },
+        "method": "POP909 chord_midi dataset annotation",
+        "sequence": [
+          {
+            "end_sec": 24.724884,
+            "label": "D:maj",
+            "relative_end_sec": 3.90244,
+            "relative_start_sec": 0.0,
+            "start_sec": 20.822444
+          },
+          {
+            "end_sec": 26.676104,
+            "label": "G:min",
+            "relative_end_sec": 5.85366,
+            "relative_start_sec": 3.90244,
+            "start_sec": 24.724884
+          },
+          {
+            "end_sec": 28.627324,
+            "label": "F#:dim",
+            "relative_end_sec": 7.80488,
+            "relative_start_sec": 5.85366,
+            "start_sec": 26.676104
+          }
+        ],
+        "status": "supported"
+      },
+      "local_key_annotation": {
+        "assertion_level": "centered",
+        "diagnostics": {
+          "annotation_origin": "audio-derived dataset annotation",
+          "calibrated_probability": null,
+          "dominant_overlap_ratio": 1.0,
+          "overlapping_regions": [
+            {
+              "end_sec": 271.06975056689345,
+              "label": "F:maj",
+              "overlap_sec": 7.80488,
+              "start_sec": 0.34829931972789113
+            }
+          ],
+          "source_label": "F:maj"
+        },
+        "method": "POP909 key_audio dataset annotation",
+        "scope": "selected_segment",
+        "status": "supported",
+        "value": "F major"
+      }
+    }
+  },
+  "midi_contract": {
+    "diagnostics": {
+      "dangling_note_on_count": 0,
+      "unmatched_note_off_count": 0
+    },
+    "key_signature_events": [],
+    "meter_events": [
+      {
+        "denominator": 4,
+        "numerator": 1,
+        "tick": 0
+      }
+    ],
+    "midi_type": 1,
+    "tempo_events": [
+      {
+        "tempo_us_per_quarter": 975610,
+        "tick": 0
+      }
+    ],
+    "ticks_per_quarter": 480,
+    "track_names": [
+      "BRIDGE",
+      "MELODY",
+      "PIANO"
+    ]
+  },
+  "not_implemented": [
+    {
+      "feature_id": "rhythm.quantized_note_values",
+      "reason": "requires_quantization_gate"
+    },
+    {
+      "feature_id": "rhythm.syncopation_swing_tuplets",
+      "reason": "requires_meter_aware_validated_extractors"
+    },
+    {
+      "feature_id": "structure.motif_repetition",
+      "reason": "requires_motif_contract"
+    },
+    {
+      "feature_id": "texture.voice_leading",
+      "reason": "requires_voice_assignment"
+    },
+    {
+      "feature_id": "performance.articulation_microtiming",
+      "reason": "requires_score_or_grid_reference"
+    },
+    {
+      "feature_id": "structure.functional_form",
+      "reason": "requires_external_annotation"
+    },
+    {
+      "feature_id": "audio.expressive_character",
+      "reason": "requires_audio_teacher_and_filtering"
+    }
+  ],
+  "quality": {
+    "errors": [],
+    "status": "valid",
+    "warnings": [
+      "Lexical melody and velocity direction remain blocked pending calibration."
+    ]
+  },
+  "record_sha256": "sha256:c5b09a7f6135fae09df71c4cffc5104c8e0338f10a769ec79bc064b5e748f6c9",
+  "sample_id": "pop909_train_364_bar6_8_2bar",
+  "schema_version": "sori_dense_midi_evidence_v0.1",
+  "scope": {
+    "bar_count": 2,
+    "beats": 8,
+    "coordinate_policy": "bar-aligned internally; seconds displayed externally",
+    "duration_sec": 7.80488,
+    "end_bar_exclusive": 8,
+    "end_sec": 28.627324,
+    "end_tick": 13920,
+    "start_bar": 6,
+    "start_sec": 20.822444,
+    "start_tick": 10080
+  },
+  "selection": {
+    "policy": "balanced_scale_bar_aligned_hash_v0.1",
+    "purpose": "extractor_audit_only",
+    "scale_bars": 2,
+    "seed": "sori-pop909-dense-metadata-v0.1-20260716",
+    "training_eligible": false
+  },
+  "source": {
+    "canonical_piece_id": "pop909:364",
+    "dataset": "POP909",
+    "dataset_revision": "d83e6edba6872a704f5d3b8b32f5cb540088dae6",
+    "registry_split": "train",
+    "relative_midi_path": "POP909/364/364.mid",
+    "source_file_hashes": {
+      "364.mid": "sha256:907a94be0f53e0e745124567feef4cc881ee51ffb7316485eca4898f9b27a987",
+      "beat_midi.txt": "sha256:ec5435760dfc45e5f500f23a0e89e770ea5e93dfed72d860ee52e35308ab6a1a",
+      "chord_midi.txt": "sha256:4b165e592ea1b12ebd8c3577d56b7851cfb659d46069a532cbe8e8ad4c4c106f",
+      "key_audio.txt": "sha256:57a6105239b5f5b1f4ef4184893f374dc282002597fe02b87bef877c835956d3"
+    },
+    "source_id": "pop909:364",
+    "source_origin": "official POP909 GitHub repository",
+    "split": "train"
+  }
+}
