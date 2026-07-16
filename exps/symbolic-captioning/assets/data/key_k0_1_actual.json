@@ -1,0 +1,416 @@
+{
+  "calibration_version": "sori_key_lexical_calibration_v0.1",
+  "dataset": {
+    "dataset_revision": "d83e6edba6872a704f5d3b8b32f5cb540088dae6",
+    "excluded_source_count": 11,
+    "fold_seed": "sori-pop909-valid-key-calibration-v0.1",
+    "held_out_audit_source_count": 27,
+    "name": "POP909",
+    "official_split": "valid",
+    "registry_source_count": 91,
+    "threshold_fit_source_count": 53,
+    "usable_source_count": 80
+  },
+  "reference": {
+    "minimum_dominant_duration_ratio": 0.8,
+    "role": "Valid-only calibration reference; never supplied to the estimator",
+    "scope": "whole_piece_dominant_annotation",
+    "source": "POP909 key_audio.txt"
+  },
+  "estimator": {
+    "feature": "duration-weighted pitch-class histogram",
+    "input": "MIDI Window",
+    "output": "Rule Estimate",
+    "profiles": [
+      "Krumhansl-Kessler",
+      "Temperley",
+      "Bellman-Budge"
+    ],
+    "reference_visible_to_estimator": false,
+    "scope": "whole_piece",
+    "version": "duration_weighted_key_profiles_v0.1"
+  },
+  "policy": {
+    "fit_metrics": {
+      "accepted_count": 44,
+      "correct_count": 40,
+      "coverage": 0.830189,
+      "precision": 0.909091,
+      "precision_wilson_95": [
+        0.788405,
+        0.964078
+      ],
+      "source_count": 53
+    },
+    "held_out_audit_metrics": {
+      "accepted_count": 21,
+      "correct_count": 19,
+      "coverage": 0.777778,
+      "precision": 0.904762,
+      "precision_wilson_95": [
+        0.710854,
+        0.973482
+      ],
+      "source_count": 27
+    },
+    "lexical_form": "centered around {key}",
+    "margin_threshold": 0.066428,
+    "minimum_audit_support": 8,
+    "minimum_fit_support": 12,
+    "profile_agreement_threshold": 0.666667,
+    "promoted": true,
+    "status": "calibrated_and_audited",
+    "target_precision": 0.9
+  },
+  "ungated_metrics": {
+    "held_out_audit": {
+      "accepted_count": 27,
+      "correct_count": 24,
+      "coverage": 1.0,
+      "precision": 0.888889,
+      "precision_wilson_95": [
+        0.719418,
+        0.96148
+      ],
+      "source_count": 27
+    },
+    "threshold_fit": {
+      "accepted_count": 53,
+      "correct_count": 45,
+      "coverage": 1.0,
+      "precision": 0.849057,
+      "precision_wilson_95": [
+        0.729455,
+        0.921477
+      ],
+      "source_count": 53
+    }
+  },
+  "examples": [
+    {
+      "calibration_fold": "held_out_audit",
+      "caption_projection": {
+        "allowed_claims": [
+          {
+            "assertion_level": "centered",
+            "claim_id": "claim.key",
+            "evidence_ids": [
+              "duration_weighted_pitch_class_histogram@whole_piece"
+            ],
+            "feature_id": "tonal.key_estimate",
+            "value": "B minor"
+          }
+        ],
+        "blocked_claims": [],
+        "downstream_stage": "caption_realization_prompt_assembly",
+        "input_modalities": [
+          "midi"
+        ],
+        "profile": "caption_pretraining",
+        "projection_version": "sori_caption_projection_v0.2",
+        "source_metadata": "pop909:381"
+      },
+      "correct": true,
+      "lexical_gate": {
+        "margin": 0.067055,
+        "margin_threshold": 0.066428,
+        "policy_promoted": true,
+        "profile_agreement": 0.666667,
+        "profile_agreement_threshold": 0.666667,
+        "status": "passed"
+      },
+      "midi_sha256": "sha256:83345396d96fc26f4fd616f3bcd8b4919258aa6d1c4b50952b610fa4323eae06",
+      "midi_window": {
+        "duration_beats": 301.039583,
+        "end_tick": 144499,
+        "note_count": 1505,
+        "scope": "whole_piece",
+        "start_tick": 0,
+        "ticks_per_quarter": 480
+      },
+      "rule_estimate": {
+        "display_value": "B minor",
+        "ensemble_score": 0.796707,
+        "evidence_mass_ticks": 549912,
+        "label": "11:min",
+        "margin": 0.067055,
+        "mode": "min",
+        "note_count": 1505,
+        "pitch_class_histogram": [
+          0.0,
+          0.05419231,
+          0.20602024,
+          0.00001091,
+          0.1285042,
+          0.0,
+          0.23434659,
+          0.03395634,
+          0.0,
+          0.11196337,
+          0.0,
+          0.23100605
+        ],
+        "profile_agreement": 0.666667,
+        "profile_winners": {
+          "bellman_budge": "11:min",
+          "krumhansl_kessler": "11:min",
+          "temperley": "2:maj"
+        },
+        "ranked_candidates": [
+          {
+            "display_value": "B minor",
+            "ensemble_score": 0.796707,
+            "label": "11:min"
+          },
+          {
+            "display_value": "D major",
+            "ensemble_score": 0.729651,
+            "label": "2:maj"
+          },
+          {
+            "display_value": "A major",
+            "ensemble_score": 0.538267,
+            "label": "9:maj"
+          },
+          {
+            "display_value": "G major",
+            "ensemble_score": 0.533238,
+            "label": "7:maj"
+          },
+          {
+            "display_value": "F-sharp minor",
+            "ensemble_score": 0.489249,
+            "label": "6:min"
+          }
+        ],
+        "tonic_pitch_class": 11
+      },
+      "source_id": "pop909:381",
+      "split": "valid",
+      "valid_reference": {
+        "annotated_duration_sec": 270.767891,
+        "canonical_label": "11:min",
+        "dominant_duration_ratio": 1.0,
+        "label": "B:min",
+        "source": "POP909 key_audio.txt"
+      }
+    },
+    {
+      "calibration_fold": "held_out_audit",
+      "caption_projection": {
+        "allowed_claims": [
+          {
+            "assertion_level": "centered",
+            "claim_id": "claim.key",
+            "evidence_ids": [
+              "duration_weighted_pitch_class_histogram@whole_piece"
+            ],
+            "feature_id": "tonal.key_estimate",
+            "value": "F-sharp major"
+          }
+        ],
+        "blocked_claims": [],
+        "downstream_stage": "caption_realization_prompt_assembly",
+        "input_modalities": [
+          "midi"
+        ],
+        "profile": "caption_pretraining",
+        "projection_version": "sori_caption_projection_v0.2",
+        "source_metadata": "pop909:883"
+      },
+      "correct": false,
+      "lexical_gate": {
+        "margin": 0.076179,
+        "margin_threshold": 0.066428,
+        "policy_promoted": true,
+        "profile_agreement": 0.666667,
+        "profile_agreement_threshold": 0.666667,
+        "status": "passed"
+      },
+      "midi_sha256": "sha256:db97cc001a878d46e4e24c3099f7d79a88bcecb2db6700fc155bbc410cc28bdf",
+      "midi_window": {
+        "duration_beats": 248.216667,
+        "end_tick": 119144,
+        "note_count": 1526,
+        "scope": "whole_piece",
+        "start_tick": 0,
+        "ticks_per_quarter": 480
+      },
+      "rule_estimate": {
+        "display_value": "F-sharp major",
+        "ensemble_score": 0.804125,
+        "evidence_mass_ticks": 454289,
+        "label": "6:maj",
+        "margin": 0.076179,
+        "mode": "maj",
+        "note_count": 1526,
+        "pitch_class_histogram": [
+          0.0,
+          0.16631924,
+          0.00072861,
+          0.21941099,
+          0.0,
+          0.08796603,
+          0.16861513,
+          0.0,
+          0.10260649,
+          0.0,
+          0.19506966,
+          0.05928385
+        ],
+        "profile_agreement": 0.666667,
+        "profile_winners": {
+          "bellman_budge": "6:maj",
+          "krumhansl_kessler": "3:min",
+          "temperley": "6:maj"
+        },
+        "ranked_candidates": [
+          {
+            "display_value": "F-sharp major",
+            "ensemble_score": 0.804125,
+            "label": "6:maj"
+          },
+          {
+            "display_value": "E-flat minor",
+            "ensemble_score": 0.727946,
+            "label": "3:min"
+          },
+          {
+            "display_value": "C-sharp major",
+            "ensemble_score": 0.62521,
+            "label": "1:maj"
+          },
+          {
+            "display_value": "B-flat minor",
+            "ensemble_score": 0.57068,
+            "label": "10:min"
+          },
+          {
+            "display_value": "B major",
+            "ensemble_score": 0.548579,
+            "label": "11:maj"
+          }
+        ],
+        "tonic_pitch_class": 6
+      },
+      "source_id": "pop909:883",
+      "split": "valid",
+      "valid_reference": {
+        "annotated_duration_sec": 231.108209,
+        "canonical_label": "3:min",
+        "dominant_duration_ratio": 1.0,
+        "label": "Eb:min",
+        "source": "POP909 key_audio.txt"
+      }
+    },
+    {
+      "calibration_fold": "held_out_audit",
+      "caption_projection": {
+        "allowed_claims": [],
+        "blocked_claims": [
+          {
+            "assertion_level": "centered",
+            "claim_id": "claim.key",
+            "evidence_ids": [
+              "duration_weighted_pitch_class_histogram@whole_piece"
+            ],
+            "feature_id": "tonal.key_estimate",
+            "reason": "lexical_gate_failed",
+            "value": "B major"
+          }
+        ],
+        "downstream_stage": "caption_realization_prompt_assembly",
+        "input_modalities": [
+          "midi"
+        ],
+        "profile": "caption_pretraining",
+        "projection_version": "sori_caption_projection_v0.2",
+        "source_metadata": "pop909:483"
+      },
+      "correct": true,
+      "lexical_gate": {
+        "margin": 0.064618,
+        "margin_threshold": 0.066428,
+        "policy_promoted": true,
+        "profile_agreement": 0.666667,
+        "profile_agreement_threshold": 0.666667,
+        "status": "blocked"
+      },
+      "midi_sha256": "sha256:270f601d815bc31cdf5834b64f2a77ac452e48cba8853db49d808866d78813a3",
+      "midi_window": {
+        "duration_beats": 262.891667,
+        "end_tick": 126188,
+        "note_count": 1928,
+        "scope": "whole_piece",
+        "start_tick": 0,
+        "ticks_per_quarter": 480
+      },
+      "rule_estimate": {
+        "display_value": "B major",
+        "ensemble_score": 0.886282,
+        "evidence_mass_ticks": 474785,
+        "label": "11:maj",
+        "margin": 0.064618,
+        "mode": "maj",
+        "note_count": 1928,
+        "pitch_class_histogram": [
+          0.0,
+          0.15830744,
+          0.0,
+          0.11248249,
+          0.07828385,
+          0.00402709,
+          0.21299957,
+          0.00499173,
+          0.13483787,
+          0.00014533,
+          0.12664259,
+          0.16728203
+        ],
+        "profile_agreement": 0.666667,
+        "profile_winners": {
+          "bellman_budge": "11:maj",
+          "krumhansl_kessler": "6:maj",
+          "temperley": "11:maj"
+        },
+        "ranked_candidates": [
+          {
+            "display_value": "B major",
+            "ensemble_score": 0.886282,
+            "label": "11:maj"
+          },
+          {
+            "display_value": "F-sharp major",
+            "ensemble_score": 0.821663,
+            "label": "6:maj"
+          },
+          {
+            "display_value": "E major",
+            "ensemble_score": 0.507505,
+            "label": "4:maj"
+          },
+          {
+            "display_value": "A-flat minor",
+            "ensemble_score": 0.491781,
+            "label": "8:min"
+          },
+          {
+            "display_value": "E-flat minor",
+            "ensemble_score": 0.461595,
+            "label": "3:min"
+          }
+        ],
+        "tonic_pitch_class": 11
+      },
+      "source_id": "pop909:483",
+      "split": "valid",
+      "valid_reference": {
+        "annotated_duration_sec": 265.636281,
+        "canonical_label": "11:maj",
+        "dominant_duration_ratio": 1.0,
+        "label": "B:maj",
+        "source": "POP909 key_audio.txt"
+      }
+    }
+  ]
+}

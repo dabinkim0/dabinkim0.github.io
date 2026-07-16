@@ -1,6 +1,7 @@
 const state = {
   data: null,
   metadataData: null,
+  keyCalibration: null,
   metadataCategory: "key",
   metadataVersionByCategory: {},
   metadataStageByVersion: {},
@@ -144,14 +145,14 @@ function renderMetadataDiagram(version) {
 }
 
 const METADATA_STAGE_SUMMARIES = {
-  synthetic_fixture: "This stage contains only deterministic synthetic MIDI coverage and expected facts used to test later extraction. It is not corpus metadata and does not involve an LLM.",
-  canonical_example: "This stage shows the schema-aligned canonical record expected from the selected fixture. It contains metadata evidence only; no caption prompt or Gemini output belongs here.",
-  evidence_gate: "This stage applies status and lexical-strength policy to canonical evidence. The operation is deterministic and decides which claims may enter a projection.",
-  projection_contract: "This stage produces a compact structured CaptionProjection for a downstream caption model. It is structured data, not the natural-language prompt sent to Gemini.",
   actual_source: "This stage shows only the observed POP909 Train source window and input provenance used by the executed pilot extractor.",
   actual_extractor: "This stage shows only the rule or dataset-annotation evidence source used to derive the selected metadata family.",
   actual_metadata: "This stage shows the family-specific metadata actually extracted from POP909 Train. Fields from other metadata families and caption-model outputs are excluded.",
   actual_caption: "This downstream stage alone shows the actual caption-realization prompt and Gemini response recorded for the same Train segment. The prompt consumes the combined General Metadata, so family isolation ends at this boundary.",
+  actual_calibration_source: "This stage shows a real whole-piece MIDI Window from the POP909 Valid calibration audit fold.",
+  actual_rule_estimate: "This stage shows the MIDI-only Rule Estimate produced from duration-weighted pitch classes and three key profiles.",
+  actual_lexical_gate: "This stage shows the threshold fitted on POP909 Valid and its untouched internal audit result.",
+  actual_projection: "This stage shows the recorded CaptionProjection emitted for the same Valid MIDI Window after the lexical gate.",
 };
 
 function pickFields(value, fields) {
@@ -186,64 +187,6 @@ function actualFamilyView(category) {
   };
 }
 
-function canonicalEvidence(version) {
-  return version.example_metadata?.composition_view?.evidence?.[0] || null;
-}
-
-function syntheticFixtureArtifact(version, category) {
-  const evidence = canonicalEvidence(version);
-  return {
-    artifact_type: "synthetic_fixture_expectation",
-    source_type: "deterministic_synthetic_midi",
-    fixture_id: version.example_metadata.fixture_id,
-    metadata_family: category.id,
-    validation_target: version.diagram[0].detail,
-    expected_scope: version.example_metadata.caption_span || null,
-    expected_value: evidence?.value || version.example_metadata.temporal_map,
-    corpus_split: null,
-  };
-}
-
-function evidenceGateArtifact(version, category) {
-  const evidence = canonicalEvidence(version);
-  return {
-    artifact_type: "deterministic_evidence_gate",
-    metadata_family: category.id,
-    selected_feature: evidence?.feature_id || "temporal.temporal_map",
-    status_policy: [
-      {status: "supported", caption_eligible: true, lexical_strength: ["assertive", "centered", "suggestive"]},
-      {status: "ambiguous", caption_eligible: false, lexical_strength: ["omit"]},
-      {status: "insufficient_evidence", caption_eligible: false, lexical_strength: ["omit"]},
-      {status: "conflict", caption_eligible: false, lexical_strength: ["omit"]},
-      {status: "extractor_failed", caption_eligible: false, lexical_strength: ["omit"]}
-    ],
-    llm_involved: false,
-  };
-}
-
-function projectionArtifact(version, category) {
-  const evidence = canonicalEvidence(version);
-  const featureId = evidence?.feature_id || "temporal.temporal_map";
-  const value = evidence?.value || version.example_metadata.temporal_map;
-  return {
-    projection_version: "sori_caption_projection_v0.1",
-    profile: "caption_pretraining",
-    source_metadata: `synthetic:${version.example_metadata.fixture_id}`,
-    input_modalities: ["midi"],
-    allowed_claims: [
-      {
-        claim_id: `claim.${category.id}`,
-        feature_id: featureId,
-        value,
-        assertion_level: evidence?.assertion_level || "assertive",
-        evidence_ids: [evidence?.evidence_id || "temporal_map@caption_span"],
-      },
-    ],
-    blocked_claims: [],
-    downstream_stage: "caption_realization_prompt_assembly",
-  };
-}
-
 function actualSourceArtifact(caseItem) {
   return {
     artifact_type: "actual_corpus_source_window",
@@ -258,6 +201,48 @@ function actualSourceArtifact(caseItem) {
       vst_rendered_audio: caseItem.media?.audio || null,
     },
   };
+}
+
+function keyCalibrationArtifacts(stage) {
+  const calibration = state.keyCalibration;
+  const example = calibration?.examples?.[0];
+  if (!calibration || !example) {
+    return [{kicker: "Missing Artifact", title: "Valid Calibration Unavailable", note: "Viewer Data Error", content: {artifact_path: "assets/data/key_k0_1_actual.json"}}];
+  }
+  if (stage.artifact_kind === "actual_calibration_source") {
+    return [{
+      kicker: "Observed Corpus Input",
+      title: "Actual Valid MIDI Window",
+      note: `${example.source_id} · Held-Out Audit`,
+      content: {
+        source_id: example.source_id,
+        split: example.split,
+        calibration_fold: example.calibration_fold,
+        midi_sha256: example.midi_sha256,
+        midi_window: example.midi_window,
+      },
+    }];
+  }
+  if (stage.artifact_kind === "actual_rule_estimate") {
+    return [{
+      kicker: "Executed Extraction",
+      title: "Actual MIDI Rule Estimate",
+      note: `${example.source_id} · No Key Label Input`,
+      content: example.rule_estimate,
+    }];
+  }
+  if (stage.artifact_kind === "actual_lexical_gate") {
+    return [
+      {kicker: "Observed Calibration", title: "Valid Threshold And Audit", note: "POP909 Valid · 80 Eligible Pieces", content: {dataset: calibration.dataset, estimator: calibration.estimator, policy: calibration.policy, ungated_metrics: calibration.ungated_metrics}},
+      {kicker: "Observed Decisions", title: "Actual Audit Examples", note: "Pass · Error · Block", content: calibration.examples.map((item) => ({source_id: item.source_id, correct: item.correct, valid_reference: item.valid_reference, lexical_gate: item.lexical_gate}))},
+    ];
+  }
+  return [{
+    kicker: "Observed Structured Output",
+    title: "Actual Caption Projection",
+    note: `${example.source_id} · ${formatLabel(example.lexical_gate.status)}`,
+    content: example.caption_projection,
+  }];
 }
 
 function actualExtractorArtifact(category, caseItem) {
@@ -284,17 +269,8 @@ function actualExtractorArtifact(category, caseItem) {
 function metadataStageArtifacts(version, category, stage) {
   const caseItem = actualDatasetCase();
   const actualLabel = state.metadataData.actual_dataset_example.display_name;
-  if (stage.artifact_kind === "synthetic_fixture") {
-    return [{kicker: "Synthetic Test Input", title: "Fixture Expectation", note: "Not Train Or Test Data", content: syntheticFixtureArtifact(version, category)}];
-  }
-  if (stage.artifact_kind === "canonical_example") {
-    return [{kicker: "Canonical Metadata", title: version.example_label, note: version.example_note, content: version.example_metadata}];
-  }
-  if (stage.artifact_kind === "evidence_gate") {
-    return [{kicker: "Deterministic Policy", title: "Evidence Eligibility Rules", note: "No LLM Involved", content: evidenceGateArtifact(version, category)}];
-  }
-  if (stage.artifact_kind === "projection_contract") {
-    return [{kicker: "Structured Downstream Input", title: "CaptionProjection Example", note: "Not A Gemini Prompt", content: projectionArtifact(version, category)}];
+  if (stage.artifact_kind.startsWith("actual_calibration") || ["actual_rule_estimate", "actual_lexical_gate", "actual_projection"].includes(stage.artifact_kind)) {
+    return keyCalibrationArtifacts(stage);
   }
   if (!caseItem) {
     return [{kicker: "Missing Artifact", title: "Actual Dataset Case Unavailable", note: "Viewer Data Error", content: {case_id: state.metadataData.actual_dataset_example.case_id}}];
@@ -344,13 +320,13 @@ function renderMetadataStage(version, category) {
   const stage = currentMetadataStage();
   const stageIndex = version.diagram.findIndex((item) => item.id === stage.id) + 1;
   const isActual = stage.artifact_kind.startsWith("actual_");
-  const isContract = ["evidence_gate", "projection_contract"].includes(stage.artifact_kind);
+  const isValidation = ["actual_calibration_source", "actual_rule_estimate", "actual_lexical_gate", "actual_projection"].includes(stage.artifact_kind);
   const source = $("[data-metadata-stage-source]");
   $("[data-metadata-stage-kicker]").textContent = `${version.id} · Pipeline Stage ${String(stageIndex).padStart(2, "0")}`;
   $("[data-metadata-stage-title]").textContent = stage.title;
   $("[data-metadata-stage-summary]").textContent = METADATA_STAGE_SUMMARIES[stage.artifact_kind];
-  source.textContent = isActual ? "Actual POP909 Train" : isContract ? "Contract Only" : "Synthetic Phase 0";
-  source.className = `stage-source-badge ${isActual ? "actual" : isContract ? "contract" : "synthetic"}`;
+  source.textContent = isValidation ? "Actual POP909 Valid" : isActual ? "Actual POP909 Train" : "No Actual Artifact";
+  source.className = `stage-source-badge ${isActual ? "actual" : "contract"}`;
   renderMetadataArtifacts(metadataStageArtifacts(version, category, stage));
 }
 
@@ -733,14 +709,17 @@ function bindEvents() {
 
 async function initialize() {
   try {
-    const [summaryResponse, metadataResponse] = await Promise.all([
+    const [summaryResponse, metadataResponse, keyCalibrationResponse] = await Promise.all([
       fetch("assets/data/summary.json", { cache: "no-store" }),
-      fetch("assets/data/metadata_versions.json?schema=v0.2&ui=a112", { cache: "no-store" }),
+      fetch("assets/data/metadata_versions.json?schema=v0.3&ui=k01", { cache: "no-store" }),
+      fetch("assets/data/key_k0_1_actual.json?calibration=v0.1", { cache: "no-store" }),
     ]);
     if (!summaryResponse.ok) throw new Error(`Summary HTTP ${summaryResponse.status}`);
     if (!metadataResponse.ok) throw new Error(`Metadata HTTP ${metadataResponse.status}`);
+    if (!keyCalibrationResponse.ok) throw new Error(`Key Calibration HTTP ${keyCalibrationResponse.status}`);
     state.data = await summaryResponse.json();
     state.metadataData = await metadataResponse.json();
+    state.keyCalibration = await keyCalibrationResponse.json();
     const requestedScope = new URLSearchParams(window.location.search).get("scope");
     const availableScopes = new Set(state.data.cases.map((caseItem) => caseItem.scope_type));
     if (availableScopes.has(requestedScope)) state.scopeType = requestedScope;

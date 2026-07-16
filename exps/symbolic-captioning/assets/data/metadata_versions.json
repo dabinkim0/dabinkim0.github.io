@@ -1,5 +1,5 @@
 {
-  "schema_version": "sori_metadata_version_viewer_v0.2",
+  "schema_version": "sori_metadata_version_viewer_v0.3",
   "updated_on": "2026-07-16",
   "version_convention": "K/N/R/T.major.minor",
   "prompts": {
@@ -40,52 +40,30 @@
       "versions": [
         {
           "id": "K.0.1",
-          "date": "2026-07-15",
-          "status": "Contract Ready",
+          "date": "2026-07-16",
+          "status": "Valid Calibrated",
           "status_tone": "complete",
-          "stage": "Phase 0 · Contract And Fixtures",
-          "scope": "Piece And Local Key Evidence",
-          "next_gate": "Phase 2 Calibration On POP909 Valid",
-          "title": "Canonical Key Evidence Contract",
-          "default_stage": "canonical",
-          "summary": "Introduces a versioned evidence envelope, explicit uncertainty states, canonical hashing, and deterministic key-region fixtures. It does not yet claim that a production key extractor has been validated.",
+          "stage": "Phase 2 · Valid Threshold Calibration",
+          "scope": "Whole-Piece Key Evidence",
+          "next_gate": "External And Local-Key Audit",
+          "title": "Valid-Calibrated MIDI Key Gate",
+          "default_stage": "gate",
+          "summary": "A MIDI-only rule estimate is now calibrated on POP909 Valid with a disjoint threshold-fit and held-out audit fold. The viewer exposes only recorded calibration artifacts and actual Valid examples.",
           "characteristics": [
-            "Separates piece key from local key regions and their temporal scopes.",
-            "Allows assertive, centered, suggestive, or omitted lexical strength through an evidence gate.",
-            "Covers constant key, C-to-G local-key change, and transposition invariance with synthetic fixtures."
+            "Builds a duration-weighted pitch-class histogram from each whole-piece MIDI Window.",
+            "Combines three profile correlations into one Rule Estimate without reading key annotations.",
+            "Emits centered key language only when the Valid-calibrated margin and agreement gate passes."
           ],
           "diagram": [
-            {"id": "fixture", "artifact_kind": "synthetic_fixture", "title": "Key Fixtures", "detail": "Constant · Local Change · Transposition"},
-            {"id": "canonical", "artifact_kind": "canonical_example", "title": "Canonical Evidence", "detail": "Value · Scope · Status · Method"},
-            {"id": "gate", "artifact_kind": "evidence_gate", "title": "Lexical Gate", "detail": "Supported Or Blocked"},
-            {"id": "projection", "artifact_kind": "projection_contract", "title": "Caption Projection", "detail": "Structured Key Claim"}
+            {"id": "source", "artifact_kind": "actual_calibration_source", "title": "MIDI Window", "detail": "Actual POP909 Valid Piece"},
+            {"id": "extractor", "artifact_kind": "actual_rule_estimate", "title": "Rule Estimate", "detail": "Pitch-Class Key Profiles"},
+            {"id": "gate", "artifact_kind": "actual_lexical_gate", "title": "Lexical Gate", "detail": "Valid-Calibrated Threshold"},
+            {"id": "projection", "artifact_kind": "actual_projection", "title": "Caption Projection", "detail": "Centered Key Claim"}
           ],
-          "prompt_ref": "phase_0_projection",
-          "prompt_label": "Compatibility Notice",
-          "prompt_note": "Reload For Stage-Scoped UI",
-          "example_label": "Canonical Evidence Fragment",
-          "example_note": "Synthetic Fixture · local_key_c_to_g",
-          "example_metadata": {
-            "example_type": "canonical_evidence_fragment",
-            "schema_version": "sori_canonical_metadata_v0.1",
-            "fixture_id": "local_key_c_to_g",
-            "caption_span": {"start_tick": 3840, "end_tick": 7680},
-            "composition_view": {
-              "evidence": [
-                {
-                  "evidence_id": "composition.local_key@caption_span",
-                  "feature_id": "composition.local_key",
-                  "scope_id": "caption_span",
-                  "value": "G major",
-                  "status": "supported",
-                  "confidence": null,
-                  "assertion_level": "centered",
-                  "method": "synthetic_ground_truth",
-                  "evidence_refs": [{"kind": "tick_span", "value": [3840, 7680]}]
-                }
-              ]
-            }
-          }
+          "prompt_ref": "pilot_supported_evidence",
+          "prompt_label": "Downstream Caption Policy",
+          "prompt_note": "Centered Key Claim Only After Gate",
+          "actual_artifact": "assets/data/key_k0_1_actual.json"
         },
         {
           "id": "K.0.0",
@@ -126,54 +104,31 @@
         {
           "id": "N.0.1",
           "date": "2026-07-15",
-          "status": "Contract Ready",
-          "status_tone": "complete",
-          "stage": "Phase 0 · Contract And Fixtures",
+          "status": "Contract · Actual Baseline",
+          "status_tone": "pending",
+          "stage": "Phase 0 Contract · A.1.2 Baseline",
           "scope": "Exact Note Sequences And References",
           "next_gate": "Phase 1 Normalized Note Table",
           "title": "Traceable Note Evidence Contract",
-          "default_stage": "canonical",
-          "summary": "Defines note-level evidence as an exact value tied to scope and evidence pointers, with deterministic transposition-pair fixtures. Normalized note IDs and production role assignment remain Phase 1 and Phase 2 work.",
+          "default_stage": "metadata",
+          "summary": "The note contract is defined, but no production canonical export exists yet. The viewer therefore shows only the actual A.1.2 Train extractor output rather than an illustrative canonical object.",
           "characteristics": [
             "Keeps MIDI pitch values and display pitch names as explicit evidence rather than inferred prose.",
             "Associates sequence claims with note IDs or a declared tick span.",
-            "Tests rhythm-preserving +2-semitone transposition with byte-stable fixture pairs."
+            "Defers canonical note IDs until they are emitted from real corpus extraction."
           ],
           "diagram": [
-            {"id": "fixture", "artifact_kind": "synthetic_fixture", "title": "Note Fixtures", "detail": "Exact Pitch And Onset Lists"},
-            {"id": "canonical", "artifact_kind": "canonical_example", "title": "Evidence Pointer", "detail": "Note IDs Or Tick Span"},
-            {"id": "gate", "artifact_kind": "evidence_gate", "title": "Sequence Gate", "detail": "Exact Values Only"},
-            {"id": "projection", "artifact_kind": "projection_contract", "title": "Caption Projection", "detail": "Structured Note Claim"}
+            {"id": "source", "artifact_kind": "actual_source", "title": "MIDI Window", "detail": "Actual POP909 Train Segment"},
+            {"id": "extractor", "artifact_kind": "actual_extractor", "title": "Rule Estimate", "detail": "Exact Melody Notes"},
+            {"id": "metadata", "artifact_kind": "actual_metadata", "title": "Supported Evidence", "detail": "Actual Train Metadata"},
+            {"id": "realization", "artifact_kind": "actual_caption", "title": "Caption Realization", "detail": "Prompt And Gemini Output"}
           ],
-          "prompt_ref": "phase_0_projection",
-          "prompt_label": "Compatibility Notice",
-          "prompt_note": "Reload For Stage-Scoped UI",
-          "example_label": "Canonical Evidence Fragment",
-          "example_note": "Synthetic Fixture · transposition_source_c_major",
-          "example_metadata": {
-            "example_type": "canonical_evidence_fragment",
-            "schema_version": "sori_canonical_metadata_v0.1",
-            "fixture_id": "transposition_source_c_major",
-            "composition_view": {
-              "evidence": [
-                {
-                  "evidence_id": "composition.note_sequence@caption_span",
-                  "feature_id": "composition.note_sequence",
-                  "scope_id": "caption_span",
-                  "value": {
-                    "pitch_sequence": ["C4", "D4", "E4", "F4", "G4", "F4", "E4", "D4"],
-                    "midi_pitches": [60, 62, 64, 65, 67, 65, 64, 62],
-                    "note_count": 8
-                  },
-                  "status": "supported",
-                  "confidence": null,
-                  "assertion_level": "assertive",
-                  "method": "synthetic_ground_truth",
-                  "evidence_refs": [{"kind": "tick_span", "value": [0, 3840]}]
-                }
-              ]
-            }
-          }
+          "prompt_ref": "pilot_supported_evidence",
+          "prompt_label": "Actual Pilot Prompt",
+          "prompt_note": "Executed In A.1.2",
+          "example_label": "Actual Train Metadata",
+          "example_note": "POP909 · pop909:344",
+          "example_metadata": {"source_id": "pop909:344", "split": "train", "artifact_source": "A.1.2 actual extractor output"}
         },
         {
           "id": "N.0.0",
@@ -214,44 +169,31 @@
         {
           "id": "R.0.1",
           "date": "2026-07-15",
-          "status": "Contract Ready",
-          "status_tone": "complete",
-          "stage": "Phase 0 · Contract And Fixtures",
+          "status": "Contract · Actual Baseline",
+          "status_tone": "pending",
+          "stage": "Phase 0 Contract · A.1.2 Baseline",
           "scope": "Tempo, Meter, Onset, And Duration Evidence",
           "next_gate": "Phase 1 Tick/Beat/Bar/Second Tests",
           "title": "Temporal Backbone Contract",
-          "default_stage": "canonical",
-          "summary": "Defines full tempo, meter, key-signature, control-event, and bar-map containers instead of reducing time to one scalar BPM. Fixtures cover tempo and meter changes, pickup annotation, sustain, and exact onset sequences.",
+          "default_stage": "metadata",
+          "summary": "The temporal contract is defined, but full event-map export is not yet available on real corpus rows. The viewer shows the actual A.1.2 onset and duration evidence only.",
           "characteristics": [
             "Preserves event maps required to translate bar/beat spans into seconds.",
             "Keeps notated note duration separate from pedal-extended sounding duration.",
-            "Marks pickup as explicit fixture or dataset evidence because raw MIDI does not uniquely encode an anacrusis."
+            "Defers pickup and pedal claims until real extractor artifacts expose them."
           ],
           "diagram": [
-            {"id": "fixture", "artifact_kind": "synthetic_fixture", "title": "Temporal Fixtures", "detail": "Tempo · Meter · Pickup · Pedal"},
-            {"id": "canonical", "artifact_kind": "canonical_example", "title": "Temporal Map", "detail": "Tick · Beat · Bar · Second"},
-            {"id": "gate", "artifact_kind": "evidence_gate", "title": "Rhythm Evidence", "detail": "Onset And Duration"},
-            {"id": "projection", "artifact_kind": "projection_contract", "title": "Caption Projection", "detail": "Structured Rhythm Claim"}
+            {"id": "source", "artifact_kind": "actual_source", "title": "MIDI Window", "detail": "Actual POP909 Train Segment"},
+            {"id": "extractor", "artifact_kind": "actual_extractor", "title": "Rule Estimate", "detail": "IOI And Duration"},
+            {"id": "metadata", "artifact_kind": "actual_metadata", "title": "Supported Evidence", "detail": "Actual Train Metadata"},
+            {"id": "realization", "artifact_kind": "actual_caption", "title": "Caption Realization", "detail": "Prompt And Gemini Output"}
           ],
-          "prompt_ref": "phase_0_projection",
-          "prompt_label": "Compatibility Notice",
-          "prompt_note": "Reload For Stage-Scoped UI",
-          "example_label": "Temporal Contract Fragment",
-          "example_note": "Synthetic Fixture · tempo_change_120_to_90",
-          "example_metadata": {
-            "example_type": "canonical_temporal_fragment",
-            "schema_version": "sori_canonical_metadata_v0.1",
-            "fixture_id": "tempo_change_120_to_90",
-            "temporal_map": {
-              "ticks_per_quarter": 480,
-              "tempo_events": [
-                {"tick": 0, "tempo_us_per_quarter": 500000, "bpm": 120.0},
-                {"tick": 3840, "tempo_us_per_quarter": 666667, "bpm": 90.0}
-              ],
-              "time_signature_events": [{"tick": 0, "numerator": 4, "denominator": 4}]
-            },
-            "caption_span": {"start_tick": 0, "end_tick": 7680}
-          }
+          "prompt_ref": "pilot_supported_evidence",
+          "prompt_label": "Actual Pilot Prompt",
+          "prompt_note": "Executed In A.1.2",
+          "example_label": "Actual Train Metadata",
+          "example_note": "POP909 · pop909:344",
+          "example_metadata": {"source_id": "pop909:344", "split": "train", "artifact_source": "A.1.2 actual extractor output"}
         },
         {
           "id": "R.0.0",
@@ -292,55 +234,31 @@
         {
           "id": "T.0.1",
           "date": "2026-07-15",
-          "status": "Contract Ready",
-          "status_tone": "complete",
-          "stage": "Phase 0 · Contract And Fixtures",
+          "status": "Contract · Actual Baseline",
+          "status_tone": "pending",
+          "stage": "Phase 0 Contract · A.1.2 Baseline",
           "scope": "Bar-Wise Density, Polyphony, And Velocity",
           "next_gate": "Phase 2 POP909 Feature Extraction",
           "title": "Scoped Texture Trend Contract",
-          "default_stage": "canonical",
-          "summary": "Defines texture observations as scoped, evidence-linked values and adds a fixture whose onset density, maximum polyphony, and velocity increase independently by bar. The production extractor and threshold calibration remain pending.",
+          "default_stage": "metadata",
+          "summary": "The texture contract is defined, but calibrated bar-wise trajectory export is still pending. The viewer shows only actual A.1.2 density and polyphony aggregates.",
           "characteristics": [
             "Separates onset density, simultaneous polyphony, and velocity instead of collapsing them into one adjective.",
             "Stores raw bar-wise trajectories before rendering increasing, sparser, or steadier language.",
-            "Blocks a verbal trend when direction is ambiguous or unsupported."
+            "Defers trend language until thresholds are calibrated on real corpus trajectories."
           ],
           "diagram": [
-            {"id": "fixture", "artifact_kind": "synthetic_fixture", "title": "Texture Fixture", "detail": "Bar-Wise Note Events"},
-            {"id": "canonical", "artifact_kind": "canonical_example", "title": "Raw Trajectories", "detail": "Density · Polyphony · Velocity"},
-            {"id": "gate", "artifact_kind": "evidence_gate", "title": "Direction Gate", "detail": "Supported Or Ambiguous"},
-            {"id": "projection", "artifact_kind": "projection_contract", "title": "Caption Projection", "detail": "Structured Trend Claim"}
+            {"id": "source", "artifact_kind": "actual_source", "title": "MIDI Window", "detail": "Actual POP909 Train Segment"},
+            {"id": "extractor", "artifact_kind": "actual_extractor", "title": "Rule Estimate", "detail": "Density And Polyphony"},
+            {"id": "metadata", "artifact_kind": "actual_metadata", "title": "Supported Evidence", "detail": "Actual Train Metadata"},
+            {"id": "realization", "artifact_kind": "actual_caption", "title": "Caption Realization", "detail": "Prompt And Gemini Output"}
           ],
-          "prompt_ref": "phase_0_projection",
-          "prompt_label": "Compatibility Notice",
-          "prompt_note": "Reload For Stage-Scoped UI",
-          "example_label": "Canonical Evidence Fragment",
-          "example_note": "Synthetic Fixture · texture_dynamic_trend",
-          "example_metadata": {
-            "example_type": "canonical_evidence_fragment",
-            "schema_version": "sori_canonical_metadata_v0.1",
-            "fixture_id": "texture_dynamic_trend",
-            "composition_view": {
-              "evidence": [
-                {
-                  "evidence_id": "composition.texture_trajectory@caption_span",
-                  "feature_id": "composition.texture_trajectory",
-                  "scope_id": "caption_span",
-                  "value": {
-                    "bar_onset_counts": [1, 2, 3, 4],
-                    "bar_max_polyphony": [1, 2, 3, 4],
-                    "bar_mean_velocity": [40.0, 55.0, 70.0, 85.0],
-                    "direction": "increasing"
-                  },
-                  "status": "supported",
-                  "confidence": null,
-                  "assertion_level": "assertive",
-                  "method": "synthetic_ground_truth",
-                  "evidence_refs": [{"kind": "bar_indices", "value": [0, 1, 2, 3]}]
-                }
-              ]
-            }
-          }
+          "prompt_ref": "pilot_supported_evidence",
+          "prompt_label": "Actual Pilot Prompt",
+          "prompt_note": "Executed In A.1.2",
+          "example_label": "Actual Train Metadata",
+          "example_note": "POP909 · pop909:344",
+          "example_metadata": {"source_id": "pop909:344", "split": "train", "artifact_source": "A.1.2 actual extractor output"}
         },
         {
           "id": "T.0.0",
