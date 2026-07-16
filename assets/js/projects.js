@@ -119,36 +119,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    const projectList = document.querySelector("[data-project-list]");
-    const viewButtons = Array.from(document.querySelectorAll("[data-project-view]"));
-
-    if (projectList && viewButtons.length > 0) {
-        const defaultProjectView = "grid-compact";
-        const setProjectView = (view) => {
-            const viewClasses = ["is-list", "is-grid", "is-grid-compact"];
-
-            viewClasses.forEach((className) => {
-                projectList.classList.remove(className);
-            });
-
-            projectList.classList.add(`is-${view}`);
-
-            viewButtons.forEach((button) => {
-                const isActive = button.dataset.projectView === view;
-                button.classList.toggle("is-active", isActive);
-                button.setAttribute("aria-pressed", String(isActive));
-            });
-        };
-
-        viewButtons.forEach((button) => {
-            button.addEventListener("click", () => {
-                setProjectView(button.dataset.projectView);
-            });
-        });
-
-        setProjectView(defaultProjectView);
-    }
-
     const filterPanel = document.querySelector("[data-project-filter-panel]");
     const filterList = document.querySelector("[data-project-filter-list]");
     const filterStatus = document.querySelector("[data-project-filter-status]");
@@ -232,7 +202,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const allButton = document.createElement("button");
     allButton.type = "button";
-    allButton.className = "project-filter-chip is-active";
+    allButton.className = "archive-filter-chip project-filter-chip is-active";
     allButton.textContent = "All";
     allButton.addEventListener("click", () => applyFilter(null));
     filterList.append(allButton);
@@ -240,7 +210,7 @@ document.addEventListener("DOMContentLoaded", () => {
     tags.forEach((tag) => {
         const button = document.createElement("button");
         button.type = "button";
-        button.className = "project-filter-chip";
+        button.className = "archive-filter-chip project-filter-chip";
         button.textContent = tag;
         button.dataset.filterTag = tag;
         button.addEventListener("click", () => handleFilterClick(tag));

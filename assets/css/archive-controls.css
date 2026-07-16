@@ -1,0 +1,163 @@
+@layer components {
+    .archive-view-toggle {
+        display: inline-flex;
+        flex: 0 0 auto;
+        gap: 6px;
+    }
+
+    .view-toggle-button {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        min-width: 32px;
+        height: 32px;
+        margin: 0;
+        padding: 0;
+        border: 1px solid var(--rule-soft);
+        border-radius: var(--radius-control);
+        background: transparent;
+        color: var(--muted);
+        font: inherit;
+        cursor: pointer;
+        touch-action: manipulation;
+        transition:
+            background-color var(--motion-fast) var(--ease-out),
+            border-color var(--motion-fast) var(--ease-out),
+            color var(--motion-fast) var(--ease-out);
+    }
+
+    .view-toggle-button::before {
+        content: "";
+        position: absolute;
+        inset: -6px;
+    }
+
+    .view-toggle-button.is-active {
+        border-color: var(--control-active);
+        background: var(--control-active);
+        color: #fff;
+    }
+
+    .view-toggle-button:not(.is-active):hover {
+        border-color: var(--accent-border);
+        background: var(--accent-soft);
+        color: var(--accent-strong);
+    }
+
+    .view-toggle-button:focus-visible {
+        outline: 2px solid var(--focus-color);
+        outline-offset: 3px;
+    }
+
+    .view-toggle-icon {
+        display: block;
+        width: 16px;
+        height: 16px;
+    }
+
+    .view-toggle-icon--list {
+        background:
+            linear-gradient(currentColor 0 0) 0 2px / 16px 2px no-repeat,
+            linear-gradient(currentColor 0 0) 0 7px / 16px 2px no-repeat,
+            linear-gradient(currentColor 0 0) 0 12px / 16px 2px no-repeat;
+    }
+
+    .view-toggle-icon--grid {
+        background:
+            linear-gradient(currentColor 0 0) 1px 1px / 6px 6px no-repeat,
+            linear-gradient(currentColor 0 0) 9px 1px / 6px 6px no-repeat,
+            linear-gradient(currentColor 0 0) 1px 9px / 6px 6px no-repeat,
+            linear-gradient(currentColor 0 0) 9px 9px / 6px 6px no-repeat;
+    }
+
+    .view-toggle-icon--grid-compact {
+        background:
+            linear-gradient(currentColor 0 0) 0 0 / 4px 4px no-repeat,
+            linear-gradient(currentColor 0 0) 6px 0 / 4px 4px no-repeat,
+            linear-gradient(currentColor 0 0) 12px 0 / 4px 4px no-repeat,
+            linear-gradient(currentColor 0 0) 0 6px / 4px 4px no-repeat,
+            linear-gradient(currentColor 0 0) 6px 6px / 4px 4px no-repeat,
+            linear-gradient(currentColor 0 0) 12px 6px / 4px 4px no-repeat,
+            linear-gradient(currentColor 0 0) 0 12px / 4px 4px no-repeat,
+            linear-gradient(currentColor 0 0) 6px 12px / 4px 4px no-repeat,
+            linear-gradient(currentColor 0 0) 12px 12px / 4px 4px no-repeat;
+    }
+
+    .archive-filter-panel {
+        display: grid;
+        gap: var(--space-2);
+        margin: 0 0 var(--space-5);
+    }
+
+    .archive-filter-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--space-2) 10px;
+    }
+
+    .archive-filter-status {
+        margin: 0;
+        color: var(--muted);
+        font-size: var(--type-meta);
+        line-height: var(--leading-meta);
+    }
+
+    .archive-filter-chip {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        width: max-content;
+        min-height: 32px;
+        margin: 0;
+        padding: 4px 10px;
+        border: 1px solid var(--rule);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.72);
+        color: var(--text);
+        font: inherit;
+        font-size: var(--type-label);
+        line-height: 1.35;
+        letter-spacing: 0.01em;
+        appearance: none;
+        cursor: pointer;
+        touch-action: manipulation;
+        transition:
+            border-color var(--motion-fast) var(--ease-out),
+            background-color var(--motion-fast) var(--ease-out),
+            color var(--motion-fast) var(--ease-out);
+    }
+
+    .archive-filter-chip::before {
+        content: "";
+        position: absolute;
+        inset: -4px;
+    }
+
+    .archive-filter-chip:not(.is-active):hover {
+        border-color: var(--accent-border);
+        background: var(--accent-soft);
+        color: var(--accent-strong);
+    }
+
+    .archive-filter-chip.is-active {
+        border-color: var(--control-active);
+        background: var(--control-active);
+        color: #fff;
+    }
+
+    .archive-filter-chip:focus-visible {
+        outline: 2px solid var(--focus-color);
+        outline-offset: 3px;
+    }
+}
+
+@layer responsive {
+    @media (prefers-reduced-motion: reduce) {
+        .view-toggle-button,
+        .archive-filter-chip {
+            transition: none;
+        }
+    }
+}

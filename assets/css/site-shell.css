@@ -245,7 +245,7 @@ a {
     border: 0 !important;
 }
 
-@media (max-width: 960px) {
+@media (max-width: 920px) {
     .header-shell {
         width: min(100vw - 32px, 1180px);
     }

@@ -411,7 +411,6 @@
         padding-right var(--motion-expand) var(--ease-out),
         padding-bottom var(--motion-expand) var(--ease-out),
         transform var(--motion-expand) var(--ease-out);
-    will-change: height, opacity, transform;
 }
 
 .news-scroll-area.is-draggable {
@@ -787,7 +786,7 @@
     color: var(--muted);
 }
 
-@media (max-width: 960px) {
+@media (max-width: 920px) {
     .home-layout {
         grid-template-columns: 1fr;
         gap: 0;
@@ -849,7 +848,7 @@
     }
 }
 
-@media (max-width: 960px) {
+@media (max-width: 920px) {
     .shell {
         width: min(100vw - 32px, 1180px);
     }
