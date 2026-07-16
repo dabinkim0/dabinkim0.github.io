@@ -1,0 +1,11 @@
+{
+  "name": "dabinkim-portfolio-ui",
+  "private": true,
+  "scripts": {
+    "test:ui": "playwright test",
+    "test:ui:update": "playwright test --update-snapshots=all"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.61.1"
+  }
+}

@@ -38,6 +38,8 @@ Personal website hosted with GitHub Pages.
 ├── assets/
 │   ├── css/
 │   │   ├── adatt.css
+│   │   ├── archive-controls.css
+│   │   ├── archive-layout.css
 │   │   ├── ddsp-carsound.css
 │   │   ├── index.css
 │   │   ├── projects.css
@@ -50,10 +52,16 @@ Personal website hosted with GitHub Pages.
 │   │   └── dabin-kim-cv.pdf
 │   └── js/
 │       ├── adatt.js
+│       ├── archive-view.js
 │       ├── index.js
 │       ├── mathjax-config.js
 │       ├── projects.js
 │       └── publications.js
+├── docs/
+│   └── UI_MAINTENANCE.md
+├── tests/
+│   ├── archive-layout.spec.mjs
+│   └── home-panels.spec.mjs
 └── favicon.svg
 ```
 
@@ -70,6 +78,7 @@ Personal website hosted with GitHub Pages.
 ## Frontend Organization
 
 - Shared layout, navigation, contact, and footer rules live in `assets/css/site-shell.css`.
+- Projects and Publications share archive layout, controls, and view state through `archive-layout.css`, `archive-controls.css`, and `archive-view.js`.
 - Page-specific styles are stored in the remaining `assets/css/*.css` files and linked after the shared stylesheet.
 - Page-specific scripts are stored in `assets/js/*.js`.
 - Shared site-wide images such as profile photos are stored in `assets/images/`.
@@ -86,6 +95,19 @@ Personal website hosted with GitHub Pages.
 - If a public URL changes, keep a tiny redirect page at the old path and document it under Route Rules.
 - When adding demo audio in `publications/adatt/audio`, generate matching spectrograms in `publications/adatt/spectrograms`.
 - Update `assets/docs/dabin-kim-cv.pdf` by editing and running `scripts/build_cv_pdf.py`.
+- Follow `docs/UI_MAINTENANCE.md` for archive DOM, responsive, and screenshot-regression rules.
+
+## UI Regression Tests
+
+Run:
+
+```bash
+npm ci
+npx playwright install chromium
+npm run test:ui
+```
+
+The Playwright suite verifies Projects and Publications at `390`, `720`, `920`, and `1180px` in all three view modes, plus the home accordion states. Update screenshots with `npm run test:ui:update` only after reviewing the visual changes.
 
 ## CV PDF
 

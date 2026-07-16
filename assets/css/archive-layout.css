@@ -1,0 +1,189 @@
+@layer tokens, base, components, pages, responsive, utilities;
+
+@layer tokens {
+    :root {
+        --archive-grid-gap: 30px clamp(22px, 2.8vw, 34px);
+        --archive-media-title-gap: 10px;
+        --archive-list-media-width: clamp(210px, 23vw, 292px);
+    }
+}
+
+@layer components {
+    .archive-page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .archive-page .shell {
+        width: min(1180px, calc(100vw - 48px));
+        margin: 0 auto;
+    }
+
+    .archive-page .page-shell {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 36px 0 72px;
+    }
+
+    .archive-page .page-intro {
+        max-width: none;
+        margin-bottom: var(--space-5);
+    }
+
+    .archive-page .page-intro h1 {
+        margin: 0 0 14px;
+        max-width: none;
+        font-size: clamp(3.2rem, 4.8vw, 4.8rem);
+        font-weight: 400;
+        line-height: 0.96;
+        letter-spacing: -0.04em;
+    }
+
+    .archive-page .page-summary {
+        max-width: none;
+        margin: 0;
+        color: var(--muted);
+        font-size: var(--type-intro);
+        line-height: var(--leading-body);
+    }
+
+    .archive-page .page-summary-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 18px;
+    }
+
+    .archive-page .archive-section {
+        flex: 1;
+        padding-top: var(--space-5);
+        padding-bottom: clamp(28px, 4vw, 44px);
+        border-top: 1px solid var(--rule);
+    }
+
+    .archive-page .section-label {
+        margin: 0 0 var(--space-4);
+        color: var(--text);
+        font-size: var(--type-body);
+        font-weight: 500;
+        letter-spacing: 0.02em;
+    }
+
+    .archive-page .contact-section {
+        margin-top: auto;
+        padding-top: var(--space-5);
+        border-top: 1px solid var(--rule);
+        text-align: center;
+    }
+
+    .archive-view {
+        display: grid;
+    }
+
+    .archive-card {
+        display: grid;
+        min-width: 0;
+    }
+
+    .archive-card__media {
+        grid-area: media;
+    }
+
+    .archive-card__copy {
+        grid-area: copy;
+        min-width: 0;
+    }
+
+    .archive-card__meta {
+        grid-area: meta;
+        min-width: 0;
+    }
+
+    .archive-view[data-view="grid"] {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--archive-grid-gap);
+    }
+
+    .archive-view[data-view="grid-compact"] {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: var(--archive-grid-gap);
+    }
+
+    .archive-view:is([data-view="grid"], [data-view="grid-compact"]) .archive-card--project {
+        grid-template-areas:
+            "media"
+            "copy"
+            "meta";
+    }
+
+    .archive-view:is([data-view="grid"], [data-view="grid-compact"]) .archive-card--publication {
+        grid-template-areas:
+            "media"
+            "copy";
+    }
+
+    .archive-view:is([data-view="grid"], [data-view="grid-compact"]) .archive-card {
+        grid-template-columns: 1fr;
+        gap: var(--archive-card-stack-gap, var(--archive-media-title-gap));
+        align-content: start;
+        padding: 0;
+        border-bottom: none;
+    }
+}
+
+@layer responsive {
+    /* Archive-wide layout breakpoints are standardized at 920px and 720px. */
+    @media (max-width: 920px) {
+        .archive-view[data-view="grid-compact"] {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .archive-page .shell {
+            width: min(100vw - 32px, 1180px);
+        }
+    }
+
+    @media (max-width: 720px) {
+        .archive-page .page-shell {
+            padding: 32px 0 56px;
+        }
+
+        .archive-page .page-intro h1 {
+            font-size: 3.6rem;
+        }
+
+        .archive-page .page-summary {
+            font-size: var(--type-body-large);
+        }
+
+        .archive-page .page-summary-row {
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .archive-view:is([data-view="list"], [data-view="grid"], [data-view="grid-compact"]) {
+            grid-template-columns: 1fr;
+            gap: 0;
+        }
+
+        .archive-view:is([data-view="list"], [data-view="grid"], [data-view="grid-compact"]) .archive-card--project {
+            grid-template-areas:
+                "media"
+                "copy"
+                "meta";
+        }
+
+        .archive-view:is([data-view="list"], [data-view="grid"], [data-view="grid-compact"]) .archive-card--publication {
+            grid-template-areas:
+                "media"
+                "copy";
+        }
+
+        .archive-view:is([data-view="list"], [data-view="grid"], [data-view="grid-compact"]) .archive-card {
+            grid-template-columns: 1fr;
+            align-content: start;
+        }
+    }
+}

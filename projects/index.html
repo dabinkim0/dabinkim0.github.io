@@ -17,10 +17,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&amp;family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../assets/css/site-shell.css">
-    <link rel="stylesheet" href="../assets/css/projects.css">
     <link rel="stylesheet" href="../assets/css/typography.css">
+    <link rel="stylesheet" href="../assets/css/archive-layout.css">
+    <link rel="stylesheet" href="../assets/css/archive-controls.css">
+    <link rel="stylesheet" href="../assets/css/projects.css">
 </head>
-<body>
+<body class="archive-page">
     <header class="main-header">
         <div class="shell header-shell">
             <a href="../index.html" class="logo">Dabin Kim</a>
@@ -42,14 +44,14 @@
                 <p class="page-summary">
                     A selected archive of projects spanning music composition and interactive sound design, primarily completed before 2024.
                 </p>
-                <div class="project-view-toggle" role="group" aria-label="Project layout">
-                    <button class="view-toggle-button" type="button" data-project-view="list" aria-label="List view" aria-pressed="false">
+                <div class="archive-view-toggle" data-archive-controls="project-archive" role="group" aria-label="Project layout">
+                    <button class="view-toggle-button" type="button" data-archive-view-option="list" aria-label="List view" aria-pressed="false">
                         <span class="view-toggle-icon view-toggle-icon--list" aria-hidden="true"></span>
                     </button>
-                    <button class="view-toggle-button" type="button" data-project-view="grid" aria-label="Grid view" aria-pressed="false">
+                    <button class="view-toggle-button" type="button" data-archive-view-option="grid" aria-label="Grid view" aria-pressed="false">
                         <span class="view-toggle-icon view-toggle-icon--grid" aria-hidden="true"></span>
                     </button>
-                    <button class="view-toggle-button is-active" type="button" data-project-view="grid-compact" aria-label="Compact grid view" aria-pressed="true">
+                    <button class="view-toggle-button is-active" type="button" data-archive-view-option="grid-compact" aria-label="Compact grid view" aria-pressed="true">
                         <span class="view-toggle-icon view-toggle-icon--grid-compact" aria-hidden="true"></span>
                     </button>
                 </div>
@@ -57,14 +59,26 @@
         </section>
 
         <section class="archive-section">
-            <div class="project-filter-panel" data-project-filter-panel>
-                <div class="project-filter-list" data-project-filter-list role="group" aria-label="Filter projects"></div>
-                <p class="project-filter-status" data-project-filter-status aria-live="polite" aria-atomic="true">Showing all projects.</p>
+            <div class="project-filter-panel archive-filter-panel" data-project-filter-panel>
+                <div class="project-filter-list archive-filter-list" data-project-filter-list role="group" aria-label="Filter projects"></div>
+                <p class="project-filter-status archive-filter-status" data-project-filter-status aria-live="polite" aria-atomic="true">Showing all projects.</p>
             </div>
 
-            <div class="project-list is-grid-compact" data-project-list>
-                <article class="project-entry">
-                    <div class="project-meta">
+            <div id="project-archive" class="project-list archive-view" data-project-list data-view="grid-compact">
+                <article class="project-entry archive-card archive-card--project">
+                        <figure class="project-figure archive-card__media">
+                            <img src="figs/dorothymyoon_cho.jpg" alt="Media Art: Chopyeong Magic Island" width="4320" height="4320" decoding="async" fetchpriority="high">
+                        </figure>
+                    <div class="project-content archive-card__copy">
+                        <h2>Media Art: 초평오행도 (Chopyeong Magic Island, 草坪五行島)</h2>
+                        <p class="project-summary">
+                            Artist: Dorothy M. Yoon.
+                        </p>
+                        <p class="project-description">
+                            Designed the interactive sound system and original soundtrack for a metaverse-based media artwork, shaping an immersive sonic experience inspired by the cosmology of the five elements.
+                        </p>
+                    </div>
+                    <div class="project-meta archive-card__meta">
                         <button class="format-tag" type="button" data-filter-tag="Interactive Sound Design">Interactive Sound Design</button>
                         <p class="meta-label">Role</p>
                         <p class="meta-value">Music Director</p>
@@ -77,22 +91,22 @@
                             <a class="meta-link" href="https://d11gqctr4esips.cloudfront.net/" target="_blank" rel="noreferrer" aria-label="Open project page for Media Art: 초평오행도 (Chopyeong Magic Island, 草坪五行島)">Project Page ↗</a>
                         </p>
                     </div>
-                    <div class="project-content project-content--has-figure">
-                        <figure class="project-figure">
-                            <img src="figs/dorothymyoon_cho.jpg" alt="Media Art: Chopyeong Magic Island" width="4320" height="4320" decoding="async" fetchpriority="high">
-                        </figure>
-                        <h2>Media Art: 초평오행도 (Chopyeong Magic Island, 草坪五行島)</h2>
-                        <p class="project-summary">
-                            Artist: Dorothy M. Yoon.
-                        </p>
-                        <p class="project-description">
-                            Designed the interactive sound system and original soundtrack for a metaverse-based media artwork, shaping an immersive sonic experience inspired by the cosmology of the five elements.
-                        </p>
-                    </div>
                 </article>
 
-                <article class="project-entry">
-                    <div class="project-meta">
+                <article class="project-entry archive-card archive-card--project">
+                        <figure class="project-figure archive-card__media">
+                            <img src="figs/allabouterror.jpeg" alt="Live Performance: All About Error" width="1667" height="2424" loading="lazy" decoding="async">
+                        </figure>
+                    <div class="project-content archive-card__copy">
+                        <h2>Live Performance: All About Error</h2>
+                        <p class="project-summary">
+                            Artist: Neo Harmonics (이태헌, 권태균, 최재란, 강요섭, 김준형).
+                        </p>
+                        <p class="project-description">
+                            Provided technical support for the Max for Live-based audio system used in the live performance.
+                        </p>
+                    </div>
+                    <div class="project-meta archive-card__meta">
                         <button class="format-tag" type="button" data-filter-tag="Interactive Sound Design">Interactive Sound Design</button>
                         <p class="meta-label">Role</p>
                         <p class="meta-value">Technical Support</p>
@@ -105,22 +119,22 @@
                             <a class="meta-link" href="../projects/posters/poster_all_about_error.png" data-popup-image="poster" aria-label="Open poster image for Live Performance: All About Error">Poster</a>
                         </p>
                     </div>
-                    <div class="project-content project-content--has-figure">
-                        <figure class="project-figure">
-                            <img src="figs/allabouterror.jpeg" alt="Live Performance: All About Error" width="1667" height="2424" loading="lazy" decoding="async">
-                        </figure>
-                        <h2>Live Performance: All About Error</h2>
-                        <p class="project-summary">
-                            Artist: Neo Harmonics (이태헌, 권태균, 최재란, 강요섭, 김준형).
-                        </p>
-                        <p class="project-description">
-                            Provided technical support for the Max for Live-based audio system used in the live performance.
-                        </p>
-                    </div>
                 </article>
 
-                <article class="project-entry">
-                    <div class="project-meta">
+                <article class="project-entry archive-card archive-card--project">
+                        <figure class="project-figure archive-card__media">
+                            <img src="figs/rittual.png" alt="Live Performance: 만물관객, 리추얼 천골" width="1290" height="952" loading="lazy" decoding="async">
+                        </figure>
+                    <div class="project-content archive-card__copy">
+                        <h2>Live Performance: 만물관객, 리추얼 천골 (Manmulgwanggaek, Ritual Cheongol)</h2>
+                        <p class="project-summary">
+                            Artists: 고헌, 권세현, 성은지, 성창현, 임금님.
+                        </p>
+                        <p class="project-description">
+                            Designed a real-time bio-signal data sonification in Max/MSP that transforms the respiratory resonance frequency data of four dancers into sound, using I Ching trigrams as a structural framework for harmony and rhythm.
+                        </p>
+                    </div>
+                    <div class="project-meta archive-card__meta">
                         <button class="format-tag" type="button" data-filter-tag="Interactive Sound Design">Interactive Sound Design</button>
                         <p class="meta-label">Role</p>
                         <p class="meta-value">Developer</p>
@@ -137,22 +151,22 @@
                             <a class="meta-link" href="https://kooooong.notion.site/a93cdf98cf3a44d18539f17a607887a2" target="_blank" rel="noreferrer" aria-label="Open project page for Live Performance: 만물관객, 리추얼 천골 (Manmulgwanggaek, Ritual Cheongol)">Project Page ↗</a>
                         </p>
                     </div>
-                    <div class="project-content project-content--has-figure">
-                        <figure class="project-figure">
-                            <img src="figs/rittual.png" alt="Live Performance: 만물관객, 리추얼 천골" width="1290" height="952" loading="lazy" decoding="async">
-                        </figure>
-                        <h2>Live Performance: 만물관객, 리추얼 천골 (Manmulgwanggaek, Ritual Cheongol)</h2>
-                        <p class="project-summary">
-                            Artists: 고헌, 권세현, 성은지, 성창현, 임금님.
-                        </p>
-                        <p class="project-description">
-                            Designed a real-time bio-signal data sonification in Max/MSP that transforms the respiratory resonance frequency data of four dancers into sound, using I Ching trigrams as a structural framework for harmony and rhythm.
-                        </p>
-                    </div>
                 </article>
 
-                <article class="project-entry">
-                    <div class="project-meta">
+                <article class="project-entry archive-card archive-card--project">
+                        <figure class="project-figure archive-card__media">
+                            <img src="figs/dorothymyoon_44magicsticks.jpg" alt="Paradise Art Lab Festival VR Media Art: 44 Magic Sticks and Saekdong Aura" width="869" height="540" loading="lazy" decoding="async">
+                        </figure>
+                    <div class="project-content archive-card__copy">
+                        <h2>Paradise Art Lab Festival VR Media Art: 44개 색동 요술봉과 색동 아우라 (44 Magic Sticks and Saekdong Aura)</h2>
+                        <p class="project-summary">
+                            Artist: Dorothy M. Yoon.
+                        </p>
+                        <p class="project-description">
+                            Designed the interaction system, created the sound effects, and produced the original soundtrack for an AR-based environment.
+                        </p>
+                    </div>
+                    <div class="project-meta archive-card__meta">
                         <button class="format-tag" type="button" data-filter-tag="Interactive Sound Design">Interactive Sound Design</button>
                         <p class="meta-label">Role</p>
                         <p class="meta-value">Music Director</p>
@@ -165,22 +179,22 @@
                             <a class="meta-link" href="http://dorothymyoon.com/portfolio/44-magic-sticks-and-saekdong-aura/" target="_blank" rel="noreferrer" aria-label="Open project page for Paradise Art Lab Festival VR Media Art: 44개 색동 요술봉과 색동 아우라 (44 Magic Sticks and Saekdong Aura)">Project Page ↗</a>
                         </p>
                     </div>
-                    <div class="project-content project-content--has-figure">
-                        <figure class="project-figure">
-                            <img src="figs/dorothymyoon_44magicsticks.jpg" alt="Paradise Art Lab Festival VR Media Art: 44 Magic Sticks and Saekdong Aura" width="869" height="540" loading="lazy" decoding="async">
+                </article>
+
+                <article class="project-entry archive-card archive-card--project">
+                        <figure class="project-figure archive-card__media project-figure--poppop">
+                            <img src="figs/dorothymyoon_poppop.jpg" alt="Live Performance: POP! POP! Dodoland" width="600" height="454" loading="lazy" decoding="async">
                         </figure>
-                        <h2>Paradise Art Lab Festival VR Media Art: 44개 색동 요술봉과 색동 아우라 (44 Magic Sticks and Saekdong Aura)</h2>
+                    <div class="project-content archive-card__copy">
+                        <h2>Live Performance: 경기도 어린이박물관 어린이 예술제4 퍼포먼스: POP! POP! 도도랜드</h2>
                         <p class="project-summary">
                             Artist: Dorothy M. Yoon.
                         </p>
                         <p class="project-description">
-                            Designed the interaction system, created the sound effects, and produced the original soundtrack for an AR-based environment.
+                            Composed and produced the original music for a children's museum performance combining movement, media, and live storytelling.
                         </p>
                     </div>
-                </article>
-
-                <article class="project-entry">
-                    <div class="project-meta">
+                    <div class="project-meta archive-card__meta">
                         <button class="format-tag" type="button" data-filter-tag="Music">Music</button>
                         <p class="meta-label">Role</p>
                         <p class="meta-value">Composer</p>
@@ -193,22 +207,22 @@
                             <a class="meta-link" href="https://www.youtube.com/playlist?list=PLyyTK5ekx9MDHOUCpi8zvVD7-H41a9All" target="_blank" rel="noreferrer" aria-label="Open audio clip for Live Performance: 경기도 어린이박물관 어린이 예술제4 퍼포먼스: POP! POP! 도도랜드">Audio Clip ↗</a>
                         </p>
                     </div>
-                    <div class="project-content project-content--has-figure">
-                        <figure class="project-figure project-figure--poppop">
-                            <img src="figs/dorothymyoon_poppop.jpg" alt="Live Performance: POP! POP! Dodoland" width="600" height="454" loading="lazy" decoding="async">
-                        </figure>
-                        <h2>Live Performance: 경기도 어린이박물관 어린이 예술제4 퍼포먼스: POP! POP! 도도랜드</h2>
-                        <p class="project-summary">
-                            Artist: Dorothy M. Yoon.
-                        </p>
-                        <p class="project-description">
-                            Composed and produced the original music for a children's museum performance combining movement, media, and live storytelling.
-                        </p>
-                    </div>
                 </article>
 
-                <article class="project-entry">
-                    <div class="project-meta">
+                <article class="project-entry archive-card archive-card--project">
+                        <figure class="project-figure archive-card__media">
+                            <img src="figs/supercollider_logo.png" alt="Granular Synthesis-based Orchestral Sound Generator" width="8718" height="6144" loading="lazy" decoding="async">
+                        </figure>
+                    <div class="project-content archive-card__copy">
+                        <h2>Granular Synthesis-based Orchestral Sound Generator</h2>
+                        <p class="project-summary">
+                            Personal project.
+                        </p>
+                        <p class="project-description">
+                            Built an end-to-end SuperCollider system that generates orchestral textures from two three-second samples using granular synthesis, custom delay, and reverb processing.
+                        </p>
+                    </div>
+                    <div class="project-meta archive-card__meta">
                         <button class="format-tag" type="button" data-filter-tag="Interactive Sound Design">Interactive Sound Design</button>
                         <p class="meta-label">Role</p>
                         <p class="meta-value">Developer</p>
@@ -221,22 +235,22 @@
                             <a class="meta-link" href="https://www.youtube.com/watch?v=FicBVExcqVo" target="_blank" rel="noreferrer" aria-label="Open demo for Granular Synthesis-based Orchestral Sound Generator">Demo ↗</a>
                         </p>
                     </div>
-                    <div class="project-content project-content--has-figure">
-                        <figure class="project-figure">
-                            <img src="figs/supercollider_logo.png" alt="Granular Synthesis-based Orchestral Sound Generator" width="8718" height="6144" loading="lazy" decoding="async">
-                        </figure>
-                        <h2>Granular Synthesis-based Orchestral Sound Generator</h2>
-                        <p class="project-summary">
-                            Personal project.
-                        </p>
-                        <p class="project-description">
-                            Built an end-to-end SuperCollider system that generates orchestral textures from two three-second samples using granular synthesis, custom delay, and reverb processing.
-                        </p>
-                    </div>
                 </article>
 
-                <article class="project-entry">
-                    <div class="project-meta">
+                <article class="project-entry archive-card archive-card--project">
+                        <figure class="project-figure archive-card__media">
+                            <img src="figs/dmz_dna_sonification.jpg" alt="Exhibition: DMZ native plant DNA sonification" width="850" height="381" loading="lazy" decoding="async">
+                        </figure>
+                    <div class="project-content archive-card__copy">
+                        <h2>Exhibition: 식물의 소리 (DMZ 자생식물 DNA Sonification 음감회, 서울숲)</h2>
+                        <p class="project-summary">
+                            Artists: 권병준, 이다영.
+                        </p>
+                        <p class="project-description">
+                            Developed and operated a Max/MSP patch to translate the DNA data of DMZ native plants into real-time auditory experiences. Also provided technical support for designing harmonically and melodically coherent progression algorithms for real-time data-to-sound mapping.
+                        </p>
+                    </div>
+                    <div class="project-meta archive-card__meta">
                         <button class="format-tag" type="button" data-filter-tag="Interactive Sound Design">Interactive Sound Design</button>
                         <p class="meta-label">Role</p>
                         <p class="meta-value">Audio Engineer</p>
@@ -249,22 +263,22 @@
                             <a class="meta-link" href="../projects/posters/poster_dna_sonification.jpg" data-popup-image="poster" aria-label="Open poster image for Exhibition: 식물의 소리 (DMZ 자생식물 DNA Sonification 음감회, 서울숲)">Poster</a>
                         </p>
                     </div>
-                    <div class="project-content project-content--has-figure">
-                        <figure class="project-figure">
-                            <img src="figs/dmz_dna_sonification.jpg" alt="Exhibition: DMZ native plant DNA sonification" width="850" height="381" loading="lazy" decoding="async">
-                        </figure>
-                        <h2>Exhibition: 식물의 소리 (DMZ 자생식물 DNA Sonification 음감회, 서울숲)</h2>
-                        <p class="project-summary">
-                            Artists: 권병준, 이다영.
-                        </p>
-                        <p class="project-description">
-                            Developed and operated a Max/MSP patch to translate the DNA data of DMZ native plants into real-time auditory experiences. Also provided technical support for designing harmonically and melodically coherent progression algorithms for real-time data-to-sound mapping.
-                        </p>
-                    </div>
                 </article>
 
-                <article class="project-entry">
-                    <div class="project-meta">
+                <article class="project-entry archive-card archive-card--project">
+                        <figure class="project-figure archive-card__media">
+                            <img src="figs/goodluck.png" alt="Original Soundtrack: 합격을 기원합니다" width="979" height="850" loading="lazy" decoding="async">
+                        </figure>
+                    <div class="project-content archive-card__copy">
+                        <h2>Original Soundtrack: 합격을 기원합니다</h2>
+                        <p class="project-summary">
+                            Directors: 박세원, 민지산.
+                        </p>
+                        <p class="project-description">
+                            Composed the original soundtrack and handled audio post-production for the independent film.
+                        </p>
+                    </div>
+                    <div class="project-meta archive-card__meta">
                         <button class="format-tag" type="button" data-filter-tag="Music">Music</button>
                         <p class="meta-label">Role</p>
                         <p class="meta-value">Music Director</p>
@@ -277,22 +291,22 @@
                             <a class="meta-link" href="https://www.youtube.com/watch?v=QQPLZ69rmTA&amp;list=PLyyTK5ekx9MDM-N5Yu0HykOpCTlsUwpKH" target="_blank" rel="noreferrer" aria-label="Open audio clip for Original Soundtrack: 합격을 기원합니다">Audio Clip ↗</a>
                         </p>
                     </div>
-                    <div class="project-content project-content--has-figure">
-                        <figure class="project-figure">
-                            <img src="figs/goodluck.png" alt="Original Soundtrack: 합격을 기원합니다" width="979" height="850" loading="lazy" decoding="async">
-                        </figure>
-                        <h2>Original Soundtrack: 합격을 기원합니다</h2>
-                        <p class="project-summary">
-                            Directors: 박세원, 민지산.
-                        </p>
-                        <p class="project-description">
-                            Composed the original soundtrack and handled audio post-production for the independent film.
-                        </p>
-                    </div>
                 </article>
 
-                <article class="project-entry">
-                    <div class="project-meta">
+                <article class="project-entry archive-card archive-card--project">
+                        <figure class="project-figure archive-card__media">
+                            <img src="figs/ssangbitnari.png" alt="MIDI Controller: Ssangbitnari" width="1534" height="859" loading="lazy" decoding="async">
+                        </figure>
+                    <div class="project-content archive-card__copy">
+                        <h2>MIDI Controller: 쌍빛나리 (Ssangbitnari)</h2>
+                        <p class="project-summary">
+                            Developers: 김건호, 김다빈, 양승현.
+                        </p>
+                        <p class="project-description">
+                            Developed an Arduino-based MIDI controller that maps orientation and motion to sound parameters in Pure Data, with channel switching and LED feedback designed for intuitive live performance.
+                        </p>
+                    </div>
+                    <div class="project-meta archive-card__meta">
                         <button class="format-tag" type="button" data-filter-tag="Hardware Interface">Hardware Interface</button>
                         <p class="meta-label">Role</p>
                         <p class="meta-value">Developer</p>
@@ -305,22 +319,22 @@
                             <a class="meta-link" href="https://www.youtube.com/watch?v=Jc-FzXt6E1Y" target="_blank" rel="noreferrer" aria-label="Open demo for MIDI Controller: 쌍빛나리 (Ssangbitnari)">Demo ↗</a>
                         </p>
                     </div>
-                    <div class="project-content project-content--has-figure">
-                        <figure class="project-figure">
-                            <img src="figs/ssangbitnari.png" alt="MIDI Controller: Ssangbitnari" width="1534" height="859" loading="lazy" decoding="async">
-                        </figure>
-                        <h2>MIDI Controller: 쌍빛나리 (Ssangbitnari)</h2>
-                        <p class="project-summary">
-                            Developers: 김건호, 김다빈, 양승현.
-                        </p>
-                        <p class="project-description">
-                            Developed an Arduino-based MIDI controller that maps orientation and motion to sound parameters in Pure Data, with channel switching and LED feedback designed for intuitive live performance.
-                        </p>
-                    </div>
                 </article>
 
-                <article class="project-entry">
-                    <div class="project-meta">
+                <article class="project-entry archive-card archive-card--project">
+                        <figure class="project-figure archive-card__media">
+                            <img src="figs/die_verwandlung.jpg" alt="Original Soundtrack: Die Verwandlung" width="550" height="484" loading="lazy" decoding="async">
+                        </figure>
+                    <div class="project-content archive-card__copy">
+                        <h2>Original Soundtrack: 변신 (Die Verwandlung)</h2>
+                        <p class="project-summary">
+                            Director: 기성림.
+                        </p>
+                        <p class="project-description">
+                            Designed the theatrical soundscape and composed the original soundtrack for the 66th regular production of Die Verwandlung.
+                        </p>
+                    </div>
+                    <div class="project-meta archive-card__meta">
                         <button class="format-tag" type="button" data-filter-tag="Music">Music</button>
                         <p class="meta-label">Role</p>
                         <p class="meta-value">Music Director</p>
@@ -337,22 +351,22 @@
                             <a class="meta-link" href="https://www.youtube.com/watch?v=MOen8vCmTvQ" target="_blank" rel="noreferrer" aria-label="Open archive video for Original Soundtrack: 변신 (Die Verwandlung)">Archive ↗</a>
                         </p>
                     </div>
-                    <div class="project-content project-content--has-figure">
-                        <figure class="project-figure">
-                            <img src="figs/die_verwandlung.jpg" alt="Original Soundtrack: Die Verwandlung" width="550" height="484" loading="lazy" decoding="async">
-                        </figure>
-                        <h2>Original Soundtrack: 변신 (Die Verwandlung)</h2>
-                        <p class="project-summary">
-                            Director: 기성림.
-                        </p>
-                        <p class="project-description">
-                            Designed the theatrical soundscape and composed the original soundtrack for the 66th regular production of Die Verwandlung.
-                        </p>
-                    </div>
                 </article>
 
-                <article class="project-entry">
-                    <div class="project-meta">
+                <article class="project-entry archive-card archive-card--project">
+                        <figure class="project-figure archive-card__media">
+                            <img src="figs/gyeonggi1000.jpg" alt="Original Soundtrack: 오! 경기의 천년여행" width="510" height="411" loading="lazy" decoding="async">
+                        </figure>
+                    <div class="project-content archive-card__copy">
+                        <h2>Original Soundtrack: 경기도박물관 경기천년특별전 영상 &lt;오! 경기의 천년여행&gt;</h2>
+                        <p class="project-summary">
+                            Creators: 이보아, 김도유, 박주혁, 최희현, 이윤경, 양기태, 박찬우, 김진수, 우주언, 김다빈.
+                        </p>
+                        <p class="project-description">
+                            Composed and directed the original soundtrack for a Gyeonggi Provincial Museum film created for the Gyeonggi Millennium special exhibition.
+                        </p>
+                    </div>
+                    <div class="project-meta archive-card__meta">
                         <button class="format-tag" type="button" data-filter-tag="Music">Music</button>
                         <p class="meta-label">Role</p>
                         <p class="meta-value">Music Director</p>
@@ -365,22 +379,22 @@
                             <a class="meta-link" href="https://www.youtube.com/watch?v=IGH19Vskk8M" target="_blank" rel="noreferrer" aria-label="Open audio clip for Original Soundtrack: 경기도박물관 경기천년특별전 영상 오! 경기의 천년여행">Audio Clip ↗</a>
                         </p>
                     </div>
-                    <div class="project-content project-content--has-figure">
-                        <figure class="project-figure">
-                            <img src="figs/gyeonggi1000.jpg" alt="Original Soundtrack: 오! 경기의 천년여행" width="510" height="411" loading="lazy" decoding="async">
-                        </figure>
-                        <h2>Original Soundtrack: 경기도박물관 경기천년특별전 영상 &lt;오! 경기의 천년여행&gt;</h2>
-                        <p class="project-summary">
-                            Creators: 이보아, 김도유, 박주혁, 최희현, 이윤경, 양기태, 박찬우, 김진수, 우주언, 김다빈.
-                        </p>
-                        <p class="project-description">
-                            Composed and directed the original soundtrack for a Gyeonggi Provincial Museum film created for the Gyeonggi Millennium special exhibition.
-                        </p>
-                    </div>
                 </article>
 
-                <article class="project-entry">
-                    <div class="project-meta">
+                <article class="project-entry archive-card archive-card--project">
+                        <figure class="project-figure archive-card__media">
+                            <img src="figs/gyeonggi.png" alt="VR Media Art: 천년경기와 미디어의 만남 in 봄" width="1130" height="758" loading="lazy" decoding="async">
+                        </figure>
+                    <div class="project-content archive-card__copy">
+                        <h2>VR Media Art: 경기도박물관 '천년경기와 미디어의 만남 in 봄' VR Media Art: Retrospect &amp; Prospect, 책가도</h2>
+                        <p class="project-summary">
+                            Creators: Prof. Boa Lee and the Research Team (Art &amp; Technology, Sogang University).
+                        </p>
+                        <p class="project-description">
+                            Produced the original soundtrack and designed the sound interaction system for a media artwork that reinterprets Jang Han-jong's Chaekgado from a contemporary perspective.
+                        </p>
+                    </div>
+                    <div class="project-meta archive-card__meta">
                         <button class="format-tag" type="button" data-filter-tag="Music">Music</button>
                         <p class="meta-label">Role</p>
                         <p class="meta-value">Music Director, Developer</p>
@@ -393,22 +407,22 @@
                             <a class="meta-link" href="https://creative.sogang.ac.kr/%EC%95%84%ED%85%8D-%EC%9D%B4%EB%B3%B4%EC%95%84%EA%B5%90%EC%88%98%EC%99%80-%EC%97%B0%EA%B5%AC%ED%8C%80-%EA%B2%BD%EA%B8%B0%EB%8F%84%EB%B0%95%EB%AC%BC%EA%B4%80-%ED%8A%B9%EB%B3%84%EC%A0%84-%EC%A0%84/" target="_blank" rel="noreferrer" aria-label="Open related page for VR Media Art: 경기도박물관 천년경기와 미디어의 만남 in 봄 VR Media Art: Retrospect and Prospect, 책가도">Related Page ↗</a>
                         </p>
                     </div>
-                    <div class="project-content project-content--has-figure">
-                        <figure class="project-figure">
-                            <img src="figs/gyeonggi.png" alt="VR Media Art: 천년경기와 미디어의 만남 in 봄" width="1130" height="758" loading="lazy" decoding="async">
-                        </figure>
-                        <h2>VR Media Art: 경기도박물관 '천년경기와 미디어의 만남 in 봄' VR Media Art: Retrospect &amp; Prospect, 책가도</h2>
-                        <p class="project-summary">
-                            Creators: Prof. Boa Lee and the Research Team (Art &amp; Technology, Sogang University).
-                        </p>
-                        <p class="project-description">
-                            Produced the original soundtrack and designed the sound interaction system for a media artwork that reinterprets Jang Han-jong's Chaekgado from a contemporary perspective.
-                        </p>
-                    </div>
                 </article>
 
-                <article class="project-entry">
-                    <div class="project-meta">
+                <article class="project-entry archive-card archive-card--project">
+                        <figure class="project-figure archive-card__media">
+                            <img src="figs/night_portrait.jpg" alt="Original Soundtrack: Night Portrait" width="780" height="627" loading="lazy" decoding="async">
+                        </figure>
+                    <div class="project-content archive-card__copy">
+                        <h2>Original Soundtrack: 밤의 초상 (Night Portrait)</h2>
+                        <p class="project-summary">
+                            Director: 우주언.
+                        </p>
+                        <p class="project-description">
+                            Composed the original soundtrack and handled audio post-production for the independent film.
+                        </p>
+                    </div>
+                    <div class="project-meta archive-card__meta">
                         <button class="format-tag" type="button" data-filter-tag="Music">Music</button>
                         <p class="meta-label">Role</p>
                         <p class="meta-value">Music Director</p>
@@ -425,22 +439,22 @@
                             <a class="meta-link" href="../projects/posters/poster_night_portrait.jpg" data-popup-image="poster" aria-label="Open poster image for Original Soundtrack: 밤의 초상 (Night Portrait)">Poster</a>
                         </p>
                     </div>
-                    <div class="project-content project-content--has-figure">
-                        <figure class="project-figure">
-                            <img src="figs/night_portrait.jpg" alt="Original Soundtrack: Night Portrait" width="780" height="627" loading="lazy" decoding="async">
+                </article>
+
+                <article class="project-entry archive-card archive-card--project">
+                        <figure class="project-figure archive-card__media">
+                            <img src="figs/science_investigation_report.jpg" alt="Original Soundtrack: Science Investigation Report" width="2126" height="926" loading="lazy" decoding="async">
                         </figure>
-                        <h2>Original Soundtrack: 밤의 초상 (Night Portrait)</h2>
+                    <div class="project-content archive-card__copy">
+                        <h2>Original Soundtrack: 과학탐구보고서</h2>
                         <p class="project-summary">
-                            Director: 우주언.
+                            Director: 박주혁.
                         </p>
                         <p class="project-description">
                             Composed the original soundtrack and handled audio post-production for the independent film.
                         </p>
                     </div>
-                </article>
-
-                <article class="project-entry">
-                    <div class="project-meta">
+                    <div class="project-meta archive-card__meta">
                         <button class="format-tag" type="button" data-filter-tag="Music">Music</button>
                         <p class="meta-label">Role</p>
                         <p class="meta-value">Music Director</p>
@@ -453,22 +467,22 @@
                             <a class="meta-link" href="https://www.youtube.com/watch?v=KkIvBRWGqxo&amp;list=PLyyTK5ekx9MBVkMO8BQ8XXYYmrj7a6krL" target="_blank" rel="noreferrer" aria-label="Open audio clip for Original Soundtrack: 과학탐구보고서">Audio Clip ↗</a>
                         </p>
                     </div>
-                    <div class="project-content project-content--has-figure">
-                        <figure class="project-figure">
-                            <img src="figs/science_investigation_report.jpg" alt="Original Soundtrack: Science Investigation Report" width="2126" height="926" loading="lazy" decoding="async">
-                        </figure>
-                        <h2>Original Soundtrack: 과학탐구보고서</h2>
-                        <p class="project-summary">
-                            Director: 박주혁.
-                        </p>
-                        <p class="project-description">
-                            Composed the original soundtrack and handled audio post-production for the independent film.
-                        </p>
-                    </div>
                 </article>
 
-                <article class="project-entry">
-                    <div class="project-meta">
+                <article class="project-entry archive-card archive-card--project">
+                        <figure class="project-figure archive-card__media">
+                            <img src="figs/spoiler.png" alt="Live Performance: SPOILER The Spoils" width="960" height="720" loading="lazy" decoding="async">
+                        </figure>
+                    <div class="project-content archive-card__copy">
+                        <h2>Live Performance: SPOILER 'The Spoils'</h2>
+                        <p class="project-summary">
+                            Directors: 기성림, 이예본, 김다빈.
+                        </p>
+                        <p class="project-description">
+                            Co-directed the performance planning and arranged the musical accompaniment for a performance based on Massive Attack's "The Spoils".
+                        </p>
+                    </div>
+                    <div class="project-meta archive-card__meta">
                         <button class="format-tag" type="button" data-filter-tag="Music">Music</button>
                         <p class="meta-label">Role</p>
                         <p class="meta-value">Co-director</p>
@@ -479,18 +493,6 @@
                         <p class="meta-label">Link</p>
                         <p class="meta-value">
                             <a class="meta-link" href="https://www.youtube.com/watch?v=jaflf8Pseo0&amp;list=PLyyTK5ekx9MDRyGONaQ_fGtqttOpBkeuz" target="_blank" rel="noreferrer" aria-label="Open archive video for Live Performance: SPOILER The Spoils">Archive ↗</a>
-                        </p>
-                    </div>
-                    <div class="project-content project-content--has-figure">
-                        <figure class="project-figure">
-                            <img src="figs/spoiler.png" alt="Live Performance: SPOILER The Spoils" width="960" height="720" loading="lazy" decoding="async">
-                        </figure>
-                        <h2>Live Performance: SPOILER 'The Spoils'</h2>
-                        <p class="project-summary">
-                            Directors: 기성림, 이예본, 김다빈.
-                        </p>
-                        <p class="project-description">
-                            Co-directed the performance planning and arranged the musical accompaniment for a performance based on Massive Attack's "The Spoils".
                         </p>
                     </div>
                 </article>
@@ -514,6 +516,7 @@
             <p class="copyright">&copy; 2025&ndash;2026 Dabin Kim. All rights reserved.</p>
         </div>
     </footer>
+    <script src="../assets/js/archive-view.js"></script>
     <script src="../assets/js/projects.js"></script>
 </body>
 </html>
