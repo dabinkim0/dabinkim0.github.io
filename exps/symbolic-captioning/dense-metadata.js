@@ -293,9 +293,9 @@
     appendJsonCard(
       container,
       "Observed Scope",
-      "Coordinate And Selection Contract",
+      "Global And Local Scope Contract",
       "supported",
-      { scope: sample.scope, selection: sample.selection }
+      { scopes: sample.scopes, selection: sample.selection }
     );
     appendJsonCard(
       container,
@@ -314,8 +314,69 @@
     );
   }
 
+  function renderGlobal(container, sample) {
+    const globalMetadata = sample.metadata.global;
+    appendJsonCard(
+      container,
+      "Whole-Piece Context",
+      "Global Temporal Summary",
+      globalMetadata.status,
+      {
+        scope: sample.scopes.global,
+        temporal_summary: globalMetadata.temporal_summary,
+      },
+      "Global evidence summarizes the whole piece and does not duplicate its full note table."
+    );
+    const catalog = globalMetadata.track_catalog;
+    appendEventSequenceCard(
+      container,
+      "Normalized Identity",
+      "Track, Instrument, And Functional Role",
+      {
+        status: "supported",
+        event_fields: [
+          "track_id",
+          "raw_track_name",
+          "instrument",
+          "functional_role",
+          "role_confidence",
+          "role_source",
+        ],
+        event_count: catalog.length,
+        events: catalog.map(function (track) {
+          return [
+            track.track_id,
+            track.raw_track_name,
+            track.instrument.values.map(function (value) { return value.name; }).join(", "),
+            track.functional_role,
+            track.role_confidence,
+            track.role_source,
+          ];
+        }),
+      },
+      null,
+      "Track identity, MIDI instrument, functional role, and role confidence remain separate fields."
+    );
+    appendJsonCard(
+      container,
+      "Whole-Piece Aggregate",
+      "Global Notes And Texture",
+      "supported",
+      { notes: globalMetadata.notes, texture: globalMetadata.texture }
+    );
+    appendJsonCard(
+      container,
+      "Dataset Annotation",
+      "Global Tonality And Harmony",
+      globalMetadata.tonality_harmony.piece_key_annotation.status,
+      globalMetadata.tonality_harmony,
+      "The key remains an audio-derived POP909 annotation, not a MIDI-only estimate."
+    );
+  }
+
   function renderNotes(container, sample) {
-    Object.entries(sample.metadata.notes.role_summaries).forEach(function (entry) {
+    const localMetadata = sample.metadata.local;
+    Object.entries(localMetadata.notes.functional_role_summaries).forEach(function (entry) {
       const statistics = Object.assign({}, entry[1]);
       const sequence = statistics.event_sequence;
       delete statistics.event_sequence;
@@ -331,16 +392,17 @@
     appendJsonCard(
       container,
       "Exact Event Layer",
-      sample.metadata.notes.events.length + " Onset Events",
+      localMetadata.notes.events.length + " Onset Events",
       "supported",
-      sample.metadata.notes.events,
-      "Every event is directly paired from the source MIDI. Long-span tables are scrollable."
+      localMetadata.notes.events,
+      "Events reference stable track IDs; instrument and functional-role semantics resolve through the global track catalog."
     );
   }
 
   function renderRhythm(container, sample) {
-    Object.entries(sample.metadata.rhythm.role_statistics).forEach(function (entry) {
-      const sequence = sample.metadata.notes.role_summaries[entry[0]].event_sequence;
+    const localMetadata = sample.metadata.local;
+    Object.entries(localMetadata.rhythm.functional_role_statistics).forEach(function (entry) {
+      const sequence = localMetadata.notes.functional_role_summaries[entry[0]].event_sequence;
       appendEventSequenceCard(
         container,
         "Beat-Normalized Event Tuples",
@@ -390,7 +452,8 @@
   }
 
   function renderTexture(container, sample) {
-    const trajectory = sample.metadata.texture.bar_trajectory;
+    const localMetadata = sample.metadata.local;
+    const trajectory = localMetadata.texture.bar_trajectory;
     const charts = document.createElement("div");
     charts.className = "dense-trajectory-charts";
     charts.append(
@@ -452,9 +515,39 @@
       "Span Texture Summary",
       "supported",
       {
-        span_polyphony: sample.metadata.texture.span_polyphony,
-        role_onset_counts: sample.metadata.texture.role_onset_counts,
+        span_polyphony: localMetadata.texture.span_polyphony,
+        onsets_per_beat: localMetadata.texture.onsets_per_beat,
+        functional_role_onset_counts: localMetadata.texture.functional_role_onset_counts,
+        relation_to_global: localMetadata.relation_to_global,
       }
+    );
+  }
+
+  function renderTiming(container, sample) {
+    const timing = sample.metadata.local.performance.timing_interpretation;
+    appendJsonCard(
+      container,
+      "Direct MIDI Evidence",
+      "Observed Performance Time",
+      timing.observed_performance_time.status,
+      timing.observed_performance_time,
+      "These coordinates are observed event timing and are not interpreted as notated score values."
+    );
+    appendJsonCard(
+      container,
+      "Blocked Interpretation",
+      "Quantized Score Time",
+      timing.quantized_score_time.status,
+      timing.quantized_score_time,
+      "Note-value words remain unavailable until a validated quantization gate is implemented."
+    );
+    appendJsonCard(
+      container,
+      "Blocked Interpretation",
+      "Microtiming",
+      timing.microtiming.status,
+      timing.microtiming,
+      "Early, late, or delayed wording requires an aligned score or validated inferred grid."
     );
   }
 
@@ -470,40 +563,44 @@
       return;
     }
     if (denseState.view === "overview") renderStatusOverview(container, sample);
+    else if (denseState.view === "global") renderGlobal(container, sample);
     else if (denseState.view === "notes") renderNotes(container, sample);
     else if (denseState.view === "rhythm") renderRhythm(container, sample);
     else if (denseState.view === "texture") renderTexture(container, sample);
+    else if (denseState.view === "timing") renderTiming(container, sample);
     else if (denseState.view === "tonality") {
+      const localMetadata = sample.metadata.local;
       appendJsonCard(
         container,
         "Dataset Annotation",
         "Local Key",
-        sample.metadata.tonality_harmony.local_key_annotation.status,
-        sample.metadata.tonality_harmony.local_key_annotation,
+        localMetadata.tonality_harmony.local_key_annotation.status,
+        localMetadata.tonality_harmony.local_key_annotation,
         "This key annotation is audio-derived, not a MIDI-only rule estimate."
       );
       appendJsonCard(
         container,
         "Dataset Annotation",
         "Chord Timeline",
-        sample.metadata.tonality_harmony.chord_timeline.status,
-        sample.metadata.tonality_harmony.chord_timeline
+        localMetadata.tonality_harmony.chord_timeline.status,
+        localMetadata.tonality_harmony.chord_timeline
       );
     } else if (denseState.view === "performance") {
+      const localMetadata = sample.metadata.local;
       appendJsonCard(
         container,
         "Direct MIDI Evidence",
         "Velocity",
-        sample.metadata.dynamics.status,
-        sample.metadata.dynamics,
+        localMetadata.dynamics.status,
+        localMetadata.dynamics,
         "MIDI velocity is not converted into acoustic loudness wording."
       );
       appendJsonCard(
         container,
         "Conditional MIDI Evidence",
         "Sustain Pedal CC64",
-        sample.metadata.performance.pedal_cc64.status,
-        sample.metadata.performance.pedal_cc64,
+        localMetadata.performance.pedal_cc64.status,
+        localMetadata.performance.pedal_cc64,
         "Missing CC64 is insufficient evidence, not evidence that no pedal was used."
       );
     } else {
@@ -522,10 +619,12 @@
     tabs.innerHTML = "";
     const views = [
       ["overview", "Overview"],
-      ["notes", "Notes And Roles"],
+      ["global", "Global"],
+      ["notes", "Local Notes And Roles"],
       ["rhythm", "Rhythm"],
       ["texture", "Texture"],
       ["tonality", "Tonality And Harmony"],
+      ["timing", "Timing Contract"],
       ["performance", "Performance"],
       ["raw", "Raw JSON"],
     ];
@@ -548,6 +647,8 @@
 
   function renderSampleSummary() {
     const sample = denseState.sample;
+    const localScope = sample.scopes.local;
+    const localNotes = sample.metadata.local.notes;
     get("[data-dense-release]").textContent =
       denseState.index.release_id + " · " + sample.selection.scale_bars + "-Bar Audit Span";
     get("[data-dense-sample-title]").textContent = formatLabel(sample.sample_id);
@@ -557,12 +658,12 @@
       "This record is an extractor audit artifact, not a training export.";
     get("[data-dense-source]").textContent = sample.source.source_id;
     get("[data-dense-split]").textContent = formatLabel(sample.source.split);
-    get("[data-dense-scale]").textContent = sample.scope.bar_count + " Bars";
+    get("[data-dense-scale]").textContent = localScope.bar_count + " Bars";
     get("[data-dense-seconds]").textContent =
-      sample.scope.start_sec.toFixed(2) + "–" + sample.scope.end_sec.toFixed(2) + " Sec";
+      localScope.start_sec.toFixed(2) + "–" + localScope.end_sec.toFixed(2) + " Sec";
     get("[data-dense-bars]").textContent =
-      sample.scope.start_bar + "–" + (sample.scope.end_bar_exclusive - 1);
-    get("[data-dense-note-count]").textContent = sample.metadata.notes.onset_event_count;
+      localScope.start_bar + "–" + (localScope.end_bar_exclusive - 1);
+    get("[data-dense-note-count]").textContent = localNotes.onset_event_count;
   }
 
   async function loadSample() {
@@ -601,7 +702,7 @@
     if (!container) return;
     try {
       const response = await fetch(
-        "assets/data/dense-metadata/index.json?release=m002",
+        "assets/data/dense-metadata/index.json?release=m003",
         { cache: "no-store" }
       );
       if (!response.ok) throw new Error("Dense Metadata HTTP " + response.status);
