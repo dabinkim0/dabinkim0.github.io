@@ -4,6 +4,7 @@
   const denseState = {
     index: null,
     sample: null,
+    projection: null,
     sampleIndex: 0,
     scale: "all",
     stage: "canonical",
@@ -24,24 +25,33 @@
     {
       id: "canonical",
       index: "02",
-      version: "M.0.3",
+      version: "M.0.4",
       title: "Canonical Evidence",
       status: "supported",
       statusLabel: "Available",
-      description: "Current rule-based audit evidence with unavailable fields kept explicit. This artifact is not sent directly to Gemini.",
+      description: "Typed rule-based audit evidence with explicit units, provenance, and unavailable fields. This artifact is not sent directly to Gemini.",
+    },
+    {
+      id: "projection",
+      index: "03",
+      version: "P.0.1",
+      title: "Compact Projection",
+      status: "supported",
+      statusLabel: "Available",
+      description: "Provider-neutral global and timestamped local metadata with allowed and blocked claims.",
     },
     {
       id: "llm_input",
-      index: "03",
-      version: "P.0.1",
+      index: "04",
+      version: "J.0.1",
       title: "Exact LLM Input",
-      status: "not_generated",
-      statusLabel: "Not Generated",
-      description: "Compact projection, assembled text prompt, and optional attachment manifest.",
+      status: "not_assembled",
+      statusLabel: "Not Assembled",
+      description: "The exact text prompt, optional attachment manifest, and immutable request hash.",
     },
     {
       id: "raw_output",
-      index: "04",
+      index: "05",
       version: "A / B",
       title: "Raw LLM Output",
       status: "not_generated",
@@ -50,7 +60,7 @@
     },
     {
       id: "final_caption",
-      index: "05",
+      index: "06",
       version: "F.0.1",
       title: "Filtered Final Caption",
       status: "not_generated",
@@ -101,10 +111,18 @@
   function renderMetrics() {
     if (!denseState.index) return;
     const counts = denseState.index.implementation_status_counts;
-    get("[data-dense-sample-count]").textContent = denseState.index.sample_count;
-    get("[data-dense-implemented-count]").textContent = counts.implemented || 0;
-    get("[data-dense-partial-count]").textContent = counts.partial || 0;
-    get("[data-dense-missing-count]").textContent = counts.not_implemented || 0;
+    const values = [
+      ["[data-dense-sample-count]", denseState.index.sample_count],
+      ["[data-dense-implemented-count]", counts.implemented || 0],
+      ["[data-dense-partial-count]", counts.partial || 0],
+      ["[data-dense-missing-count]", counts.not_implemented || 0],
+    ];
+    values.forEach(function (entry) {
+      const node = get(entry[0]);
+      if (node) node.textContent = entry[1];
+    });
+    const projectionCount = get("[data-dense-projection-count]");
+    if (projectionCount) projectionCount.textContent = denseState.index.projection_count || 0;
   }
 
   function renderFeatureMatrix() {
@@ -180,7 +198,7 @@
     const sampleLabel = document.createElement("span");
     const sampleTitle = document.createElement("strong");
     sampleLabel.textContent = "Sample Index";
-    sampleTitle.textContent = "Select An Actual Train Metadata Example";
+    sampleTitle.textContent = "Select An Actual Train Artifact Pair";
     const select = document.createElement("select");
     select.className = "case-select";
     select.setAttribute("aria-label", "Dense Metadata Sample Index");
@@ -252,6 +270,7 @@
       button.addEventListener("click", function () {
         denseState.stage = stage.id;
         if (stage.id === "canonical") denseState.view = "global";
+        if (stage.id === "projection") denseState.view = "compact";
         renderStages();
         renderStageSummary();
         renderTabs();
@@ -468,13 +487,18 @@
         scope: sample.scopes.local,
         active_track_ids: localMetadata.notes.active_track_ids,
         active_functional_roles: localMetadata.notes.active_functional_roles,
-        onset_event_count: localMetadata.notes.onset_event_count,
-        pitch_class_histogram_duration_weighted:
-          localMetadata.notes.pitch_class_histogram_duration_weighted,
+        note_on_event_count: localMetadata.notes.note_on_event_count,
+        unique_onset_group_count: localMetadata.notes.unique_onset_group_count,
+        pitch: localMetadata.notes.pitch,
+        velocity: localMetadata.notes.velocity,
+        observed_duration: localMetadata.notes.observed_duration,
+        pitch_class_profile_duration_weighted:
+          localMetadata.notes.pitch_class_profile_duration_weighted,
         texture: {
-          onsets_per_beat: localMetadata.texture.onsets_per_beat,
-          span_polyphony: localMetadata.texture.span_polyphony,
-          functional_role_onset_counts: localMetadata.texture.functional_role_onset_counts,
+          density: localMetadata.texture.density,
+          polyphony: localMetadata.texture.polyphony,
+          functional_role_note_on_counts:
+            localMetadata.texture.functional_role_note_on_counts,
         },
         dynamics: localMetadata.dynamics,
         tonality_harmony: localMetadata.tonality_harmony,
@@ -525,20 +549,68 @@
     );
   }
 
+  function renderProjection(container, projection) {
+    if (denseState.view === "compact") {
+      appendJsonCard(
+        container,
+        "Whole-Piece Projection",
+        "Compact Global Metadata",
+        "supported",
+        projection.compact_metadata.global,
+        "Audit-only ticks, track IDs, raw histograms, and full chord dictionaries are excluded."
+      );
+      appendJsonCard(
+        container,
+        "Timestamped Projection",
+        "Compact Local Window",
+        "supported",
+        projection.compact_metadata.local_window,
+        "The local window is explicitly scoped and must not be generalized to the whole piece."
+      );
+    } else if (denseState.view === "allowed") {
+      appendJsonCard(
+        container,
+        "Claim Budget " + projection.allowed_claims.length + " / " + projection.claim_budget,
+        "Allowed Claims",
+        "supported",
+        projection.allowed_claims,
+        "Only these evidence-linked statements may be realized by the caption model."
+      );
+    } else if (denseState.view === "blocked") {
+      appendJsonCard(
+        container,
+        "Explicit Uncertainty",
+        "Blocked Claims",
+        "ambiguous",
+        projection.blocked_claims,
+        "Unknown or uncalibrated concepts remain visible but cannot be verbalized as facts."
+      );
+    } else {
+      appendJsonCard(
+        container,
+        "Complete Projection Artifact",
+        projection.sample_id,
+        "supported",
+        projection,
+        "This is a provider-neutral projection, not an assembled Gemini request."
+      );
+    }
+  }
+
   function renderUnavailableStage(container, stage) {
     const messages = {
       llm_input: {
-        text: "This sample has M.0.3 canonical evidence, but no P.0.1 compact projection, assembled Gemini prompt, attachment manifest, or request hash.",
+        text: "This sample has M.0.4 canonical evidence and a P.0.1 compact projection, but no assembled Gemini prompt, attachment manifest, or immutable request hash.",
         prerequisites: [
-          "Define and validate the compact projection schema.",
-          "Assemble the exact text prompt and optional attachment manifest.",
+          "Choose the caption realization prompt version.",
+          "Assemble the exact text prompt and optional MIDI or audio attachment manifest.",
           "Freeze an immutable request record before execution.",
         ],
       },
       raw_output: {
-        text: "No Gemini request has been executed for this M.0.3 sample, so there is no linked verbatim response.",
+        text: "No Gemini request has been assembled or executed for this M.0.4/P.0.1 sample pair, so there is no linked verbatim response.",
         prerequisites: [
-          "Generate the P.0.1 exact LLM input.",
+          "Assemble the J.0.1 exact LLM input from P.0.1.",
           "Execute either Gemini Web (A) or Gemini API (B).",
           "Store the raw response with its request hash and backend version.",
         ],
@@ -578,7 +650,8 @@
     const container = get("[data-dense-content]");
     container.innerHTML = "";
     const sample = denseState.sample;
-    if (!sample) {
+    const projection = denseState.projection;
+    if (!sample || !projection) {
       const loading = document.createElement("p");
       loading.className = "dense-loading";
       loading.textContent = "Loading actual extractor output…";
@@ -586,6 +659,7 @@
       return;
     }
     if (denseState.stage === "source") renderSource(container, sample);
+    else if (denseState.stage === "projection") renderProjection(container, projection);
     else if (denseState.stage !== "canonical") {
       renderUnavailableStage(container, currentStage());
     } else if (denseState.view === "global") renderGlobal(container, sample);
@@ -606,15 +680,22 @@
   function renderTabs() {
     const tabs = get("[data-dense-tabs]");
     tabs.innerHTML = "";
-    tabs.hidden = denseState.stage !== "canonical";
+    tabs.hidden = !["canonical", "projection"].includes(denseState.stage);
     if (tabs.hidden) return;
-    const views = [
-      ["global", "Global"],
-      ["local", "Local"],
-      ["roles", "Track / Role"],
-      ["timing", "Timing"],
-      ["raw", "Raw JSON"],
-    ];
+    const views = denseState.stage === "canonical"
+      ? [
+          ["global", "Global"],
+          ["local", "Local"],
+          ["roles", "Track / Role"],
+          ["timing", "Timing"],
+          ["raw", "Raw JSON"],
+        ]
+      : [
+          ["compact", "Compact Metadata"],
+          ["allowed", "Allowed Claims"],
+          ["blocked", "Blocked Claims"],
+          ["projection_raw", "Raw JSON"],
+        ];
     views.forEach(function (viewSpec) {
       const button = document.createElement("button");
       const active = denseState.view === viewSpec[0];
@@ -637,12 +718,13 @@
     const localScope = sample.scopes.local;
     const localNotes = sample.metadata.local.notes;
     get("[data-dense-release]").textContent =
-      denseState.index.release_id + " · " + sample.selection.scale_bars + "-Bar Audit Span";
+      denseState.index.release_id + " + " + denseState.index.projection_release_id +
+      " · " + sample.selection.scale_bars + "-Bar Audit Span";
     get("[data-dense-sample-title]").textContent = formatLabel(sample.sample_id);
     get("[data-dense-sample-origin]").textContent =
       sample.source.source_id.toUpperCase() +
       ", selected deterministically from the actual POP909 Train split. " +
-      "This record is an extractor audit artifact, not a training export.";
+      "This canonical/projection pair is an audit artifact, not a training export.";
     get("[data-dense-source]").textContent = sample.source.source_id;
     get("[data-dense-split]").textContent = formatLabel(sample.source.split);
     get("[data-dense-scale]").textContent = localScope.bar_count + " Bars";
@@ -650,7 +732,7 @@
       localScope.start_sec.toFixed(2) + "–" + localScope.end_sec.toFixed(2) + " Sec";
     get("[data-dense-bars]").textContent =
       localScope.start_bar + "–" + (localScope.end_bar_exclusive - 1);
-    get("[data-dense-note-count]").textContent = localNotes.onset_event_count;
+    get("[data-dense-note-count]").textContent = localNotes.note_on_event_count;
   }
 
   async function loadSample() {
@@ -659,18 +741,30 @@
     const requestToken = denseState.requestToken + 1;
     denseState.requestToken = requestToken;
     denseState.sample = null;
+    denseState.projection = null;
     renderPicker();
     renderContent();
     try {
-      const shortHash = entry.record_sha256.slice(-12);
-      const response = await fetch(
-        "assets/data/dense-metadata/" + entry.file + "?v=" + shortHash,
-        { cache: "no-store" }
-      );
-      if (!response.ok) throw new Error("Dense Sample HTTP " + response.status);
-      const sample = await response.json();
+      const canonicalHash = entry.record_sha256.slice(-12);
+      const projectionHash = entry.projection_id.slice(-12);
+      const responses = await Promise.all([
+        fetch(
+          "assets/data/dense-metadata/" + entry.canonical_file + "?v=" + canonicalHash,
+          { cache: "no-store" }
+        ),
+        fetch(
+          "assets/data/dense-metadata/" + entry.projection_file + "?v=" + projectionHash,
+          { cache: "no-store" }
+        ),
+      ]);
+      if (!responses[0].ok) throw new Error("Canonical HTTP " + responses[0].status);
+      if (!responses[1].ok) throw new Error("Projection HTTP " + responses[1].status);
+      const artifacts = await Promise.all(responses.map(function (response) {
+        return response.json();
+      }));
       if (requestToken !== denseState.requestToken) return;
-      denseState.sample = sample;
+      denseState.sample = artifacts[0];
+      denseState.projection = artifacts[1];
       renderSampleSummary();
       renderStages();
       renderStageSummary();
@@ -679,7 +773,7 @@
     } catch (error) {
       const message = document.createElement("p");
       message.className = "dense-loading";
-      message.textContent = "Actual metadata could not be loaded: " + error.message;
+      message.textContent = "Actual canonical/projection pair could not be loaded: " + error.message;
       const container = get("[data-dense-content]");
       container.innerHTML = "";
       container.appendChild(message);
@@ -691,7 +785,7 @@
     if (!container) return;
     try {
       const response = await fetch(
-        "assets/data/dense-metadata/index.json?release=m003",
+        "assets/data/dense-metadata/index.json?release=m004-p001",
         { cache: "no-store" }
       );
       if (!response.ok) throw new Error("Dense Metadata HTTP " + response.status);

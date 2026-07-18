@@ -24,6 +24,9 @@
       "insufficient_evidence": 3,
       "supported": 27
     },
+    "projection.compact_caption_evidence": {
+      "supported": 30
+    },
     "rhythm.numeric_sequences": {
       "supported": 30
     },
@@ -35,6 +38,9 @@
     },
     "temporal.coordinate_map": {
       "supported": 30
+    },
+    "temporal.meter_beat_alignment": {
+      "ambiguous": 30
     },
     "texture.bar_trajectory": {
       "supported": 30
@@ -60,8 +66,16 @@
       "feature_id": "temporal.coordinate_map",
       "implementation_status": "implemented",
       "label": "Bar, Beat, Tick, And Seconds",
-      "output": "Exact span coordinates and per-bar boundaries",
+      "output": "Exact span coordinates with dataset-beat and quarter-note units separated",
       "validation_tier": "direct_midi_and_dataset_annotation"
+    },
+    {
+      "availability": "all_cached_sources",
+      "feature_id": "temporal.meter_beat_alignment",
+      "implementation_status": "partial",
+      "label": "Meter And Dataset-Beat Alignment",
+      "output": "Both sources are retained; metrical equivalence remains blocked",
+      "validation_tier": "explicit_source_separation_unvalidated_equivalence"
     },
     {
       "availability": "pop909_dataset_native_tracks",
@@ -84,7 +98,7 @@
       "feature_id": "notes.event_table",
       "implementation_status": "implemented",
       "label": "Role-Aware Note Event Table",
-      "output": "Pitch, onset, duration, velocity, track, and channel",
+      "output": "Pitch, observed quarter-note time, velocity, track, and channel",
       "validation_tier": "direct_midi"
     },
     {
@@ -100,7 +114,7 @@
       "feature_id": "rhythm.numeric_sequences",
       "implementation_status": "implemented",
       "label": "Exact Rhythm Sequences",
-      "output": "Relative onsets, IOIs, and durations in quarter-note beats",
+      "output": "Relative onsets, IOIs, and durations in explicit quarter-note units",
       "validation_tier": "direct_midi"
     },
     {
@@ -108,7 +122,7 @@
       "feature_id": "texture.bar_trajectory",
       "implementation_status": "implemented",
       "label": "Bar-Wise Texture Trajectory",
-      "output": "Density, polyphony, register, and role activity per bar",
+      "output": "Note-event rate, unique-onset rate, polyphony, register, and role activity",
       "validation_tier": "deterministic_derived"
     },
     {
@@ -140,8 +154,16 @@
       "feature_id": "harmony.dataset_chords",
       "implementation_status": "implemented",
       "label": "Chord Timeline",
-      "output": "Clipped chord labels and exact annotation-time spans",
+      "output": "Clipped timeline, normalized chord classes, durations, and no-chord occupancy",
       "validation_tier": "dataset_annotation"
+    },
+    {
+      "availability": "all_valid_m0_4_records",
+      "feature_id": "projection.compact_caption_evidence",
+      "implementation_status": "implemented",
+      "label": "Provider-Neutral Compact Projection",
+      "output": "Separate P.0.1 artifact with compact metadata and allowed or blocked claims",
+      "validation_tier": "deterministic_claim_projection"
     },
     {
       "availability": "pop909_melody_track_only",
@@ -217,14 +239,16 @@
     }
   ],
   "implementation_status_counts": {
-    "implemented": 12,
+    "implemented": 13,
     "not_implemented": 7,
-    "partial": 2
+    "partial": 3
   },
+  "projection_count": 30,
+  "projection_release_id": "P.0.1",
   "purpose": "extractor_audit_only",
   "rejected_source_count": 0,
   "rejected_sources": [],
-  "release_id": "M.0.3",
+  "release_id": "M.0.4",
   "sample_count": 30,
   "samples": [
     {
@@ -240,20 +264,22 @@
         6,
         8
       ],
+      "canonical_file": "samples/pop909_train_350_bar6_8_2bar.json",
       "canonical_piece_id": "pop909:350",
       "evidence_status_counts": {
-        "ambiguous": 2,
+        "ambiguous": 3,
         "insufficient_evidence": 1,
-        "supported": 11
+        "supported": 12
       },
-      "file": "samples/pop909_train_350_bar6_8_2bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 43,
       "piece_duration_sec": 237.142869,
-      "record_sha256": "sha256:117a4f77c3479669e39a8539d8d4ab99e8569fdad0a9b2a5b73a03bff933c8fb",
+      "projection_file": "projections/pop909_train_350_bar6_8_2bar.projection.json",
+      "projection_id": "sha256:b54d7c3d1ebe6f35c00757a629b617a47191daa70aa0425d51abe223d0a87dd0",
+      "record_sha256": "sha256:c7be9d54463f56de94f321d1ad1677fa07f703ffdb2b6288005385d17563bf75",
       "sample_id": "pop909_train_350_bar6_8_2bar",
       "scale_bars": 2,
       "source_id": "pop909:350",
@@ -278,19 +304,21 @@
         49,
         53
       ],
+      "canonical_file": "samples/pop909_train_675_bar49_53_4bar.json",
       "canonical_piece_id": "pop909:675",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_675_bar49_53_4bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 70,
       "piece_duration_sec": 301.170918,
-      "record_sha256": "sha256:f76d59daf9766d89126ec677577d53f79b17f8749fcab4588e8d3657b737cb50",
+      "projection_file": "projections/pop909_train_675_bar49_53_4bar.projection.json",
+      "projection_id": "sha256:8a5b08a6d658857a678ca910eb1ecae247d41cdcca8ce680ade2f8a24a207567",
+      "record_sha256": "sha256:e93594530eaccb9218e6b08170885dd3277207011e0106d4c0ca00d4a5d14a43",
       "sample_id": "pop909_train_675_bar49_53_4bar",
       "scale_bars": 4,
       "source_id": "pop909:675",
@@ -313,19 +341,21 @@
         52,
         60
       ],
+      "canonical_file": "samples/pop909_train_244_bar52_60_8bar.json",
       "canonical_piece_id": "pop909:244",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_244_bar52_60_8bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 207,
       "piece_duration_sec": 300.445784,
-      "record_sha256": "sha256:1d9297f0a43166426103e0420fc6dd1545e364247a8550b72ea35be9edb8d557",
+      "projection_file": "projections/pop909_train_244_bar52_60_8bar.projection.json",
+      "projection_id": "sha256:bc87181f81bda69d28364dd742ee3d6069c7b641cdf82ccf4e15e3cab67aaa3a",
+      "record_sha256": "sha256:4e3b11118ed676cd376ad4055321899fff8f159c546ef039daf47424767b2f6c",
       "sample_id": "pop909_train_244_bar52_60_8bar",
       "scale_bars": 8,
       "source_id": "pop909:244",
@@ -350,19 +380,21 @@
         14,
         30
       ],
+      "canonical_file": "samples/pop909_train_115_bar14_30_16bar.json",
       "canonical_piece_id": "pop909:115",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_115_bar14_30_16bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 329,
       "piece_duration_sec": 272.051043,
-      "record_sha256": "sha256:6ee053526a86cda5fe3cbe8fbdfa9418ade561029b051f137b5a095c48a59575",
+      "projection_file": "projections/pop909_train_115_bar14_30_16bar.projection.json",
+      "projection_id": "sha256:35fcaa03621edf556af326566684563a9155c328252fce402aa885b6ba17a366",
+      "record_sha256": "sha256:988c8cc123d2a5b6f55d039bfcf52fc52ea3b6ac5425f3cd1160a0d784865b5d",
       "sample_id": "pop909_train_115_bar14_30_16bar",
       "scale_bars": 16,
       "source_id": "pop909:115",
@@ -387,19 +419,21 @@
         44,
         76
       ],
+      "canonical_file": "samples/pop909_train_167_bar44_76_32bar.json",
       "canonical_piece_id": "pop909:167",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_167_bar44_76_32bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 853,
       "piece_duration_sec": 237.450597,
-      "record_sha256": "sha256:b8b37c521341f2a27e538339ad3306fb257a8573ece7e3705521338b506fa183",
+      "projection_file": "projections/pop909_train_167_bar44_76_32bar.projection.json",
+      "projection_id": "sha256:3146a06d59fd7c658993d7bbb3e572949fda050ee230a6ab63b29e1945c6eb32",
+      "record_sha256": "sha256:73a93c3418c40ffde3902877806205521d5c3546fd24bedfc2125481d90e3f82",
       "sample_id": "pop909_train_167_bar44_76_32bar",
       "scale_bars": 32,
       "source_id": "pop909:167",
@@ -424,19 +458,21 @@
         6,
         8
       ],
+      "canonical_file": "samples/pop909_train_364_bar6_8_2bar.json",
       "canonical_piece_id": "pop909:364",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_364_bar6_8_2bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 40,
       "piece_duration_sec": 274.14641,
-      "record_sha256": "sha256:223d707117f438b1cde31a0c1b53958941733ff6ba5ac2c5a9e40ce9aac144f2",
+      "projection_file": "projections/pop909_train_364_bar6_8_2bar.projection.json",
+      "projection_id": "sha256:acf0ec09a46760d6cef53bd865c8f876a28573b6971d318db65cfcc24a687607",
+      "record_sha256": "sha256:30164196bae8175a7a15ea9db2c05639abb14ac6fc7572b8066e325f61848866",
       "sample_id": "pop909_train_364_bar6_8_2bar",
       "scale_bars": 2,
       "source_id": "pop909:364",
@@ -459,19 +495,21 @@
         69,
         73
       ],
+      "canonical_file": "samples/pop909_train_287_bar69_73_4bar.json",
       "canonical_piece_id": "pop909:287",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_287_bar69_73_4bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 94,
       "piece_duration_sec": 288.695248,
-      "record_sha256": "sha256:7ce8022d557cea28f175ca8c245d87a9bee691a5c91b2566a0d8ad96f5db05c8",
+      "projection_file": "projections/pop909_train_287_bar69_73_4bar.projection.json",
+      "projection_id": "sha256:3d772dc61b99d87f37ce4e142e205f2ad7af8b76fa5201e25ad986e6e105dcfa",
+      "record_sha256": "sha256:455fa17ec9f6e3b34271a61ecf381799abc499968847c5eb43fc9479cf01eca3",
       "sample_id": "pop909_train_287_bar69_73_4bar",
       "scale_bars": 4,
       "source_id": "pop909:287",
@@ -496,19 +534,21 @@
         8,
         16
       ],
+      "canonical_file": "samples/pop909_train_884_bar8_16_8bar.json",
       "canonical_piece_id": "pop909:884",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_884_bar8_16_8bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 110,
       "piece_duration_sec": 296.453716,
-      "record_sha256": "sha256:483e91d8be1172a6acd1f09d1831fa556277bcc9ef6022aba642efa84a5e8b68",
+      "projection_file": "projections/pop909_train_884_bar8_16_8bar.projection.json",
+      "projection_id": "sha256:9867df20f8b5f63b34eed642c34b9e1872dee412dfbecafd6b6a9b3e6b542cc4",
+      "record_sha256": "sha256:11c71654be0d4666c23a975c177f7dfb5667617e18af58822b6775daaec02e12",
       "sample_id": "pop909_train_884_bar8_16_8bar",
       "scale_bars": 8,
       "source_id": "pop909:884",
@@ -533,19 +573,21 @@
         58,
         74
       ],
+      "canonical_file": "samples/pop909_train_850_bar58_74_16bar.json",
       "canonical_piece_id": "pop909:850",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_850_bar58_74_16bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 353,
       "piece_duration_sec": 251.623588,
-      "record_sha256": "sha256:4bdb2e31dd70ac51f49a878890d5a3bbb104f37168b48226674389d8d1b78261",
+      "projection_file": "projections/pop909_train_850_bar58_74_16bar.projection.json",
+      "projection_id": "sha256:58e4ff245366d3dceacc944f3b7661ab04a0277fe3aa74f618d3c0fdb04bdcbc",
+      "record_sha256": "sha256:9b9a7a36bb71bbf06102a24cf9cc12796a2c1a92c27ca0854f6f706d1549eeec",
       "sample_id": "pop909_train_850_bar58_74_16bar",
       "scale_bars": 16,
       "source_id": "pop909:850",
@@ -570,19 +612,21 @@
         18,
         50
       ],
+      "canonical_file": "samples/pop909_train_120_bar18_50_32bar.json",
       "canonical_piece_id": "pop909:120",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_120_bar18_50_32bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 1004,
       "piece_duration_sec": 206.043655,
-      "record_sha256": "sha256:37bc1aa8840953dd1ba59c52404ee9bf9e44b990b3ad10bc24837a6f1e7f4b12",
+      "projection_file": "projections/pop909_train_120_bar18_50_32bar.projection.json",
+      "projection_id": "sha256:cef6ab670094a75e732e24f5f57c448b2975955909e1c146d014d19cf179a076",
+      "record_sha256": "sha256:1a6d9d9c24c1a467360456c1f21d0d652aa559b1a38b2578b1d10455f917374f",
       "sample_id": "pop909_train_120_bar18_50_32bar",
       "scale_bars": 32,
       "source_id": "pop909:120",
@@ -605,19 +649,21 @@
         41,
         43
       ],
+      "canonical_file": "samples/pop909_train_318_bar41_43_2bar.json",
       "canonical_piece_id": "pop909:318",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_318_bar41_43_2bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 48,
       "piece_duration_sec": 186.36304,
-      "record_sha256": "sha256:62ea5a4078f7a53846af26da47320e799508b719ae6d6caac8790120bfcc1e42",
+      "projection_file": "projections/pop909_train_318_bar41_43_2bar.projection.json",
+      "projection_id": "sha256:3318cfaffe72b5daa5c04338c75d88f2f409718f2cf1ad965b7bf627aeb0b443",
+      "record_sha256": "sha256:20fdbc375cb0f61b1a7cb8f3c96d42eb7dc94ea62ef46f0b10fc69493ee04f0b",
       "sample_id": "pop909_train_318_bar41_43_2bar",
       "scale_bars": 2,
       "source_id": "pop909:318",
@@ -642,19 +688,21 @@
         85,
         89
       ],
+      "canonical_file": "samples/pop909_train_660_bar85_89_4bar.json",
       "canonical_piece_id": "pop909:660",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_660_bar85_89_4bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 71,
       "piece_duration_sec": 219.106617,
-      "record_sha256": "sha256:213f9cbb03aad3c1127af588e5a9457881864b1182082b85a0ade373fe3b48f2",
+      "projection_file": "projections/pop909_train_660_bar85_89_4bar.projection.json",
+      "projection_id": "sha256:414034fb536d8ed14d1557c246fa040ef0c6fedc1dd3bac221070e8f89d7e4f3",
+      "record_sha256": "sha256:71b578864c49821bbadb30da7b11d4444c6c1f1b84ff4f081c3ce14fcaf90cfb",
       "sample_id": "pop909_train_660_bar85_89_4bar",
       "scale_bars": 4,
       "source_id": "pop909:660",
@@ -679,20 +727,22 @@
         16,
         24
       ],
+      "canonical_file": "samples/pop909_train_334_bar16_24_8bar.json",
       "canonical_piece_id": "pop909:334",
       "evidence_status_counts": {
-        "ambiguous": 2,
+        "ambiguous": 3,
         "insufficient_evidence": 1,
-        "supported": 11
+        "supported": 12
       },
-      "file": "samples/pop909_train_334_bar16_24_8bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 222,
       "piece_duration_sec": 167.21285,
-      "record_sha256": "sha256:38ba11b536c8962720fab8167f880b4d382dfd9e54bdd007a9376f9da4db4a78",
+      "projection_file": "projections/pop909_train_334_bar16_24_8bar.projection.json",
+      "projection_id": "sha256:7934b3d97f2292539ef9122d0fade6666f3f3d1f46e0e1b008456dce23f5471a",
+      "record_sha256": "sha256:9c04864f51e13d79a0dd4d6836f61280e1b0e060cbd4d59e086be96c67e84904",
       "sample_id": "pop909_train_334_bar16_24_8bar",
       "scale_bars": 8,
       "source_id": "pop909:334",
@@ -717,19 +767,21 @@
         59,
         75
       ],
+      "canonical_file": "samples/pop909_train_667_bar59_75_16bar.json",
       "canonical_piece_id": "pop909:667",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_667_bar59_75_16bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 233,
       "piece_duration_sec": 300.60966,
-      "record_sha256": "sha256:12375e0defc038e8c0504480a19bcdb8a0b491869d95e15a61e631b796652df4",
+      "projection_file": "projections/pop909_train_667_bar59_75_16bar.projection.json",
+      "projection_id": "sha256:0f5294d44487fadad36c20c6a1e2a6360002b704c5731f0b8f2c1683bde181c5",
+      "record_sha256": "sha256:23df4643d4ededd574672a7220ea30cd4f7bf0ed6bc9f518ad75139eb2b68d0d",
       "sample_id": "pop909_train_667_bar59_75_16bar",
       "scale_bars": 16,
       "source_id": "pop909:667",
@@ -754,19 +806,21 @@
         44,
         76
       ],
+      "canonical_file": "samples/pop909_train_039_bar44_76_32bar.json",
       "canonical_piece_id": "pop909:039",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_039_bar44_76_32bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 557,
       "piece_duration_sec": 271.105059,
-      "record_sha256": "sha256:fdde0a42e4ac13083122edf7b61a3ea3a65d05a27cd178343553e23e11cdfc9b",
+      "projection_file": "projections/pop909_train_039_bar44_76_32bar.projection.json",
+      "projection_id": "sha256:e16c1c8f10c355a0109007f282a09437d73753c144ca189970738674ac7cc72b",
+      "record_sha256": "sha256:16be767eea6529b2fc4eb6f92bf78b15de6b0f752a2ffde18febb827c87aee6f",
       "sample_id": "pop909_train_039_bar44_76_32bar",
       "scale_bars": 32,
       "source_id": "pop909:039",
@@ -791,20 +845,22 @@
         36,
         38
       ],
+      "canonical_file": "samples/pop909_train_307_bar36_38_2bar.json",
       "canonical_piece_id": "pop909:307",
       "evidence_status_counts": {
-        "ambiguous": 2,
+        "ambiguous": 3,
         "insufficient_evidence": 1,
-        "supported": 11
+        "supported": 12
       },
-      "file": "samples/pop909_train_307_bar36_38_2bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 42,
       "piece_duration_sec": 252.244116,
-      "record_sha256": "sha256:22827f53f61bad15dacc132e3f3f9d342fe08110834a3da421495815057d67f1",
+      "projection_file": "projections/pop909_train_307_bar36_38_2bar.projection.json",
+      "projection_id": "sha256:0c6267414f68bfb5c9fb6bed2f6db13552147f9d5d5cce3d026a8fec761a8aea",
+      "record_sha256": "sha256:f67ce207443f412a01d6cd38641d7155690956638e4e6a07c79c25078e68f2d3",
       "sample_id": "pop909_train_307_bar36_38_2bar",
       "scale_bars": 2,
       "source_id": "pop909:307",
@@ -829,19 +885,21 @@
         89,
         93
       ],
+      "canonical_file": "samples/pop909_train_258_bar89_93_4bar.json",
       "canonical_piece_id": "pop909:258",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_258_bar89_93_4bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 88,
       "piece_duration_sec": 232.221572,
-      "record_sha256": "sha256:891c04827338e089b7e061e2ab4af3fa296710eda661b622964e2095599a46da",
+      "projection_file": "projections/pop909_train_258_bar89_93_4bar.projection.json",
+      "projection_id": "sha256:9c2c4fd4fd36905303877e4e73e870af6c90421ef4e97c46d68ea49361c2746a",
+      "record_sha256": "sha256:14aa1a27616d32df0a4f535f8543d343461c41cd2db810e29204680fc7fc128e",
       "sample_id": "pop909_train_258_bar89_93_4bar",
       "scale_bars": 4,
       "source_id": "pop909:258",
@@ -866,19 +924,21 @@
         26,
         34
       ],
+      "canonical_file": "samples/pop909_train_709_bar26_34_8bar.json",
       "canonical_piece_id": "pop909:709",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_709_bar26_34_8bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 197,
       "piece_duration_sec": 215.85327,
-      "record_sha256": "sha256:61082a290d74df817bc0855ccba56d4b23b3463b23ea87359a3d935e0da0961d",
+      "projection_file": "projections/pop909_train_709_bar26_34_8bar.projection.json",
+      "projection_id": "sha256:d8608ad578e2244f54e1ec260823cb49c65519f493dc479735d970f2aa540bac",
+      "record_sha256": "sha256:3f82baf403673726da417db2fa2d4e5b709b862b4b02c5d91e910e3e0b8b6c02",
       "sample_id": "pop909_train_709_bar26_34_8bar",
       "scale_bars": 8,
       "source_id": "pop909:709",
@@ -903,19 +963,21 @@
         24,
         40
       ],
+      "canonical_file": "samples/pop909_train_715_bar24_40_16bar.json",
       "canonical_piece_id": "pop909:715",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_715_bar24_40_16bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 307,
       "piece_duration_sec": 238.043145,
-      "record_sha256": "sha256:4f1f1f1f7016bfef06d32abe221679b2f3dfbb682f3e5b968eb6ba862624606f",
+      "projection_file": "projections/pop909_train_715_bar24_40_16bar.projection.json",
+      "projection_id": "sha256:7358c9eb091d51ac5b8acac0c7442756d3b434fc30a64d45f7a669ba39735ee6",
+      "record_sha256": "sha256:05a325bf537d2928b01226dd45f8cb4470a2ca55e47fc96b5d8b14d659430e2a",
       "sample_id": "pop909_train_715_bar24_40_16bar",
       "scale_bars": 16,
       "source_id": "pop909:715",
@@ -940,19 +1002,21 @@
         19,
         51
       ],
+      "canonical_file": "samples/pop909_train_703_bar19_51_32bar.json",
       "canonical_piece_id": "pop909:703",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_703_bar19_51_32bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 798,
       "piece_duration_sec": 267.713729,
-      "record_sha256": "sha256:a44327195aefaa14ed425d04ca80dceba0483df4869000aa0ec4472d82dae2a7",
+      "projection_file": "projections/pop909_train_703_bar19_51_32bar.projection.json",
+      "projection_id": "sha256:e43670997240f9a7a18002f485121ddb412512698c6cad249972feb6c9caab07",
+      "record_sha256": "sha256:46a3d7c74b8b0650b146f2bd35b53bba167bdd02427ea9f67c3c97b533ba161f",
       "sample_id": "pop909_train_703_bar19_51_32bar",
       "scale_bars": 32,
       "source_id": "pop909:703",
@@ -977,19 +1041,21 @@
         17,
         19
       ],
+      "canonical_file": "samples/pop909_train_172_bar17_19_2bar.json",
       "canonical_piece_id": "pop909:172",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_172_bar17_19_2bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 40,
       "piece_duration_sec": 249.976877,
-      "record_sha256": "sha256:150d3ea09985291063320719af74e96aeef5fb55faf5dda160fc4d648754447d",
+      "projection_file": "projections/pop909_train_172_bar17_19_2bar.projection.json",
+      "projection_id": "sha256:f8951d436cd57f4b31b60cfc4c1690b8ec26807e2a71e5a77256ae089e0f2e3a",
+      "record_sha256": "sha256:8c8425d38140786ecfcea55c43b08584c2be708e5b9d458f17e450989a656e97",
       "sample_id": "pop909_train_172_bar17_19_2bar",
       "scale_bars": 2,
       "source_id": "pop909:172",
@@ -1014,19 +1080,21 @@
         49,
         53
       ],
+      "canonical_file": "samples/pop909_train_441_bar49_53_4bar.json",
       "canonical_piece_id": "pop909:441",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_441_bar49_53_4bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 83,
       "piece_duration_sec": 264.778605,
-      "record_sha256": "sha256:ee6cae6db88e9718fdb1679c8c55b444c9b2c63fb77d37ebe589fb924ba7771e",
+      "projection_file": "projections/pop909_train_441_bar49_53_4bar.projection.json",
+      "projection_id": "sha256:e642dbfda8c5ce89fd3e5d825ee997d3aee91e318ba49df4ba1a47d915589e2c",
+      "record_sha256": "sha256:a7beada3a8d563cc6993800081bb5ad3928c8fd4bb66b29de56e99223496298c",
       "sample_id": "pop909_train_441_bar49_53_4bar",
       "scale_bars": 4,
       "source_id": "pop909:441",
@@ -1051,19 +1119,21 @@
         32,
         40
       ],
+      "canonical_file": "samples/pop909_train_814_bar32_40_8bar.json",
       "canonical_piece_id": "pop909:814",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_814_bar32_40_8bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 203,
       "piece_duration_sec": 226.5,
-      "record_sha256": "sha256:00b495f8645772fc632d87c49f6973b10e4453ddfddc7c7bef32213bf75d095d",
+      "projection_file": "projections/pop909_train_814_bar32_40_8bar.projection.json",
+      "projection_id": "sha256:d5fa8ffb8449af117e53bb52892b813d27765d7c9da6aa2774f82651de0f84ad",
+      "record_sha256": "sha256:e202d1bfab9280d04765ce03be6985849748572e4f535a2245fa9546c65045c2",
       "sample_id": "pop909_train_814_bar32_40_8bar",
       "scale_bars": 8,
       "source_id": "pop909:814",
@@ -1088,19 +1158,21 @@
         23,
         39
       ],
+      "canonical_file": "samples/pop909_train_170_bar23_39_16bar.json",
       "canonical_piece_id": "pop909:170",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_170_bar23_39_16bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 596,
       "piece_duration_sec": 227.727212,
-      "record_sha256": "sha256:0393f5b5444f80465aece9e17b155052797a6d4b765ab249bb6b7f9522310cf4",
+      "projection_file": "projections/pop909_train_170_bar23_39_16bar.projection.json",
+      "projection_id": "sha256:169e2f21d31f6dd00f4e47f0d6c1e664dfb3c0731f7fb3400d87957cb602320a",
+      "record_sha256": "sha256:a1dbc3b67b25084b4643ea6907c5c58ab5b0fb9a7d7192bbe9227c4d816450a6",
       "sample_id": "pop909_train_170_bar23_39_16bar",
       "scale_bars": 16,
       "source_id": "pop909:170",
@@ -1125,19 +1197,21 @@
         8,
         40
       ],
+      "canonical_file": "samples/pop909_train_328_bar8_40_32bar.json",
       "canonical_piece_id": "pop909:328",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_328_bar8_40_32bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 710,
       "piece_duration_sec": 255.999744,
-      "record_sha256": "sha256:879e821cf9d688b93f924cf159c8e6c4bd459f5021a5be08fef8dd95b70fe45b",
+      "projection_file": "projections/pop909_train_328_bar8_40_32bar.projection.json",
+      "projection_id": "sha256:d7be97436bec09f549a006d5c324eff1f5a6cba8d7952432743b8c8bac1a4340",
+      "record_sha256": "sha256:0c8905fe0cd0d0e96f6312d799cc3694eaccf4f404a62c83f0fcea5911791ed4",
       "sample_id": "pop909_train_328_bar8_40_32bar",
       "scale_bars": 32,
       "source_id": "pop909:328",
@@ -1162,19 +1236,21 @@
         17,
         19
       ],
+      "canonical_file": "samples/pop909_train_101_bar17_19_2bar.json",
       "canonical_piece_id": "pop909:101",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_101_bar17_19_2bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 44,
       "piece_duration_sec": 295.168176,
-      "record_sha256": "sha256:f092ebef76e168582747cee03dc8c5b14e09c6e37c858219f9b09718c890b172",
+      "projection_file": "projections/pop909_train_101_bar17_19_2bar.projection.json",
+      "projection_id": "sha256:3eaec12aa78d0d320717f5691d2fe8f7427620eaed6882ffe036e8f488b002b2",
+      "record_sha256": "sha256:59b6070f0c21eb85fd6e01e5992476e84fb953884a2d8bb1b5b95f74d2ca5df2",
       "sample_id": "pop909_train_101_bar17_19_2bar",
       "scale_bars": 2,
       "source_id": "pop909:101",
@@ -1199,19 +1275,21 @@
         25,
         29
       ],
+      "canonical_file": "samples/pop909_train_227_bar25_29_4bar.json",
       "canonical_piece_id": "pop909:227",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_227_bar25_29_4bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 75,
       "piece_duration_sec": 253.849552,
-      "record_sha256": "sha256:a057d10d86fa3005b3886388ee4b82ecf3c9636e0e239393f11c4702c0fe6a2f",
+      "projection_file": "projections/pop909_train_227_bar25_29_4bar.projection.json",
+      "projection_id": "sha256:901cd2c58e10326607096185de54819dc99b3c5099b78e74fb649ed618e81876",
+      "record_sha256": "sha256:367f0204672578f9c1d5aa22fbb854ea5c20b206ce5b66ee8939e7be8c06e898",
       "sample_id": "pop909_train_227_bar25_29_4bar",
       "scale_bars": 4,
       "source_id": "pop909:227",
@@ -1236,19 +1314,21 @@
         71,
         79
       ],
+      "canonical_file": "samples/pop909_train_009_bar71_79_8bar.json",
       "canonical_piece_id": "pop909:009",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_009_bar71_79_8bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 111,
       "piece_duration_sec": 203.912289,
-      "record_sha256": "sha256:aee3a4c79b728064d3b4ffb47827c8e6ddf31acb23ca7d458ec119daa693665b",
+      "projection_file": "projections/pop909_train_009_bar71_79_8bar.projection.json",
+      "projection_id": "sha256:de17427283c7cb65277e6620f8414ea905c0c6760f8c1bcbda9463587074f050",
+      "record_sha256": "sha256:230016c557aba23a21f65c5c1ea4a149433a3f4a296e1f9d147ca367048f41f7",
       "sample_id": "pop909_train_009_bar71_79_8bar",
       "scale_bars": 8,
       "source_id": "pop909:009",
@@ -1273,19 +1353,21 @@
         84,
         100
       ],
+      "canonical_file": "samples/pop909_train_690_bar84_100_16bar.json",
       "canonical_piece_id": "pop909:690",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_690_bar84_100_16bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 262,
       "piece_duration_sec": 250.547843,
-      "record_sha256": "sha256:bf8fa1ddc6ee7e2567292f07689dca9e744d26d2815abb8b92e6ddf92bc79f6d",
+      "projection_file": "projections/pop909_train_690_bar84_100_16bar.projection.json",
+      "projection_id": "sha256:07958e7e747b4da2792cdb1f826c534e40110ac0560213bcb144f41802a3d481",
+      "record_sha256": "sha256:69f9f7aded12551cd0d895567494ab2d455ec46647c80ab974424b6767483b8e",
       "sample_id": "pop909_train_690_bar84_100_16bar",
       "scale_bars": 16,
       "source_id": "pop909:690",
@@ -1310,19 +1392,21 @@
         69,
         101
       ],
+      "canonical_file": "samples/pop909_train_210_bar69_101_32bar.json",
       "canonical_piece_id": "pop909:210",
       "evidence_status_counts": {
-        "ambiguous": 2,
-        "supported": 12
+        "ambiguous": 3,
+        "supported": 13
       },
-      "file": "samples/pop909_train_210_bar69_101_32bar.json",
       "implementation_status_counts": {
-        "implemented": 12,
-        "partial": 2
+        "implemented": 13,
+        "partial": 3
       },
       "note_event_count": 562,
       "piece_duration_sec": 229.134596,
-      "record_sha256": "sha256:6df65d3ea69ae9c10cdfcf5b3a1b1845cfb92bb834cba6c0a9c5daa20434231c",
+      "projection_file": "projections/pop909_train_210_bar69_101_32bar.projection.json",
+      "projection_id": "sha256:1ef041cbefa68e31fee594e558ab85a003e278935eda7a359c422e0c9024038e",
+      "record_sha256": "sha256:e586e486275c6f3a9c8dcc03bf6299f7d14d5cb56b2ee190ee6e1f5ab408cd4a",
       "sample_id": "pop909_train_210_bar69_101_32bar",
       "scale_bars": 32,
       "source_id": "pop909:210",
@@ -1340,7 +1424,7 @@
     "16": 6,
     "32": 6
   },
-  "schema_version": "sori_dense_metadata_demo_index_v0.3",
+  "schema_version": "sori_dense_metadata_demo_index_v0.4",
   "selection_seed": "sori-pop909-dense-metadata-v0.1-20260716",
   "split": "train",
   "structurally_valid_count": 30,

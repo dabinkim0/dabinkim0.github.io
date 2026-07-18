@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&amp;family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260717-stage-inspector">
+  <link rel="stylesheet" href="styles.css?v=20260717-m004-p001">
 </head>
 <body>
   <header class="main-header">
@@ -28,12 +28,12 @@
     <section class="hero">
       <p class="eyebrow">Experiment Dashboard</p>
       <h1>Symbolic Music <span>Captioning</span></h1>
-      <p class="hero-copy">A sample-centered review of the metadata-grounded caption pipeline. The current M.0.3 release stops at canonical evidence; no compact LLM request or caption has been generated for these samples.</p>
+      <p class="hero-copy">A sample-centered review of the metadata-grounded caption pipeline. M.0.4 canonical evidence and P.0.1 compact projections are available; exact Gemini requests and captions are not.</p>
       <div class="hero-metrics" aria-label="Experiment Summary">
-        <article class="hero-metric"><span>Current Release</span><strong>M.0.3</strong><em>Canonical Evidence</em></article>
+        <article class="hero-metric"><span>Current Release</span><strong>M.0.4 + P.0.1</strong><em>Evidence + Projection</em></article>
         <article class="hero-metric"><span>Actual Samples</span><strong>30</strong><em>POP909 Train Audit</em></article>
-        <article class="hero-metric"><span>Exact LLM Requests</span><strong>0</strong><em>P.0.1 Not Generated</em></article>
-        <article class="hero-metric"><span>Final Captions</span><strong>0</strong><em>Filtering Not Started</em></article>
+        <article class="hero-metric"><span>Compact Projections</span><strong>30</strong><em>Schema-Validated P.0.1</em></article>
+        <article class="hero-metric"><span>Exact LLM Requests</span><strong>0</strong><em>J.0.1 Not Assembled</em></article>
       </div>
     </section>
 
@@ -43,7 +43,7 @@
           <p class="section-kicker">Target Architecture</p>
           <h2 id="pipeline-title">Music Caption Pretraining Pipeline</h2>
         </div>
-        <p>This diagram shows the intended end-to-end system. Current M.0.3 samples stop after canonical evidence.</p>
+        <p>This diagram shows the intended end-to-end system. Current artifacts stop after the P.0.1 compact projection.</p>
       </div>
 
       <div class="pipeline-map" aria-label="Music Captioning Pipeline">
@@ -58,14 +58,21 @@
           <span class="node-index">02</span>
           <span class="node-badge required">Required</span>
           <strong>Canonical Evidence</strong>
-          <small>M.0.3 · Current Endpoint</small>
+          <small>M.0.4 · Available</small>
+        </article>
+        <div class="flow-arrow" aria-hidden="true"><span></span></div>
+        <article class="pipeline-node required-node">
+          <span class="node-index">03</span>
+          <span class="node-badge required">Current</span>
+          <strong>Compact Projection</strong>
+          <small>P.0.1 · Current Endpoint</small>
         </article>
         <div class="flow-arrow" aria-hidden="true"><span></span></div>
         <article class="pipeline-node request-node">
-          <span class="node-index">03</span>
+          <span class="node-index">04</span>
           <span class="node-badge required">Required</span>
-          <strong>Compact Projection + Prompt</strong>
-          <small>P.0.1 · Not Generated</small>
+          <strong>Text Prompt + Attachments</strong>
+          <small>J.0.1 · Not Assembled</small>
           <div class="optional-inputs" aria-label="Optional Attachments">
             <span>Optional MIDI File</span>
             <span>Optional VST-Rendered Audio</span>
@@ -73,7 +80,7 @@
         </article>
         <div class="flow-arrow" aria-hidden="true"><span></span></div>
         <article class="pipeline-node backend-node">
-          <span class="node-index">04</span>
+          <span class="node-index">05</span>
           <strong>Gemini</strong>
           <div class="backend-options">
             <span><b>A</b> Gemini Web</span>
@@ -82,19 +89,19 @@
         </article>
         <div class="flow-arrow" aria-hidden="true"><span></span></div>
         <article class="pipeline-node output-node">
-          <span class="node-index">05</span>
+          <span class="node-index">06</span>
           <strong>Raw Caption</strong>
           <small>Structured Response</small>
         </article>
         <div class="flow-arrow" aria-hidden="true"><span></span></div>
         <article class="pipeline-node filter-node">
-          <span class="node-index">06</span>
+          <span class="node-index">07</span>
           <strong>LLM-Based Caption Filtering</strong>
           <small>Evidence-Aware Claim Selection</small>
         </article>
         <div class="flow-arrow" aria-hidden="true"><span></span></div>
         <article class="pipeline-node candidate-node">
-          <span class="node-index">07</span>
+          <span class="node-index">08</span>
           <i class="node-icon check-icon" aria-hidden="true">✓</i>
           <strong>Caption Dataset Candidate</strong>
           <small>After Filtering</small>
@@ -111,21 +118,21 @@
     <section id="dense-metadata-audit" class="section-block dense-audit" aria-labelledby="dense-audit-title">
       <div class="section-head outside-head">
         <div>
-          <p class="section-kicker">Current M.0.3 Workflow</p>
+          <p class="section-kicker">Current M.0.4 / P.0.1 Workflow</p>
           <h2 id="dense-audit-title">Sample Pipeline Inspector</h2>
         </div>
         <p>Select one actual sample, then inspect exactly how far it has progressed. Canonical JSON is never presented as an LLM request.</p>
       </div>
 
       <div class="dense-audit-metrics" aria-label="Dense Metadata Pilot Summary">
-        <article><span>Actual Samples</span><strong data-dense-sample-count>—</strong><em>POP909 Train · Audit Only</em></article>
+        <article><span>Canonical Samples</span><strong data-dense-sample-count>—</strong><em>M.0.4 · Audit Only</em></article>
+        <article><span>Compact Projections</span><strong data-dense-projection-count>—</strong><em>P.0.1 · Provider-Neutral</em></article>
         <article><span>Implemented</span><strong data-dense-implemented-count>—</strong><em>Extractor Paths Available</em></article>
-        <article><span>Partial</span><strong data-dense-partial-count>—</strong><em>Raw Evidence Only</em></article>
         <article><span>Not Implemented</span><strong data-dense-missing-count>—</strong><em>No Demo Value Fabricated</em></article>
       </div>
 
       <details class="dense-feature-disclosure">
-        <summary><span><b>Extractor Coverage</b><small>12 implemented, 2 partial, and 7 unavailable feature paths.</small></span><em>Inspect Matrix</em></summary>
+        <summary><span><b>Extractor Coverage</b><small>13 implemented, 3 partial, and 7 unavailable feature paths.</small></span><em>Inspect Matrix</em></summary>
         <article class="panel-card feature-status-panel">
           <div class="card-head dense-card-head">
             <div><p class="section-kicker">Implementation Boundary</p><h3>Feature Status Matrix</h3></div>
@@ -144,8 +151,8 @@
         <div class="dense-sample-controls" data-dense-picker></div>
         <div class="dense-sample-summary" data-dense-sample-summary>
           <div>
-            <p class="eyebrow" data-dense-release>M.0.3 · Loading</p>
-            <h3 data-dense-sample-title>Loading Actual Metadata…</h3>
+            <p class="eyebrow" data-dense-release>M.0.4 + P.0.1 · Loading</p>
+            <h3 data-dense-sample-title>Loading Actual Artifact Pair…</h3>
             <p data-dense-sample-origin></p>
           </div>
           <dl class="dense-sample-facts">
@@ -154,13 +161,15 @@
             <div><dt>Scale</dt><dd data-dense-scale>—</dd></div>
             <div><dt>Seconds</dt><dd data-dense-seconds>—</dd></div>
             <div><dt>Bars</dt><dd data-dense-bars>—</dd></div>
-            <div><dt>Note Events</dt><dd data-dense-note-count>—</dd></div>
+            <div><dt>Note-On Events</dt><dd data-dense-note-count>—</dd></div>
           </dl>
         </div>
         <div class="dense-lineage" aria-label="Artifact Version Lineage">
-          <span class="available"><b>M.0.3</b> Canonical Evidence</span>
+          <span class="available"><b>M.0.4</b> Canonical Evidence</span>
           <i>→</i>
-          <span><b>P.0.1</b> Not Generated</span>
+          <span class="available"><b>P.0.1</b> Compact Projection</span>
+          <i>→</i>
+          <span><b>J.0.1</b> Not Assembled</span>
           <i>→</i>
           <span><b>A / B</b> Not Executed</span>
           <i>→</i>
@@ -173,7 +182,7 @@
               <div><p class="section-kicker" data-dense-stage-kicker>Current Stage</p><h3 data-dense-stage-title>Canonical Evidence</h3><p data-dense-stage-description></p></div>
               <span class="dense-status" data-dense-stage-status>—</span>
             </header>
-            <div class="dense-view-tabs" data-dense-tabs role="tablist" aria-label="Canonical Evidence View"></div>
+            <div class="dense-view-tabs" data-dense-tabs role="tablist" aria-label="Selected Artifact View"></div>
             <div class="dense-view-content" data-dense-content aria-live="polite">
               <p class="dense-loading">Loading actual extractor output…</p>
             </div>
@@ -184,7 +193,7 @@
 
     <details class="archive-disclosure metadata-archive">
       <summary>
-        <span><b>Legacy Extractor Development</b><small>K.0.x family-isolated experiments; not the current M.0.3 sample input.</small></span>
+        <span><b>Legacy Extractor Development</b><small>K.0.x family-isolated experiments; not the current M.0.4/P.0.1 sample pair.</small></span>
         <em>Open Archive</em>
       </summary>
       <section id="metadata-development" class="section-block metadata-development archive-content" aria-labelledby="metadata-development-title">
@@ -249,7 +258,7 @@
 
     <details class="archive-disclosure run-archive">
       <summary>
-        <span><b>Legacy Executed Runs</b><small>A.1.x and K.0.1 prompts below are preserved historical runs and are not linked to current M.0.3 samples.</small></span>
+        <span><b>Legacy Executed Runs</b><small>A.1.x and K.0.1 prompts below are preserved historical runs and are not linked to current M.0.4/P.0.1 samples.</small></span>
         <em>Open Archive</em>
       </summary>
       <div class="archive-content">
@@ -426,7 +435,7 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260717-stage-inspector"></script>
-  <script src="dense-metadata.js?v=20260717-stage-inspector"></script>
+  <script src="script.js?v=20260717-m004-p001"></script>
+  <script src="dense-metadata.js?v=20260717-m004-p001"></script>
 </body>
 </html>
