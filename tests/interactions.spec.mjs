@@ -40,3 +40,13 @@ test("reduced motion removes archive control translation", async ({ browser }) =
 
     await context.close();
 });
+
+test("publication titles use the accent color on hover", async ({ page }) => {
+    await page.setViewportSize({ width: 1180, height: 900 });
+    await page.goto("/publications/");
+
+    const title = page.locator(".publication-copy h3 a:not(.disabled-link)").first();
+    await expect(title).toBeVisible();
+    await title.hover();
+    await expect(title).toHaveCSS("color", "rgb(36, 79, 74)");
+});

@@ -79,10 +79,10 @@ body {
         max-width: 100%;
         height: auto;
     }
-}
 
-a {
-    color: inherit;
+    a {
+        color: inherit;
+    }
 }
 
 :where(a, button, input, select, textarea):focus-visible {
