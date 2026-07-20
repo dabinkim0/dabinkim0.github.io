@@ -11,6 +11,7 @@ respective owners.
 | `koba.jpg` | https://kobashow.com/img/logo.jpg |
 | `kaist.png` | https://www.kaist.ac.kr/common/img/apple-touch-icon.png |
 | `sony-csl.png` | https://www.sonycsl.co.jp/wp-content/uploads/2025/03/site-icon-420x420.png |
+| `sori.svg` | https://www.sori-ai.com/favicon.svg |
 | `sogang-university.webp` | https://www.sogang.ac.kr/favicon.ico |
 
-Retrieved on 2026-07-14.
+Retrieved on 2026-07-14, with the SORI mark retrieved on 2026-07-21.
