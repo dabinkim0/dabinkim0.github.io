@@ -90,6 +90,16 @@ body {
     outline-offset: 3px;
 }
 
+.award-note {
+    margin: 4px 0 0;
+    color: var(--accent-strong);
+    font-family: var(--font-sans);
+    font-size: var(--type-meta);
+    font-weight: 500;
+    line-height: var(--leading-meta);
+    letter-spacing: 0.01em;
+}
+
 .main-header {
     position: sticky;
     top: 0;

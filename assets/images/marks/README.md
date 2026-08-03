@@ -7,6 +7,7 @@ respective owners.
 | File | Official source |
 | --- | --- |
 | `interspeech-2026.png` | https://interspeech2026.org/ |
+| `aes.png` | https://auto.aes.org/wp-content/uploads/2026/03/AES-Logo-300x300.png |
 | `ksmi.webp` | https://music-informatics.kr/logo_ksmi.webp |
 | `koba.jpg` | https://kobashow.com/img/logo.jpg |
 | `kaist.png` | https://www.kaist.ac.kr/common/img/apple-touch-icon.png |
@@ -14,4 +15,5 @@ respective owners.
 | `sori.svg` | https://www.sori-ai.com/favicon.svg |
 | `sogang-university.webp` | https://www.sogang.ac.kr/favicon.ico |
 
-Retrieved on 2026-07-14, with the SORI mark retrieved on 2026-07-21.
+Retrieved on 2026-07-14, with the SORI mark retrieved on 2026-07-21 and the
+AES mark retrieved on 2026-08-03.
