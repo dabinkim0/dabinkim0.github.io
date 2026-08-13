@@ -4,7 +4,7 @@ th {
     font-weight: 500 !important;
 }
 
-.shell {
+.demo-shell {
     width: min(1320px, calc(100vw - 48px));
     margin: 0 auto;
 }
@@ -579,7 +579,7 @@ code {
 }
 
 @media (max-width: 768px) {
-    .shell {
+    .demo-shell {
         width: min(100vw - 32px, 1320px);
     }
 

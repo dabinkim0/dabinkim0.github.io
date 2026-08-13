@@ -4,7 +4,7 @@ th {
     font-weight: 500 !important;
 }
 
-.shell {
+.demo-shell {
     width: min(1360px, calc(100vw - 48px));
     margin: 0 auto;
 }
@@ -451,7 +451,7 @@ h2.section-title.no-divider {
 }
 
 @media (max-width: 768px) {
-    .shell {
+    .demo-shell {
         width: min(100vw - 32px, 1360px);
     }
 
