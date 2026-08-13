@@ -5,3 +5,8 @@ node_modules/
 .npm-cache/
 test-results/
 playwright-report/
+
+# Private research workspaces
+/exps/
+/experiments/
+/symbolic-fused-lalm-experiments/
