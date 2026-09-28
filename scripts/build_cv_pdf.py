@@ -10,9 +10,9 @@ SECTIONS = [
     (
         "Profile",
         [
-            "An ML/DL researcher focused on music generation, editing, and representation learning. My work explores how learned representations can expand both what can be edited in music and how flexibly those edits can be controlled. I build models that connect musical structure, timbre, and expressive intent, and extend these capabilities through grounded relationships with text, image, and video. My goal is to develop controllable music AI systems that are technically rigorous, perceptually meaningful, and useful in creative workflows.",
+            "I am an ML/DL researcher focused on generative models for music and audio, particularly fine-grained offline editing and real-time online interaction. My current research explores full-duplex systems that listen and generate concurrently, enabling responsive musical co-creation with users.",
             "Affiliation: Music and Audio Computing (MAC) Lab, KAIST",
-            "Research Interests: controllable audio generation, music generation and editing, musical representation learning",
+            "Research Interests: Controllable Music Generation, Real-time Musical Interaction",
         ],
     ),
     (
@@ -33,7 +33,7 @@ SECTIONS = [
         "Publications",
         [
             "AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control. Dabin Kim, Junwon Lee, Juhan Nam. 27th Annual Conference of the International Speech Communication Association (INTERSPEECH), 2026. Paper: https://arxiv.org/abs/2606.15813 | Demo: https://dabinkim0.github.io/publications/adatt/",
-            "DDSP-Based Neural Vehicle Sound Synthesis from Driving Signals. Minsuk Choi, Dabin Kim, Daehun Song, Juhan Nam. 6th AES International Conference on Automotive Audio, 2026. Demo: https://dabinkim0.github.io/publications/ddsp-carsound/",
+            "DDSP-Based Neural Vehicle Sound Synthesis from Driving Signals. Minsuk Choi, Dabin Kim, Daehun Song, Juhan Nam. 6th AES International Conference on Automotive Audio, 2026. Paper: https://aes.org/publications/elibrary-page/?id=23427 | Demo: https://dabinkim0.github.io/publications/ddsp-carsound/",
             "Video-Foley: Two-Stage Video-To-Sound Generation via Temporal Event Condition for Foley Sound. Junwon Lee, Jaekwon Im, Dabin Kim, Juhan Nam. IEEE/ACM Transactions on Audio, Speech, and Language Processing (TASLP), 2025. Paper: https://arxiv.org/abs/2408.11915 | Demo: https://jnwnlee.github.io/video-foley-demo/ | Code: https://github.com/jnwnlee/video-foley",
             "Pitch-ControlNet: Continuous Pitch Control for Monophonic Instrument Sound Generation. Dabin Kim*, Junwon Lee*, Minseo Kim*, Juhan Nam (*equal contribution). Late-Breaking/Demo (LBD), 25th International Society for Music Information Retrieval Conference (ISMIR), 2024. Paper: https://ismir2024program.ismir.net/lbd_480.html",
         ],
@@ -41,7 +41,7 @@ SECTIONS = [
     (
         "Selected Presentations",
         [
-            "May 30, 2026 | AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control. Short Oral and Poster Sessions, Korean Society for Music Informatics (KSMI) 2026. Jeong Ha Sang Hall, Sogang University, Seoul, South Korea.",
+            "Sep 27 - Oct 1, 2026 | AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control. INTERSPEECH 2026. International Convention Centre Sydney, Sydney, Australia.",
             "May 12, 2026 | AI generative models for controllable music and Foley sound synthesis. KOBA 2026 AI Audio/Sound Day. COEX Conference Room, Seoul, South Korea.",
         ],
     ),
