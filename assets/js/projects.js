@@ -30,20 +30,6 @@ document.querySelectorAll(".project-meta").forEach((metadata) => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    const preventImageSaveGesture = (event) => {
-        event.preventDefault();
-    };
-    const protectedProjectImages = document.querySelectorAll(".project-list .project-figure, .project-list .project-figure img");
-
-    protectedProjectImages.forEach((element) => {
-        element.addEventListener("contextmenu", preventImageSaveGesture);
-        element.addEventListener("dragstart", preventImageSaveGesture);
-    });
-
-    document.querySelectorAll(".project-list .project-figure img").forEach((image) => {
-        image.setAttribute("draggable", "false");
-    });
-
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const motionBase = Number.parseFloat(window.getComputedStyle(document.documentElement).getPropertyValue("--motion-base")) || 240;
     const overlayDuration = prefersReducedMotion ? 0 : motionBase;

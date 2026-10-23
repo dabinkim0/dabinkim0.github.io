@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Canonical pages only. Compatibility redirects (adatt/, publications/timbre-transfer/) are intentionally omitted. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url><loc>https://dabinkim0.github.io/</loc></url>
+    <url><loc>https://dabinkim0.github.io/publications/</loc></url>
+    <url><loc>https://dabinkim0.github.io/publications/adatt/</loc></url>
+    <url><loc>https://dabinkim0.github.io/publications/ddsp-carsound/</loc></url>
+    <url><loc>https://dabinkim0.github.io/projects/</loc></url>
+</urlset>

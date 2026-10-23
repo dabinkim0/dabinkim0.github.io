@@ -447,13 +447,13 @@ def build_html() -> str:
 <body>
     <header class="main-header">
         <div class="shell header-shell">
-            <a href="../../index.html" class="logo">Dabin Kim</a>
+            <a href="../../" class="logo">Dabin Kim</a>
             <nav class="main-nav" aria-label="Primary">
                 <ul>
-                    <li><a href="../index.html" class="is-active nav-current">Publications</a></li>
-                    <li><a href="../../projects/index.html">Projects</a></li>
+                    <li><a href="../" class="is-active nav-current">Publications</a></li>
+                    <li><a href="../../projects/">Projects</a></li>
                     <li><a href="#" class="nav-disabled" aria-disabled="true" tabindex="-1">Blog</a></li>
-                    <li><a href="../../index.html">About</a></li>
+                    <li><a href="../../">About</a></li>
                 </ul>
             </nav>
         </div>

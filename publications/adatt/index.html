@@ -19,19 +19,49 @@
     <link rel="stylesheet" href="../../assets/css/site-shell.css">
     <link rel="stylesheet" href="../../assets/css/adatt.css">
     <link rel="stylesheet" href="../../assets/css/typography.css">
-    <script src="../../assets/js/mathjax-config.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "headline": "AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control",
+        "author": [
+            {
+                "@type": "Person",
+                "name": "Dabin Kim",
+                "url": "https://dabinkim0.github.io/"
+            },
+            {
+                "@type": "Person",
+                "name": "Junwon Lee",
+                "url": "https://jnwnlee.github.io/"
+            },
+            {
+                "@type": "Person",
+                "name": "Juhan Nam",
+                "url": "https://mac.kaist.ac.kr/~juhan/"
+            }
+        ],
+        "datePublished": "2026",
+        "isPartOf": {
+            "@type": "CreativeWork",
+            "name": "27th Annual Conference of the International Speech Communication Association (INTERSPEECH)"
+        },
+        "url": "https://dabinkim0.github.io/publications/adatt/",
+        "sameAs": "https://arxiv.org/abs/2606.15813",
+        "image": "https://dabinkim0.github.io/publications/adatt/figs/fig_architecture_demo.png"
+    }
+    </script>
 </head>
 <body>
     <header class="main-header">
         <div class="shell header-shell">
-            <a href="../../index.html" class="logo">Dabin Kim</a>
+            <a href="../../" class="logo">Dabin Kim</a>
             <nav class="main-nav" aria-label="Primary">
                 <ul>
-                    <li><a href="../index.html" class="is-active nav-current">Publications</a></li>
-                    <li><a href="../../projects/index.html">Projects</a></li>
+                    <li><a href="../" class="is-active nav-current">Publications</a></li>
+                    <li><a href="../../projects/">Projects</a></li>
                     <li><a href="#" class="nav-disabled" aria-disabled="true" tabindex="-1">Blog</a></li>
-                    <li><a href="../../index.html">About</a></li>
+                    <li><a href="../../">About</a></li>
                 </ul>
             </nav>
         </div>
@@ -77,7 +107,7 @@
                             </tr>
                             <tr>
                                 <td>ControlNet</td>
-                                <td>A DiT-based ControlNet trained with a frozen Stable Audio Open backbone. It is conditioned on two heterogeneous structural features: \(f_0\) and RMS contours.</td>
+                                <td>A DiT-based ControlNet trained with a frozen Stable Audio Open backbone. It is conditioned on two heterogeneous structural features: <i>f</i><sub>0</sub> and RMS contours.</td>
                             </tr>
                             <tr>
                                 <td>SmartControl</td>
@@ -425,7 +455,6 @@
             </p>
         </div>
     </footer>
-    <script defer src="../../assets/js/adatt.js"></script>
     <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"afb62ab7a2f14377b6a11b2553460c27"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
