@@ -34,11 +34,25 @@ const expectedColumns = (view, width) => {
     return 2;
 };
 
-const waitForFirstImage = async (card) => {
-    const image = card.locator("img").first();
-    if (await image.count()) {
-        await image.evaluate((element) => element.decode?.().catch(() => undefined));
-    }
+// Under parallel load, cards below the first one can still be loading when the
+// screenshot is taken, so wait for every image inside the viewport.
+const waitForVisibleImages = async (page) => {
+    await page.waitForFunction(() => Array.from(document.images)
+        .filter((image) => {
+            const box = image.getBoundingClientRect();
+            return box.width > 0 && box.height > 0
+                && box.bottom > 0 && box.top < window.innerHeight
+                && box.right > 0 && box.left < window.innerWidth;
+        })
+        .every((image) => image.complete && image.naturalWidth > 0));
+
+    await page.evaluate(async () => {
+        await Promise.all(Array.from(document.images)
+            .filter((image) => image.complete && image.naturalWidth > 0)
+            .map((image) => image.decode().catch(() => undefined)));
+        // Let load handlers (e.g. publication figure fit classes) settle before capture.
+        await new Promise((resolve) => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+    });
 };
 
 for (const archive of archives) {
@@ -122,7 +136,7 @@ for (const archive of archives) {
                     }
                 }
 
-                await waitForFirstImage(card);
+                await waitForVisibleImages(page);
                 await expect(page).toHaveScreenshot(`${archive.name}-${view}-${width}.png`, {
                     animations: "disabled",
                     fullPage: false
