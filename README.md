@@ -145,7 +145,13 @@ npx playwright install chromium
 npm run test:ui
 ```
 
-The Playwright suite verifies Projects and Publications at `390`, `720`, `920`, and `1180px` in all three view modes, plus the home accordion states. Update screenshots with `npm run test:ui:update` only after reviewing the visual changes.
+The Playwright suite verifies Projects and Publications at `390`, `720`, `920`, and `1180px` in all three view modes, the home accordion states and statement toggle, and runs axe-core WCAG 2.1 AA checks on every page (including the home page with JavaScript disabled). Update screenshots with `npm run test:ui:update` only after reviewing the visual changes.
+
+Before pushing, also run the static checks (no Node needed):
+
+```bash
+npm run check   # generated HTML is current + every local link resolves
+```
 
 ## CV PDF
 

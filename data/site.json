@@ -13,9 +13,18 @@
         "Musical Representation Learning"
     ],
     "profiles": [
-        { "label": "Google Scholar", "href": "https://scholar.google.com/citations?user=zW7HDK8AAAAJ&hl=ko&oi=sra" },
-        { "label": "GitHub", "href": "https://github.com/dabinkim0" },
-        { "label": "LinkedIn", "href": "https://www.linkedin.com/in/dabin-kim-4a792a345/" }
+        {
+            "label": "Google Scholar",
+            "href": "https://scholar.google.com/citations?user=zW7HDK8AAAAJ&hl=ko&oi=sra"
+        },
+        {
+            "label": "GitHub",
+            "href": "https://github.com/dabinkim0"
+        },
+        {
+            "label": "LinkedIn",
+            "href": "https://www.linkedin.com/in/dabin-kim-4a792a345/"
+        }
     ],
     "cv": "assets/docs/dabin-kim-cv.pdf",
     "people": {
@@ -24,10 +33,18 @@
         "Juhan Nam": "https://mac.kaist.ac.kr/~juhan/"
     },
     "nav": [
-        { "label": "Publications", "href": "publications/" },
-        { "label": "Projects", "href": "projects/" },
-        { "label": "Blog", "href": null },
-        { "label": "About", "href": "" }
+        {
+            "label": "Publications",
+            "href": "publications/"
+        },
+        {
+            "label": "Projects",
+            "href": "projects/"
+        },
+        {
+            "label": "About",
+            "href": ""
+        }
     ],
     "faviconVersion": "f965c0f",
     "fonts": "https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&family=Noto+Serif+KR:wght@400;500&family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&display=swap",

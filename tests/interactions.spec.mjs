@@ -41,6 +41,15 @@ test("reduced motion removes archive control translation", async ({ browser }) =
     await context.close();
 });
 
+test("filter bar only appears when there is more than one category", async ({ page }) => {
+    await page.goto("/publications/");
+    await expect(page.locator("[data-publication-filter-panel]")).toBeHidden();
+
+    await page.goto("/projects/");
+    await expect(page.locator("[data-project-filter-panel]")).toBeVisible();
+    expect(await page.locator("[data-project-filter-list] button").count()).toBeGreaterThan(2);
+});
+
 test("publication titles use the accent color on hover", async ({ page }) => {
     await page.setViewportSize({ width: 1180, height: 900 });
     await page.goto("/publications/");

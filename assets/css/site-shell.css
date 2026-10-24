@@ -190,16 +190,6 @@
         background: var(--accent);
     }
 
-    .main-nav a.nav-disabled {
-        color: var(--muted);
-        opacity: 0.55;
-        pointer-events: none;
-    }
-
-    .main-nav a.nav-disabled::after {
-        opacity: 0;
-    }
-
     .logo:focus-visible,
     .main-nav a:focus-visible,
     .contact-links a:focus-visible {

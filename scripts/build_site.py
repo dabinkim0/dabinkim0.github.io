@@ -118,9 +118,6 @@ def render_header(page: Page, args: dict) -> list[str]:
         "            <ul>",
     ]
     for item in site["nav"]:
-        if item["href"] is None:
-            lines.append(f'                <li><a href="#" class="nav-disabled" aria-disabled="true" tabindex="-1">{esc(item["label"])}</a></li>')
-            continue
         current = ""
         if item["href"] == section:
             own_page = page.href(item["href"]) == "./"
@@ -229,7 +226,8 @@ def render_publication_body(page: Page, publication: dict) -> list[str]:
         if target:
             lines.append(f"    <a {link_attrs(page, target)}>{label}</a>")
         else:
-            lines.append(f'    <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">{label}</a>')
+            # Kept as muted text so the layout signals what is not available yet.
+            lines.append(f'    <span class="disabled-link">{label}<span class="visually-hidden"> (not available)</span></span>')
     lines.append("</div>")
     return lines
 

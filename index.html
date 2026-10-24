@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dabin Kim | ML Researcher</title>
+    <!-- Lets CSS collapse the home panels only when JavaScript can reopen them. -->
+    <script>document.documentElement.classList.add("js");</script>
     <meta name="description" content="Dabin Kim is an ML researcher working on music generation, editing, and musical representation learning.">
     <link rel="canonical" href="https://dabinkim0.github.io/">
     <meta property="og:title" content="Dabin Kim | ML Researcher">
@@ -58,7 +60,6 @@
                 <ul>
                     <li><a href="publications/">Publications</a></li>
                     <li><a href="projects/">Projects</a></li>
-                    <li><a href="#" class="nav-disabled" aria-disabled="true" tabindex="-1">Blog</a></li>
                     <li><a href="./" class="is-active" aria-current="page">About</a></li>
                 </ul>
             </nav>
@@ -111,18 +112,21 @@
                             <span class="statement-text">Exploring full-duplex real-time music generation, focusing on how generative AI can listen and respond while making music with users.</span>
                         </div>
                     </div>
+                    <button class="statement-toggle" type="button" aria-pressed="false" aria-label="Pause moving statement" hidden>
+                        <span class="statement-toggle-icon" aria-hidden="true"></span>
+                    </button>
                 </section>
 
                 <section id="news" class="section-block">
                     <div class="news-panel-grid">
-                        <div class="education-list is-collapsed" data-collapsible="recent-news">
+                        <div class="education-list" data-collapsible="recent-news">
                             <h2 class="news-heading">
-                                <button class="news-toggle" type="button" aria-expanded="false" aria-controls="recent-news-list">
+                                <button class="news-toggle" type="button" aria-expanded="true" aria-controls="recent-news-list">
                                     <span>Recent News</span>
                                     <span class="news-toggle-icon" aria-hidden="true"></span>
                                 </button>
                             </h2>
-                            <div class="news-scroll-area" data-draggable-scroll aria-hidden="true">
+                            <div class="news-scroll-area" data-draggable-scroll>
                                 <ul id="recent-news-list" class="entry-list">
                                     <!-- build:news -->
                                     <li class="entry-item entry-item--news-event entry-item--branded">
@@ -173,7 +177,7 @@
                                     <span class="news-toggle-icon" aria-hidden="true"></span>
                                 </button>
                             </h2>
-                            <div class="news-scroll-area" data-draggable-scroll aria-hidden="true">
+                            <div class="news-scroll-area" data-draggable-scroll>
                                 <ul id="background-list" class="entry-list">
                                     <!-- build:background -->
                                     <li class="entry-item entry-item--branded">
@@ -240,7 +244,7 @@
                             <div class="links">
                                 <a href="https://arxiv.org/abs/2606.15813" target="_blank" rel="noreferrer">Paper</a>
                                 <a href="publications/adatt/">Demo</a>
-                                <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">Code</a>
+                                <span class="disabled-link">Code<span class="visually-hidden"> (not available)</span></span>
                             </div>
                         </li>
                         <li>
@@ -251,7 +255,7 @@
                             <div class="links">
                                 <a href="https://aes.org/publications/elibrary-page/?id=23427" target="_blank" rel="noreferrer">Paper</a>
                                 <a href="publications/ddsp-carsound/">Demo</a>
-                                <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">Code</a>
+                                <span class="disabled-link">Code<span class="visually-hidden"> (not available)</span></span>
                             </div>
                         </li>
                         <li>
@@ -270,8 +274,8 @@
                             <p class="venue"><em>Late-Breaking/Demo (LBD), 25th International Society for Music Information Retrieval Conference (ISMIR)</em>, 2024.</p>
                             <div class="links">
                                 <a href="https://ismir2024program.ismir.net/lbd_480.html" target="_blank" rel="noreferrer">Paper</a>
-                                <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">Demo</a>
-                                <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">Code</a>
+                                <span class="disabled-link">Demo<span class="visually-hidden"> (not available)</span></span>
+                                <span class="disabled-link">Code<span class="visually-hidden"> (not available)</span></span>
                             </div>
                         </li>
                         <!-- /build:home-publications -->

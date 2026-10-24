@@ -61,7 +61,16 @@ for (const archive of archives) {
             test(`${archive.name} ${view} at ${width}px`, async ({ page }) => {
                 await page.setViewportSize({ width, height: width === 390 ? 844 : 900 });
                 await page.goto(archive.path);
-                await page.locator(`[data-archive-view-option="${view}"]`).click();
+                const viewButton = page.locator(`[data-archive-view-option="${view}"]`);
+                if (width <= 720) {
+                    // Every view is one column here, so the toggle is hidden; a view chosen
+                    // on a wider window still has to render correctly after resizing.
+                    await expect(page.locator(".archive-view-toggle")).toBeHidden();
+                    await viewButton.dispatchEvent("click");
+                } else {
+                    await expect(page.locator(".archive-view-toggle")).toBeVisible();
+                    await viewButton.click();
+                }
 
                 const list = page.locator(archive.list);
                 const card = list.locator(archive.card).first();

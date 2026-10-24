@@ -71,10 +71,6 @@
         color: var(--accent-strong);
     }
 
-    .item-list h3 a.disabled-link:hover {
-        text-decoration-color: currentColor;
-    }
-
     .item-list .authors,
     .item-list .venue {
         font-size: var(--type-meta);
@@ -103,7 +99,7 @@
         margin-top: var(--space-3);
     }
 
-    .item-list .links a {
+    .item-list .links :is(a, .disabled-link) {
         padding-bottom: 2px;
         border-bottom: 1px solid var(--rule);
         color: var(--text);
@@ -119,14 +115,9 @@
         color: var(--accent-strong);
     }
 
-    .item-list .links a[href="#"],
     .item-list .links .disabled-link {
         border-bottom-color: transparent;
         color: var(--muted);
-    }
-
-    .item-list .links .disabled-link {
-        pointer-events: none;
     }
 
     .publication-figure {
@@ -148,10 +139,6 @@
     .item-list li:focus-within .publication-figure,
     .publication-figure:hover {
         border-color: var(--interactive-border-hover);
-    }
-
-    .publication-figure.disabled-link {
-        pointer-events: none;
     }
 
     .publication-figure img {

@@ -90,6 +90,11 @@
         margin: 0 0 var(--space-5);
     }
 
+    /* Hidden by the page script when there is only one category to filter by. */
+    .archive-filter-panel[hidden] {
+        display: none;
+    }
+
     .archive-filter-list {
         display: flex;
         flex-wrap: wrap;
@@ -177,6 +182,13 @@
 }
 
 @layer responsive {
+    /* Every view renders as one column at this width, so the toggle would do nothing. */
+    @media (max-width: 720px) {
+        .archive-view-toggle {
+            display: none;
+        }
+    }
+
     @media (prefers-reduced-motion: reduce) {
         .view-toggle-button,
         .archive-filter-chip {

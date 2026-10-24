@@ -73,6 +73,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const countDiff = (categoryCounts.get(tagB) || 0) - (categoryCounts.get(tagA) || 0);
         return countDiff || filterTagOrder.get(tagA) - filterTagOrder.get(tagB);
     });
+
+    if (filterTags.length < 2) {
+        // A single category would only offer "All" and itself, so skip the filter UI.
+        filterPanel.hidden = true;
+        return;
+    }
+
     const filterButtons = new Map();
     let activeFilter = null;
 

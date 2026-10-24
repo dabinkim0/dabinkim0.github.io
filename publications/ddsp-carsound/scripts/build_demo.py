@@ -336,10 +336,11 @@ def render_sample_item(case: dict[str, object], sample_id: str, method: dict[str
     # Alt text uses the full legend wording ("Direct (RPM, Gear Level, ...)") rather than the short label.
     method_name = re.sub(r"<[^>]+>", "", method.get("legend_html", html.escape(method["label"])).replace("<br>", " "))
     alt_text = f"Spectrogram for {html.escape(case['title'])} sample {sample_id} - {method_name}"
+    audio_label = f"{html.escape(case['title'])}, Sample {format_sample_title(sample_id)}: {method_name}"
 
     return (
         "                        <div class=\"sample-item\">\n"
-        "                            <audio controls preload=\"none\" class=\"audio-player\">\n"
+        f"                            <audio controls preload=\"none\" class=\"audio-player\" aria-label=\"{audio_label}\">\n"
         f"                                <source src=\"audio/{html.escape(audio_file.name)}\" type=\"audio/wav\">\n"
         "                            </audio>\n"
         f"                            <img class=\"spectrogram-preview\" src=\"spectrograms/{html.escape(audio_file.stem)}.png\" alt=\"{alt_text}\" loading=\"lazy\" width=\"{SPEC_IMAGE_WIDTH}\" height=\"{SPEC_IMAGE_HEIGHT}\">\n"
@@ -379,7 +380,7 @@ def build_sample_card(case: dict[str, object], sample_id: str) -> str:
         "                    <div class=\"sample-card-header\">\n"
         f"                        <h3>Sample {format_sample_title(sample_id)}</h3>\n"
         "                    </div>\n"
-        "                    <div class=\"sample-row-scroll\">\n"
+        f"                    <div class=\"sample-row-scroll\" role=\"region\" aria-label=\"{html.escape(case['title'])}, Sample {format_sample_title(sample_id)} samples\" tabindex=\"0\">\n"
         "                        <div class=\"sample-groups-layout\">\n"
         f"{chr(10).join(group_blocks)}\n"
         "                        </div>\n"

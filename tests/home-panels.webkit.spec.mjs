@@ -5,7 +5,11 @@ for (const panel of ["recent-news", "background"]) {
         await page.setViewportSize({ width: 1180, height: 900 });
         await page.goto("/");
         await page.evaluate(() => document.fonts.ready);
-        await page.locator(`[data-collapsible="${panel}"] .news-toggle`).click();
+        const toggle = page.locator(`[data-collapsible="${panel}"] .news-toggle`);
+        // Recent News starts open; only click panels that are still collapsed.
+        if (await toggle.getAttribute("aria-expanded") !== "true") {
+            await toggle.click();
+        }
         await page.waitForTimeout(600);
 
         const rowGaps = await page.locator(`[data-collapsible="${panel}"] .entry-item`).evaluateAll((items) => (

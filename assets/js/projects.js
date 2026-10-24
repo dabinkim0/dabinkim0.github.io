@@ -155,6 +155,11 @@ document.addEventListener("DOMContentLoaded", () => {
         const countDiff = (tagCounts.get(tagB) || 0) - (tagCounts.get(tagA) || 0);
         return countDiff || tagOrder.get(tagA) - tagOrder.get(tagB);
     });
+    if (tags.length < 2) {
+        filterPanel.hidden = true;
+        return;
+    }
+
     let activeTag = null;
     const topLevelButtons = new Map();
 

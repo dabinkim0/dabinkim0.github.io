@@ -2,10 +2,13 @@
   "name": "dabinkim-portfolio-ui",
   "private": true,
   "scripts": {
+    "build": "python3 scripts/build_site.py",
+    "check": "python3 scripts/build_site.py --check && python3 tests/check_links.py",
     "test:ui": "playwright test",
     "test:ui:update": "playwright test --update-snapshots=all"
   },
   "devDependencies": {
+    "@axe-core/playwright": "4.13.0",
     "@playwright/test": "1.61.1"
   }
 }

@@ -1,4 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const statement = document.querySelector(".statement-block");
+    const statementToggle = statement?.querySelector(".statement-toggle");
+
+    if (statement && statementToggle) {
+        statementToggle.hidden = false;
+        statementToggle.addEventListener("click", () => {
+            const isPaused = statementToggle.getAttribute("aria-pressed") !== "true";
+            statementToggle.setAttribute("aria-pressed", String(isPaused));
+            statement.classList.toggle("is-paused", isPaused);
+        });
+    }
+
     const collapsibleSections = document.querySelectorAll("[data-collapsible]");
     const getClosestElement = (target, selector) => {
         const element = target instanceof Element ? target : target?.parentElement;
