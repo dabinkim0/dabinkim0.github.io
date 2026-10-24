@@ -65,7 +65,7 @@ Personal website hosted with GitHub Pages.
 ├── docs/
 │   └── UI_MAINTENANCE.md
 ├── tests/
-│   ├── __screenshots__/        # Playwright visual baselines
+│   ├── __screenshots__/        # Playwright baselines per platform (darwin/, linux/)
 │   ├── archive-layout.spec.mjs
 │   ├── home-panels.spec.mjs
 │   ├── home-panels.webkit.spec.mjs
@@ -146,6 +146,12 @@ npm run test:ui
 ```
 
 The Playwright suite verifies Projects and Publications at `390`, `720`, `920`, and `1180px` in all three view modes, the home accordion states and statement toggle, and runs axe-core WCAG 2.1 AA checks on every page (including the home page with JavaScript disabled). Update screenshots with `npm run test:ui:update` only after reviewing the visual changes.
+
+Screenshot baselines are kept per platform in `tests/__screenshots__/<platform>/`, because fonts render differently on macOS (`darwin`) and on the Linux CI runner (`linux`). `npm run test:ui:update` refreshes only your own platform. To refresh the Linux baselines CI compares against, push a commit whose message contains `[update-screenshots]` (or run "Update Linux screenshots" from the Actions tab), then commit the rendered files:
+
+```bash
+gh run download <run-id> -n linux-screenshots -D tests/__screenshots__/linux
+```
 
 Before pushing, also run the static checks (no Node needed):
 

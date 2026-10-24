@@ -7,7 +7,8 @@ export default defineConfig({
     retries: process.env.CI ? 2 : 0,
     workers: process.env.CI ? 2 : undefined,
     reporter: process.env.CI ? [["html", { open: "never" }], ["list"]] : "list",
-    snapshotPathTemplate: "{testDir}/__screenshots__/{testFileName}/{arg}{ext}",
+    // Font rendering differs between macOS and the Linux CI runner, so each platform keeps its own baselines.
+    snapshotPathTemplate: "{testDir}/__screenshots__/{platform}/{testFileName}/{arg}{ext}",
     expect: {
         toHaveScreenshot: {
             maxDiffPixelRatio: 0.01,

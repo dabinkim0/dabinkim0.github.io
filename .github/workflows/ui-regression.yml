@@ -1,12 +1,14 @@
 name: UI regression
 
+# Every branch push is checked, so pull requests show the result of their head commit.
 on:
-  pull_request:
   push:
-    branches: [main]
+  workflow_dispatch:
 
 jobs:
   playwright:
+    # Commits that ask for new Linux baselines are rendered by update-screenshots.yml instead.
+    if: ${{ !contains(github.event.head_commit.message, '[update-screenshots]') }}
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:

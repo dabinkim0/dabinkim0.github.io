@@ -1,0 +1,34 @@
+name: Update Linux screenshots
+
+# Renders the Playwright screenshot baselines on the same runner image and
+# browser build as the UI regression job, and uploads them as an artifact.
+# Fonts render differently on macOS, so local runs cannot produce these.
+#
+# Trigger: "Run workflow" in the Actions tab, or push a commit whose message
+# contains [update-screenshots]. Then commit the result:
+#   gh run download <run-id> -n linux-screenshots -D tests/__screenshots__/linux
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  render:
+    if: github.event_name == 'workflow_dispatch' || contains(github.event.head_commit.message, '[update-screenshots]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npx playwright test --project=chromium --update-snapshots=all
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: linux-screenshots
+          path: tests/__screenshots__/linux/
+          retention-days: 7
