@@ -18,12 +18,11 @@ for (const path of pages) {
 
 test("home panels stay accessible in every state", async ({ page }) => {
     await page.goto("/");
-    const backgroundToggle = page.locator('[data-collapsible="background"] .news-toggle');
-
-    // The page-level test covers the initial state (Recent News open); check Background open, then both closed.
-    for (const expanded of ["true", "false"]) {
-        await backgroundToggle.click();
-        await expect(backgroundToggle).toHaveAttribute("aria-expanded", expanded);
+    // The page-level test covers the initial state (both closed); check each panel open.
+    for (const panel of ["recent-news", "background"]) {
+        const toggle = page.locator(`[data-collapsible="${panel}"] .news-toggle`);
+        await toggle.click();
+        await expect(toggle).toHaveAttribute("aria-expanded", "true");
         // Header colors fade over 240ms; scan the settled state, not a mid-transition frame.
         await page.evaluate(() => Promise.all(document.getAnimations()
             .filter((animation) => animation instanceof CSSTransition)
