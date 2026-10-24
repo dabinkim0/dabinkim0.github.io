@@ -12,13 +12,16 @@
     <meta property="og:url" content="https://dabinkim0.github.io/">
     <meta property="og:image" content="https://dabinkim0.github.io/assets/images/profile/profile_02.jpg">
     <meta name="twitter:card" content="summary_large_image">
+    <!-- build:head-assets -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg?v=f965c0f">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&amp;family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+    <!-- /build:head-assets -->
     <link rel="stylesheet" href="assets/css/site-shell.css">
-    <link rel="stylesheet" href="assets/css/index.css">
     <link rel="stylesheet" href="assets/css/typography.css">
+    <link rel="stylesheet" href="assets/css/index.css">
+    <!-- build:jsonld-person -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -38,14 +41,16 @@
             "Musical Representation Learning"
         ],
         "sameAs": [
-            "https://scholar.google.com/citations?user=zW7HDK8AAAAJ",
+            "https://scholar.google.com/citations?user=zW7HDK8AAAAJ&hl=ko&oi=sra",
             "https://github.com/dabinkim0",
             "https://www.linkedin.com/in/dabin-kim-4a792a345/"
         ]
     }
     </script>
+    <!-- /build:jsonld-person -->
 </head>
 <body>
+    <!-- build:header -->
     <header class="main-header">
         <div class="shell header-shell">
             <a href="./" class="logo">Dabin Kim</a>
@@ -54,11 +59,12 @@
                     <li><a href="publications/">Publications</a></li>
                     <li><a href="projects/">Projects</a></li>
                     <li><a href="#" class="nav-disabled" aria-disabled="true" tabindex="-1">Blog</a></li>
-                    <li><a href="./" class="is-active">About</a></li>
+                    <li><a href="./" class="is-active" aria-current="page">About</a></li>
                 </ul>
             </nav>
         </div>
     </header>
+    <!-- /build:header -->
 
     <main id="top" class="shell page-shell">
         <div class="home-layout">
@@ -83,11 +89,13 @@
                     </dl>
 
                     <div class="identity-links">
+                        <!-- build:profile-links -->
                         <a href="mailto:dabinchi9598@kaist.ac.kr">Email</a>
                         <a href="https://scholar.google.com/citations?user=zW7HDK8AAAAJ&amp;hl=ko&amp;oi=sra" target="_blank" rel="noreferrer">Google Scholar</a>
                         <a href="https://github.com/dabinkim0" target="_blank" rel="noreferrer">GitHub</a>
                         <a href="https://www.linkedin.com/in/dabin-kim-4a792a345/" target="_blank" rel="noreferrer">LinkedIn</a>
                         <a href="assets/docs/dabin-kim-cv.pdf" target="_blank" rel="noreferrer">Download CV</a>
+                        <!-- /build:profile-links -->
                     </div>
                 </div>
             </aside>
@@ -116,6 +124,7 @@
                             </h2>
                             <div class="news-scroll-area" data-draggable-scroll aria-hidden="true">
                                 <ul id="recent-news-list" class="entry-list">
+                                    <!-- build:news -->
                                     <li class="entry-item entry-item--news-event entry-item--branded">
                                         <a class="entry-brand-mark" href="https://auto.aes.org/" target="_blank" rel="noopener" aria-label="Open the AES Automotive Audio 2026 website">
                                             <img src="assets/images/marks/aes.png" alt="" width="300" height="300" loading="lazy" decoding="async">
@@ -152,6 +161,7 @@
                                             <p class="entry-meta">May 12, 2026</p>
                                         </div>
                                     </li>
+                                    <!-- /build:news -->
                                 </ul>
                             </div>
                         </div>
@@ -165,6 +175,7 @@
                             </h2>
                             <div class="news-scroll-area" data-draggable-scroll aria-hidden="true">
                                 <ul id="background-list" class="entry-list">
+                                    <!-- build:background -->
                                     <li class="entry-item entry-item--branded">
                                         <a class="entry-brand-mark" href="https://mac.kaist.ac.kr/" target="_blank" rel="noopener" aria-label="Open the Music and Audio Computing Lab website">
                                             <img src="assets/images/marks/kaist.png" alt="" width="180" height="180" loading="lazy" decoding="async">
@@ -211,6 +222,7 @@
                                             <p class="entry-detail">Double major in Big Data Science</p>
                                         </div>
                                     </li>
+                                    <!-- /build:background -->
                                 </ul>
                             </div>
                         </div>
@@ -220,6 +232,7 @@
                 <section id="publications" class="section-block">
                     <h2 class="section-label">Recent Publications</h2>
                     <ul class="item-list">
+                        <!-- build:home-publications -->
                         <li>
                             <h3><a href="publications/adatt/">AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control</a></h3>
                             <p class="authors"><span class="author-self">Dabin Kim</span>, Junwon Lee, Juhan Nam</p>
@@ -242,7 +255,7 @@
                             </div>
                         </li>
                         <li>
-                            <h3><a href="https://arxiv.org/abs/2408.11915" target="_blank" rel="noreferrer">Video-Foley: Two-Stage Video-To-Sound Generation via Temporal Event Condition for Foley Sound</a></h3>
+                            <h3><a href="https://jnwnlee.github.io/video-foley-demo/" target="_blank" rel="noreferrer">Video-Foley: Two-Stage Video-To-Sound Generation via Temporal Event Condition for Foley Sound</a></h3>
                             <p class="authors">Junwon Lee, Jaekwon Im, <span class="author-self">Dabin Kim</span>, Juhan Nam</p>
                             <p class="venue"><em>IEEE/ACM Transactions on Audio, Speech, and Language Processing (TASLP)</em>, 2025.</p>
                             <div class="links">
@@ -261,17 +274,20 @@
                                 <a href="#" class="disabled-link" aria-disabled="true" tabindex="-1">Code</a>
                             </div>
                         </li>
+                        <!-- /build:home-publications -->
                     </ul>
                 </section>
 
                 <section id="contact" class="section-block contact-section home-contact">
                     <h2 class="section-label">Contact</h2>
                     <div class="contact-links">
+                        <!-- build:profile-links -->
                         <a href="mailto:dabinchi9598@kaist.ac.kr">Email</a>
                         <a href="https://scholar.google.com/citations?user=zW7HDK8AAAAJ&amp;hl=ko&amp;oi=sra" target="_blank" rel="noreferrer">Google Scholar</a>
                         <a href="https://github.com/dabinkim0" target="_blank" rel="noreferrer">GitHub</a>
                         <a href="https://www.linkedin.com/in/dabin-kim-4a792a345/" target="_blank" rel="noreferrer">LinkedIn</a>
                         <a href="assets/docs/dabin-kim-cv.pdf" target="_blank" rel="noreferrer">Download CV</a>
+                        <!-- /build:profile-links -->
                     </div>
                 </section>
 
@@ -279,13 +295,17 @@
         </div>
     </main>
 
+    <!-- build:footer -->
     <footer class="main-footer">
         <div class="shell footer-shell">
             <p class="copyright">&copy; 2025&ndash;2026 Dabin Kim. All rights reserved.</p>
         </div>
     </footer>
+    <!-- /build:footer -->
 
     <script src="assets/js/index.js"></script>
+    <!-- build:analytics -->
     <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"afb62ab7a2f14377b6a11b2553460c27"}'></script><!-- End Cloudflare Web Analytics -->
+    <!-- /build:analytics -->
 </body>
 </html>

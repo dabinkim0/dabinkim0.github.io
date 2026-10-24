@@ -1,0 +1,148 @@
+/* Shared layout for the publication demo pages (AdaTT, DDSP). Page-specific tweaks live in adatt.css and ddsp-carsound.css. */
+@layer components {
+    .post-layout {
+        padding: 36px 0 72px;
+    }
+
+    .post-page {
+        min-width: 0;
+        max-width: 1120px;
+        margin: 0 auto;
+    }
+
+    .post-section {
+        padding: 0 0 40px;
+        margin-bottom: 40px;
+        border-bottom: 1px solid var(--rule);
+        scroll-margin-top: 92px;
+    }
+
+    .post-section:last-child {
+        padding-bottom: 0;
+        margin-bottom: 0;
+        border-bottom: none;
+    }
+
+    h1 {
+        margin: 0 auto 18px;
+        width: 100%;
+        max-width: none;
+        font-size: clamp(2.45rem, 3.6vw, 3.7rem);
+        line-height: 1;
+        letter-spacing: -0.04em;
+        font-weight: 400;
+        text-align: center;
+    }
+
+    .article-authors {
+        margin: 0 0 8px;
+        font-size: 1.2rem;
+    }
+
+    .article-author-link {
+        text-decoration-line: underline;
+        text-decoration-color: transparent;
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.16em;
+        transition:
+            color var(--motion-fast) var(--ease-out),
+            text-decoration-color var(--motion-fast) var(--ease-out);
+    }
+
+    .article-author-link:hover,
+    .article-author-link:focus-visible {
+        color: var(--text);
+        text-decoration-color: currentColor;
+    }
+
+    .article-affiliations,
+    .article-supporting {
+        margin: 0;
+        font-size: 1.08rem;
+        line-height: 1.55;
+    }
+
+    .article-supporting {
+        margin-top: 8px;
+    }
+
+    .article-resource-list {
+        margin: 6px 0 0;
+        font-size: 1.08rem;
+        line-height: 1.55;
+    }
+
+    .centered-title {
+        text-align: center !important;
+    }
+
+    .methodology {
+        background-color: var(--surface-color);
+        border: 1px solid var(--rule-soft);
+        border-radius: var(--radius-card);
+        padding: 28px;
+        margin: 30px 0 20px;
+        text-align: left;
+        color: var(--text);
+    }
+
+    .methodology p {
+        margin: 0;
+        font-size: 1.14rem;
+        line-height: 1.9;
+    }
+
+    .sample-card-header {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+    }
+
+    .sample-card-header h3 {
+        margin: 0;
+        width: 100%;
+        color: var(--text);
+        font-family: var(--font-serif);
+        font-size: 1.22rem;
+        font-weight: 500;
+        text-align: center;
+    }
+
+    .sample-row {
+        display: grid;
+        gap: 14px;
+        width: max-content;
+    }
+
+    .sample-row.cols-5 {
+        grid-template-columns: repeat(5, minmax(255px, 1fr));
+    }
+
+    .sample-item {
+        width: 255px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .audio-player {
+        width: 100%;
+        margin-bottom: 12px;
+    }
+
+    .sample-label {
+        margin: 0;
+        width: 100%;
+        color: var(--muted);
+        font-size: 0.98rem;
+        line-height: 1.55;
+        text-align: center;
+    }
+
+    .sample-label strong {
+        color: var(--text);
+        font-weight: 500;
+    }
+}

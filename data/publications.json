@@ -1,0 +1,107 @@
+[
+    {
+        "id": "adatt",
+        "shortName": "AdaTT",
+        "title": "AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control",
+        "authors": [
+            { "name": "Dabin Kim", "self": true },
+            { "name": "Junwon Lee" },
+            { "name": "Juhan Nam" }
+        ],
+        "venue": "27th Annual Conference of the International Speech Communication Association (INTERSPEECH)",
+        "year": 2026,
+        "category": "Generative Models",
+        "links": {
+            "paper": "https://arxiv.org/abs/2606.15813",
+            "demo": "publications/adatt/",
+            "code": null
+        },
+        "figure": {
+            "src": "publications/adatt/figs/fig_architecture_demo.png",
+            "width": 2828,
+            "height": 1848,
+            "thumb": "publications/adatt/figs/fig_architecture_demo-1200.png",
+            "thumbWidth": 1200,
+            "alt": "AdaTT main architecture figure"
+        }
+    },
+    {
+        "id": "ddsp-carsound",
+        "shortName": "DDSP",
+        "title": "DDSP-Based Neural Vehicle Sound Synthesis from Driving Signals",
+        "authors": [
+            { "name": "Minsuk Choi" },
+            { "name": "Dabin Kim", "self": true },
+            { "name": "Daehun Song" },
+            { "name": "Juhan Nam" }
+        ],
+        "venue": "6th AES International Conference on Automotive Audio",
+        "year": 2026,
+        "award": "Best Student Paper Award",
+        "category": "Generative Models",
+        "links": {
+            "paper": "https://aes.org/publications/elibrary-page/?id=23427",
+            "demo": "publications/ddsp-carsound/",
+            "code": null
+        },
+        "figure": {
+            "src": "publications/ddsp-carsound/figs/fig_framework_overview.png",
+            "width": 2788,
+            "height": 2588,
+            "alt": "DDSP framework overview figure"
+        }
+    },
+    {
+        "id": "video-foley",
+        "shortName": "Video-Foley",
+        "title": "Video-Foley: Two-Stage Video-To-Sound Generation via Temporal Event Condition for Foley Sound",
+        "authors": [
+            { "name": "Junwon Lee" },
+            { "name": "Jaekwon Im" },
+            { "name": "Dabin Kim", "self": true },
+            { "name": "Juhan Nam" }
+        ],
+        "venue": "IEEE/ACM Transactions on Audio, Speech, and Language Processing (TASLP)",
+        "year": 2025,
+        "category": "Generative Models",
+        "links": {
+            "paper": "https://arxiv.org/abs/2408.11915",
+            "demo": "https://jnwnlee.github.io/video-foley-demo/",
+            "code": "https://github.com/jnwnlee/video-foley"
+        },
+        "figure": {
+            "src": "publications/figs/video-foley/model_vts.png",
+            "width": 1572,
+            "height": 1231,
+            "alt": "Video-Foley main figure"
+        }
+    },
+    {
+        "id": "pitch-controlnet",
+        "shortName": "Pitch-ControlNet",
+        "title": "Pitch-ControlNet: Continuous Pitch Control for Monophonic Instrument Sound Generation",
+        "authors": [
+            { "name": "Dabin Kim", "self": true, "mark": "*" },
+            { "name": "Junwon Lee", "mark": "*" },
+            { "name": "Minseo Kim", "mark": "*" },
+            { "name": "Juhan Nam" }
+        ],
+        "authorNote": "*equal contribution",
+        "venue": "Late-Breaking/Demo (LBD), 25th International Society for Music Information Retrieval Conference (ISMIR)",
+        "year": 2024,
+        "category": "Generative Models",
+        "links": {
+            "paper": "https://ismir2024program.ismir.net/lbd_480.html",
+            "demo": null,
+            "code": null
+        },
+        "figure": {
+            "src": "publications/figs/pitch-controlnet/fig_architecture.png",
+            "width": 3532,
+            "height": 1388,
+            "thumb": "publications/figs/pitch-controlnet/fig_architecture-1200.png",
+            "thumbWidth": 1200,
+            "alt": "Pitch-ControlNet main figure"
+        }
+    }
+]

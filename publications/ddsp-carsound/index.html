@@ -12,13 +12,17 @@
     <meta property="og:url" content="https://dabinkim0.github.io/publications/ddsp-carsound/">
     <meta property="og:image" content="https://dabinkim0.github.io/publications/ddsp-carsound/figs/fig_framework_overview.png">
     <meta name="twitter:card" content="summary_large_image">
+    <!-- build:head-assets -->
     <link rel="icon" type="image/svg+xml" href="../../favicon.svg?v=f965c0f">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&amp;family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+    <!-- /build:head-assets -->
     <link rel="stylesheet" href="../../assets/css/site-shell.css">
-    <link rel="stylesheet" href="../../assets/css/ddsp-carsound.css">
     <link rel="stylesheet" href="../../assets/css/typography.css">
+    <link rel="stylesheet" href="../../assets/css/demo-page.css">
+    <link rel="stylesheet" href="../../assets/css/ddsp-carsound.css">
+    <!-- build:jsonld-article -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
@@ -55,14 +59,16 @@
         "image": "https://dabinkim0.github.io/publications/ddsp-carsound/figs/fig_framework_overview.png"
     }
     </script>
+    <!-- /build:jsonld-article -->
 </head>
 <body>
+    <!-- build:header -->
     <header class="main-header">
         <div class="shell header-shell">
             <a href="../../" class="logo">Dabin Kim</a>
             <nav class="main-nav" aria-label="Primary">
                 <ul>
-                    <li><a href="../" class="is-active nav-current">Publications</a></li>
+                    <li><a href="../" class="is-active" aria-current="true">Publications</a></li>
                     <li><a href="../../projects/">Projects</a></li>
                     <li><a href="#" class="nav-disabled" aria-disabled="true" tabindex="-1">Blog</a></li>
                     <li><a href="../../">About</a></li>
@@ -70,6 +76,7 @@
             </nav>
         </div>
     </header>
+    <!-- /build:header -->
 
     <div class="demo-shell post-layout">
         <main class="post-page">
@@ -96,6 +103,7 @@
             </div>
 
             <div class="case-overview">
+                <!-- build:ddsp-overview -->
                 <a href="#f0-definition-section" class="case-card-link">
                     <div class="case-card">
                         <h3>Demo A: F<sub>0</sub> Definition</h3>
@@ -108,8 +116,10 @@
                         <p>Compares synthesized vehicle sounds across driving signal configurations: (RPM), (RPM, Gear Level, Pedal Position) and (RPM, Gear Level, Pedal Position, Speed, Acceleration), under direct and encoded conditioning.</p>
                     </div>
                 </a>
+                <!-- /build:ddsp-overview -->
             </div>
         </section>
+        <!-- build:ddsp-cases -->
         <section id="f0-definition-section" class="post-section">
             <h2 class="section-title centered-title">Demo A: F<sub>0</sub> Definition</h2>
             <p class="section-intro">Compares synthesized vehicle sounds using crank-based and firing-based F<sub>0</sub> definitions under direct and encoded conditioning.</p>
@@ -1514,14 +1524,19 @@
                 </article>
             </div>
         </section>
+        <!-- /build:ddsp-cases -->
         </main>
     </div>
 
+    <!-- build:footer -->
     <footer class="main-footer">
         <div class="shell footer-shell">
             <p class="copyright">&copy; 2026 Dabin Kim. DDSP-Based Neural Vehicle Sound Synthesis from Driving Signals.</p>
         </div>
     </footer>
+    <!-- /build:footer -->
+    <!-- build:analytics -->
     <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"afb62ab7a2f14377b6a11b2553460c27"}'></script><!-- End Cloudflare Web Analytics -->
+    <!-- /build:analytics -->
 </body>
 </html>

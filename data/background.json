@@ -1,0 +1,28 @@
+[
+    {
+        "mark": { "href": "https://mac.kaist.ac.kr/", "label": "Open the Music and Audio Computing Lab website", "src": "assets/images/marks/kaist.png", "width": 180, "height": 180 },
+        "titleHtml": "Ph.D. in <a href=\"https://mac.kaist.ac.kr/\" target=\"_blank\" rel=\"noopener\">Music and Audio Computing (MAC) Lab</a>, KAIST",
+        "date": "Mar 2026 - Present"
+    },
+    {
+        "mark": { "href": "https://www.sori-ai.com/", "label": "Open the SORI website", "src": "assets/images/marks/sori.svg", "width": 100, "height": 100 },
+        "titleHtml": "<a href=\"https://www.sori-ai.com/\" target=\"_blank\" rel=\"noopener\">SORI</a> Research Intern",
+        "date": "Jun 2026 - Jul 2026"
+    },
+    {
+        "mark": { "href": "https://www.sonycsl.co.jp/en/", "label": "Open the Sony CSL website", "src": "assets/images/marks/sony-csl.png", "width": 420, "height": 420 },
+        "titleHtml": "<a href=\"https://www.sonycsl.co.jp/en/\" target=\"_blank\" rel=\"noopener\">Sony CSL</a> Research Intern",
+        "date": "Jul 2025 - Oct 2025"
+    },
+    {
+        "mark": { "href": "https://mac.kaist.ac.kr/", "label": "Open the Music and Audio Computing Lab website", "src": "assets/images/marks/kaist.png", "width": 180, "height": 180 },
+        "titleHtml": "M.S. in <a href=\"https://mac.kaist.ac.kr/\" target=\"_blank\" rel=\"noopener\">Music and Audio Computing (MAC) Lab</a>, KAIST",
+        "date": "Aug 2023 - Aug 2025"
+    },
+    {
+        "mark": { "href": "https://creative.sogang.ac.kr/", "label": "Open the Art and Technology website", "src": "assets/images/marks/sogang-university-symbol.svg", "width": 153, "height": 205, "variant": "sogang" },
+        "titleHtml": "B.S. in <a href=\"https://creative.sogang.ac.kr/\" target=\"_blank\" rel=\"noopener\">Art &amp; Technology</a>, Sogang University",
+        "date": "Feb 2017 - Feb 2023",
+        "detail": "Double major in Big Data Science"
+    }
+]

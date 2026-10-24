@@ -1,28 +1,51 @@
 #!/usr/bin/env python3
 
+"""Regenerate the DDSP demo samples (publications/ddsp-carsound/).
+
+Writes only the marked regions of index.html (`ddsp-overview`, `ddsp-cases`);
+the rest of the page, including its header and footer, is maintained by hand
+and by scripts/build_site.py.
+
+Full rebuild from the AES listening-test set (needs numpy, scipy, matplotlib):
+
+    python3 publications/ddsp-carsound/scripts/build_demo.py --source /path/to/AES_ListeningTestset_v2
+
+Markup only, reusing the committed audio and spectrograms (no dependencies):
+
+    python3 publications/ddsp-carsound/scripts/build_demo.py --html-only
+"""
+
 from __future__ import annotations
 
+import argparse
 import html
 import os
 import re
 from pathlib import Path
 
-import numpy as np
-from scipy import signal
-from scipy.io import wavfile
-
 ROOT = Path(__file__).resolve().parents[3]
-os.environ.setdefault("MPLCONFIGDIR", str(ROOT / ".mplconfig"))
-
-import matplotlib
-
-matplotlib.use("Agg")
-from matplotlib import pyplot as plt
 
 PAGE_DIR = ROOT / "publications" / "ddsp-carsound"
 AUDIO_DIR = PAGE_DIR / "audio"
 SPEC_DIR = PAGE_DIR / "spectrograms"
-SOURCE_BASE = Path("/Users/dabinkim/Desktop/30_research/2026_ddsp_carsound/AES_ListeningTestset_v2")
+
+# Set by load_media_libraries(); only needed when regenerating audio and spectrograms.
+np = signal = wavfile = plt = None
+
+
+def load_media_libraries() -> None:
+    global np, signal, wavfile, plt
+    os.environ.setdefault("MPLCONFIGDIR", str(ROOT / ".mplconfig"))
+    import numpy
+    from scipy import signal as scipy_signal
+    from scipy.io import wavfile as scipy_wavfile
+    import matplotlib
+
+    matplotlib.use("Agg")
+    from matplotlib import pyplot
+
+    np, signal, wavfile, plt = numpy, scipy_signal, scipy_wavfile, pyplot
+
 
 N_FFT = 256
 HOP_LENGTH = 32
@@ -34,39 +57,6 @@ SPEC_IMAGE_WIDTH = int((int(round((SEC_END - SEC_START) * SOURCE_SAMPLE_RATE)) -
 SPEC_IMAGE_HEIGHT = N_FFT // 2 + 1
 DISPLAY_SAMPLE_IDS = ["024", "031", "052", "080", "095", "099", "104", "112", "172", "179"]
 DISPLAY_SAMPLE_LABELS = {sample_id: f"{index:02d}" for index, sample_id in enumerate(DISPLAY_SAMPLE_IDS, start=1)}
-PROJECT_TITLE = "DDSP-Based Neural Vehicle Sound Synthesis from Driving Signals"
-PROJECT_AUTHORS = "Minsuk Choi, Dabin Kim, Daehun Song, Juhan Nam"
-MAIN_FIGURE_SRC = "figs/fig_framework_overview.png"
-MAIN_FIGURE_ALT = "Framework overview"
-ABSTRACT = (
-    "This paper presents a DDSP-based neural vehicle sound synthesis framework conditioned "
-    "on driving signals collected from the CAN bus of an internal combustion engine (ICE) "
-    "vehicle, and demonstrates the feasibility of realistic and coherent vehicle sound "
-    "synthesis within this framework. We investigate three design choices for synthesis "
-    "configuration: the definition of the fundamental frequency (F0), the configuration of "
-    "driving signal inputs, and the conditioning representation. Specifically, we compare "
-    "crank-based and firing-based F0 definitions, multiple driving signal combinations "
-    "constructed from engine RPM, gear level, accelerator pedal position, vehicle speed, "
-    "and longitudinal acceleration, and two conditioning representations: direct and "
-    "encoded conditioning. The framework is evaluated using objective and subjective "
-    "measures together with qualitative spectrogram observation. The results show that the "
-    "crank-based F0 provides more accurate synthesis than the firing-based F0 in the "
-    "present four-cylinder four-stroke vehicle setting. Richer driving signal "
-    "configurations generally improve synthesis quality, while the contribution of "
-    "individual signals depends on their redundancy and complementarity. Encoded "
-    "conditioning yields better objective performance, especially when the available "
-    "driving signals are limited, whereas direct conditioning achieves the best perceptual "
-    "results under full driving signal configuration and offers practical advantages in "
-    "simplicity and efficiency. These findings provide practical guidelines for DDSP-based "
-    "neural vehicle sound synthesis and highlight the potential of "
-    "driving-signal-conditioned neural audio synthesis for automotive audio applications "
-    "such as vehicle sound design and driving simulation."
-)
-REFERENCE_TEXT = (
-    "<em>DDSP-Based Neural Vehicle Sound Synthesis from Driving Signals</em>.<br>"
-    "Proceedings of the 6th AES International Conference on Automotive Audio, 2026."
-)
-
 CASES = [
     {
         "slug": "f0-definition",
@@ -82,7 +72,7 @@ CASES = [
             "Compares synthesized vehicle sounds using crank-based and firing-based "
             "F<sub>0</sub> definitions under direct and encoded conditioning."
         ),
-        "source_dir": SOURCE_BASE / "TestA_F0" / "mainset" / "processed" / "selected" / "2kHz",
+        "source_subdir": "TestA_F0/mainset/processed/selected/2kHz",
         "methods": [
             {
                 "label": "Ground Truth",
@@ -140,7 +130,7 @@ CASES = [
             "(RPM), (RPM, Gear Level, Pedal Position) and (RPM, Gear Level, Pedal "
             "Position, Speed, Acceleration), under direct and encoded conditioning."
         ),
-        "source_dir": SOURCE_BASE / "TestB_CAN" / "mainset" / "processed" / "selected" / "2kHz",
+        "source_subdir": "TestB_CAN/mainset/processed/selected/2kHz",
         "methods": [
             {
                 "label": "Ground Truth",
@@ -246,9 +236,9 @@ def save_spectrogram(source_path: Path, output_stem: str) -> Path:
     return out_path
 
 
-def list_sample_ids(source_dir: Path) -> list[str]:
+def list_sample_ids(source_dir: Path | None) -> list[str]:
     available_ids = set()
-    for path in sorted(source_dir.glob("2kHz_*_GroundTruth.wav")):
+    for path in sorted((source_dir or AUDIO_DIR).glob("2kHz_*_GroundTruth.wav")):
         match = re.match(r"2kHz_(\d+)_GroundTruth\.wav$", path.name)
         if match:
             available_ids.add(match.group(1))
@@ -333,12 +323,19 @@ def infer_group_key(method: dict[str, str]) -> str:
 
 
 def render_sample_item(case: dict[str, object], sample_id: str, method: dict[str, str]) -> str:
-    source_file = find_source_file(case["source_dir"], sample_id, method["pattern"])
-    audio_file = write_playback_audio(source_file)
-    save_spectrogram(source_file, audio_file.stem)
+    if case["source_dir"] is None:
+        audio_file = find_source_file(AUDIO_DIR, sample_id, method["pattern"])
+        if not (SPEC_DIR / f"{audio_file.stem}.png").exists():
+            raise FileNotFoundError(f"Missing spectrogram for {audio_file.name}")
+    else:
+        source_file = find_source_file(case["source_dir"], sample_id, method["pattern"])
+        audio_file = write_playback_audio(source_file)
+        save_spectrogram(source_file, audio_file.stem)
 
     label_html = build_label(method, emphasize=bool(method.get("emphasize")))
-    alt_text = html.escape(f"Spectrogram for {case['title']} sample {sample_id} - {method['label']}")
+    # Alt text uses the full legend wording ("Direct (RPM, Gear Level, ...)") rather than the short label.
+    method_name = re.sub(r"<[^>]+>", "", method.get("legend_html", html.escape(method["label"])).replace("<br>", " "))
+    alt_text = f"Spectrogram for {html.escape(case['title'])} sample {sample_id} - {method_name}"
 
     return (
         "                        <div class=\"sample-item\">\n"
@@ -419,7 +416,7 @@ def build_case_section(case: dict[str, object]) -> str:
     )
 
 
-def build_html() -> str:
+def build_regions() -> dict[str, str]:
     overview_cards = "\n".join(
         f"                <a href=\"#{case['slug']}-section\" class=\"case-card-link\">\n"
         "                    <div class=\"case-card\">\n"
@@ -429,84 +426,45 @@ def build_html() -> str:
         "                </a>"
         for case in CASES
     )
-    case_sections = "\n".join(build_case_section(case) for case in CASES)
+    return {
+        "ddsp-overview": overview_cards,
+        "ddsp-cases": "\n".join(build_case_section(case) for case in CASES),
+    }
 
-    return f"""<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{html.escape(PROJECT_TITLE)}</title>
-    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600&family=Noto+Serif+KR:wght@400;500&family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../assets/css/ddsp-carsound.css">
-    <link rel="stylesheet" href="../../assets/css/typography.css">
-</head>
-<body>
-    <header class="main-header">
-        <div class="shell header-shell">
-            <a href="../../" class="logo">Dabin Kim</a>
-            <nav class="main-nav" aria-label="Primary">
-                <ul>
-                    <li><a href="../" class="is-active nav-current">Publications</a></li>
-                    <li><a href="../../projects/">Projects</a></li>
-                    <li><a href="#" class="nav-disabled" aria-disabled="true" tabindex="-1">Blog</a></li>
-                    <li><a href="../../">About</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
 
-    <div class="shell post-layout">
-        <main class="post-page">
-        <section id="overview" class="post-section">
-            <h1>{html.escape(PROJECT_TITLE)}</h1>
-            <p class="article-authors">{html.escape(PROJECT_AUTHORS)}</p>
-
-            <div class="hero-figure">
-                <img src="{html.escape(MAIN_FIGURE_SRC)}" alt="{html.escape(MAIN_FIGURE_ALT)}">
-            </div>
-
-            <div id="abstract" class="methodology abstract-card">
-                <h3>Abstract</h3>
-                <p>
-                    {html.escape(ABSTRACT)}
-                </p>
-            </div>
-
-            <div class="case-overview">
-{overview_cards}
-            </div>
-        </section>
-{case_sections}
-        </main>
-    </div>
-
-    <footer class="main-footer">
-        <div class="shell footer-shell">
-            <p class="copyright">&copy; 2026 Dabin Kim. {html.escape(PROJECT_TITLE)}.</p>
-        </div>
-    </footer>
-</body>
-</html>
-"""
+def write_regions(page: Path, regions: dict[str, str]) -> None:
+    text = page.read_text(encoding="utf-8")
+    for name, body in regions.items():
+        pattern = re.compile(
+            rf"^(?P<open>[ \t]*<!-- build:{name} -->\n).*?^(?P<close>[ \t]*<!-- /build:{name} -->)$",
+            re.S | re.M,
+        )
+        text, count = pattern.subn(lambda match: f"{match.group('open')}{body}\n{match.group('close')}", text)
+        if count != 1:
+            raise SystemExit(f"{page}: expected one '{name}' region, found {count}")
+    page.write_text(text, encoding="utf-8")
 
 
 def main() -> None:
-    AUDIO_DIR.mkdir(parents=True, exist_ok=True)
-    SPEC_DIR.mkdir(parents=True, exist_ok=True)
+    parser = argparse.ArgumentParser(description="Regenerate the DDSP demo sample regions.")
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--source", type=Path, help="AES_ListeningTestset_v2 directory; regenerates audio and spectrograms")
+    group.add_argument("--html-only", action="store_true", help="reuse the committed audio and spectrograms")
+    args = parser.parse_args()
 
-    html_output = build_html()
+    for case in CASES:
+        case["source_dir"] = None if args.html_only else args.source / case["source_subdir"]
+    if not args.html_only:
+        load_media_libraries()
+        AUDIO_DIR.mkdir(parents=True, exist_ok=True)
+        SPEC_DIR.mkdir(parents=True, exist_ok=True)
+
     output_path = PAGE_DIR / "index.html"
-    output_path.write_text(html_output, encoding="utf-8")
+    write_regions(output_path, build_regions())
 
-    total_audio = len(list(AUDIO_DIR.glob("*.wav")))
-    total_specs = len(list(SPEC_DIR.glob("*.png")))
-    print(f"Wrote {output_path}")
-    print(f"Audio files: {total_audio}")
-    print(f"Spectrogram files: {total_specs}")
+    print(f"Updated {output_path.relative_to(ROOT)}")
+    print(f"Audio files: {len(list(AUDIO_DIR.glob('*.wav')))}")
+    print(f"Spectrogram files: {len(list(SPEC_DIR.glob('*.png')))}")
 
 
 if __name__ == "__main__":

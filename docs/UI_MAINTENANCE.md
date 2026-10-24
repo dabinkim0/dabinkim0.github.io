@@ -19,7 +19,7 @@ Do not add `order` to move whole card regions. Desktop layouts may reposition re
 - At `720px` and below: every view uses one column and `media -> copy -> meta`.
 - Component-specific breakpoints are allowed only when they do not change the archive layout contract.
 
-CSS cascade layers are ordered as `tokens`, `base`, `components`, `pages`, `responsive`, and `utilities`. Add shared behavior to the appropriate common layer rather than increasing selector specificity in a page stylesheet.
+CSS cascade layers are declared once in `site-shell.css` and ordered as `tokens`, `base`, `components`, `pages`, `responsive`, and `utilities`. Every stylesheet wraps all of its rules in one of these layers; unlayered rules would beat every layer and silently break this contract. Put breakpoint and reduced-motion overrides in `responsive`, and add shared behavior to the appropriate common layer rather than increasing selector specificity in a page stylesheet.
 
 ## Interaction rules
 

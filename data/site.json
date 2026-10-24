@@ -1,0 +1,36 @@
+{
+    "name": "Dabin Kim",
+    "url": "https://dabinkim0.github.io/",
+    "jobTitle": "ML Researcher",
+    "email": "dabinchi9598@kaist.ac.kr",
+    "image": "assets/images/profile/profile_02.jpg",
+    "affiliation": {
+        "name": "Music and Audio Computing (MAC) Lab, KAIST",
+        "url": "https://mac.kaist.ac.kr/"
+    },
+    "researchInterests": [
+        "Music Generation and Editing",
+        "Musical Representation Learning"
+    ],
+    "profiles": [
+        { "label": "Google Scholar", "href": "https://scholar.google.com/citations?user=zW7HDK8AAAAJ&hl=ko&oi=sra" },
+        { "label": "GitHub", "href": "https://github.com/dabinkim0" },
+        { "label": "LinkedIn", "href": "https://www.linkedin.com/in/dabin-kim-4a792a345/" }
+    ],
+    "cv": "assets/docs/dabin-kim-cv.pdf",
+    "people": {
+        "Dabin Kim": "https://dabinkim0.github.io/",
+        "Junwon Lee": "https://jnwnlee.github.io/",
+        "Juhan Nam": "https://mac.kaist.ac.kr/~juhan/"
+    },
+    "nav": [
+        { "label": "Publications", "href": "publications/" },
+        { "label": "Projects", "href": "projects/" },
+        { "label": "Blog", "href": null },
+        { "label": "About", "href": "" }
+    ],
+    "faviconVersion": "f965c0f",
+    "fonts": "https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&family=Noto+Serif+KR:wght@400;500&family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&display=swap",
+    "copyrightHtml": "&copy; 2025&ndash;2026 Dabin Kim. All rights reserved.",
+    "analyticsToken": "afb62ab7a2f14377b6a11b2553460c27"
+}

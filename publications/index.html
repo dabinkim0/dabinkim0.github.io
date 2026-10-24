@@ -12,10 +12,12 @@
     <meta property="og:url" content="https://dabinkim0.github.io/publications/">
     <meta property="og:image" content="https://dabinkim0.github.io/publications/adatt/figs/fig_architecture_demo.png">
     <meta name="twitter:card" content="summary_large_image">
+    <!-- build:head-assets -->
     <link rel="icon" type="image/svg+xml" href="../favicon.svg?v=f965c0f">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500&amp;family=Noto+Serif+KR:wght@400;500&amp;family=Public+Sans:ital,wght@0,400;0,500;1,400;1,500&amp;family=Source+Serif+4:ital,wght@0,400;0,500;1,400;1,500&amp;display=swap" rel="stylesheet">
+    <!-- /build:head-assets -->
     <link rel="stylesheet" href="../assets/css/site-shell.css">
     <link rel="stylesheet" href="../assets/css/typography.css">
     <link rel="stylesheet" href="../assets/css/archive-layout.css">
@@ -23,12 +25,13 @@
     <link rel="stylesheet" href="../assets/css/publications.css">
 </head>
 <body class="archive-page">
+    <!-- build:header -->
     <header class="main-header">
         <div class="shell header-shell">
             <a href="../" class="logo">Dabin Kim</a>
             <nav class="main-nav" aria-label="Primary">
                 <ul>
-                    <li><a href="./" class="is-active nav-current">Publications</a></li>
+                    <li><a href="./" class="is-active" aria-current="page">Publications</a></li>
                     <li><a href="../projects/">Projects</a></li>
                     <li><a href="#" class="nav-disabled" aria-disabled="true" tabindex="-1">Blog</a></li>
                     <li><a href="../">About</a></li>
@@ -36,6 +39,7 @@
             </nav>
         </div>
     </header>
+    <!-- /build:header -->
 
     <main id="top" class="shell page-shell">
         <section class="page-intro">
@@ -66,6 +70,7 @@
             </div>
 
             <ul id="publication-archive" class="item-list archive-view" data-publication-list data-view="grid-compact">
+                <!-- build:publication-archive -->
                 <li class="publication-item archive-card archive-card--publication" data-publication-category="Generative Models">
                     <a class="publication-figure archive-card__media" href="adatt/" aria-label="Open AdaTT demo">
                         <img src="adatt/figs/fig_architecture_demo-1200.png" srcset="adatt/figs/fig_architecture_demo-1200.png 1200w, adatt/figs/fig_architecture_demo.png 2828w" sizes="(max-width: 720px) 100vw, (max-width: 920px) 50vw, 600px" alt="AdaTT main architecture figure" width="2828" height="1848" decoding="async" fetchpriority="high">
@@ -127,28 +132,35 @@
                         </div>
                     </div>
                 </li>
+                <!-- /build:publication-archive -->
             </ul>
         </section>
 
         <section id="contact" class="contact-section">
             <h2 class="section-label">Contact</h2>
             <div class="contact-links">
+                <!-- build:profile-links -->
                 <a href="mailto:dabinchi9598@kaist.ac.kr">Email</a>
                 <a href="https://scholar.google.com/citations?user=zW7HDK8AAAAJ&amp;hl=ko&amp;oi=sra" target="_blank" rel="noreferrer">Google Scholar</a>
                 <a href="https://github.com/dabinkim0" target="_blank" rel="noreferrer">GitHub</a>
                 <a href="https://www.linkedin.com/in/dabin-kim-4a792a345/" target="_blank" rel="noreferrer">LinkedIn</a>
                 <a href="../assets/docs/dabin-kim-cv.pdf" target="_blank" rel="noreferrer">Download CV</a>
+                <!-- /build:profile-links -->
             </div>
         </section>
     </main>
 
+    <!-- build:footer -->
     <footer class="main-footer">
         <div class="shell footer-shell">
             <p class="copyright">&copy; 2025&ndash;2026 Dabin Kim. All rights reserved.</p>
         </div>
     </footer>
+    <!-- /build:footer -->
     <script src="../assets/js/archive-view.js"></script>
     <script src="../assets/js/publications.js"></script>
+    <!-- build:analytics -->
     <!-- Cloudflare Web Analytics --><script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token":"afb62ab7a2f14377b6a11b2553460c27"}'></script><!-- End Cloudflare Web Analytics -->
+    <!-- /build:analytics -->
 </body>
 </html>

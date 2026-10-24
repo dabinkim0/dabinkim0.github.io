@@ -1,9 +1,11 @@
 from pathlib import Path
+import json
 import textwrap
 
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "assets" / "docs" / "dabin-kim-cv.pdf"
+DATA_DIR = ROOT / "data"
 
 
 SECTIONS = [
@@ -29,15 +31,7 @@ SECTIONS = [
             "Jul 2025 - Oct 2025 | Assistant Researcher, Sony Computer Science Laboratories (Sony CSL)",
         ],
     ),
-    (
-        "Publications",
-        [
-            "AdaTT: Text-Guided Instrument Timbre Transfer with Target-Adaptive Structural Control. Dabin Kim, Junwon Lee, Juhan Nam. 27th Annual Conference of the International Speech Communication Association (INTERSPEECH), 2026. Paper: https://arxiv.org/abs/2606.15813 | Demo: https://dabinkim0.github.io/publications/adatt/",
-            "DDSP-Based Neural Vehicle Sound Synthesis from Driving Signals. Minsuk Choi, Dabin Kim, Daehun Song, Juhan Nam. 6th AES International Conference on Automotive Audio, 2026. Paper: https://aes.org/publications/elibrary-page/?id=23427 | Demo: https://dabinkim0.github.io/publications/ddsp-carsound/",
-            "Video-Foley: Two-Stage Video-To-Sound Generation via Temporal Event Condition for Foley Sound. Junwon Lee, Jaekwon Im, Dabin Kim, Juhan Nam. IEEE/ACM Transactions on Audio, Speech, and Language Processing (TASLP), 2025. Paper: https://arxiv.org/abs/2408.11915 | Demo: https://jnwnlee.github.io/video-foley-demo/ | Code: https://github.com/jnwnlee/video-foley",
-            "Pitch-ControlNet: Continuous Pitch Control for Monophonic Instrument Sound Generation. Dabin Kim*, Junwon Lee*, Minseo Kim*, Juhan Nam (*equal contribution). Late-Breaking/Demo (LBD), 25th International Society for Music Information Retrieval Conference (ISMIR), 2024. Paper: https://ismir2024program.ismir.net/lbd_480.html",
-        ],
-    ),
+    ("Publications", None),  # filled from data/publications.json
     (
         "Selected Presentations",
         [
@@ -54,6 +48,23 @@ SECTIONS = [
         ],
     ),
 ]
+
+
+def publication_items():
+    site = json.loads((DATA_DIR / "site.json").read_text(encoding="utf-8"))
+    publications = json.loads((DATA_DIR / "publications.json").read_text(encoding="utf-8"))
+    items = []
+    for publication in publications:
+        authors = ", ".join(author["name"] + author.get("mark", "") for author in publication["authors"])
+        if publication.get("authorNote"):
+            authors += f" ({publication['authorNote']})"
+        links = []
+        for key, label in (("paper", "Paper"), ("demo", "Demo"), ("code", "Code")):
+            target = publication["links"].get(key)
+            if target:
+                links.append(f"{label}: {target if target.startswith('http') else site['url'] + target}")
+        items.append(f"{publication['title']}. {authors}. {publication['venue']}, {publication['year']}. " + " | ".join(links))
+    return items
 
 
 PAGE_W, PAGE_H = 612, 792
@@ -99,6 +110,8 @@ def build_lines():
     )
 
     for title, items in SECTIONS:
+        if items is None:
+            items = publication_items()
         add_line(title, HEAD_SIZE, "F2", 16, 2)
         for item in items:
             add_wrapped(item, prefix="- ", subsequent="  ")

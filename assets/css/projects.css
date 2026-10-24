@@ -1,6 +1,5 @@
 @layer pages {
     :root {
-        --chip-active: var(--control-active);
         --project-entry-block-padding: 24px 0 28px;
         --project-entry-rule: 1px solid var(--rule-soft);
         --project-meta-columns: max-content minmax(0, 1fr);
@@ -41,7 +40,7 @@
         margin: 0;
         overflow: hidden;
         border-radius: var(--radius-card);
-        background: var(--chip-active);
+        background: var(--control-active);
     }
 
     .project-figure::after {
@@ -71,6 +70,7 @@
 
     .project-meta {
         display: grid;
+        font-family: var(--font-sans);
         grid-template-columns: var(--project-meta-columns);
         align-content: start;
         align-items: baseline;
@@ -134,6 +134,7 @@
         background: transparent;
         color: var(--muted);
         font: inherit;
+        font-family: var(--font-sans);
         font-size: var(--type-label);
         font-weight: 500;
         line-height: var(--leading-meta);
@@ -340,6 +341,7 @@
         background: transparent;
         color: var(--muted);
         font: inherit;
+        font-family: var(--font-sans);
         line-height: 1;
         cursor: pointer;
     }

@@ -20,6 +20,7 @@
         background: transparent;
         color: var(--muted);
         font: inherit;
+        font-family: var(--font-sans);
         cursor: pointer;
         touch-action: manipulation;
         transition:
@@ -115,6 +116,7 @@
         background: rgba(255, 255, 255, 0.72);
         color: var(--text);
         font: inherit;
+        font-family: var(--font-sans);
         font-size: var(--type-label);
         line-height: 1.35;
         letter-spacing: 0.01em;
