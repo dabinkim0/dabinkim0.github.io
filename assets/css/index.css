@@ -156,18 +156,12 @@
     }
 
     .statement-block {
-        display: flex;
-        align-items: center;
-        gap: var(--space-3);
+        display: block;
         width: 100%;
         max-width: 100%;
         min-width: 0;
         overflow: hidden;
         contain: inline-size;
-    }
-
-    .statement-block .section-body {
-        flex: 1 1 auto;
     }
 
     .statement-track {
@@ -193,64 +187,9 @@
         white-space: nowrap;
     }
 
-    .statement-block:hover .statement-track,
-    .statement-block.is-paused .statement-track {
+    /* Hovering pauses the statement so it can be read; leaving resumes it. */
+    .statement-block:hover .statement-track {
         animation-play-state: paused;
-    }
-
-    .statement-toggle {
-        position: relative;
-        display: inline-flex;
-        flex: 0 0 auto;
-        align-items: center;
-        justify-content: center;
-        width: 26px;
-        height: 26px;
-        margin: 0;
-        padding: 0;
-        border: 1px solid var(--rule-soft);
-        border-radius: 999px;
-        background: transparent;
-        color: var(--muted);
-        cursor: pointer;
-        touch-action: manipulation;
-        transition:
-            border-color var(--motion-fast) var(--ease-out),
-            color var(--motion-fast) var(--ease-out);
-    }
-
-    .statement-toggle[hidden] {
-        display: none;
-    }
-
-    /* Extends the hit area to 38px without changing the visual size. */
-    .statement-toggle::before {
-        content: "";
-        position: absolute;
-        inset: -6px;
-    }
-
-    .statement-toggle:hover,
-    .statement-toggle:focus-visible {
-        border-color: var(--interactive-border-hover);
-        color: var(--accent-strong);
-    }
-
-    .statement-toggle-icon {
-        display: block;
-        width: 8px;
-        height: 9px;
-        background:
-            linear-gradient(currentColor 0 0) 0 0 / 2px 100% no-repeat,
-            linear-gradient(currentColor 0 0) 6px 0 / 2px 100% no-repeat;
-    }
-
-    .statement-toggle[aria-pressed="true"] .statement-toggle-icon {
-        width: 8px;
-        height: 10px;
-        margin-left: 2px;
-        background: currentColor;
-        clip-path: polygon(0 0, 100% 50%, 0 100%);
     }
 
     @keyframes statement-marquee {
@@ -790,10 +729,6 @@
         }
 
         .statement-text:nth-child(2) {
-            display: none;
-        }
-
-        .statement-toggle {
             display: none;
         }
     }

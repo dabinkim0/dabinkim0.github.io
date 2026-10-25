@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./fixtures.mjs";
 
 for (const panel of ["recent-news", "background"]) {
     test(`${panel} rows keep content-aligned rules in WebKit`, async ({ page }) => {

@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./fixtures.mjs";
 
 const widths = [390, 720, 920, 1180];
 const views = ["list", "grid", "grid-compact"];

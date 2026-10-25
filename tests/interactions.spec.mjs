@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { blockAnalytics, expect, test } from "./fixtures.mjs";
 
 test.use({ reducedMotion: "no-preference" });
 
@@ -30,6 +30,7 @@ test("inactive archive controls use restrained pointer motion", async ({ page })
 
 test("reduced motion removes archive control translation", async ({ browser }) => {
     const context = await browser.newContext({ reducedMotion: "reduce" });
+    await blockAnalytics(context);
     const page = await context.newPage();
     await page.setViewportSize({ width: 1180, height: 900 });
     await page.goto("/publications/");

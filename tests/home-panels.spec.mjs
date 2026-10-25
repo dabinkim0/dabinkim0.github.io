@@ -1,4 +1,4 @@
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./fixtures.mjs";
 
 for (const width of [390, 1180]) {
     test(`home panels at ${width}px`, async ({ page }) => {
@@ -27,31 +27,23 @@ for (const width of [390, 1180]) {
 }
 
 test.describe("moving statement", () => {
-    test("pause toggle stops and restarts the marquee", async ({ page }) => {
+    test("hovering pauses the marquee and leaving resumes it", async ({ page }) => {
         await page.emulateMedia({ reducedMotion: "no-preference" });
         await page.goto("/");
-        const toggle = page.locator(".statement-toggle");
         const track = page.locator(".statement-track");
 
-        await expect(toggle).toBeVisible();
-        await expect(toggle).toHaveAttribute("aria-pressed", "false");
         await expect(track).toHaveCSS("animation-play-state", "running");
 
-        await toggle.click();
-        await page.mouse.move(0, 0);
-        await expect(toggle).toHaveAttribute("aria-pressed", "true");
+        await page.locator(".statement-block").hover();
         await expect(track).toHaveCSS("animation-play-state", "paused");
 
-        await toggle.click();
         await page.mouse.move(0, 0);
-        await expect(toggle).toHaveAttribute("aria-pressed", "false");
         await expect(track).toHaveCSS("animation-play-state", "running");
     });
 });
 
-test("reduced motion shows the statement statically without a toggle", async ({ page }) => {
+test("reduced motion shows the statement statically", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/");
-    await expect(page.locator(".statement-toggle")).toBeHidden();
     await expect(page.locator(".statement-track")).toHaveCSS("animation-name", "none");
 });

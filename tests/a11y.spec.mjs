@@ -1,5 +1,5 @@
 import AxeBuilder from "@axe-core/playwright";
-import { expect, test } from "@playwright/test";
+import { expect, test } from "./fixtures.mjs";
 
 const pages = ["/", "/publications/", "/projects/", "/publications/adatt/", "/publications/ddsp-carsound/", "/404.html"];
 const wcag = ["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"];
@@ -41,6 +41,5 @@ test.describe("without JavaScript", () => {
         for (const list of ["#recent-news-list", "#background-list"]) {
             await expect(page.locator(`${list} .entry-item`).first()).toBeVisible();
         }
-        await expect(page.locator(".statement-toggle")).toBeHidden();
     });
 });
