@@ -12,7 +12,7 @@ SECTIONS = [
     (
         "Profile",
         [
-            "I am an ML researcher focused on generative models for music and audio, particularly fine-grained offline editing and real-time online interaction. My current research explores full-duplex systems that listen and generate concurrently, enabling responsive musical co-creation with users.",
+            "I am an ML/DL researcher focused on generative models for music and audio, particularly fine-grained offline editing and real-time online interaction. My current research explores full-duplex systems that listen and generate concurrently, enabling responsive musical co-creation with users.",
             "Affiliation: Music and Audio Computing (MAC) Lab, KAIST",
             "Research Interests: Controllable Music Generation, Real-time Musical Interaction",
         ],
@@ -100,7 +100,7 @@ def build_lines():
         y -= 3
 
     add_line("Dabin Kim", TITLE_SIZE, "F2", 26, 2)
-    add_line("ML Researcher", SUB_SIZE, "F1", 14, 2)
+    add_line("ML / DL Researcher", SUB_SIZE, "F1", 14, 2)
     add_line(
         "Daejeon, South Korea | dabinchi9598@kaist.ac.kr | https://dabinkim0.github.io",
         9,
